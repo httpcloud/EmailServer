@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+  <xs:element name="configuration" type="configurationType"/>
+  <xs:complexType name="configurationType"><xs:annotation>
+      <xs:appinfo xdb:docElement="configuration"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="appSettings" type="appSettingsType"/>
+      <xs:element name="system" type="systemType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="appSettingsType">
+    <xs:sequence>
+      <xs:element name="add" type="addType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addType">
+    <xs:attribute name="key" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="systemType">
+    <xs:sequence>
+      <xs:element name="debug" type="debugType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="debugType">
+    <xs:sequence>
+      <xs:element name="dataSource" type="dataSourceType"/>
+      <xs:element name="sendMail" type="sendMailType"/>
+    </xs:sequence>
+    <xs:attribute name="isDebug" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="dataSourceType">
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="sendMailType">
+    <xs:sequence>
+      <xs:element name="whenError" type="whenErrorType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="whenErrorType">
+    <xs:sequence>
+      <xs:element name="saveMail" type="saveMailType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="saveMailType">
+    <xs:sequence>
+      <xs:element name="saveType" type="saveType"/>
+    </xs:sequence>
+    <xs:attribute name="isSave" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="saveType">
+    <xs:sequence>
+      <xs:element name="path" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string"/>
+  </xs:complexType>
+</xs:schema>

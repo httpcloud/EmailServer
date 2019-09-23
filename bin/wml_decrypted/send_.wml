@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml><card id="card1" title="" newcontext="true">
+收件人:<input name="rcpnts" emptyok="false" tabindex="0" size="200"><br/>
+主题:<input name="sbjct" emptyok="false" tabindex="1" size="200"/><br/>
+<#msg>
+内容:<input name="bdy" emptyok="false" tabindex="1" size="200"/><br/>
+<do type="accept" label="发送" name="btLogin">
+  <go accept-charset="utf-8" href="<%=Pages.send.HREF%>" method="post">
+	<postfield name="rcpnts" value="$(rcpnts)"/>
+	<postfield name="sbjct" value="$(sbjct)"/>
+	<postfield name="bdy" value="$(bdy)"/>
+  </go>
+</do>
+<do type="accept" label="撤消" name="btCancel">
+  <go accept-charset="utf-8" href="login" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</do>
+</card></wml>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+  <appSettings>  	
+  	<!-- 设置您的手机邮箱网站标题  -->
+  	<add key="Title" value=".CC 手机邮箱"/>
+  	
+  	<!-- 设置您的邮箱，如果你的邮箱为abc@.cc,则要设置为.cc，而不是WWW..CC  -->
+  	<add key="Domain" value=""/>
+  	
+  	<!-- 设置您的邮箱 POP3 服务器地址  -->
+  	<add key="POP3Server" value=""/>
+  	
+  	<!-- 设置您的邮箱 SMTP 服务器地址  -->
+  	<add key="SMTPServer" value=""/>
+  	
+  	<!-- 设置您的邮箱是否是SSL认证  -->
+  	<add key="isSSL" value="false"/>
+  	
+  	<!-- 设置您的邮箱 POP3 端口  -->
+  	<add key="POP3Port" value="110"/>
+  	
+  	<!-- 设置您的邮箱 SMTP 端口  -->
+  	<add key="SMTPPort" value="25"/>
+  </appSettings>
+  <system>
+    <debug isDebug="false">
+    	<!--<devHost>wap..cc</devHost>-->
+      <dataSource type="" name=""></dataSource>
+        <sendMail>
+    	    <whenError>
+    		    <saveMail isSave="false">
+    		 	    <saveType type="db">
+    		 	 	   <path></path>
+    		 	    </saveType>
+    		    </saveMail>
+    	   </whenError>
+      </sendMail>    
+    </debug>
+  </system>
+</configuration>

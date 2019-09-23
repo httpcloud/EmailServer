@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model name="WapMail" id="WapMail" language="delphi">
+  <Package name="login" id="ID=11">
+    <DesignElement name="Object2" id="ID=1867" metaclass="Object">
+      <Property name="Stereotype">actor</Property>
+      <Property name="Concurrent">False</Property>
+      <Property name="MultipleInstance">False</Property>
+      <Property name="Active">False</Property>
+    </DesignElement>
+    <DesignElement name="Object1" id="ID=1865" metaclass="Object">
+      <Property name="Concurrent">False</Property>
+      <Property name="MultipleInstance">False</Property>
+      <Property name="Active">False</Property>
+      <Link targetName="Collaboration Link1" id="ID=1869" metaclass="Collaboration Link" idref="ID=1867" />
+      <Link targetName="Message Link1" id="ID=1874" metaclass="Message Link" idref="ID=1867">
+        <Property name="Destruction">False</Property>
+        <Property name="Synchronization">call</Property>
+        <Property name="Return Arrow">False</Property>
+        <Property name="Non-Atomic Delivery">False</Property>
+        <Property name="Supplier">Object2</Property>
+        <Property name="Client">Object1</Property>
+        <Property name="Creation">False</Property>
+      </Link>
+    </DesignElement>
+    <DesignElement name="Note2" id="ID=1876" metaclass="Note">
+      <Property name="Text">萨</Property>
+      <Property name="TextOnly">False</Property>
+    </DesignElement>
+    <DesignElement name="Note3" id="ID=1878" metaclass="Note">
+      <Property name="Text">上海</Property>
+      <Property name="TextOnly">False</Property>
+    </DesignElement>
+    <DesignElement name="Object3" id="ID=1880" metaclass="Object">
+      <Property name="Stereotype">actor</Property>
+      <Property name="Concurrent">False</Property>
+      <Property name="MultipleInstance">False</Property>
+      <Property name="Active">False</Property>
+    </DesignElement>
+    <Diagram name="Sequence Diagram1" id="ID=1859" metaclass="Sequence Diagram" file="Sequence_Diagram1.txvint.html">
+      <DiagramReference id="ID=1866" element="ID=1865" metaclass="Object">
+        <Property name="Concurrent">False</Property>
+        <Property name="MultipleInstance">False</Property>
+        <Property name="Active">False</Property>
+        <Property name="bounds">20,20,126,180</Property>
+        <DiagramReference id="ID=1875" element="ID=1874" metaclass="Message Link">
+          <Property name="Sequence Number">1</Property>
+          <Property name="Destruction">False</Property>
+          <Property name="Synchronization">call</Property>
+          <Property name="Return Arrow">False</Property>
+          <Property name="Non-Atomic Delivery">False</Property>
+          <Property name="Supplier">Object2</Property>
+          <Property name="Client">Object1</Property>
+          <Property name="Creation">False</Property>
+        </DiagramReference>
+      </DiagramReference>
+      <DiagramReference id="ID=1868" element="ID=1867" metaclass="Object">
+        <Property name="Stereotype">actor</Property>
+        <Property name="Concurrent">False</Property>
+        <Property name="MultipleInstance">False</Property>
+        <Property name="Active">False</Property>
+        <Property name="bounds">266,20,372,180</Property>
+      </DiagramReference>
+      <DiagramReference id="ID=1877" element="ID=1876" metaclass="Note">
+        <Property name="Text">萨</Property>
+        <Property name="TextOnly">False</Property>
+        <Property name="bounds">0,0,50,30</Property>
+      </DiagramReference>
+      <DiagramReference id="ID=1879" element="ID=1878" metaclass="Note">
+        <Property name="Text">上海</Property>
+        <Property name="TextOnly">False</Property>
+        <Property name="bounds">0,0,50,30</Property>
+      </DiagramReference>
+      <DiagramReference id="ID=1881" element="ID=1880" metaclass="Object">
+        <Property name="Stereotype">actor</Property>
+        <Property name="Concurrent">False</Property>
+        <Property name="MultipleInstance">False</Property>
+        <Property name="Active">False</Property>
+        <Property name="bounds">146,20,246,180</Property>
+      </DiagramReference>
+    </Diagram>
+  </Package>
+</Model>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml><card id="crd" title="手机邮" newcontext="false">
+<p>
+<#info><#detailInfo>
+<!-- #include file="return.wml" -->
+</p>
+<do type="prev" label="返回"><prev/></do>
+</card></wml>

@@ -1,0 +1,9 @@
+.LOG
+
+1、版本的自动选择:
+
+  //重要!:据此判断加载的是自用的适应所有邮箱的完全版本还是适应单一域名的公开发行版本
+  if not config.TXMLConfig.isDebug(Request) then
+  begin
+    //公共发行版
+  end.

@@ -1,0 +1,1016 @@
+﻿unit inBoxModule;
+
+interface
+
+uses
+  SysUtils, Classes, HTTPApp, WebModu, HTTPProd,IdPOP3,IdMessage,idStrings,IdGlobal,IdCoderMIME,StrUtils,
+  windows,EMailCode,serialization,HashMap,Config,WebDisp,
+  DCPbase64,synacode;
+
+type
+  TinBox = class(TWebPageModule)
+    PageProducer: TPageProducer;
+    procedure WebPageModuleBeforeDispatchPage(Sender: TObject;
+      const PageName: string; var Handled: Boolean);
+    procedure PageProducerHTMLTag(Sender: TObject; Tag: TTag;
+      const TagString: string; TagParams: TStrings; var ReplaceText: string);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+  function inBox: TinBox;
+  function paginationShow(pop:TIdPOP3; selfURL,detailURL,sessionID:string; currentPage:integer; pageItemNum:integer; totalNumber:integer):string;
+  //function MyDecode(s: string): string; overload;
+  function MyDecode(s: AnsiString;charSet:AnsiString=TCharSet.other;encoder:AnsiString=TEncoder.other;contentType:AnsiString=TContentType.mailSubject): string; overload;
+
+implementation
+
+{$R *.dfm}  {*.wml}
+
+uses WebReq, WebCntxt, WebFact, Variants,mainModule,loginModule,detailModule, gb_big5;
+
+const pageItemCount = 5;  //每页显示的条目数
+//var
+//  msgTime   : array[1..5] of TIWLabelWap;      //邮件收发时间
+//  theSender : array[1..5] of TIWLabelWap;      //发件人
+//  subject   : array[1..5] of TIWHyperLinkWap;  //邮件主题
+//  chkBox    : array[1..5] of TIWCheckBoxWap;   //用于选择邮件
+//  navigater : array[1..4] of TIWHyperLinkWap;  //导航条
+
+function CheckTxt(s: string): string;
+var
+  s1,s2,s3: integer;
+  t,v: string;
+  Encoding: char;
+  hex,step: integer;
+  a1: array[1..4] of byte;
+  b1: array[1..3] of byte;
+  j:  integer;
+  byte_ptr,real_bytes: integer;
+begin
+  s1:=Pos('=?',s);
+  s2:= 1 ;
+  hex:= 0 ;
+  if s1>0 then
+  begin
+    for s2:=Length(s)-1 downto 1 do
+    begin
+      if Copy(s,s2,2)='?=' then Break;
+    end;
+  end;
+  if (s1=0) or (s2=1) then
+  begin
+    Result:=s;
+    Exit;
+  end;
+  t:=Copy(s,s1+2,s2-2-s1);
+  s3:=Pos('?',t);
+  Delete(t,1,s3);
+  if(t='')then
+  begin
+    Result:= s;
+    Exit ;
+  end ;
+  Encoding:=t[1];
+  Delete(t,1,2);
+  v:='';
+  step:=0;
+  case Encoding of
+  'Q':
+    while t<>'' do
+    begin
+      case step of
+      0:
+        begin
+          case t[1] of
+          '_': v:=v+' ';
+          '=': step:=1;
+          else v:=v+t[1];
+          end;
+        end;
+      1:
+        begin
+          if t[1]<='9' then hex:=(Ord(t[1])-Ord('0'))*16
+          else hex:=(Ord(t[1])-55)*16;
+          step:=2;
+        end;
+      2:
+        begin
+          if t[1]<='9' then hex:=hex+(Ord(t[1])-Ord('0'))
+          else hex:=hex+Ord(t[1])-55;
+          v:=v+Chr(hex);
+          step:=0;
+        end;
+      end;
+      Delete(t,1,1);
+    end;
+  'B':
+    begin
+      byte_ptr:=0;
+      for j:=1 to Length(t) do
+      begin
+              Inc(byte_ptr);
+              case t[j] of
+              'A'..'Z': a1[byte_ptr]:=Ord(t[j])-65;
+              'a'..'z': a1[byte_ptr]:=Ord(t[j])-71;
+              '0'..'9': a1[byte_ptr]:=Ord(t[j])+4;
+              '+': a1[byte_ptr]:=62;
+              '/': a1[byte_ptr]:=63;
+              '=': a1[byte_ptr]:=64;
+              end;
+              if byte_ptr=4 then
+              begin
+                      byte_ptr:=0;
+                      real_bytes:=3;
+                      if a1[1]=64 then real_bytes:=0;
+                      if a1[3]=64 then
+                      begin
+                              a1[3]:=0;
+                              a1[4]:=0;
+                              real_bytes:=1;
+                      end;
+                      if a1[4]=64 then
+                      begin
+                              a1[4]:=0;
+                              real_bytes:=2;
+                      end;
+                      b1[1]:=a1[1]*4+(a1[2] div 16);
+                      b1[2]:=(a1[2] mod 16)*16+(a1[3]div 4);
+                      b1[3]:=(a1[3] mod 4)*64 +a1[4];
+                      if(real_bytes>0)then
+                        v:= v + chr(b1[1]) ;
+                      if(real_bytes>1)then
+                        v:= v + chr(b1[2]) ;
+                      if(real_bytes>2)then
+                        v:= v + chr(b1[3]) ;
+              end;
+      end;
+    end;
+  end;
+  Result:=Copy(s,1,s1-1)+v+Copy(s,s2+2,999);
+end;
+
+function DecodeBase64_old(s: string): string;
+var
+  str:TStringList;
+  strLeft,strRight,strTemp:string;
+  I:integer;
+begin
+  str := TStringList.Create;
+  while((Pos('?= =?',s)>0)or(Pos('?==?',s)>0)) do
+  begin
+
+    if Pos('?= =?',s)>0 then
+      SplitString(s,'?= =?',strLeft,strRight)
+    else
+      SplitString(s,'?==?',strLeft,strRight);
+
+    str.Add(strLeft+'?=');
+    s := '=?'+strRight;
+  end;
+  strTemp:='';
+  if(str.Count>0) then
+  begin
+    str.Add(s);
+    for I := 0 to str.Count - 1 do
+      strTemp := strTemp + CheckTxt(str[I]);
+  end
+  else
+    strTemp := CheckTxt(s);
+  Result := strTemp;
+end;
+{
+function DecodeBase64_delphi(s: string): string;
+var
+  str:TStringList;
+  strLeft,strRight,strTemp:string;
+  I:integer;
+  IdDecoderMIME:TIdDecoderMIME;
+begin
+  str := TStringList.Create;
+  while((Pos('?= =?',s)>0)or(Pos('?==?',s)>0)) do
+  begin
+
+    if Pos('?= =?',s)>0 then
+      SplitString(s,'?= =?',strLeft,strRight)
+    else
+      SplitString(s,'?==?',strLeft,strRight);
+
+    str.Add(strLeft+'?=');
+    s := '=?'+strRight;
+  end;
+  strTemp:='';
+  IdDecoderMIME := TIdDecoderMIME.Create;
+  if(str.Count>0) then
+  begin
+    str.Add(s);
+    for I := 0 to str.Count - 1 do
+      strTemp := strTemp + IdDecoderMIME.DecodeString(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2));
+  end
+  else
+    strTemp := IdDecoderMIME.DecodeString(RightStr(s,Length(s)-PosEx('?B?',s)-2));
+  Result := strTemp;
+  IdDecoderMIME.Free;
+end;
+}
+
+function DecodeBase64(s: string): string;
+var
+  str:TStringList;
+  strLeft,strRight,strTemp,charSet:string;
+  I:integer;
+begin
+  str := TStringList.Create;
+  while((Pos('?= =?',s)>0)or(Pos('?==?',s)>0)) do
+  begin
+
+    if Pos('?= =?',s)>0 then
+      SplitString(s,'?= =?',strLeft,strRight)
+    else
+      SplitString(s,'?==?',strLeft,strRight);
+
+    str.Add(strLeft+'?=');
+    s := '=?'+strRight;
+  end;
+  strTemp:='';
+  if(str.Count>0) then
+  begin
+    str.Add(s);
+    for I := 0 to str.Count - 1 do
+      if Pos('?B?',str[i])>0 then  //base64编码标志
+      begin
+        charSet := lowercase(Copy(Str[I],PosEx('=?',Str[I])+2,PosEx('?B?',Str[I])-PosEx('=?',Str[I])-2));
+        strTemp := strTemp + DCPbase64.Base64DecodeStr(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=',''));
+        //strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Encoding.Convert(Encoding.GetEncoding(charSet),Encoding.GetEncoding('GB2312'),Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=',''))));
+//        if charSet='big5' then
+//           strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Encoding.Convert(Encoding.GetEncoding(charSet),Encoding.GetEncoding('GB2312'),Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=',''))))
+//        else
+//           strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=','')));
+      end
+      else
+        strTemp := strTemp + str[i];
+
+  end
+  else
+  begin
+    if Pos('?B?',s)>0 then //base64编码标志
+    begin
+      charSet := lowercase(Copy(s,PosEx('=?',s)+2,PosEx('?B?',s)-PosEx('=?',s)-2));
+      //strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Encoding.Convert(Encoding.GetEncoding(charSet),Encoding.GetEncoding('GB2312'),Convert.FromBase64String(ReplaceStr(RightStr(s,Length(s)-PosEx('?B?',s)-2),'?=',''))))
+      strTemp := strTemp + DCPbase64.Base64DecodeStr(ReplaceStr(RightStr(s,Length(s)-PosEx('?B?',s)-2),'?=',''));
+      //else
+      //   strTemp := System.Text.ASCIIEncoding.Default.GetString(Convert.FromBase64String(ReplaceStr(RightStr(s,Length(s)-PosEx('?B?',s)-2),'?=','')));
+    end
+    else
+      strTemp := s;
+  end;
+  Result := strTemp;
+end;
+
+{
+function MyDecode(s: string): string; overload;
+var
+  str:TStringList;
+  strLeft,strRight,strTemp,charSet:string;
+  I,thePos:integer;
+  tmp:widestring;
+begin
+  str := TStringList.Create;
+  while((Pos('?= =?',s)>0)or(Pos('?==?',s)>0)) do
+  begin
+
+    if Pos('?= =?',s)>0 then
+      SplitString(s,'?= =?',strLeft,strRight)
+    else
+      SplitString(s,'?==?',strLeft,strRight);
+
+    str.Add(strLeft+'?=');
+    s := '=?'+strRight;
+  end;
+  Result:='';
+  if(str.Count>0) then
+  begin
+    str.Add(s);
+    for I := 0 to str.Count - 1 do
+    begin
+
+      //开始判断并处理base64编码
+      thePos  := Pos('?B?',str[i]);
+      if thePos=0 then
+         thePos := Pos('?b?',str[i]); //极个别时候，会有小写的Base64编码标志?b?
+      if thePos>0 then
+         strTemp := Base64Decode(ReplaceStr(RightStr(Str[I],Length(Str[I])-thePos-2),'?=',''))
+      else
+      begin //开始判断并处理QuotedPrintable编码
+        thePos := Pos('?Q?',str[i]);
+        if thePos=0 then
+           thePos := Pos('?q?',str[i]); //极个别时候，会有小写的QuotedPrintable编码标志?q?
+        if thePos>0 then
+           strTemp := QuotedPrintableDecode(ReplaceStr(RightStr(Str[I],Length(Str[I])-thePos-2),'?=',''))
+        else
+           strTemp := str[i]; //没做编码或其它编码时，不做任何处理。
+      end;
+
+      if thePos>0 then
+         charSet := lowercase(Copy(Str[I],PosEx('=?',Str[I])+2,thePos-PosEx('=?',Str[I])-2));
+
+//        //.Net Framework 环境中，字符集转换方法：
+//        strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Encoding.Convert(Encoding.GetEncoding(charSet),Encoding.GetEncoding('GB2312'),Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=',''))));
+//        if charSet='big5' then
+//           strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Encoding.Convert(Encoding.GetEncoding(charSet),Encoding.GetEncoding('GB2312'),Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=',''))))
+//        else
+//           strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=','')));
+
+      if charSet='big5' then
+        strTemp := GBChs2Cht(Big52GB(strTemp))  //若编码为big5编码，先转换为GBK,再转换成繁体，否则显示结果为乱码。
+      else
+      if charSet='utf-8' then
+      begin
+        UTF8.DecodeStr(PChar(strTemp),Length(strTemp),tmp);
+        strTemp := tmp;
+      end;
+      Result := Result + strTemp;
+    end;
+  end
+  else
+  begin
+
+    //开始判断并处理base64编码
+    thePos  := Pos('?B?',s);
+    if thePos=0 then
+       thePos := Pos('?b?',s); //极个别时候，会有小写的Base64编码标志?b?
+    if thePos>0 then
+       strTemp := Base64Decode(ReplaceStr(RightStr(s,Length(s)-thePos-2),'?=',''))
+    else
+    begin //开始判断并处理QuotedPrintable编码
+      thePos := Pos('?Q?',s);
+      if thePos=0 then
+         thePos := Pos('?q?',s); //极个别时候，会有小写的QuotedPrintable编码标志?q?
+      if thePos>0 then
+         strTemp := QuotedPrintableDecode(ReplaceStr(RightStr(s,Length(s)-thePos-2),'?=',''))
+      else
+         strTemp := s; //没做编码或其它编码时，不做任何处理。
+    end;
+
+    if thePos>0 then
+       charSet := lowercase(Copy(s,PosEx('=?',s)+2,thePos-PosEx('=?',s)-2));
+
+    if charSet='big5' then
+      strTemp := GBChs2Cht(Big52GB(strTemp))  //若编码为big5编码，先转换为GBK(此时显示为正确的简体）,再转换成繁体，否则显示结果为乱码。
+    else
+    if charSet='utf-8' then
+    begin
+      UTF8.DecodeStr(PChar(strTemp),Length(strTemp),tmp);
+      strTemp := tmp;
+    end;             
+    Result := strTemp;
+  end;
+end;
+}
+{
+//本函数期望能够解以下编码：
+//=?ISO-8859-1?Q?
+//=?ISO-8859-1?B?
+//=?UTF8?Q?
+//=?UTF8?B?
+//=?GB2312?Q?
+//=?GB2312?B?
+//=?BIG5?Q?
+//=?BIG5?Q?
+//mail.subject='微软(=?ISO-8859-1?Q?=D6=D0=B9=FA?=)=?ISO-8859-1?Q?=D3=D0=CF=DE=B9=AB=CB=BE=A3=BA=C7=FD=B6=AF=BF=AA=B7=A2=C8=CB=D4=B1=D3=D0=BD=B1=B5=F7=B2=E9?=,=?ISO-8859-1?Q?=BB=F0=C8=C8=BD=F8=D0=D0=D6=D0?=...'
+}
+function MyDecode_20081102(s: AnsiString;charSet:AnsiString=TCharSet.other;encoder:AnsiString=TEncoder.other;contentType:AnsiString=TContentType.mailSubject): string; overload;
+var
+  str1List,str2List,encoderList:TStringList;
+  strLeft,strRight,strTemp,lastStr:String;
+  I,thePos:integer;
+  tmp:widestring;
+  //qpos,bpos,firstPos:integer;
+begin
+  Result:='';
+  if contentType=TContentType.mailBody then //由于默认情况下，Indy已经做过解码工作了，所以这里不再做内容的解码工作，只做最后的必要的字符集的转换工作。
+  begin
+    if charSet=TCharSet.BIG5 then
+       strTemp := GBChs2Cht(Big52GB(s))  //若编码为big5编码，先转换为GBK,再转换成繁体，否则显示结果为乱码。
+    else
+      if charSet=TCharSet.UTF8 then
+      begin
+        //UTF8.DecodeStr(PChar(s),Length(s),tmp);
+        strTemp := tmp;
+      end
+      else
+        if charSet=TCharSet.GB2312 then
+          strTemp := s;
+      if strTemp<>'' then
+        Result := Result + strTemp
+      else
+        Result := Result + s;
+    exit;
+  end;
+  //去除内容中的回车换行符
+  i:=0;
+  while (PosEx(#13#10,s)>0) and (i<3) do
+  begin
+    s := StringReplace(s,#13#10,'',[rfReplaceAll]);
+    i := i+1;
+  end;
+  {
+  //去除内容中的换行符
+  i:=0;
+  while (PosEx(#10,s)>0) and (i<3) do
+  begin
+    s := StringReplace(s,#10,'',[rfReplaceAll]);
+    i := i+1;
+  end;
+  }
+
+  {
+  strList := TStringList.Create;
+  while((Pos('?= =?',s)>0)or(Pos('?==?',s)>0)) do
+  begin
+
+    if Pos('?= =?',s)>0 then
+      SplitString(s,'?= =?',strLeft,strRight)
+    else
+      SplitString(s,'?==?',strLeft,strRight);
+
+    str.Add(strLeft+'?=');
+    s := '=?'+strRight;
+  end;
+  }
+  str1List := TStringList.Create;
+  str2List := TStringList.Create;
+  {
+  while((Pos('?Q?',s)>0)or(Pos('?B?',s)>0)) do
+  begin
+//    qpos := pos('?Q?',s);
+//    bpos := pos('?B?',s);
+//    if qpos>bpos then
+//     firstPos := bpos
+//    else
+//     firstPos := qpos;
+    StrUtils.
+    LastDelimiter(s,'=?',leftStr,rightStr);
+    s:=leftStr;
+    LastDelimiter(rightStr,'?=',rightStr,lastStr);
+    str1List.Add('=?'+rightStr+'?=');
+    str2List.Add(lastStr);
+  end;
+  result := s;
+  }
+  s := ReverseString(s);
+  //s := 'lastStr:'+s;
+  while((Pos('?Q?',upperCase(s))>0)or(Pos('?B?',upperCase(s))>0)) do
+  begin
+    SplitString(s,'=?',strLeft,StrRight);
+    lastStr := ReverseString(strLeft);
+    str2List.Add(lastStr);
+
+    s:=StrRight;
+    SplitString(s,'?=',strLeft,StrRight);
+    s:=StrRight;
+    strLeft := ReverseString(strLeft);
+    if(strLeft<>'')then
+      str1List.Add('=?'+strLeft+'?=')
+    else
+      str1List.Add(strLeft);
+  end;
+  result := s;
+
+
+  if(str1List.Count>0) then
+  begin
+    //str1List.Add(s);
+    for I := str1List.Count - 1  downto 0 do
+    begin
+
+      //开始判断并处理base64编码
+      thePos  := Pos('?B?',str1List[i]);
+      if thePos=0 then
+         thePos := Pos('?b?',str1List[i]); //极个别时候，会有小写的Base64编码标志?b?
+      if thePos>0 then
+         strTemp := DCPbase64.Base64DecodeStr(ReplaceStr(RightStr(str1List[I],Length(str1List[I])-thePos-2),'?=',''))
+      else
+      begin //开始判断并处理QuotedPrintable编码
+        thePos := Pos('?Q?',str1List[i]);
+        if thePos=0 then
+           thePos := Pos('?q?',str1List[i]); //极个别时候，会有小写的QuotedPrintable编码标志?q?
+        if thePos>0 then
+           strTemp := Synacode.DecodeQuotedPrintable(ReplaceStr(RightStr(str1List[I],Length(str1List[I])-thePos-2),'?=',''))
+        else
+        begin //开始处理包未含编码标志的文本
+          if (encoder = TEncoder.base64) or (encoder= TEncoder.bit8) then
+             strTemp := DCPbase64.Base64DecodeStr(str1List[i])
+          else
+          if encoder = TEncoder.QuotedPrintable then
+             strTemp := QuotedPrintableDecode(str1List[i])
+          else
+             strTemp := str1List[i]; //没做编码或其它编码时，不做任何处理。
+        end;
+      end;
+
+      if thePos>0 then
+         charSet := lowercase(Copy(str1List[I],PosEx('=?',str1List[I])+2,thePos-PosEx('=?',str1List[I])-2));
+
+//        //.Net Framework 环境中，字符集转换方法：
+//        strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Encoding.Convert(Encoding.GetEncoding(charSet),Encoding.GetEncoding('GB2312'),Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=',''))));
+//        if charSet='big5' then
+//           strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Encoding.Convert(Encoding.GetEncoding(charSet),Encoding.GetEncoding('GB2312'),Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=',''))))
+//        else
+//           strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=','')));
+
+      if charSet=TCharSet.BIG5 then
+        strTemp := GBChs2Cht(Big52GB(strTemp))  //若编码为big5编码，先转换为GBK,再转换成繁体，否则显示结果为乱码。
+      else
+      if charSet=TCharSet.UTF8 then
+      begin
+        //UTF8.DecodeStr(PChar(strTemp),Length(strTemp),tmp);
+        //strTemp := Tmp;
+        strTemp:=TEncoding.UTF8.GetString(TEncoding.Default.GetBytes(strTemp));
+      end;
+
+      //去除字符串末尾的半个汉字等非法字符：如去除字符串:'abcdefghijklmn'#$A1 最后的#$A1
+      //FilterHalfUnicode(strTemp);   //delphi2009版已不存在这个问题，所以注释掉.  --lwgboy 2009-11-2 10:30
+      Result := Result + strTemp+str2List[i];
+    end;
+
+  end
+  else
+  begin
+    //开始判断并处理base64编码
+    thePos  := Pos('?B?',s);
+    if thePos=0 then
+       thePos := Pos('?b?',s); //极个别时候，会有小写的Base64编码标志?b?
+    if thePos>0 then
+       strTemp := DCPbase64.Base64DecodeStr(ReplaceStr(RightStr(s,Length(s)-thePos-2),'?=',''))
+    else
+    begin //开始判断并处理QuotedPrintable编码
+      thePos := Pos('?Q?',s);
+      if thePos=0 then
+         thePos := Pos('?q?',s); //极个别时候，会有小写的QuotedPrintable编码标志?q?
+      if thePos>0 then
+         strTemp := synacode.DecodeQuotedPrintable(ReplaceStr(RightStr(s,Length(s)-thePos-2),'?=',''))
+      else
+      begin //开始处理包未含编码标志的文本
+         if (encoder = TEncoder.base64) or (encoder= TEncoder.bit8) then
+            strTemp := DCPbase64.Base64DecodeStr(s)
+         else
+         if encoder = TEncoder.QuotedPrintable then
+            strTemp := QuotedPrintableDecode(s)
+         else
+            strTemp := s; //没做编码或其它编码时，不做任何处理。
+      end;
+    end;
+
+    if thePos>0 then
+       charSet := lowercase(Copy(s,Pos('=?',s)+2,thePos-PosEx('=?',s)-2));
+
+    if charSet='big5' then
+      strTemp := GBChs2Cht(Big52GB(strTemp))  //若编码为big5编码，先转换为GBK(此时显示为正确的简体）,再转换成繁体，否则显示结果为乱码。
+    else
+    if charSet='utf-8' then
+    begin
+      //UTF8.DecodeStr(PChar(strTemp),Length(strTemp),tmp);
+      strTemp := tmp;
+    end;
+
+    //去除字符串末尾的半个汉字等非法字符：如去除字符串:'abcdefghijklmn'#$A1 最后的#$A1
+    //FilterHalfUnicode(strTemp);  // delphi 2009 中已基本不存在这种情况，所以注释掉。 --lwgboy 2008-10-26
+    Result := strTemp;
+
+    //IsTextUnicode(
+  end;
+
+end;
+
+function MyDecode(s: AnsiString;charSet:AnsiString=TCharSet.other;encoder:AnsiString=TEncoder.other;contentType:AnsiString=TContentType.mailSubject): string; overload;
+var
+  str1List,str2List,headerEncoderList:TStringList;
+  strLeft,strRight,strTemp,strCharSet,lastStr:String;
+  I,thePos:integer;
+  tmp:widestring;
+begin
+  Result:='';
+  if contentType=TContentType.mailBody then //由于默认情况下，Indy已经做过解码工作了，所以这里不再做内容的解码工作，只做最后的必要的字符集的转换工作。
+  begin
+    if charSet=TCharSet.BIG5 then
+       strTemp := GBChs2Cht(Big52GB(s))  //若编码为big5编码，先转换为GBK,再转换成繁体，否则显示结果为乱码。
+    else
+      if charSet=TCharSet.UTF8 then
+      begin
+        strTemp := UTF8ToUnicodeString(s);
+      end
+      else
+        if charSet=TCharSet.GB2312 then
+          strTemp := s;
+      if strTemp<>'' then
+        Result := Result + strTemp
+      else
+        Result := Result + s;
+    exit;
+  end;
+  //去除内容中的回车换行符
+  i:=0;
+  while (PosEx(#13#10,s)>0) and (i<3) do
+  begin
+    s := StringReplace(s,#13#10,'',[rfReplaceAll]);
+    i := i+1;
+  end;
+  {
+  //去除内容中的换行符
+  i:=0;
+  while (PosEx(#10,s)>0) and (i<3) do
+  begin
+    s := StringReplace(s,#10,'',[rfReplaceAll]);
+    i := i+1;
+  end;
+  }
+
+  {
+  strList := TStringList.Create;
+  while((Pos('?= =?',s)>0)or(Pos('?==?',s)>0)) do
+  begin
+
+    if Pos('?= =?',s)>0 then
+      SplitString(s,'?= =?',strLeft,strRight)
+    else
+      SplitString(s,'?==?',strLeft,strRight);
+
+    str.Add(strLeft+'?=');
+    s := '=?'+strRight;
+  end;
+  }
+  str1List := TStringList.Create;
+  str2List := TStringList.Create;
+  headerEncoderList :=TStringList.Create;
+  s := StringReplace(s,'?b?','?B?',[rfReplaceAll]); //将可能的编码标志替换为大写，方便后面做分离。
+  s := StringReplace(s,'?q?','?Q?',[rfReplaceAll]); //将可能的编码标志替换为大写，方便后面做分离。
+
+  s := ReverseString(s);                  //尾 =?cba?B?2132BG= 间中 =?gfe?Q?8ftu?= 头
+  while((Pos('?Q?',upperCase(s))>0)or(Pos('?B?',upperCase(s))>0)) do
+  begin
+    SplitString(s,'=?',strLeft,strRight);
+    lastStr := ReverseString(strLeft);
+    str2List.Add(lastStr);                //lastStr="尾"
+
+    s:=strRight;
+    SplitString(s,'?=',strLeft,strRight); //strLeft="cba?B?2132BG" , strRight="= 间中 =?gfe?Q?8ftu= 头"
+    s:=strRight;
+    if(strLeft<>'')then
+    begin
+      strLeft := ReverseString(strLeft);  //strLeft="GB2312?B?abc"
+
+      thePos := Pos('?B?',upperCase(strLeft));      //个别时候，会有小写的Base64编码标志?b?,所以要转换为大写来判断。
+      if thePos>0 then strTemp:='B'
+      else
+      begin
+        thePos := Pos('?Q?',upperCase(strLeft));    //个别时候，会有小写的QuotedPrintable编码标志?q?,所以要转换为大写来判断。
+        if thePos>0 then strTemp := 'Q';
+      end;
+
+      if thePos>0 then //说明存在编码标志:是base64编码还是QuotePrintAnble编码.通常:若thePos=4,则charSet=GBK;若thePos=5,则charSet=BIG5或UTF8;若thePos=6,则charSet=UTF-8;若thePos=7,则charSet=GB2312;若thePos=11,则charSet=ISO-8859-1，即thePos=Length(charSet)+1 ;
+        SplitString(strLeft,'?'+strTemp+'?',strCharSet,strLeft) //strCharSet="GB2312",strLeft="abc"
+      else
+        SplitString(strLeft,'?',strCharSet,strLeft); //不存在编码标志时，视左边为语言编码，右边为编码的内容,这可能有Bug,有空儿时再做进一步处理。--lwgboy 2008-10-2
+
+      str1List.Add(strLeft);
+      headerEncoderList.Add(upperCase(strCharSet+'='+strTemp)); //处理有的语言编码或字符编码为小写，所以全转换为大写来处理。
+    end
+    else
+      str1List.Add(strLeft);
+  end;
+  result := s;
+
+
+  if(str1List.Count>0) then
+  begin
+    for I := str1List.Count - 1  downto 0 do
+    begin
+      if(headerEncoderList.ValueFromIndex[i]='B')then  //开始判断并处理base64编码
+      begin
+         if (headerEncoderList.Names[i]='UTF-8') or (headerEncoderList.Names[i]='UTF8')then
+         begin
+           //strTemp := TEncoding.default.GetString(TEncoding.Convert(TEncoding.UTF8,TEncoding.Default,DCPbase64.Base64DecodeStrToBytes(str1List[i])));
+           //strTemp := TEncoding.UTF8.GetString(TEncoding.Default.GetBytes(DCPbase64.Base64DecodeStr(str1List[i]))) //这里直接处理UTF8编码，以防止Base64解码后的UTF8编码末尾可能会有的：由#和数字组成的半个字符赋给String类型变量(然后再进行UTF8解码)时，末尾的半个字符被截除。
+           //strTemp := TEncoding.UTF8.GetString(ToBytes(DCPbase64.Base64DecodeStr(str1List[i]))) //这里直接处理UTF8编码，以防止Base64解码后的UTF8编码末尾可能会有的：由#和数字组成的半个字符赋给String类型变量(然后再进行UTF8解码)时，末尾的半个字符被截除。
+           strTemp := TEncoding.UTF8.GetString(DCPbase64.Base64DecodeStrToBytes(str1List[i])) //这里直接处理UTF8编码，以防止Base64解码后的UTF8编码末尾可能会有的：由#和数字组成的半个字符赋给String类型变量(然后再进行UTF8解码)时，末尾的半个字符被截除。
+         end
+         else
+           strTemp := DCPbase64.Base64DecodeStr(str1List[i]);
+      end
+      else
+      begin //开始判断并处理QuotedPrintable编码
+        if(headerEncoderList.ValueFromIndex[i]='Q')then
+        begin
+          if headerEncoderList.Names[i]='UTF8' then
+            strTemp := TEncoding.UTF8.GetString(TEncoding.Default.GetBytes(Synacode.DecodeQuotedPrintable(str1List[i])))//这里直接处理UTF8编码，以防止Base64解码后的UTF8编码末尾可能会有的：由#和数字组成的半个字符赋给String类型变量(然后再进行UTF8解码)时，末尾的半个字符被截除。
+          else
+            strTemp := Synacode.DecodeQuotedPrintable(str1List[i]);
+        end
+        else
+        begin //开始处理未含编码标志的文本
+          if (encoder = TEncoder.base64) or (encoder= TEncoder.bit8) then
+             strTemp := DCPbase64.Base64DecodeStr(str1List[i])
+          else
+          if encoder = TEncoder.QuotedPrintable then
+             strTemp := QuotedPrintableDecode(str1List[i])   //可能会有Bug,有空儿再做检测和处理，最简单的办法是改为 Synacode.DecodeQuotedPrintable(str1List[i])，因可能执行不到这里所以暂时未作更改。 2008-11-2
+          else
+             strTemp := str1List[i]; //没做编码或其它编码时，不做任何处理。
+        end;
+      end;
+
+//上面语句中已处理过了，所以这里不再需要做处理，注释掉。
+//      if thePos>0 then
+//         charSet := lowercase(Copy(str1List[I],PosEx('=?',str1List[I])+2,thePos-PosEx('=?',str1List[I])-2));
+
+//        //.Net Framework 环境中，字符集转换方法：
+//        strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Encoding.Convert(Encoding.GetEncoding(charSet),Encoding.GetEncoding('GB2312'),Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=',''))));
+//        if charSet='big5' then
+//           strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Encoding.Convert(Encoding.GetEncoding(charSet),Encoding.GetEncoding('GB2312'),Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=',''))))
+//        else
+//           strTemp := strTemp + System.Text.ASCIIEncoding.Default.GetString(Convert.FromBase64String(ReplaceStr(RightStr(Str[I],Length(Str[I])-PosEx('?B?',Str[I])-2),'?=','')));
+
+      if charSet=TCharSet.BIG5 then
+        strTemp := GBChs2Cht(Big52GB(strTemp))  //若编码为big5编码，先转换为GBK,再转换成繁体，否则显示结果为乱码。
+      else
+      if charSet=TCharSet.UTF8 then
+      begin
+        //UTF8.DecodeStr(PChar(strTemp),Length(strTemp),tmp);
+        //strTemp := Tmp;
+        strTemp:=TEncoding.UTF8.GetString(TEncoding.Default.GetBytes(strTemp));
+      end;
+
+      //去除字符串末尾的半个汉字等非法字符：如去除字符串:'abcdefghijklmn'#$A1 最后的#$A1
+      //FilterHalfUnicode(strTemp);   //delphi2009版已不存在这个问题，所以注释掉.  --lwgboy 2009-11-2 10:30
+      Result := Result + strTemp+str2List[i];
+    end;
+
+  end
+  else
+  begin
+    //开始判断并处理base64编码
+    thePos  := Pos('?B?',s);
+    if thePos=0 then
+       thePos := Pos('?b?',s); //极个别时候，会有小写的Base64编码标志?b?
+    if thePos>0 then
+       strTemp := DCPbase64.Base64DecodeStr(ReplaceStr(RightStr(s,Length(s)-thePos-2),'?=',''))
+    else
+    begin //开始判断并处理QuotedPrintable编码
+      thePos := Pos('?Q?',s);
+      if thePos=0 then
+         thePos := Pos('?q?',s); //极个别时候，会有小写的QuotedPrintable编码标志?q?
+      if thePos>0 then
+         strTemp := synacode.DecodeQuotedPrintable(ReplaceStr(RightStr(s,Length(s)-thePos-2),'?=',''))
+      else
+      begin //开始处理包未含编码标志的文本
+         if (encoder = TEncoder.base64) or (encoder= TEncoder.bit8) then
+            strTemp := DCPbase64.Base64DecodeStr(s)
+         else
+         if encoder = TEncoder.QuotedPrintable then
+            strTemp := QuotedPrintableDecode(s)
+         else
+            strTemp := s; //没做编码或其它编码时，不做任何处理。
+      end;
+    end;
+
+    if thePos>0 then
+       charSet := lowercase(Copy(s,Pos('=?',s)+2,thePos-PosEx('=?',s)-2));
+
+    if charSet='big5' then
+      strTemp := GBChs2Cht(Big52GB(strTemp))  //若编码为big5编码，先转换为GBK(此时显示为正确的简体）,再转换成繁体，否则显示结果为乱码。
+    else
+    if charSet='utf-8' then
+    begin
+      //UTF8.DecodeStr(PChar(strTemp),Length(strTemp),tmp);
+      strTemp := tmp;
+    end;
+
+    //去除字符串末尾的半个汉字等非法字符：如去除字符串:'abcdefghijklmn'#$A1 最后的#$A1
+    //FilterHalfUnicode(strTemp);  // delphi 2009 中已基本不存在这种情况，所以注释掉。 --lwgboy 2008-10-26
+    Result := strTemp;
+
+    //IsTextUnicode(
+  end;
+
+end;
+
+
+function inBox: TinBox;
+begin
+  Result := TinBox(WebContext.FindModuleClass(TinBox));
+end;
+
+procedure TinBox.PageProducerHTMLTag(Sender: TObject; Tag: TTag;
+  const TagString: string; TagParams: TStrings; var ReplaceText: string);
+var
+  user:TUser;
+  strTmp:string;
+  I: Integer;
+begin
+  if TagString='userOtherMailList' then
+  begin
+    strTmp := Session.Values[TConfig.currentUserSession];
+    if strTmp<>'' then
+    begin
+      user := TUser.Create(self);
+      strToComponent(strTmp,user);
+      strTmp := '';
+      for I := 0 to user.mailConfigArrayLength - 1 do
+      begin
+        strTmp := strTmp + user.mailConfigArray[i].mailAddress;
+        
+      end;
+    end;
+    ReplaceText := strTmp;
+  end;
+end;
+
+procedure TinBox.WebPageModuleBeforeDispatchPage(Sender: TObject;
+  const PageName: string; var Handled: Boolean);
+var
+  currentPage,content,serialObj:string;
+  POP3:TIdPOP3;
+begin
+{
+  serialObj:=WebContext.Session.Values['POP3'];
+  if serialObj<>'' then
+  begin
+    POP3 := TIdPOP3.Create(nil);
+    POP3 := serialization.StrToComponent(serialObj,POP3) as TIdPOP3;
+    if not POP3.Connected then
+      POP3.Connect;
+    Response.ContentType := 'text/vnd.wap.wml';
+    content := '<?xml version="1.0"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">';
+    content := content + '<wml><card id="card1" title="" newcontext="true">';
+    currentPage := Request.QueryFields.Values['p'];
+    if currentPage='' then currentPage := '1';
+    currentPage := paginationShow(GetPOP3,Request.InternalScriptName+Request.InternalPathInfo,Request.InternalScriptName+'/detailModule',StrToInt(currentPage),pageItemCount,GetPOP3.CheckMessages);
+    currentPage := paginationShow(GetPOP3,Request.InternalScriptName+Request.InternalPathInfo,Request.InternalScriptName+'/detailModule',StrToInt(currentPage),pageItemCount,GetPOP3.CheckMessages);
+    Response.Content := content+currentPage+'</card></wml>';
+    Response.SendResponse;
+  end;
+}
+  Response.ContentType := 'text/vnd.wap.wml';
+  if GetUserPOP3(POP3) then
+  begin
+    if not POP3.Connected then
+    begin
+      POP3.ConnectTimeout := 1500;
+      POP3.Connect;
+    end;
+    currentPage := Request.QueryFields.Values['p'];
+    if currentPage='' then currentPage := '1';
+    currentPage := paginationShow(POP3,Request.InternalScriptName+Request.InternalPathInfo,Request.InternalScriptName+'/detail',WebContext.Session.SessionID,StrToInt(currentPage),pageItemCount,POP3.CheckMessages);
+    content := '<?xml version="1.0"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">';
+    content := content + '<wml><card id="card1" title="" newcontext="true"><p>';
+    Response.Content := content+currentPage + '<br/><a href="'+Request.InternalScriptName+'/login?ms='+Session.SessionID+loginModule.AppendUserInfo+'">'+('切换邮箱')+'</a></p></card></wml>';
+    Session.UpdateResponse(Response); //用UpdateResponse方法可以防止Session丢失．
+    Response.SendResponse;
+  end
+  else
+  begin
+    DispatchPageName('main',Response,[]);
+    Main.Response.SendResponse;
+  end;
+
+end;
+
+function paginationShow(pop:TIdPOP3; selfURL,detailURL,sessionID:string; currentPage:integer; pageItemNum:integer; totalNumber:integer):string;
+var
+  summaryPage:integer; //总页数
+  currentItem:integer; //当前的记录行
+  currentPageFirstItem:integer; //当前页的第一行记录
+  i:integer;
+
+  msg:TIdMessage;
+  theSubject :string;
+  txtTemp:WideString;
+  format:TFormatSettings;
+  content:TStringList;
+begin
+  if totalNumber<=0 then
+  begin
+    Result := ('您的收件箱没有任何邮件.');
+    exit;
+  end;
+
+  if totalNumber mod pageItemNum>0 then
+     summaryPage := totalNumber div pageItemNum + 1
+  else
+     summaryPage := totalNumber div pageItemNum;
+
+  //ReleaseAll;
+  content := TStringList.Create;
+  if currentPage<=1  then
+  begin
+    currentPage := 1;
+    content.Add('<a href="'+selfURL+'?ms='+sessionID+'&amp;p='+IntToStr(currentPage+1)+'">'+('下')+'</a>');
+    content.Add('<a href="'+selfURL+'?ms='+sessionID+'&amp;p='+IntToStr(summaryPage  )+'">'+('尾')+'</a>');
+  end
+  else
+  if currentPage>=summaryPage then
+  begin
+    currentPage := summaryPage;
+    content.Add('<a href="'+selfURL+'?ms='+sessionID+'&amp;p=1">'+('头')+'</a>');
+    content.Add('<a href="'+selfURL+'?ms='+sessionID+'&amp;p='+IntToStr(currentPage-1)+'">'+('上')+'</a>');
+  end
+  else
+  begin
+    content.Add('<a href="'+selfURL+'?ms='+sessionID+'&amp;p=1">'+('头')+'</a>');
+    content.Add('<a href="'+selfURL+'?ms='+sessionID+'&amp;p='+IntToStr(currentPage-1)+'">'+('上')+'</a>');
+    content.Add('<a href="'+selfURL+'?ms='+sessionID+'&amp;p='+IntToStr(currentPage+1)+'">'+('下')+'</a>');
+    content.Add('<a href="'+selfURL+'?ms='+sessionID+'&amp;p='+IntToStr(summaryPage  )+'">'+('尾')+'</a>');
+  end;
+  content.Add('<br/>');
+
+//  try
+//    GetLocaleFormatSettings(LOCALE_SYSTEM_DEFAULT, format);
+//    format.ShortDateFormat := 'yyyyMMdd';
+//    format.ShortTimeFormat := 'hh:mm';
+//  except
+//    On Exception do begin
+//    end;
+//  end;
+
+  currentPageFirstItem := (currentPage-1)*pageItemNum + 1;
+  pageItemNum := (totalNumber-currentPageFirstItem)+1;
+  if pageItemNum>pageItemCount then pageItemNum := pageItemCount;
+  for i := 1 to pageItemNum do  // Mial MessageNumbers start with 1 !!!
+  begin
+    msg := TIdMessage.Create(Nil);
+    try
+      msg.NoDecode := true;
+      pop.RetrieveHeader(currentPageFirstItem+i-1,msg);
+
+
+      //pop.Retrieve(currentPageFirstItem+i-1,msg)
+    except on E:Exception do
+      begin
+        logToFile(pop.Username,'Host='+pop.Host+#13#10+'Recv:'+#13#10+'msgId='+IntToStr(currentPageFirstItem+i-1)+#13#10+'Msg:'+e.Message);
+        FreeAndNil(msg);                       // oops, an error
+        Continue;
+      end;
+    end;
+
+    content.Add('<select name="time'+IntToStr(i)+'" title="time'+IntToStr(i)+'" multiple="true" tabindex="0">');
+    content.Add('<option value="'+ IntToStr(currentPageFirstItem+i-1)+'"><small><i>'+{DateTimeToStr(msg.Date,format)}FormatdateTime('yy-mm-dd hh:mm',msg.Date)+'</i></small></option>');
+    content.Add('</select><br/>');
+
+    theSubject := FormatdateTime('yy-mm-dd hh:mm',msg.Date); // for test
+
+
+    //发件人
+    txtTemp := iif(msg.From.Name<>'',msg.From.Name,msg.From.Text);
+    if txtTemp<>'' then
+    begin
+       if (pos('?B?',uppercase(txtTemp))>0) or (pos('?Q?',uppercase(txtTemp))>0) then
+          txtTemp := MyDecode(txtTemp)+':'
+       else
+          txtTemp := txtTemp+':';
+    end;
+    //content.Add(iif(Pos('?utf-8?',lowercase(msg.Subject))>0,txtTemp,(txtTemp)));
+    txtTemp := Config.FilterSpecialCharacter(txtTemp);
+    content.Add((txtTemp));
+
+    //主题
+
+    if trim(msg.Subject)='' then
+       txtTemp := '...'
+    else
+    begin
+      if (pos('?B?',uppercase(msg.Subject))>0) or (pos('?Q?',uppercase(msg.Subject))>0) then
+      begin
+         theSubject := MyDecode(msg.Subject);
+         txtTemp := theSubject;
+      end
+      else
+      begin
+         txtTemp := msg.Subject;
+         theSubject := txtTemp;
+      end;
+
+      if (length(txtTemp)>30) then
+         txtTemp := LeftStr(txtTemp,30)+'...'
+      else
+         txtTemp := theSubject;
+    end;
+    txtTemp := FilterSpecialCharacter(txtTemp);
+    //content.Add('<a href="'+detailURL+'?id='+ IntToStr(currentPageFirstItem+i-1)+'" name="subject'+intToStr(i)+'">'+iif(Pos('?utf-8?',lowercase(msg.Subject))>0,txtTemp,(txtTemp))+'</a><br/>');
+    content.Add('<a href="'+detailURL+'?ms='+SessionID+'&amp;id='+ IntToStr(currentPageFirstItem+i-1)+'&amp;lp='+IntToStr(currentPage)+'&amp;name=subject'+intToStr(i)+'">'+(txtTemp)+'</a><br/>');  //lp: ListPage,邮件列表页码
+
+  end;
+  WebContext.Session.Values['summaryPage'] := summaryPage;
+  WebContext.Session.Values['currentPage'] := currentPage;
+  WebContext.Session.Values['totalNumber'] := totalNumber;
+  content.Add(('共'+IntToStr(summaryPage)+'页')+',<a href="'+WebContext.Request.InternalScriptName+'/inBox?ms='+WebContext.Session.SessionID+loginModule.AppendUserInfo+'&amp;p=$go">'+('转到')+'</a><input name="go" maxlength="5" size="3" format="5N" emptyok="false" value="'+IntToStr(currentPage)+'"/>'+('页'));
+
+  Result:=content.Text;
+  content.Free;
+end;  
+
+initialization
+  if WebRequestHandler <> nil then
+    WebRequestHandler.AddWebModuleFactory(TWebPageModuleFactory.Create(TinBox, TWebPageInfo.Create([wpPublished {, wpLoginRequired}], '.wml'), crOnDemand, caCache));
+end.

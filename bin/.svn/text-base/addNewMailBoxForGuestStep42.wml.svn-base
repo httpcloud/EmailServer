@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="success" title="魔方手机邮" newcontext="true">
+<p>
+<b><u>游客体验通道</u></b><br/>
+恭喜,成功登陆!<br/>
+<br/>
+<a href="<%=Pages.login.HREF%>?ms=<#ms>&amp;up=<#up>">点这里到收件箱</a>
+</p>
+<!-- #include file="return.wml" -->
+</card>
+</wml>
+

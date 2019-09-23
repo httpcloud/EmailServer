@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="login" title="手机邮" newcontext="true">
+<p>
+恭喜,注册成功!<br/>
+您的魔号是:<b><#userid></b>,对应密码:<#pwd>请牢记.<br/>
+请以您的魔号和密码登陆：<br/>
+魔号:<input name="MID" emptyok="false" format="10N" maxlength="10"/><br/>
+密码:<input name="MPW" emptyok="false" format="10" maxlength="10"/><br/>
+<do type="accept" label="登陆" name="btLogin">
+  <go accept-charset="utf-8" href="<%=Pages.login.HREF%>" method="post">
+	<postfield name="MID" value="$(MID)"/>
+	<postfield name="MPW" value="$(MPW)"/>
+  </go>
+</do>
+<a href="<%=Pages.Main.HREF%>#MLogin">用邮箱作用户名登录</a><br/>
+<a href="<%=Pages.action.HREF%>?ac=forgetPWD">忘记魔号/密码</a><br/>
+<a href="<%=Pages.reg.HREF%>">免费注册魔号</a><br/>
+<a href="<%=Pages.action.HREF%>?ac=help">新手帮助</a><br/>
+<a href="<%=Pages.Main.HREF%>">邮箱首页</a>
+<do type="prev" label="返回" name="back"><prev/></do>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>

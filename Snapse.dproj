@@ -1,0 +1,144 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{23158B27-2C54-4ABE-A781-6A5462F36356}</ProjectGuid>
+			<MainSource>Snapse.dpk</MainSource>
+			<ProjectVersion>12.0</ProjectVersion>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_DependencyCheckOutputName>C:\Users\Public\Documents\RAD Studio\7.0\Bpl\Snapse.bpl</DCC_DependencyCheckOutputName>
+			<GenPackage>true</GenPackage>
+			<GenDll>true</GenDll>
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_CodePage>65001</DCC_CodePage>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_Platform>x86</DCC_Platform>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="Snapse.dpk">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="rtl.dcp"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\asn1util.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\blcksock.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\clamsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\dnssend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\ftpsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\ftptsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\httpsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\imapsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\ldapsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\mimeinln.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\mimemess.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\mimepart.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\nntpsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\pingsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\pop3send.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\slogsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\smtpsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\snmpsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\sntpsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\ssl_cryptlib.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\ssl_openssl.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\ssl_openssl_lib.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\synachar.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\synacode.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\synacrypt.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\synadbg.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\synafpc.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\synaicnv.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\synaip.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\synamisc.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\synaser.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\synautil.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\synsock.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\tlntsend.pas"/>
+			<DCCReference Include="..\ThirdComponent\Delphi\synapse\cryptlib.pas"/>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>Package</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">Snapse.dpk</Source>
+					</Source>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">2052</VersionInfo>
+						<VersionInfo Name="CodePage">936</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcboffice2k120.bpl">CodeGear C++Builder Office 2000 Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcbofficexp120.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k120.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dclofficexp120.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

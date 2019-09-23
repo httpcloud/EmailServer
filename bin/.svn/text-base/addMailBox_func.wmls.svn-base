@@ -1,0 +1,38 @@
+function getPOP3(mailbox,prefix)
+{  
+	WMLBrowser.setVar("POP3",String.replace(mailbox,prefix,"pop3."));
+}
+
+function getSMTP(mailbox,prefix)
+{
+	WMLBrowser.setVar("SMTP",String.replace(mailbox,prefix,"smtp."));
+}
+
+function checkMail(mailbox)
+{
+	var pos = String.find(mailbox,"@");
+	var result = false;	
+	if (pos>0)
+	{		
+		if (String.elements(String.subString(mailbox,pos+1,String.length(mailbox)-pos),".")>=2)
+			result = true;
+	}
+	if(!result)	
+		Dialogs.alert("” œ‰µÿ÷∑("+mailbox+")Œﬁ–ß!");
+	return result;
+}
+
+extern function getSvr(mailbox)
+{
+	if(checkMail(mailbox))
+	{
+		var email = WMLBrowser.getVar("box");	
+		var UserName = String.subString(email,0,String.find(email,"@"));
+		WMLBrowser.setVar("UN",UserName);
+		UserName = UserName + "@";
+		getPOP3(email,UserName);
+		getSMTP(email,UserName);	
+		WMLBrowser.refresh();	
+		WMLBrowser.go(String.replace(WMLBrowser.getCurrentCard(),"#crd1","#crd2"));
+	}
+}

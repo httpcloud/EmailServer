@@ -1,0 +1,15 @@
+unit Comon.Debug;
+
+interface
+
+uses windows;
+
+
+  type
+    Debug = class
+      class procedure outputInfo(DebugInfo:string);
+    end;
+
+implementation
+
+end.

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="login" title="手机邮" newcontext="true">
+<p>
+<#info>
+本站所有服务都是完全免费的。<br/>
+随身邮系统可以帮助你适时的收发您的各个信箱中的邮件。<br/>
+非注册用户可以通过[游客体验通道]来体验随身邮,当你的邮箱服务商不在邮箱列表中时,可通过[更多邮箱登陆]通道根据提示一步步完成各项参数的设定之后即可登陆你的邮箱。<br/>
+注册用户,可保存你邮箱的各种参数信息从而实现快速登陆,免除你每次登陆邮箱都要输入用户名/信箱/磨号等过程。<br/>
+因系统在不断更新中,使用过程中若有其它疑问或不成功的,请发邮件至<b>i@.cc</b>,24小时内你会得到满意的答复。<br/>
+祝你工作愉快,用的开心！
+</p>
+<a href="/">返回首页</a>
+<!-- #include file="return.wml" -->
+</card></wml>
+

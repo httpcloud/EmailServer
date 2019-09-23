@@ -1,0 +1,11 @@
+unit Model;
+
+interface
+
+type
+  UserInBox = class
+  end;
+
+implementation
+
+end.

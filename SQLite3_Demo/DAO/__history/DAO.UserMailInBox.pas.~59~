@@ -1,0 +1,224 @@
+unit DAO.UserMailInBox;
+
+interface
+
+uses disqlite3_encryption_db,  RTTI,
+  Generics.Collections,Domain.UserMailInBox,DISQLite3Database,DISQLite3Api;
+
+type
+  TUserMailInBoxDAO = class(TMailBoxConfigDatabase)
+     function Add(InBox:Domain.UserMailInBox.TUserMailInBoxRec): Int64; overload;
+     function Readx(UserEmail: String): TObjectList<TUserMailInBoxRec>;
+     function Read(UserEmail: String): TObjectList<TUserMailInBoxRec>; overload;
+
+     //本函数有缺陷，在绑定 KeyFieldName 时，所以用下面的直接替代。
+     //function ReadBy(objList:TObjectList<TKeyValue>): TObjectList<TUserMailInBoxRec>;  overload;
+     function ReadBy(KeyFieldName:string;kv:TKeyValue): TObjectList<TUserMailInBoxRec>; overload;
+
+
+     //function Delete(sql: string;params: TObjectList<TKeyValue>): Int64;
+  end;
+
+implementation
+
+uses
+  SysUtils;
+
+{ UserInBox }
+
+function TUserMailInBoxDAO.Add(InBox:Domain.UserMailInBox.TUserMailInBoxRec): Int64;
+var
+  sql:string;
+  //params:TDictionary<String,TValue>;
+  params:TObjectList<TKeyValue>;
+  kv:TKeyValue;
+begin
+   sql := 'insert into UserInBox(UserEMail,MailID,RecvTime,FromAddr,Recipient ,CC,BCC ,Subject ,AttchFileName ,Body,OrginalContent,Status) values(?,?,?,?,?,?,?,?,?,?,?,?);';
+   //sql := 'insert into UserInBox(UserEMail,MailID,RecvTime,FromAddr,Recipient ,CC,BCC ,Subject ,AttchFileName ,Body,OrginalContent,Status) values(?,?,current_timestamp,?,?,?,?,?,?,?,?,?);';
+   //sql := 'insert into UserInBox(Subject ,AttchFileName ) values(?,?);';
+   {
+   params:=TDictionary<String,TValue>.Create;
+   params.Add('str',InBox.UserEMail);
+   params.Add('str',InBox.MailID);
+   //params.Add('str',InBox.RecvTime);
+   params.Add('str',InBox.FromAddr);
+   params.Add('str',InBox.Recipient);
+   params.Add('str',InBox.CC);
+   params.Add('str',InBox.BCC);
+   params.Add('str',InBox.Subject);
+   params.Add('str',InBox.AttchFileName);
+   params.Add('str',InBox.Body);
+   params.Add('str',InBox.OrginalContent);
+   params.Add('int',InBox.Status);
+   }
+
+   params:=TObjectList<TKeyValue>.Create;
+   params.Add(TKeyValue.Create('str',InBox.UserEMail));
+   params.Add(TKeyValue.Create('str',InBox.MailID));
+   params.Add(TKeyValue.Create('str',DateTimeToStr(InBox.RecvTime)));
+   params.Add(TKeyValue.Create('str',InBox.FromAddr));
+   params.Add(TKeyValue.Create('str',InBox.Recipient));
+   params.Add(TKeyValue.Create('str',InBox.CC));
+   params.Add(TKeyValue.Create('str',InBox.BCC));
+   params.Add(TKeyValue.Create('str',InBox.Subject));
+   params.Add(TKeyValue.Create('str',InBox.AttchFileName));
+   params.Add(TKeyValue.Create('str',InBox.Body));
+   params.Add(TKeyValue.Create('str',InBox.OrginalContent));
+   params.Add(TKeyValue.Create('int',InBox.Status));
+
+   inherited Add(sql,params);
+   params.Free;
+end;
+
+function TUserMailInBoxDAO.Read(UserEmail: String): TObjectList<TUserMailInBoxRec>;
+var
+  sql:string;
+  objList:TObjectList<TKeyValue>;
+  kv:TKeyValue;
+  stmt:TDISQLite3Statement;
+  InBoxList:TObjectList<TUserMailInBoxRec>;
+  i:integer;
+  fs:TFormatSettings;
+begin
+  sql := 'select * from UserInBox where UserEMail=? order by RecvTime desc;';
+  objList:=TObjectList<TKeyValue>.Create;
+  kv := TKeyValue.Create('str',UserEMail);
+  objList.Add(kv);
+  stmt := inherited Read(sql,objList);
+  if(stmt<>nil)then
+  begin
+    //fs.LongDateFormat := 'yyyy-MM-dd hh:mm:ss';
+    fs.ShortDateFormat := 'yyyy-MM-dd';
+    fs.ShortTimeFormat := 'hh:mm:ss';
+    fs.DateSeparator := '-';
+    fs.TimeSeparator := ':';
+    InBoxList := TObjectList<TUserMailInBoxRec>.Create();
+    i:=0;
+    while(stmt.Step=SQLITE_ROW)do
+    begin
+      inBoxList.Add(TUserMailInBoxRec.Create);
+      inBoxList.Items[i].UserEMail:=stmt.Column_Str16(GetIndex(stmt,'UserEMail'));
+      inBoxList.Items[i].MailID:=stmt.Column_Str16(GetIndex(stmt,'MailID'));
+      inBoxList.Items[i].RecvTime:=StrToDateTime(stmt.Column_Str16(GetIndex(stmt,'RecvTime')),fs);
+      inBoxList.Items[i].FromAddr:=stmt.Column_Str16(GetIndex(stmt,'FromAddr'));
+      inBoxList.Items[i].Recipient:=stmt.Column_Str16(GetIndex(stmt,'Recipient'));
+      inBoxList.Items[i].CC:=stmt.Column_Str16(GetIndex(stmt,'CC'));
+      inBoxList.Items[i].BCC:=stmt.Column_Str16(GetIndex(stmt,'BCC'));
+      inBoxList.Items[i].Subject:=stmt.Column_Str16(GetIndex(stmt,'Subject'));
+      inBoxList.Items[i].AttchFileName:=stmt.Column_Str16(GetIndex(stmt,'AttchFileName'));
+      inBoxList.Items[i].Body:=stmt.Column_Str16(GetIndex(stmt,'Body'));
+      inBoxList.Items[i].OrginalContent:=stmt.Column_Str16(GetIndex(stmt,'OrginalContent'));
+      inBoxList.Items[i].Status:=stmt.Column_int(GetIndex(stmt,'Status'));
+      i:=i+1;
+    end;
+  end;
+  Result := inBoxList;
+  objList.Free;
+  stmt.Free;
+end;
+
+
+{$REGION '本函数有缺陷，在绑定 KeyFieldName 时可能会被当成参数值而把 KeyFieldName 加上引号，所以注视掉，用下面的替代。'}
+{
+function TUserMailInBoxDAO.ReadBy(objList:TObjectList<TKeyValue>): TObjectList<TUserMailInBoxRec>;
+var
+  sql:string;
+  stmt:TDISQLite3Statement;
+  InBoxList:TObjectList<TUserMailInBoxRec>;
+  i:integer;
+  fs:TFormatSettings;
+begin
+  sql := 'select * from UserInBox where ?=? Order by RecvTime desc;';
+  stmt := inherited Read(sql,objList);
+  if(stmt<>nil)then
+  begin
+    //fs.LongDateFormat := 'yyyy-MM-dd hh:mm:ss';
+    fs.ShortDateFormat := 'yyyy-MM-dd';
+    fs.ShortTimeFormat := 'hh:mm:ss';
+    fs.DateSeparator := '-';
+    fs.TimeSeparator := ':';
+    InBoxList := TObjectList<TUserMailInBoxRec>.Create();
+    i:=0;
+    while(stmt.Step=SQLITE_ROW)do
+    begin
+      inBoxList.Add(TUserMailInBoxRec.Create);
+      inBoxList.Items[i].UserEMail:=stmt.Column_Str16(GetIndex(stmt,'UserEMail'));
+      inBoxList.Items[i].MailID:=stmt.Column_Str16(GetIndex(stmt,'MailID'));
+      inBoxList.Items[i].RecvTime:=StrToDateTime(stmt.Column_Str16(GetIndex(stmt,'RecvTime')),fs);
+      inBoxList.Items[i].FromAddr:=stmt.Column_Str16(GetIndex(stmt,'FromAddr'));
+      inBoxList.Items[i].Recipient:=stmt.Column_Str16(GetIndex(stmt,'Recipient'));
+      inBoxList.Items[i].CC:=stmt.Column_Str16(GetIndex(stmt,'CC'));
+      inBoxList.Items[i].BCC:=stmt.Column_Str16(GetIndex(stmt,'BCC'));
+      inBoxList.Items[i].Subject:=stmt.Column_Str16(GetIndex(stmt,'Subject'));
+      inBoxList.Items[i].AttchFileName:=stmt.Column_Str16(GetIndex(stmt,'AttchFileName'));
+      inBoxList.Items[i].Body:=stmt.Column_Str16(GetIndex(stmt,'Body'));
+      inBoxList.Items[i].OrginalContent:=stmt.Column_Str16(GetIndex(stmt,'OrginalContent'));
+      inBoxList.Items[i].Status:=stmt.Column_int(GetIndex(stmt,'Status'));
+      i:=i+1;
+    end;
+  end;
+  Result := inBoxList;
+  objList.Free;
+  stmt.Free;
+end;
+}
+{$ENDREGION}
+function TUserMailInBoxDAO.ReadBy(KeyFieldName: string; kv: TKeyValue): TObjectList<TUserMailInBoxRec>;
+var
+  sql:string;
+  stmt:TDISQLite3Statement;
+  InBoxList:TObjectList<TUserMailInBoxRec>;
+  objList:TObjectList<TKeyValue>;
+  i:integer;
+  fs:TFormatSettings;
+
+begin
+  sql := 'select * from UserInBox where '+KeyFieldName+'=? order by RecvTime desc;';
+  objList := TObjectList<TKeyValue>.Create;
+  objList.Add(kv);
+  stmt := inherited Read(sql,objList);
+  if(stmt<>nil)then
+  begin
+    fs.LongDateFormat := 'yyyy-MM-dd hh:mm:ss';
+    fs.ShortDateFormat := 'yyyy-MM-dd';
+    fs.ShortTimeFormat := 'hh:mm:ss';
+    fs.DateSeparator := '/';
+    fs.TimeSeparator := ':';
+    InBoxList := TObjectList<TUserMailInBoxRec>.Create();
+    i:=0;
+    while(stmt.Step=SQLITE_ROW)do
+    begin
+      inBoxList.Add(TUserMailInBoxRec.Create);
+      inBoxList.Items[i].UserEMail:=stmt.Column_Str16(GetIndex(stmt,'UserEMail'));
+      inBoxList.Items[i].MailID:=stmt.Column_Str16(GetIndex(stmt,'MailID'));
+
+      inBoxList.Items[i].RecvTime:=StrToDateTime(stmt.Column_Str16(GetIndex(stmt,'RecvTime')),fs);
+      inBoxList.Items[i].FromAddr:=stmt.Column_Str16(GetIndex(stmt,'FromAddr'));
+      inBoxList.Items[i].Recipient:=stmt.Column_Str16(GetIndex(stmt,'Recipient'));
+      inBoxList.Items[i].CC:=stmt.Column_Str16(GetIndex(stmt,'CC'));
+      inBoxList.Items[i].BCC:=stmt.Column_Str16(GetIndex(stmt,'BCC'));
+      inBoxList.Items[i].Subject:=stmt.Column_Str16(GetIndex(stmt,'Subject'));
+      inBoxList.Items[i].AttchFileName:=stmt.Column_Str16(GetIndex(stmt,'AttchFileName'));
+      inBoxList.Items[i].Body:=stmt.Column_Str16(GetIndex(stmt,'Body'));
+      inBoxList.Items[i].OrginalContent:=stmt.Column_Str16(GetIndex(stmt,'OrginalContent'));
+      inBoxList.Items[i].Status:=stmt.Column_int(GetIndex(stmt,'Status'));
+      i:=i+1;
+    end;
+  end;
+  Result := inBoxList;
+  objList.Free;
+  stmt.Free;
+end;
+
+function TUserMailInBoxDAO.Readx(UserEMail:string): TObjectList<TUserMailInBoxRec>;
+var
+  sql:string;
+  objList:TObjectList<TKeyValue>;
+begin
+  sql := 'select * from UserInBox where UserEMail=? order by RecvTime desc;';
+  objList:=TObjectList<TKeyValue>.Create;
+  objList.Add(TKeyValue.Create('str',UserEMail));
+  Result := inherited Read_<TUserMailInBoxRec>(sql,objList);
+end;
+
+end.

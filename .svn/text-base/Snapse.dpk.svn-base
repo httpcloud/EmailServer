@@ -1,0 +1,62 @@
+package Snapse;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl;
+
+contains
+  asn1util in 'S:\Delphi\VCL\synapse38\source\lib\asn1util.pas',
+  blcksock in 'S:\Delphi\VCL\synapse38\source\lib\blcksock.pas',
+  clamsend in 'S:\Delphi\VCL\synapse38\source\lib\clamsend.pas',
+  dnssend in 'S:\Delphi\VCL\synapse38\source\lib\dnssend.pas',
+  ftpsend in 'S:\Delphi\VCL\synapse38\source\lib\ftpsend.pas',
+  ftptsend in 'S:\Delphi\VCL\synapse38\source\lib\ftptsend.pas',
+  httpsend in 'S:\Delphi\VCL\synapse38\source\lib\httpsend.pas',
+  imapsend in 'S:\Delphi\VCL\synapse38\source\lib\imapsend.pas',
+  ldapsend in 'S:\Delphi\VCL\synapse38\source\lib\ldapsend.pas',
+  mimeinln in 'S:\Delphi\VCL\synapse38\source\lib\mimeinln.pas',
+  mimemess in 'S:\Delphi\VCL\synapse38\source\lib\mimemess.pas',
+  mimepart in 'S:\Delphi\VCL\synapse38\source\lib\mimepart.pas',
+  nntpsend in 'S:\Delphi\VCL\synapse38\source\lib\nntpsend.pas',
+  pingsend in 'S:\Delphi\VCL\synapse38\source\lib\pingsend.pas',
+  pop3send in 'S:\Delphi\VCL\synapse38\source\lib\pop3send.pas',
+  slogsend in 'S:\Delphi\VCL\synapse38\source\lib\slogsend.pas',
+  smtpsend in 'S:\Delphi\VCL\synapse38\source\lib\smtpsend.pas',
+  snmpsend in 'S:\Delphi\VCL\synapse38\source\lib\snmpsend.pas',
+  sntpsend in 'S:\Delphi\VCL\synapse38\source\lib\sntpsend.pas',
+  ssl_openssl_lib in 'S:\Delphi\VCL\synapse38\source\lib\ssl_openssl_lib.pas',
+  synachar in 'S:\Delphi\VCL\synapse38\source\lib\synachar.pas',
+  synacode in 'S:\Delphi\VCL\synapse38\source\lib\synacode.pas',
+  synacrypt in 'S:\Delphi\VCL\synapse38\source\lib\synacrypt.pas',
+  synafpc in 'S:\Delphi\VCL\synapse38\source\lib\synafpc.pas',
+  synaicnv in 'S:\Delphi\VCL\synapse38\source\lib\synaicnv.pas',
+  synaip in 'S:\Delphi\VCL\synapse38\source\lib\synaip.pas',
+  synamisc in 'S:\Delphi\VCL\synapse38\source\lib\synamisc.pas',
+  synautil in 'S:\Delphi\VCL\synapse38\source\lib\synautil.pas',
+  synsock in 'S:\Delphi\VCL\synapse38\source\lib\synsock.pas',
+  tlntsend in 'S:\Delphi\VCL\synapse38\source\lib\tlntsend.pas';
+
+end.

@@ -1,0 +1,23 @@
+unit UserInBox;
+
+interface
+
+type
+  TUserMailInBoxRec = class
+    UserEMail: WideString;
+    MailID: WideString;
+    RecvTime: TDateTime;
+    FromAddr: WideString;
+    Recipient: WideString;
+    CC: WideString;
+    BCC: WideString;
+    Subject: WideString;
+    AttchFileName: WideString;
+    Body: WideString;
+    OrginalContent: WideString;
+    Status: Integer;
+  end;
+
+implementation
+
+end.

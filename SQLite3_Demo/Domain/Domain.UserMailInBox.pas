@@ -1,0 +1,48 @@
+unit Domain.UserMailInBox;
+
+
+
+
+interface
+
+uses Classes;
+
+type
+  MailStatus = (eNoRead, // ÐÂÓÊ¼þ
+    eAlreadyReaded, // ÒÑ¶Á
+    eAlreadySent, // ÒÑÉ¾³ý
+    eDeleted, // ÒÑÉ¾³ý
+    eWaitForSend, // ´ý·¢ËÍ£¬²Ý¸åÏä
+    eTrashMail // À¬»øÓÊ¼þ
+    );
+
+  TUserMailInBoxRec = class(TObject)
+    UserEMail: String;
+    MailID: String;
+    //RecvTime: TDateTime;
+    FromAddr: String;
+    Recipient: String;
+    CC: String;
+    BCC: String;
+    Subject: String;
+    AttchFileName: String;
+    Body: String;
+    OrginalContent: String;
+    Status: Integer;
+  private
+    FRecvTime: TDateTime;
+    procedure SetRecvTime(const Value: TDateTime);
+  published
+     Property RecvTime:TDateTime read FRecvTime write SetRecvTime;
+  end;
+
+implementation
+
+{ TUserMailInBoxRec }
+
+procedure TUserMailInBoxRec.SetRecvTime(const Value: TDateTime);
+begin
+  FRecvTime := Value;
+end;
+
+end.

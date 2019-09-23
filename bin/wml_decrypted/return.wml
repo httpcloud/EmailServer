@@ -1,0 +1,2 @@
+<br/><a href="http://wap..cc">退出邮箱</a>
+<br/>魔方报时:<%=Modules.WebDataModuleShare.ScriptObject.GetCurrentTime('hh:nn')%>

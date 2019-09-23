@@ -1,0 +1,23 @@
+unit Common;
+
+interface
+
+uses PerlRegEx;
+
+function CheckEmail(EmailAddr:string):boolean;
+
+implementation
+
+function CheckEmail(EmailAddr: string): Boolean;
+var
+  PerlRegEx:TPerlRegEx;
+begin
+   PerlRegEx := TPerlRegEx.Create(nil);
+   PerlRegEx.Subject := EmailAddr;
+   PerlRegEx.RegEx := '\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*';
+   Result := PerlRegEx.Match;
+end;
+
+
+
+end.

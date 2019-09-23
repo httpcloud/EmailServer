@@ -1,0 +1,551 @@
+Received: from yw-out-2122.google.com (unknown [74.125.46.27])
+	by mx29 (Coremail) with SMTP id 3tGowLDroQC6_qZIehocEA==.55630S2;
+	Sun, 17 Aug 2008 00:22:19 +0800 (CST)
+Received: by yw-out-2122.google.com with SMTP id 8so1016146yws.75
+        for <helpus@163.com>; Sat, 16 Aug 2008 09:22:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlegroups.com; s=beta;
+        h=domainkey-signature:received:received:x-sender:x-apparently-to
+         :received:received:received-spf:authentication-results:received
+         :dkim-signature:domainkey-signature:received:received:from:to
+         :references:in-reply-to:subject:date:message-id:mime-version
+         :content-type:content-transfer-encoding:x-mailer:content-language
+         :thread-index:reply-to:sender:precedence:x-google-loop:mailing-list
+         :list-id:list-post:list-help:list-unsubscribe:x-beenthere;
+        bh=duumyvOIv4bWl27ZhQMQyX0GCWhoS8n04tmxbf+o5O8=;
+        b=mHmVgYLp19TgW/KiYCyKfjAuCgvV1xs2ZwsF2PiA+KyCrX0JCJ1oyAI6oqA77irLds
+         HcXajvgi1cs4C/yKv49ZrdtE9V/3k5IqGnMwQ2XDiIshuwGf4Kd7Aa4AlNZacDIYgzxU
+         pDbVMVEq7GwzKDwcFicuQe0QLmvlT61zIem6Y=
+DomainKey-Signature: a=rsa-sha1; c=nofws;
+        d=googlegroups.com; s=beta;
+        h=x-sender:x-apparently-to:received-spf:authentication-results
+         :dkim-signature:domainkey-signature:from:to:references:in-reply-to
+         :subject:date:message-id:mime-version:content-type
+         :content-transfer-encoding:x-mailer:content-language:thread-index
+         :reply-to:sender:precedence:x-google-loop:mailing-list:list-id
+         :list-post:list-help:list-unsubscribe:x-beenthere;
+        b=J1uXduOVd92URafmLm+D6ISLQRreZpAMUupS91E/yohHPMzqXZBIpeKPZ2Zl/HWOr0
+         xRdh7Z/quiYAsU0kt/7NUrdV6NiWtHUV61GRdLShdv0/wCxtvvO0GWb+QvXyDKzhZVTV
+         Ac9TXZW88a7hbTIH1sfog//UX2D+hWYFvbb7g=
+Received: by 10.90.69.7 with SMTP id r7mr114180aga.21.1218903728863;
+        Sat, 16 Aug 2008 09:22:08 -0700 (PDT)
+Received: by 10.44.12.35 with SMTP id 35gr5269hsl.0;
+	Sat, 16 Aug 2008 09:21:55 -0700 (PDT)
+X-Sender: huangfeng@gmail.com
+X-Apparently-To: dev4server@googlegroups.com
+Received: by 10.214.184.3 with SMTP id h3mr5707841qaf.2.1218903713776; Sat, 16 Aug 2008 09:21:53 -0700 (PDT)
+Received: from ti-out-0910.google.com (ti-out-0910.google.com [209.85.142.191]) by mx.google.com with ESMTP id 7si10217453yxg.0.2008.08.16.09.21.51; Sat, 16 Aug 2008 09:21:53 -0700 (PDT)
+Received-SPF: pass (google.com: domain of huangfeng@gmail.com designates 209.85.142.191 as permitted sender) client-ip=209.85.142.191;
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of huangfeng@gmail.com designates 209.85.142.191 as permitted sender) smtp.mail=huangfeng@gmail.com; dkim=pass (test mode) header.i=@gmail.com
+Received: by ti-out-0910.google.com with SMTP id j2so580484tid.19 for <dev4server@googlegroups.com>; Sat, 16 Aug 2008 09:21:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma; h=domainkey-signature:received:received:from:to:references :in-reply-to:subject:date:message-id:mime-version:content-type :x-mailer:content-language:thread-index; bh=XboFc8RFNBLb0kUuoJzN1VRe9WfutEhdJ1qrViKPsTw=; b=qtcvVWeLoH2b/QDa+hIt51OEyqQvf4yl+yRZtXqdVw6GDnZQbvPJfkqxtt4/YADqPP eOd42Kdx5ZIvjPw2Dn5pOSECbu486DWM5PhLHtCUKMWWYwv1irBpuVuOtPdymQCSYzZU EENj3CyHfpkD/EBfIsH3DF1hoa4eifo5Y5tok=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma; h=from:to:references:in-reply-to:subject:date:message-id:mime-version :content-type:x-mailer:content-language:thread-index; b=k5cWQk6XPd/ZugE8q8xzBW16xxqlzViLk8yjReYoLPSQfu4rjNginIg4zi0Ovg32ui PVcf7qotv2evEg+0/yOHO3dNofhbBKFl9PDzyrWwQBmcq+djh6nmc66XCHs0n0bJOR31 NKB/Ya96uI+DRmsYtJLTtFV6JMu2wxL0FqT9E=
+Received: by 10.110.46.3 with SMTP id t3mr3611499tit.33.1218903710957; Sat, 16 Aug 2008 09:21:50 -0700 (PDT)
+Received: from mbiradesktop ( [119.32.60.130]) by mx.google.com with ESMTPS id d7sm3225329tib.4.2008.08.16.09.21.41 (version=SSLv3 cipher=RC4-MD5); Sat, 16 Aug 2008 09:21:48 -0700 (PDT)
+From: "huangfeng@gmail.com" <huangfeng@gmail.com>
+To: dev4server@googlegroups.com
+References: <e1dec5100808142127h7ef2cac3wcf68886d48f729e5@mail.gmail.com>
+ <b1a4fa5f0808142251v23f234cck4ff9e46de6e1fede@mail.gmail.com>
+ <e1dec5100808142254h6edcb9cdg16c7ceea18f57f16@mail.gmail.com>
+ <004701c8fead$3aa22000$afe66000$@com>
+ <b1a4fa5f0808150103u5a7fd876ldae3284b080911fd@mail.gmail.com>
+ <002701c8ff2c$99a6f9c0$ccf4ed40$@com>
+ <b1a4fa5f0808151926m1ed512f6h571c486776c40f18@mail.gmail.com>
+In-Reply-To: <002801c8ffbc$30af2ba0$920d82e0$@com>
+Subject: RE: ?????????????
+Date: Sun, 17 Aug 2008 00:21:47 +0800
+Message-ID: <002801c8ffbc$30af2ba0$920d82e0$@com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="GBZGm1SytkrGynEaB6YNuHumDgRjA=_GRH"
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Office Outlook 12.0
+Content-language: zh-cn
+Thread-Index: Acj/R3PDeLbfMYEBR3CbqnNoOzC7LgAdKiVA
+Reply-To: dev4server@googlegroups.com
+Sender: dev4server@googlegroups.com
+Precedence: bulk
+X-Google-Loop: groups
+Mailing-List: list dev4server@googlegroups.com;
+	contact dev4server+owner@googlegroups.com
+List-Id: <dev4server.googlegroups.com>
+List-Post: <mailto:dev4server@googlegroups.com>
+List-Help: <mailto:dev4server+help@googlegroups.com>
+List-Unsubscribe: <http://googlegroups.com/group/dev4server/subscribe>,
+	<mailto:dev4server+unsubscribe@googlegroups.com>
+X-BeenThere: dev4server@googlegroups.com
+X-Coremail-Antispam: 1Uf129KBjvJXoW7Ar1DtFWDuF1ktFWrtryUGFg_yoW8Zryxpr
+	93JF1fAr97t3Z7JFy5t3yqvF48Wr18JrnIy395taySvr9rCry5Wa1rtw1rK34rXFWUCr4Y
+	qa4rZ3Wv9w13Wr7anT9S1TB71UUUU57v73VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UU
+	U5F7k0a2IF6r1UM7kC6x804xWl1I0E4x80FVCIwcAKzIAtM7C26IkvcIIF6IxKo4kEV4yl
+	n4kS14v26rWY6Fy7M2kK67kvxFCE548m6r1fGryUXwAawVACjsI_Ar4v6c8GOVW06r1DJr
+	WUAwAa7VCY0VAaVVAqrcv_Jw1UWr13M2vj6IxK4IxY47CYY7kI6c8GOVWUur4UXF1l5I8C
+	rVAYj202j2C_Gr0_Xr1l5I8CrVAqjxCE14ACF2xKxwAqx4xG64kEw2xG04xIwI0_Jr0_Gr
+	1l5I8CrVCF0I0E4I0vr24lYx0E74AGY7Cv6cx26r45McIj6xkF7I0En7xvr7AKxVWUJVW8
+	JwACY4xI67k04243AVAKzVAKj4xxM4xvF2IEb7IF0Fy26I8I3I1lFVAqjxCE84xlawAKzV
+	CY07xG64k0F24l7I0Y6sxI4wCY1x0262kKe7AKxVWrXVW3AwCY1x0264kExVAvwVAq07x2
+	0xylc7Ca8VAYaVAv7wCY02Avz4vEIxC_JwCY0x0Ix7I2Y4AK6w1j6w4UMxAIw28IcVAKzI
+	0EY4vE52x082I5MxAIw28IcVCjz48v1sIEY20_GFyl4x8a6x804xWl4IxYO2xFxVAFwI0_
+	Jw0_GFyl4IxY628EI7kG0VAYaI8xMI8E67AF67kF1VAFwI0_Jrv_JF1l6VACY4xI67k042
+	43AbIYCTnIWIevJa73UjIFyTuYvjxUbCzuDUUUU
+
+This is a multi-part message in MIME format
+
+--GBZGm1SytkrGynEaB6YNuHumDgRjA=_GRH
+Content-Type: text/plain; charset="GB2312"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+
+xMfS4su8ysfLtc/W1Nq+zda7xNzTwyBHSVBTwcujvw0KDQogDQoNClNwcml0RFNQIM34yc/Ltbu5
+v8nS1Lm6wvK1xA0KDQogDQoNCiANCg0KIA0KDQogDQoNCkZyb206IGRldjRzZXJ2ZXJAZ29vZ2xl
+Z3JvdXBzLmNvbSBbbWFpbHRvOmRldjRzZXJ2ZXJAZ29vZ2xlZ3JvdXBzLmNvbV0gT24NCkJlaGFs
+ZiBPZiB3ZWkNClNlbnQ6IFNhdHVyZGF5LCBBdWd1c3QgMTYsIDIwMDggMTA6MjYgQU0NClRvOiBk
+ZXY0c2VydmVyQGdvb2dsZWdyb3Vwcy5jb20NClN1YmplY3Q6IFJlOiC087zSzLjMuNf20+/R1MHE
+zOy1xL6t0emwyQ0KDQogDQoNCtXiysdHSVBTtcS6y9DEzcW207P2wLS0tNK11/a1xKOsvLi49tTC
+uvO+zbG7c2t5cGUg0tQyNTAwzfLDwL3wytW5usHLIKO6o6kNCg0KMjAwOC84LzE2IDxodWFuZ2Zl
+bmdAZ21haWwuY29tPg0KDQpHSVBTINT4vq2357niuf2jrLK7uf3P1tTatPO80ra8uavIz6Os1+66
+w9Cnufu7ucrHIFNreXBlLg0KDQogDQoNClNreXBlINTaMjAwNsTqM9TCt92+zbfFxvrByyBHSVBT
+o6zTw7XEysfV4rj2tqvO96O6DQoNCiANCg0KaHR0cDovL3d3dy5zcGlyaXRkc3AuY29tLw0KDQog
+DQoNCsirx/LX7rTztcQxMLTz0+/S9MzhuanJzLXExNq6y7a8ysfL/LXEoaOyu7n9vNu48cLvoaOh
+o8O709DOyrn9o6zTprjD1ru74bHIDQpHSVBTufMNCg0KIA0KDQogDQoNCiANCg0KRnJvbTogZGV2
+NHNlcnZlckBnb29nbGVncm91cHMuY29tIFttYWlsdG86ZGV2NHNlcnZlckBnb29nbGVncm91cHMu
+Y29tXSBPbg0KQmVoYWxmIE9mIHdlaQ0KU2VudDogRnJpZGF5LCBBdWd1c3QgMTUsIDIwMDggNDow
+NCBQTQ0KVG86IGRldjRzZXJ2ZXJAZ29vZ2xlZ3JvdXBzLmNvbQ0KU3ViamVjdDogUmU6ILTzvNLM
+uMy41/bT79HUwcTM7LXEvq3R6bDJDQoNCiANCg0Kv6rUtLXEu9jJ+dLW1sbX9rXEyOe6zqO/us1H
+SVBTsci7ucrH09Cy7r7gsMmjvw0KDQoyMDA4LzgvMTUgPGh1YW5nZmVuZ0BnbWFpbC5jb20+DQoN
+Cry4yq7N8srHwMu30bCho6y63Lbgv6rUtLa8sru07aOhDQoNCiANCg0Kd3d3LnNmLm5ldA0KDQog
+DQoNCiANCg0KIA0KDQpGcm9tOiBkZXY0c2VydmVyQGdvb2dsZWdyb3Vwcy5jb20gW21haWx0bzpk
+ZXY0c2VydmVyQGdvb2dsZWdyb3Vwcy5jb21dIE9uDQpCZWhhbGYgT2YgYmVubGlhbmcgemh1DQpT
+ZW50OiBGcmlkYXksIEF1Z3VzdCAxNSwgMjAwOCAxOjU1IFBNDQpUbzogZGV2NHNlcnZlckBnb29n
+bGVncm91cHMuY29tDQpTdWJqZWN0OiBSZTogtPO80sy4zLjX9tPv0dTBxMzstcS+rdHpsMkNCg0K
+IA0KDQpvaKOsvLjKrs3y0rvM16O/yOe5+9fUvLq/qreitcS7sKOstrzQ6NKq17yxuNK70KnKssO0
+0fm1xNaqyrajrMTRtsi24LTzo7/Du9PQDQrG5Mv7v6rUtLXEwvCjvw0KDQoyMDA4LzgvMTUgd2Vp
+IDx0c2luZ21laUBnbWFpbC5jb20+DQoNCmdpcHPSqsilwvK1xKOs19yyv9TawuXJvO22oaO8uMqu
+zfLSu8zXo6y/tMTj1PXDtLrNz+O427XEz/rK27+zvNvBy6GjDQoNCjIwMDgvOC8xNSBiZW5saWFu
+ZyB6aHUgPHpodWJlbmxpYW5nMjAwOEBnbWFpbC5jb20+DQoNCiANCg0KxL/HsNKqyrXP1tPv0vTB
+xMzsuabE3KOs0tG+rcO709C907Sluf3V4re9w+a1xNaqyrajrLK71qq1wMjnus7PwsrWo6zC6bez
+tPO80g0K1ri148/CoaO7+bG+yc/It7ao0qrTw2dvb2dsZbXEbGliamluZ2xlv+LAtNf2o6yyu7n9
+z8LPwsC0uvOjrLeiz9bA78PmtdrI/be9DQq1xGdpcHO447K7tb2woaOsy/nS1NPv0vSyv7fWsrvW
+qrXA1PXDtLjjwcujuqOoDQoNCiANCg0KIA0KDQogDQoNCiANCg0KIA0KDQogDQoNCiANCg0KIA0K
+DQogDQoNCiANCg0KIA0KDQogDQoNCg0KDQoNCi0tfi0tfi0tLS0tLS0tLX4tLX4tLS0tfi0tLS0t
+LS0tLS0tLX4tLS0tLS0tfi0tfi0tLS1+DQoguN/Q1MTczfjC57Hgs8wNCiBodHRwOi8vZ3JvdXBz
+Lmdvb2dsZS5jb20vZ3JvdXAvZGV2NHNlcnZlcg0KLX4tLS0tLS0tLS0tfi0tLS1+LS0tLX4tLS0t
+fi0tLS0tLX4tLS0tfi0tLS0tLX4tLX4tLS0NCg==
+
+--GBZGm1SytkrGynEaB6YNuHumDgRjA=_GRH
+Content-Type: text/html; charset="GB2312"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas=
+-microsoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:off=
+ice:word" xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml"=
+ xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=3DContent-Type content=3D"text/html; charset=3Dgb2312=
+">
+<meta name=3DGenerator content=3D"Microsoft Word 12 (filtered medium)"=
+>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:=0BS;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:"\@=0BS";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:=0BS;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p
+	{mso-style-priority:99;
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:=0BS;}
+span.EmailStyle18
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+=2EMsoChpDefault
+	{mso-style-type:export-only;}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext=3D"edit">
+  <o:idmap v:ext=3D"edit" data=3D"1" />
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=3DZH-CN link=3Dblue vlink=3Dpurple>
+
+<div class=3DSection1>
+
+<p class=3DMsoNormal><span style=3D'font-size:9.0pt;color:#1F497D'>#=0F=
+=1D/t0(1j}(</span><span
+lang=3DEN-US style=3D'font-size:9.0pt;font-family:"Calibri","sans-seri=
+f";
+color:#1F497D'> GIPS</span><span style=3D'font-size:9.0pt;color:#1F497=
+D'>=06=1F</span><span
+lang=3DEN-US style=3D'font-size:9.0pt;font-family:"Calibri","sans-seri=
+f";
+color:#1F497D'><o:p></o:p></span></p>
+
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:9.0pt;font-=
+family:"Calibri","sans-serif";
+color:#1F497D'><o:p>&nbsp;</o:p></span></p>
+
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:9.0pt;font-=
+family:"Calibri","sans-serif";
+color:#1F497D'>SpritDSP </span><span style=3D'font-size:9.0pt;color:#1=
+F497D'>Q
+tXoe-p=04</span><span
+lang=3DEN-US style=3D'font-size:9.0pt;font-family:"Calibri","sans-seri=
+f";
+color:#1F497D'><o:p></o:p></span></p>
+
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:9.0pt;font-=
+family:"Calibri","sans-serif";
+color:#1F497D'><o:p>&nbsp;</o:p></span></p>
+
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:9.0pt;font-=
+family:"Calibri","sans-serif";
+color:#1F497D'><o:p>&nbsp;</o:p></span></p>
+
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:9.0pt;font-=
+family:"Calibri","sans-serif";
+color:#1F497D'><o:p>&nbsp;</o:p></span></p>
+
+<p class=3DMsoNormal><span lang=3DEN-US style=3D'font-size:9.0pt;font-=
+family:"Calibri","sans-serif";
+color:#1F497D'><o:p>&nbsp;</o:p></span></p>
+
+<div style=3D'border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt=
+ 0cm 0cm 0cm'>
+
+<p class=3DMsoNormal><b><span lang=3DEN-US style=3D'font-size:10.0pt;f=
+ont-family:
+"Tahoma","sans-serif"'>From:</span></b><span lang=3DEN-US style=3D'fon=
+t-size:10.0pt;
+font-family:"Tahoma","sans-serif"'> dev4server@googlegroups.com
+[mailto:dev4server@googlegroups.com] <b>On Behalf Of </b>wei<br>
+<b>Sent:</b> Saturday, August 16, 2008 10:26 AM<br>
+<b>To:</b> dev4server@googlegroups.com<br>
+<b>Subject:</b> Re: </span><span style=3D'font-size:10.0pt'>'6=08=08Zm=
+=00J)=04O=0C'</span><span
+lang=3DEN-US style=3D'font-size:10.0pt;font-family:"Tahoma","sans-seri=
+f"'><o:p></o:p></span></p>
+
+</div>
+
+<p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span></p>
+
+<div>
+
+<p class=3DMsoNormal style=3D'margin-bottom:12.0pt'>Y/<span lang=3DEN-=
+US>GIPS</span>=048Cb=1Fze=1B=1AZ=04=0C`*=08=0E1+<span
+lang=3DEN-US>skype </span>e<span lang=3DEN-US>2500</span>=07=0EQ6-=06 =
+=1A	<span lang=3DEN-US><o:p></o:p></span></p>
+
+<div>
+
+<p class=3DMsoNormal><span lang=3DEN-US>2008/8/16 &lt;<a
+href=3D"mailto:huangfeng@gmail.com">huangfeng@gmail.com</a>&gt;<o:p></=
+o:p></span></p>
+
+<div>
+
+<div>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>GIPS </s=
+pan><span
+style=3D'font-size:9.0pt;color:#1F497D'>~ONIG=0C
+G0('6}l$=0C=00}H=1CX/<span lang=3DEN-US>
+Skype.</span></span><span lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>&nbsp;</=
+span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>Skype </=
+span><span
+style=3D'font-size:9.0pt;color:#1F497D'>(<span lang=3DEN-US>2006</span=
+>t<span
+lang=3DEN-US>3</span>=08}1>=03=06<span lang=3DEN-US> GIPS</span>=0C(=04=
+/Y*=1C=7F=1A</span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>&nbsp;</=
+span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'><a
+href=3D"http://www.spiritdsp.com/" target=3D"_blank">http://www.spirit=
+dsp.com/</a></span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>&nbsp;</=
+span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span style=3D'font-size:9.0pt;color:#1F497D'>h=03=00'=04<span lang=
+=3DEN-US>10</span>'msP=1BF=04=058}/=03=04=02
+Gw<=1B=02=02!	nG=0C=14ej=1AT<span
+lang=3DEN-US> GIPS</span>5</span><span lang=3DEN-US><o:p></o:p></span>=
+</p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>&nbsp;</=
+span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>&nbsp;</=
+span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>&nbsp;</=
+span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<div style=3D'border:none;border-top:solid windowtext 1.0pt;padding:3.=
+0pt 0cm 0cm 0cm;
+border-color:-moz-use-text-color -moz-use-text-color'>
+
+<p><b><span lang=3DEN-US style=3D'font-size:10.0pt'>From:</span></b><s=
+pan
+lang=3DEN-US style=3D'font-size:10.0pt'> <a
+href=3D"mailto:dev4server@googlegroups.com" target=3D"_blank">dev4serv=
+er@googlegroups.com</a>
+[mailto:<a href=3D"mailto:dev4server@googlegroups.com" target=3D"_blan=
+k">dev4server@googlegroups.com</a>]
+<b>On Behalf Of </b>wei<br>
+<b>Sent:</b> Friday, August 15, 2008 4:04 PM<br>
+<b>To:</b> <a href=3D"mailto:dev4server@googlegroups.com" target=3D"_b=
+lank">dev4server@googlegroups.com</a><br>
+<b>Subject:</b> Re: </span><span style=3D'font-size:10.0pt'>'6=08=08Zm=
+=00J)=04O=0C'</span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+</div>
+
+<p><span lang=3DEN-US>&nbsp;<o:p></o:p></span></p>
+
+<div>
+
+<p style=3D'margin-bottom:12.0pt'>=00=10=04^p=116Z=04=02U=1F=0C<span l=
+ang=3DEN-US>GIPS</span>TX/	n]'=1F<span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<div>
+
+<p><span lang=3DEN-US>2008/8/15 &lt;<a href=3D"mailto:huangfeng@gmail.=
+com"
+target=3D"_blank">huangfeng@gmail.com</a>&gt;<o:p></o:p></span></p>
+
+<div>
+
+<div>
+
+<p><span style=3D'font-size:9.0pt;color:#1F497D'>`A=07/j9J=0C=08=1A=00=
+=10}
+=19=01</span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>&nbsp;</=
+span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'><a
+href=3D"http://www.sf.net" target=3D"_blank">www.sf.net</a></span><spa=
+n lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>&nbsp;</=
+span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>&nbsp;</=
+span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<p><span lang=3DEN-US style=3D'font-size:9.0pt;color:#1F497D'>&nbsp;</=
+span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<div style=3D'border:none;border-top:solid windowtext 1.0pt;padding:3.=
+0pt 0cm 0cm 0cm;
+border-color:-moz-use-text-color'>
+
+<p><b><span lang=3DEN-US style=3D'font-size:10.0pt'>From:</span></b><s=
+pan
+lang=3DEN-US style=3D'font-size:10.0pt'> <a
+href=3D"mailto:dev4server@googlegroups.com" target=3D"_blank">dev4serv=
+er@googlegroups.com</a>
+[mailto:<a href=3D"mailto:dev4server@googlegroups.com" target=3D"_blan=
+k">dev4server@googlegroups.com</a>]
+<b>On Behalf Of </b>benliang zhu<br>
+<b>Sent:</b> Friday, August 15, 2008 1:55 PM<br>
+<b>To:</b> <a href=3D"mailto:dev4server@googlegroups.com" target=3D"_b=
+lank">dev4server@googlegroups.com</a><br>
+<b>Subject:</b> Re: </span><span style=3D'font-size:10.0pt'>'6=08=08Zm=
+=00J)=04O=0C'</span><span
+lang=3DEN-US><o:p></o:p></span></p>
+
+</div>
+
+<p><span lang=3DEN-US>&nbsp;<o:p></o:p></span></p>
+
+<div>
+
+<p style=3D'margin-bottom:12.0pt'><span lang=3DEN-US>oh</span>=0C`A=07=
+=00W=1F=02=1Cjq=00Q=04]=0C}=00=01F=07=00=1B@H7=04eF=0C>&=1A'=1F!	vV=00=
+=10=04=17=1F<span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<div>
+
+<p><span lang=3DEN-US>2008/8/15 wei &lt;<a href=3D"mailto:tsingmei@gma=
+il.com"
+target=3D"_blank">tsingmei@gmail.com</a>&gt;<o:p></o:p></span></p>
+
+<div>
+
+<p style=3D'margin-bottom:12.0pt'><span lang=3DEN-US>gips</span>=01;p=04=
+=0C;h(=1BIv=02`A=07=00W=0C=0B`=0EH=0C=19/=04=00.
+w=06=02<span
+lang=3DEN-US><o:p></o:p></span></p>
+
+<div>
+
+<p><span lang=3DEN-US>2008/8/15 benliang zhu &lt;<a
+href=3D"mailto:zhubenliang2008@gmail.com" target=3D"_blank">zhubenlian=
+g2008@gmail.com</a>&gt;<o:p></o:p></span></p>
+
+<div>
+
+<blockquote style=3D'border:none;border-left:solid windowtext 1.0pt;pa=
+dding:0cm 0cm 0cm 6.0pt;
+margin-left:4.8pt;margin-top:5.0pt;margin-right:0cm;margin-bottom:5.0p=
+t;
+border-color:-moz-use-text-color -moz-use-text-color -moz-use-text-col=
+or rgb(204, 204, 204)'>
+
+<p><span lang=3DEN-US>&nbsp;<o:p></o:p></span></p>
+
+<div>
+
+<p>nM=01=1E0msJ)=1F}=0CrO!	%fGY9b=04eF=0C
+eS=02U=0BK=0C;f'6=079=0B=02z,
+n=1A=01(<span lang=3DEN-US>google</span>=04<span
+lang=3DEN-US>libjingle</span>=13eZ=0C
+G=0B=0Be=0E=0CQ0Lb,	9=04<span lang=3DEN-US>gips</span>=1E
+0J=0C@emsh=06
+eS=0EH=1E=06=1A=08<span
+lang=3DEN-US><o:p></o:p></span></p>
+
+</div>
+
+<p style=3D'margin-bottom:12.0pt'><span lang=3DEN-US>&nbsp;<o:p></o:p>=
+</span></p>
+
+</blockquote>
+
+</div>
+
+</div>
+
+<p><span lang=3DEN-US>&nbsp;<o:p></o:p></span></p>
+
+</div>
+
+<p style=3D'margin-bottom:12.0pt'><span lang=3DEN-US>&nbsp;<o:p></o:p>=
+</span></p>
+
+</div>
+
+<p><span lang=3DEN-US>&nbsp;<o:p></o:p></span></p>
+
+</div>
+
+<p style=3D'margin-bottom:12.0pt'><span lang=3DEN-US>&nbsp;<o:p></o:p>=
+</span></p>
+
+</div>
+
+<p><span lang=3DEN-US>&nbsp;<o:p></o:p></span></p>
+
+</div>
+
+<p><span lang=3DEN-US>&nbsp;<o:p></o:p></span></p>
+
+</div>
+
+<p><span lang=3DEN-US>&nbsp;<o:p></o:p></span></p>
+
+</div>
+
+<p style=3D'margin-bottom:12.0pt'><span lang=3DEN-US><o:p>&nbsp;</o:p>=
+</span></p>
+
+</div>
+
+<p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+<p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+<p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+<p class=3DMsoNormal style=3D'margin-bottom:12.0pt'><span lang=3DEN-US=
+><br>
+
+</div>
+
+<br>
+--~--~---------~--~----~------------~-------~--~----~<br>
+&nbsp;X'}Q\=16=0B
+ <br> &nbsp;http://groups.google.com/group/dev4server <br> -~---------=
+-~----~----~----~------~----~------~--~---<br>
+</body>
+
+</html>
+<br>
+
+--GBZGm1SytkrGynEaB6YNuHumDgRjA=_GRH--
+
+.

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="login" title="魔方手机邮" newcontext="true">
+<p>
+<#info>
+<b><u>暂停注册通知</u></b><br/>
+因系统目前正在频繁的调整中,所以暂停新用户注册,对于由此给您带来的不便,我们深表歉意。<br/>
+系统再次开放注册时间约在两星期后,我们会努力加快进度。<br/>
+未注册户可点<b><u>游客体验通道</u></b>使用。<br/><br/>
+魔方网祝你工作愉快,天天开心!<br/>
+2008-12-11 12:00<br/>
+<a href="/">返回</a>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>

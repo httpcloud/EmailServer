@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="crd" title="手机邮箱接入平台" onenterforward="#crd0" onenterbackward="#crd0" newcontext="true">
+<p>预览中,请稍候...
+<input name="SND" value="ArcGIS中国培训中心&lt;actc@lreis.ac.cn&gt;" />
+<input name="RCPT" value="" />
+<input name="SBJCT" value="ESRI中国（北京）培训中心上海09年第二期培训课?炭瓮ㄖ?90601" />
+</p>
+</card>
+<card id="crd0" title="手机邮箱接入平台" newcontext="false">
+<a href="#crd1">答复</a>
+<a href="#crd2">全部答复</a>
+
+<a href="#crd3">转发</a>
+
+<p>
+<b>发自:</b>$(SND) <br/>
+<b>时间:</b>20090618 14:05 <br/>
+<b>签收:</b>$(RCPT) <br/>
+<b>主题:</b>$(SBJCT) <br/>
+附件:<br/><a href="/wapmail2010/MobileMail.dll/detail?fid=3.pdf&amp;fn=ESRI%D6%D0%B9%FA%A3%A8%B1%B1%BE%A9%A3%A9%C5%E0%D1%B5%D6%D0%D0%C4%C9%CF%BA%A309%C4%EA%B5%DA%B6%FE%C6%DA%C5%E0%D1%B5%BF%CE_%CC%BF%AA%BF%CE%CD%A8%D6_90601.pdf">ESRI中国（北京）培训中心上海09年第二期培训课_炭瓮ㄖ_90601.pdf</a><br/><a href="/wapmail2010/MobileMail.dll/detail?fid=4.PNG&amp;fn=shanghai.PNG">shanghai.PNG</a><br/>
+
+ESRI中国（北京）培训中心
+ 
+上海培训班开课通知
+2009年第一期上海培训已经圆满结束，课程极大方便了华东地区学员的学习，授课讲师也得到了学员们的好评。为了进一步为广大的华东地区客户服务，满足广大学员不同的课程需求，ESRI中国（北京）培训中心定于2009年7月13日至7月24日开办2009年上海课程第二期培训班。
+ 
+此次我们推出的是ArcGIS课程体系中的三门课程，分别为《ArcGIS应用教程》、《ArcGIS Server管理员教程》和《ArcGIS Server开发教程（Java）》。课程基于最新的ArcGIS 9.3版本软件，结合应用案例，内容丰富。授课讲师均<br/>
+
+<a href="/wapmail2010/MobileMail.dll/detail?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIUFFb1FwbG1PaktJdGtUZERq&amp;id=2&amp;cp=1&amp;lp=1"></a>
+<a href="/wapmail2010/MobileMail.dll/detail?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIU1Fb1FwbG1PaktJdGtUZERq&amp;id=2&amp;cp=0&amp;lp=1"></a>
+<a href="/wapmail2010/MobileMail.dll/detail?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIU1Fb1FwbG1PaktJdGtUZERq&amp;id=2&amp;cp=2&amp;lp=1">下页</a>
+
+<a href="/wapmail2010/MobileMail.dll/detail?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIUFFb1FwbG1PaktJdGtUZERq&amp;id=2&amp;cp=5&amp;lp=1">尾页</a><br/>
+<a href="/wapmail2010/MobileMail.dll/inBox?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIUxFb1FwbG1PaktJdGtUZERq&amp;p=1">返回邮件列表</a><br/>
+<a href="/wapmail2010/MobileMail.dll/login?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIXdFb1FwbG1PaktJdGtUZERq">返回收件箱</a>
+
+<br/><a href="http://wap..cc">退出邮箱</a>
+<br/>报时:01:00
+</p>
+</card>
+<card id="crd1" title="手机邮箱接入平台" newcontext="false">
+<p>
+<b>收件人:</b><input name="R" value="$SND" /><br/>
+<b>主题:</b><input name="S" value="Re:$SBJCT" /><br/>
+<b>内容:</b><input name="C" value=""/><br/>
+
+<anchor>发送
+  <go accept-charset="utf-8" href="/wapmail2010/MobileMail.dll/send?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIUFFb1FwbG1PaktJdGtUZERq" method="post">
+	<postfield name="R" value="$R" />
+	<postfield name="S" value="$S" />
+	<postfield name="C" value="$C" />
+  </go>
+</anchor>
+<br/><a href="http://wap..cc">退出邮箱</a>
+<br/>报时:01:00
+</p>
+</card>
+<card id="crd2" title="手机邮箱接入平台" newcontext="false">
+<p>
+
+<b>收件人:</b><input name="R" value="$SND;$RCPT" /><br/>
+<b>主题:</b><input name="S" value="Re:$SBJCT" /><br/>
+<b>内容:</b><input name="C" value=""/><br/>
+<anchor>发送
+  <go accept-charset="utf-8" href="/wapmail2010/MobileMail.dll/send?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIUZFb1FwbG1PaktJdGtUZERq" method="post">
+	<postfield name="R" value="$R" />
+	<postfield name="S" value="$S" />
+	<postfield name="C" value="$C" />
+  </go>
+
+</anchor>
+<a href="/wapmail2010/MobileMail.dll/inBox?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIXFFb1FwbG1PaktJdGtUZERq&amp;p=1">返回邮件列表</a><br/>
+<a href="/wapmail2010/MobileMail.dll/login?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIVZFb1FwbG1PaktJdGtUZERq">返回收件箱</a>
+<br/><a href="http://wap..cc">退出邮箱</a>
+<br/>报时:01:00
+</p>
+</card>
+
+<card id="crd3" title="手机邮箱接入平台" newcontext="false">
+<p>
+<b>收件人:</b><input name="R" value=""/><br/>
+<b>主题:</b><input name="S" value="Fw:$SBJCT" /><br/>
+<b>内容:</b><input name="C" value="$BDY" /><br/>
+<anchor>转发
+  <go accept-charset="utf-8" href="/wapmail2010/MobileMail.dll/send?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIVJFb1FwbG1PaktJdGtUZERq" method="post">
+	<postfield name="R" value="$R" />
+	<postfield name="S" value="$S" />
+	<postfield name="C" value="$C" />
+  </go>
+
+</anchor>
+<a href="/wapmail2010/MobileMail.dll/inBox?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIWpFb1FwbG1PaktJdGtUZERq&amp;p=1">返回邮件列表</a><br/>
+<a href="/wapmail2010/MobileMail.dll/login?ms=X1lbZddJb9ZOs95t&amp;tm=0&amp;up=Y2VDbmFuYmdRUTIxIWpFb1FwbG1PaktJdGtUZERq">返回收件箱</a>
+<br/><a href="http://wap..cc">退出邮箱</a>
+<br/>报时:01:00
+</p>
+</card>
+
+</wml>
+

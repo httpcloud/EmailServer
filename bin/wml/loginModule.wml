@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="card1" title="<#title>" newcontext="false">
+<p>
+--当前邮箱--<br/>
+<#mailBoxName><br/>
+<a href="<%=Pages.inBox.HREF%>?ms=<#ms>">收件箱(<#inBoxCount>)</a><br/>
+<a href="<%=Pages.write.HREF%>?ms=<#ms>">撰写新邮件</a><br/>
+<a href="<%=Pages.outBox.HREF%>?ms=<#ms>&amp;mt=1">发件箱(<#outBoxCount>)</a><br/>
+<a href="<%=Pages.outBox.HREF%>?ms=<#ms>&amp;mt=2">草稿箱(<#draftBoxCount>)</a><br/>
+<a href="<%=Pages.set.HREF%>?ms=<#ms>">系统设置</a><br/>
+<!--
+<a href="#">垃圾箱</a><br/>
+<a href="#">已删除邮件</a><br/>
+-->
+<#userOtherMailList>
+<!--<a href="<%=Pages.action.HREF%>?ms=<#ms>&amp;ac=addNewMailBoxStep1">添加其它邮箱</a>--><br/>
+<!-- #include file="return.wml" -->
+</p>
+</card>
+</wml>

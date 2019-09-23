@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="login" title="随身邮" newcontext="true">
+<p>
+<#info>
+<a href="#MLogin">用邮箱作用户名登录</a><br/>
+魔号:<input name="MID" emptyok="false" format="10N" maxlength="10"/><br/>
+密码:<input name="MPW" emptyok="false" format="10" maxlength="10"/><br/>
+<do type="accept" label="登陆" name="btLogin">
+  <go accept-charset="utf-8" href="<%=Pages.login.HREF%>" method="post">
+	<postfield name="MID" value="$(MID)"/>
+	<postfield name="MPW" value="$(MPW)"/>
+  </go>
+</do>
+<a href="<%=Pages.action.HREF%>?ac=forgetPWD">忘记魔号/密码</a><br/>
+<a href="<%=Pages.reg.HREF%>">免费注册魔号</a><br/>
+<a href="#demo">游客试用邮箱</a><br/>
+<a href="<%=Pages.action.HREF%>?ac=help">新手帮助</a>
+</p>
+</card>
+<card id="MLogin" title="随身邮" newcontext="true">
+<p>
+<#info>
+<a href="#login">用魔号快速登录</a><br/>
+信箱:<input name="MUID" emptyok="false" maxlength="25"/><br/>
+密码:<input name="MPWD" emptyok="false" maxlength="25"/><br/>
+<do type="accept" label="登陆" name="btLogin">
+  <go accept-charset="utf-8" href="<%=Pages.login.HREF%>" method="post">
+	<postfield name="MUID" value="$(MUID)"/>
+	<postfield name="MPWD" value="$(MPWD)"/>
+  </go>
+</do>
+<a href="<%=Pages.action.HREF%>?ac=forgetPWD">忘记魔号/密码</a><br/>
+<a href="<%=Pages.reg.HREF%>">免费注册魔号</a><br/>
+<a href="#demo">游客试用邮箱</a><br/>
+<a href="<%=Pages.action.HREF%>?ac=help">新手帮助</a>
+</p>
+</card>
+<card id="demo" title ="Mail..CC" newcontext="false">
+<select name="POP" title="选择服务商" tabindex="1">
+  <option value="-1">测试邮箱</option>
+  <option value="0">网易邮箱</option>
+  <option value="1">新浪邮箱</option>
+  <option value="2">搜虎邮箱</option>
+</select><br/>
+<p>
+信箱名:<input name="UID" emptyok="false" maxlength="25" /><br/>
+密　码:<input name="PWD" emptyok="false" type="password" maxlength="25" />
+<do type="accept" label="登陆" name="btLogin">
+  <go accept-charset="utf-8" href="<%=Pages.login.HREF%>" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</do><br/>
+<a href="<%=Pages.reg.HREF%>">免费注册更精彩！</a><br/>
+<a href="<%=Pages.reg.HREF%>">其它邮箱登陆通道</a>
+<do type="prev" label="返回" name="back"><prev/></do>
+</p>
+</card></wml>
+

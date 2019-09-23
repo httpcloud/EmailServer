@@ -1,0 +1,34 @@
+object login: Tlogin
+  OldCreateOrder = False
+  OnCreate = WebPageModuleCreate
+  OnDestroy = WebPageModuleDestroy
+  OnDeactivate = WebPageModuleDeactivate
+  PageProducer = PageProducer
+  OnBeforeDispatchPage = WebPageModuleBeforeDispatchPage
+  Height = 150
+  Width = 215
+  object PageProducer: TPageProducer
+    HTMLDoc.Strings = (
+      
+        '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//W' +
+        'APFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.x' +
+        'ml">'
+      '<wml>'
+      '<card id="login" newcontext="true">'
+      '<p>'
+      'test'
+      '</p>'
+      '</card>'
+      '</wml>')
+    OnHTMLTag = PageProducerHTMLTag
+    ScriptEngine = 'JScript'
+    Left = 88
+    Top = 24
+  end
+  object IdPOP31: TIdPOP3
+    AutoLogin = True
+    SASLMechanisms = <>
+    Left = 88
+    Top = 56
+  end
+end

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="sdwpdwo2cdro5d9mm_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="design:view:::8jw03gl7a7l_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,123,166" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DIFileCache.TDIFileBlock" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DIFileCache.TDIFileCache" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DIFileCache.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DIFileCache.PDIFileBlock" />
+    </reference>
+    <reference referencedUin="design:view:::4tx4ra6kgm5x9lbps_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="152,1,96,151" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:Unit3.TForm3" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:Unit3.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::dvllwtkadxsag2lpr_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="152,171,140,134" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:SQLite3_Demo.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::typg70o5pwd02zhnn_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="520,0,201,258" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCityRec" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.PCityRec" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.PMailBoxConfigRec" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesCache" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigCache" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TKeyValue" />
+    </reference>
+    <reference referencedUin="design:view:::caqrqerv8m5i21g9l_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="53,195,96,134" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:Cities.@unitclass" />
+    </reference>
+    <reference referencedUin="design:view:::3b4zu40qxwstqodrq_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="311,246,188,166" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:SQLite3_Encrypt_Demo.TMailDB" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:SQLite3_Encrypt_Demo.TNodeData" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:SQLite3_Encrypt_Demo.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:SQLite3_Encrypt_Demo.PNodeData" />
+    </reference>
+    <reference referencedUin="design:view:::djxnajyp3bg_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="@__package_fqn" value="Domain" />
+      <property name="bounds" value="330,1,96,119" />
+      <reference referencedUin="design:view:::v13d96eh1l2lazbig_v" />
+    </reference>
+    <reference referencedUin="design:view:::iegrd7dxbig_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="330,122,99,42" />
+    </reference>
+    <reference referencedUin="design:view:::o0a7cithdxo61x7cq_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="212,367,96,119" />
+      <reference referencedUin="design:view:::p6gq45xzlxolgbhnp_v" />
+    </reference>
+  </view>
+</nodeSet>

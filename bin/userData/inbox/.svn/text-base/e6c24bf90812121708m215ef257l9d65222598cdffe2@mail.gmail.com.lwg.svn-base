@@ -1,0 +1,231 @@
+Delivered-To: i@mofun.cc
+Received: by 10.141.40.19 with SMTP id s19cs44852rvj;
+        Fri, 12 Dec 2008 17:09:03 -0800 (PST)
+Received: by 10.142.213.9 with SMTP id l9mr1620668wfg.12.1229130543277;
+        Fri, 12 Dec 2008 17:09:03 -0800 (PST)
+Return-Path: <grbounce-lXsCuQUAAACCsvGnidu0oTS0a-0eTGuB=i=mofun.cc@googlegroups.com>
+Received: from wa-out-0708.google.com (wa-out-0708.google.com [209.85.146.249])
+        by mx.google.com with ESMTP id 24si5625216wff.37.2008.12.12.17.09.02;
+        Fri, 12 Dec 2008 17:09:02 -0800 (PST)
+Received-SPF: pass (google.com: domain of grbounce-lXsCuQUAAACCsvGnidu0oTS0a-0eTGuB=i=mofun.cc@googlegroups.com designates 209.85.146.249 as permitted sender) client-ip=209.85.146.249;
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of grbounce-lXsCuQUAAACCsvGnidu0oTS0a-0eTGuB=i=mofun.cc@googlegroups.com designates 209.85.146.249 as permitted sender) smtp.mail=grbounce-lXsCuQUAAACCsvGnidu0oTS0a-0eTGuB=i=mofun.cc@googlegroups.com; dkim=pass (test mode) header.i=@googlegroups.com
+Received: by wa-out-0708.google.com with SMTP id k25so876206waf.8
+        for <i@mofun.cc>; Fri, 12 Dec 2008 17:09:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlegroups.com; s=beta;
+        h=domainkey-signature:received:received:x-sender:x-apparently-to
+         :received:received:received-spf:authentication-results:received
+         :dkim-signature:domainkey-signature:received:received:message-id
+         :date:from:to:subject:in-reply-to:mime-version:content-type
+         :references:reply-to:sender:precedence:x-google-loop:mailing-list
+         :list-id:list-post:list-help:list-unsubscribe:x-beenthere-env
+         :x-beenthere;
+        bh=5eByTchDwY8lrSekQZ29gOuykBd01X/C8YBtDmuLr18=;
+        b=zko9exnYLHL89063HR19fLUemb1xdBY2B4+xveMIDPSPrGOQ3OdPXBG1FpKRqOPLwK
+         KklhL3fx6K92uxmCqjYLVcZobiKyTpezr/xG5I6ckMKrF2u6BOp5z91mkXj8LrYUzH3i
+         gNBdNOt93Tc0uyeysj1/kYUifLSO+3u8iY5fw=
+DomainKey-Signature: a=rsa-sha1; c=nofws;
+        d=googlegroups.com; s=beta;
+        h=x-sender:x-apparently-to:received-spf:authentication-results
+         :dkim-signature:domainkey-signature:message-id:date:from:to:subject
+         :in-reply-to:mime-version:content-type:references:reply-to:sender
+         :precedence:x-google-loop:mailing-list:list-id:list-post:list-help
+         :list-unsubscribe:x-beenthere-env:x-beenthere;
+        b=h6Yr155siNHWB20fwXQfFPvZT/wRdAaHLoawD2SeS7qKvudq43uxtu5WsE3ejU7XD1
+         vtIPEyFUvJSGeHrR/7p4SxH1xiOaATDZxaDdfint4D4pJiK/qv/LbKM6++pjpBEels6C
+         izUNakI/N53AwshMI9b9XeohznVWr/jAi8zEM=
+Received: by 10.140.187.10 with SMTP id k10mr233607rvf.19.1229130529248;
+        Fri, 12 Dec 2008 17:08:49 -0800 (PST)
+Received: by 10.106.152.35 with SMTP id z35gr181591prd.0;
+	Fri, 12 Dec 2008 17:08:34 -0800 (PST)
+X-Sender: kaoacupuncture@gmail.com
+X-Apparently-To: Googroup@googlegroups.com
+Received: by 10.114.76.1 with SMTP id y1mr2310697waa.11.1229130514170; Fri, 12 Dec 2008 17:08:34 -0800 (PST)
+Return-Path: <kaoacupuncture@gmail.com>
+Received: from rv-out-0506.google.com (rv-out-0506.google.com [209.85.198.229]) by mx.google.com with ESMTP id k19si7762911waf.2.2008.12.12.17.08.33; Fri, 12 Dec 2008 17:08:33 -0800 (PST)
+Received-SPF: pass (google.com: domain of kaoacupuncture@gmail.com designates 209.85.198.229 as permitted sender) client-ip=209.85.198.229;
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of kaoacupuncture@gmail.com designates 209.85.198.229 as permitted sender) smtp.mail=kaoacupuncture@gmail.com; dkim=pass (test mode) header.i=@gmail.com
+Received: by rv-out-0506.google.com with SMTP id f9so110321rvb.5 for <Googroup@googlegroups.com>; Fri, 12 Dec 2008 17:08:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma; h=domainkey-signature:received:received:message-id:date:from:to :subject:in-reply-to:mime-version:content-type:references; bh=VGagktwBLEZMJa1G0OEH0vR2zi9HE4ZwuLvJJBti1Zk=; b=D6U09v3vGZ77dYDl4cinNQg0Vpp+RkpwBwASYEASnHIwztDHXA1d0ijvC4o9TUx07A prNAqP5C7ZxSnqIUZkNC4JJN+HHc3LovK1jea2c27qgikPCEfESCOkpjPENpkXT2GhHj q2t7iyqhvY58HvnAwaUy+JjaWcf9nE6FTGrzo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma; h=message-id:date:from:to:subject:in-reply-to:mime-version :content-type:references; b=QeG6msHu7bNv2s+qtrKaPbn62eslGnenyUwCSIPlhV5T2uP6Y9oaImQBBkjVVoJRyG VaIXkt0FHDx5IGZ7DeHziH2ZdG2H/0qf0uSiKwX6f5WP1HVKMqFuN4R1PS74f8f9iyN/ sr1+v0PyuMlY43sF5qlFge9lkLDKBCbBY3bo4=
+Received: by 10.142.105.13 with SMTP id d13mr1606627wfc.196.1229130513082; Fri, 12 Dec 2008 17:08:33 -0800 (PST)
+Received: by 10.142.224.6 with HTTP; Fri, 12 Dec 2008 17:08:33 -0800 (PST)
+Message-ID: <e6c24bf90812121708m215ef257l9d65222598cdffe2@mail.gmail.com>
+Date: Sat, 13 Dec 2008 09:08:33 +0800
+From: "kao quanbao" <kaoacupuncture@gmail.com>
+To: Googroup@googlegroups.com
+Subject: [G2G] Re: 中国出口土崩瓦解的后果
+In-Reply-To: <e6c24bf90812121708m215ef257l9d65222598cdffe2@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="=_nVqf9oUAO21yhRoW3LsexUNPnOPziJmx"
+References: <207ed5950812121637j37abcf36yb3f6fa26478c241c@mail.gmail.com>
+Reply-To: Googroup@googlegroups.com
+Sender: Googroup@googlegroups.com
+Precedence: bulk
+X-Google-Loop: groups
+Mailing-List: list Googroup@googlegroups.com;
+	contact Googroup+owner@googlegroups.com
+List-Id: <Googroup.googlegroups.com>
+List-Post: <mailto:Googroup@googlegroups.com>
+List-Help: <mailto:Googroup+help@googlegroups.com>
+List-Unsubscribe: <http://googlegroups.com/group/Googroup/subscribe>,
+	<mailto:Googroup+unsubscribe@googlegroups.com>
+X-BeenThere-Env: Googroup@googlegroups.com
+X-BeenThere: Googroup@googlegroups.com
+
+This is a multi-part message in MIME format
+
+--=_nVqf9oUAO21yhRoW3LsexUNPnOPziJmx
+Content-Type: text/plain; charset="GB2312"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+Content-Disposition=inline
+
+sb7GqtWTyvbT0Pxjwv0srEa/9rj8sru6ww0KDQoyMDA4LzEyLzEyLCBGYW4gQ3JhenkgPG9obXlp
+bnRpbWF0ZUBnbWFpbC5jb20+Og0KPg0KPg0KPiDX99Xfo7ogvbm9qA0KPiC5stPQN8z1xsDC2yA8
+aHR0cDovL2hvbWUuZWVvLmNvbS5jbi9iYnMvdmlld3RocmVhZC5waHA/dGlkPTIwNjAwMz4NCj4g
+t6KyvMjVxtqjuiAyMDA4LTEyLTExDQo+DQo+ICrW0Ln6tcTDs9LXyv3X1sjntMvU47jio6zV+7j2
+ysC9576tvMPSsr2ryty1vdOwz+yhoyoNCj4NCj4gKqG2vq28w9GnyMuhty/OxCoNCj4NCj4NCj4g
+z+vSqtaqtcAxMtTCMTDI1dbQufq3orK8tcS9+LP2v9rK/dfWtcS087f5zPjLrtPQtuDDtMHuyMu1
+o9DEw7Sjv8nP1MK1xLP2v9qxyMilxOrNrMbaz8K9tcHLMi4yuPaw2bfWteOjrLb4vfi/2tTyz8K9
+tcHLwe7Iy9Xwvqq1xDE3LjkloaPT0LfWzva9q9XizPXQws7F19y94c6qIsHuyMvI57TL1fC+qrXE
+yv3X1iKhow0KPg0KPiDS9bC1tcTQzsrG0tG+rbHpsrzIq8fyuPe12KGjyKvH8rj3tdi1xLj31ta0
+89fayczGt7P2v9rQzsrGtrzS0b6tz8K9tcHLoaO21MPAufq1xLP2v9rPwr21wcs2LjG49rDZt9a1
+46O7ttS2q8PLtcSz9r/a1NoxMNTCt927udT2s6TByw0KPiAyMS41JaOsyOe98dLRvq3Xqs6qz8K1
++DIuNCWho734v9q1xLTzwb+89cnZ0uLOttfF1tC5+rXE1MS2wcOz0tfTr9Pg0tG+rbTvtb3By7S0
+vM3CvLXENDAx0trDwNSqoaO2+MnP0ru0ztbQufqz9r/atcS89cnZo6zS0b6tyscNCj4gMjAwMcTq
+tcS5ysrCwcuhow0KPg0KPg0KPiDV4tH5tcTK/dfWtry74cjOus7Su7j2vt6087XEvq28w8zluNC1
+vb7ayaWho7Wr1eLR+bXE0MLOxbP2z9bU2tbQufrJ7cnPo6zU8sHuyMu4/LzT1fC+qqGqoarS8s6q
+1tC5+rXEv+zL2cOz0tfU9rOkysfIq8fyw7PS17XEt6K2r7v6o6y2+NXi0rK+zdLizrbXxdbQufrK
+x8irx/K+rbzD1PazpLXEtq/BpqGjMTk5MMTqtPq1xNbQufrDv8Tqs/a/2tT2s6S1xMa9vvnK/dfW
+yscxMi45JaO7MjAwMMTqtb0yMDA2xOrV4tH5tcTE6rbI1PazpLy4uvXSqrett6zBvbG2o6y077W9
+wcsyMS4xJaGjtvjW0Ln6tcS/7MvZ1PazpLXEvfi/2tDox/PSstTaxvDXxc3Gtq/Iq8fyvq28w9T2
+s6S1xNf308Oho7b41+69/NbQufrR69DQtcTK18+vvq28w9GnvNK9q9fu0MK1xMr919bD6Mr2zqoi
+we7Iy76quqcio6zT0Mfpv8nUraGjDQo+DQo+DQo+IMr9vt3PwrustcSzzLbI0+vL2bbI0rvR+cHu
+yMuz1L6qoaPU2tK7uPbUwtbQyOe0y77nwdK1xM/Cu6zIw7y0sePKx7bU0M7KxrPW09DX7rGvudvM
+rLbItcS+rbzD0ae80tKyuNC1vbPUvqqho9PQt9bO9ta4s/bIq8fyMTHUwrXEw7PS173wyNq1xLbM
+yLG/ycTc1OyzycHL1eLSu8r919a/ycTc09DQqb/ktPPG5Mq1o6y1q9bQufrJ8buwtcTGxsPw0tG+
+rbrBzt7Syc7KoaMNCj4NCj4NCj4g19S00zE5NzjE6r6tvMO4xLjv0tTAtKOs1tC5+rXEvq28w9T2
+s6TK/dfWwe7Iy7jQtb3I57TLxL/Ro6OstvjNo9bNttTT2tbQufq+rbzD1OyzybXE07DP7L2rysfK
+rrfWv8nFwrXEoaO2+NXi0rvU9rOkuf3IpdK71rGxu7P2v9rNxravo6zV4sq5tcPW0Ln6s8nOqsrA
+vee5pLOnoaO4+b7dysC959L40NC1xMr9vt2jrDIwMDbE6rXEyKvH8kdEUNbQ09AyNyXAtNfUs/a/
+2qOo1eLSu8r919bU2jE5OTDE6sqxu7nWu9PQMjElo6mho9bQufpHRFC21MOz0tez9r/atcTSwMC1
+uPy808P3z9SjujIwMDbE6kdEUNbQ09A0MCXAtNfUs/a/2qOstvjDwLn6tcTP4NOmyv3X1ta709Az
+MCWjrNOiufrU8ta709AxMSWho9LytMujrNbQufqz9r/atcTRuMvZz8K9tbbU09rW0Ln6vq28w9T2
+s6S9q9Tss8nP4NOmtcS+3rTz07DP7KGjDQo+DQo+DQo+ILG+1ty2/qOsysDQ0LmrsrzBy9fu0MK1
+xL6tvMPU9rOk1KTG2sr919aho9Xi0rvK/dfW1KS8xtbQufoyMDA5xOq1xEdEUNT2s6S9q86qNy41
+JaOs1La1zdPa1tC5+tfUye3UpLzGtcQ5LjUlo6zHsNXfyv3X1r+8wse1vcHL1tC5+rXEyqfStcLK
+zsrM4qGjtau8tMq5ysc3LjUltcTU9rOkv8nE3NKyyvTT2rn9t9bA1rnbwcujrNLyzqrKwNDQtcTU
+pLzG1tDT0NK7sr+31rv5tKHKx72owaLU2tbQufq1xLP2v9rD98TqvavJz8n9NC4yJdXi0rvUpLzG
+yc+1xKGjtvjKwsq1yc+jrNPQuty24LfWzvbKptSkvMbLtcirx/LDs9LXtcSyu76wxvi9q7zM0PjJ
+9dbByse4/LzTtvG7r6O7yPDKv1VCU9L40NC1xNSkvMa+zcu1o6zW0Ln6tcSz9r/a1NoyMDA50rvV
++8Tqtry9q7Gjs9bNo9bNoaMNCj4NCj4NCj4g1tC5+rXEwM22r9Xfw8e9q7eiz9a8tL2rwLTB2bXE
+0rvE6tDOysa74bj8vNO28buvo6y2+NTaMjAwOMTq1tCjrNXi0rvQzsrGvs3S0b6tyq631tHPvv6h
+o7zTyOuz9r/azerIq82j1s21xLuwo6zAzbav1d+1xLmk1/e42s67yq631s6jz9WjrLb41fu49snn
+u+G1xLe007O74bj8zqq+58HSoaPT0NSkvMbLtaOsz9bU2tbQufq9+LPMtcTFqbTlyMu/2tLRvq20
+77W9wcsx0tozx6fN8qOstvjL+8PHtPO24NTa1sbU7LP2v9qy+sa3tcS5pLOn1tC5pNf3oaPW0Ln6
+t6K4xM6v1vfIztXFxr3X7r380tG+rb6vuObLtaOs0vLOqrTzuebEo8qn0rXU7LPJtcTJ57vhsrvO
+yLaozqPP1dX91Nqz1tD4yc/J/aGjDQo+DQo+DQo+INbQufq1xNfu0MK1xMOz0tfK/dfW0rLKubXD
+sb7AtNLRvq3KrrfW9/a1rbXEyKvH8s60wLTVuc370anJz7zTy6qho9LyzqrU2sirx/LG5Mv7uLvU
+o7n6vNK2vNLRvq3P3cjry6XNy7XEx+m/9s/Co6y63Lbgufq80ra81rjN+9fF1tC5+sC01qezxcir
+x/K+rbzDoaPDwMHW1OfQqcqxuvLU+L6t1KSy4su1o6zW0Ln61by+3TIwMDnE6sirx/LU9rOk1tA2
+MCW1xLfdtu6ho7WrxL/HsL34v9q1xLyxvufPwrus1PLLtcP3o6zW0Ln6yMvSss7et6izyc6q1+66
+87XEz/u30bHct+fMwaGjDQo+DQo+DQo+INPQ1KS8xsu11tC5+rXEs/a/2s6uy/W7ub2rs9bQ+Ly4
+uPbUwrfdoaO2+LbU09rIy8PxsdK8tL2rseHWtbXEzba7+rvutq/S0b6ts8nOqsbVsenP1s/zo6y1
+q7zZyOfIq8fy0OjH87O5tdexwMCjtcS7sKOs1eLSu8fQtry9q8bwsrvBy8yrtPO1xNf308Oho9Gn
+z7DSu8/Cuqu5+rXEvq3R6b2rysfT0LDv1vq1xKO6vfHE6rqr1Kq21MPA1Kq1xLvjwsrS0b6tseHW
+tcHLvfzI/bfW1q7Su6OstavV4rKiw7vT0Nfo1rm6q7n6s/a/2tTaMTHUws2sscjPwrusMTguMyW1
+xMrCyrWho7K70NK1xMrHo6zV4tK7x9C/ycTctryyu9fj0tTX6Na51tC5+tX+uK7Iw8jLw/Gx0rHh
+1rW1xM60wLTQ0LavoaPS8s6q1tC5+syruf3T2tLAwLWz9r/awcuhow0KPg0KPg0KPiCyxtX+tMy8
+pLXE1/fTw8/UtcPT+rzT1tjSqsHLo7u2+MCptPPE2tDotcTFrMGmvauw79b61tC5+tfUye26zcrA
+veeho774tPO24Mr9t9bO9tSkvMbLtdbQufq74dPQuPy24LXEssbV/rTMvKS3vbC4oaO2+NbQufq1
+xMD7wsq6zcuwytXSsr/JxNy74b340ruyvb21tc2how0KPg0KPg0KPiAtLQ0KPiBZb3UgbWF5IGZv
+b2wgYWxsIG9mIHRoZSBwZW9wbGUgc29tZSBvZiB0aGUgdGltZTsNCj4geW91IGNhbiBldmVuIGZv
+b2wgc29tZSBvZiB0aGUgcGVvcGxlIGFsbCBvZiB0aGUgdGltZTsNCj4gYnV0IHlvdSBjYW4ndCBm
+b29sIGFsbCBvZiB0aGUgcGVvcGxlIGFsbCBvZiB0aGUgdGltZS4NCj4go62jrUFicmFoYW0gTGlu
+Y29sbg0KPg0K
+
+--=_nVqf9oUAO21yhRoW3LsexUNPnOPziJmx
+Content-Type: text/html; charset="GB2312"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+Content-Disposition=inline
+
+sb7GqtWTyvbT0Pxjwv0srEa/9rj8sru6wzxicj48YnI+DQo8ZGl2PjxzcGFuIGNsYXNzPSJnbWFp
+bF9xdW90ZSI+MjAwOC8xMi8xMiwgRmFuIENyYXp5ICZsdDs8YSBocmVmPSJtYWlsdG86b2hteWlu
+dGltYXRlQGdtYWlsLmNvbSI+b2hteWludGltYXRlQGdtYWlsLmNvbTwvYT4mZ3Q7Ojwvc3Bhbj4N
+CjxibG9ja3F1b3RlIGNsYXNzPSJnbWFpbF9xdW90ZSIgc3R5bGU9IlBBRERJTkctTEVGVDogMWV4
+OyBNQVJHSU46IDBweCAwcHggMHB4IDAuOGV4OyBCT1JERVItTEVGVDogI2NjYyAxcHggc29saWQi
+Pg0KPGRpdj48YnI+DQo8ZGl2Ptf31d+juiC9ub2oIDwvZGl2Pg0KPGRpdiBzdHlsZT0iQ09MT1I6
+IHJnYigxNTMsMCwwKSI+PGEgb25jbGljaz0icmV0dXJuIHRvcC5qcy5PcGVuRXh0TGluayh3aW5k
+b3csZXZlbnQsdGhpcykiIGhyZWY9Imh0dHA6Ly9ob21lLmVlby5jb20uY24vYmJzL3ZpZXd0aHJl
+YWQucGhwP3RpZD0yMDYwMDMiIHRhcmdldD0iX2JsYW5rIj65stPQPHNwYW4gc3R5bGU9IkZPTlQt
+V0VJR0hUOiBib2xkIj43PC9zcGFuPsz1xsDC2zwvYT48L2Rpdj4NCg0KPGRpdj63orK8yNXG2qO6
+IDIwMDgtMTItMTEgPC9kaXY+PC9kaXY+DQo8ZGl2PjwvZGl2Pg0KPHAgYWxpZ249ImNlbnRlciI+
+PHN0cm9uZz7W0Ln6tcTDs9LXyv3X1sjntMvU47jio6zV+7j2ysC9576tvMPSsr2ryty1vdOwz+yh
+ozwvc3Ryb25nPjwvcD4NCjxwPjxzdHJvbmc+oba+rbzD0afIy6G3L87EPC9zdHJvbmc+PC9wPg0K
+PHA+z+vSqtaqtcAxMtTCMTDI1dbQufq3orK8tcS9+LP2v9rK/dfWtcS087f5zPjLrtPQtuDDtMHu
+yMu1o9DEw7Sjv8nP1MK1xLP2v9qxyMilxOrNrMbaz8K9tcHLMi4yuPaw2bfWteOjrLb4vfi/2tTy
+z8K9tcHLwe7Iy9Xwvqq1xDE3LjkloaPT0LfWzva9q9XizPXQws7F19y94c6qJnF1b3Q7we7Iy8jn
+tMvV8L6qtcTK/dfWJnF1b3Q7oaM8L3A+DQo8cD7S9bC1tcTQzsrG0tG+rbHpsrzIq8fyuPe12KGj
+yKvH8rj3tdi1xLj31ta089fayczGt7P2v9rQzsrGtrzS0b6tz8K9tcHLoaO21MPAufq1xLP2v9rP
+wr21wcs2LjG49rDZt9a146O7ttS2q8PLtcSz9r/a1NoxMNTCt927udT2s6TByyAyMS41JaOsyOe9
+8dLRvq3Xqs6qz8K1+DIuNCWho734v9q1xLTzwb+89cnZ0uLOttfF1tC5+rXE1MS2wcOz0tfTr9Pg
+0tG+rbTvtb3By7S0vM3CvLXENDAx0trDwNSqoaO2+MnP0ru0ztbQufqz9r/atcS89cnZo6zS0b6t
+yscgMjAwMcTqtcS5ysrCwcuhozwvcD4NCjxwPtXi0fm1xMr919a2vLvhyM66ztK7uPa+3rTztcS+
+rbzDzOW40LW9vtrJpaGjtavV4tH5tcTQws7Fs/bP1tTa1tC5+sntyc+jrNTywe7Iy7j8vNPV8L6q
+oaqhqtLyzqrW0Ln6tcS/7MvZw7PS19T2s6TKx8irx/LDs9LXtcS3oravu/qjrLb41eLSsr7N0uLO
+ttfF1tC5+srHyKvH8r6tvMPU9rOktcS2r8GmoaMxOTkwxOq0+rXE1tC5+sO/xOqz9r/a1PazpLXE
+xr2++cr919bKxzEyLjklo7syMDAwxOq1vTIwMDbE6tXi0fm1xMTqtsjU9rOkvLi69dKqt623rMG9
+sbajrLTvtb3ByzIxLjEloaO2+NbQufq1xL/sy9nU9rOktcS9+L/a0OjH89Ky1NrG8NfFzca2r8ir
+x/K+rbzD1PazpLXE1/fTw6GjtvjX7r381tC5+tHr0NC1xMrXz6++rbzD0ae80r2r1+7QwrXEyv3X
+1sPoyvbOqiZxdW90O8HuyMu+qrqnJnF1b3Q7o6zT0Mfpv8nUraGjPC9wPg0KDQo8cD7K/b7dz8K7
+rLXEs8y2yNPry9m2yNK70fnB7sjLs9S+qqGj1NrSu7j21MLW0MjntMu+58HStcTPwrusyMO8tLHj
+yse21NDOysaz1tPQ1+6xr7nbzKy2yLXEvq28w9GnvNLSsrjQtb2z1L6qoaPT0LfWzvbWuLP2yKvH
+8jEx1MK1xMOz0te98MjatcS2zMixv8nE3NTss8nBy9Xi0rvK/dfWv8nE3NPQ0Km/5LTzxuTKtaOs
+tavW0Ln6yfG7sLXExsbD8NLRvq26wc7e0snOyqGjPC9wPg0KPHA+19S00zE5NzjE6r6tvMO4xLjv
+0tTAtKOs1tC5+rXEvq28w9T2s6TK/dfWwe7Iy7jQtb3I57TLxL/Ro6OstvjNo9bNttTT2tbQufq+
+rbzD1OyzybXE07DP7L2rysfKrrfWv8nFwrXEoaO2+NXi0rvU9rOkuf3IpdK71rGxu7P2v9rNxrav
+o6zV4sq5tcPW0Ln6s8nOqsrAvee5pLOnoaO4+b7dysC959L40NC1xMr9vt2jrDIwMDbE6rXEyKvH
+8kdEUNbQ09AyNyXAtNfUs/a/2qOo1eLSu8r919bU2jE5OTDE6sqxu7nWu9PQMjElo6mho9bQufpH
+RFC21MOz0tez9r/atcTSwMC1uPy808P3z9SjujIwMDbE6kdEUNbQ09A0MCXAtNfUs/a/2qOstvjD
+wLn6tcTP4NOmyv3X1ta709AzMCWjrNOiufrU8ta709AxMSWho9LytMujrNbQufqz9r/atcTRuMvZ
+z8K9tbbU09rW0Ln6vq28w9T2s6S9q9Tss8nP4NOmtcS+3rTz07DP7KGjPC9wPg0KDQo8cD6xvtbc
+tv6jrMrA0NC5q7K8wcvX7tDCtcS+rbzD1PazpNSkxtrK/dfWoaPV4tK7yv3X1tSkvMbW0Ln6MjAw
+OcTqtcRHRFDU9rOkvavOqjcuNSWjrNS2tc3T2tbQufrX1Mnt1KS8xrXEOS41JaOsx7DV38r919a/
+vMLHtb3By9bQufq1xMqn0rXCys7KzOKho7WrvLTKucrHNy41JbXE1PazpL/JxNzSssr009q5/bfW
+wNa528HLo6zS8s6qysDQ0LXE1KS8xtbQ09DSu7K/t9a7+bShyse9qMGi1NrW0Ln6tcSz9r/aw/fE
+6r2ryc/J/TQuMiXV4tK71KS8xsnPtcSho7b4ysLKtcnPo6zT0LrctuC31s72yqbUpLzGy7XIq8fy
+w7PS17XEsru+sMb4vau8zND4yfXWwcrHuPy807bxu6+ju8jwyr9VQlPS+NDQtcTUpLzGvs3LtaOs
+1tC5+rXEs/a/2tTaMjAwOdK71fvE6ra8vauxo7PWzaPWzaGjPC9wPg0KPHA+1tC5+rXEwM22r9Xf
+w8e9q7eiz9a8tL2rwLTB2bXE0rvE6tDOysa74bj8vNO28buvo6y2+NTaMjAwOMTq1tCjrNXi0rvQ
+zsrGvs3S0b6tyq631tHPvv6ho7zTyOuz9r/azerIq82j1s21xLuwo6zAzbav1d+1xLmk1/e42s67
+yq631s6jz9WjrLb41fu49snnu+G1xLe007O74bj8zqq+58HSoaPT0NSkvMbLtaOsz9bU2tbQufq9
++LPMtcTFqbTlyMu/2tLRvq2077W9wcsx0tozx6fN8qOstvjL+8PHtPO24NTa1sbU7LP2v9qy+sa3
+tcS5pLOn1tC5pNf3oaPW0Ln6t6K4xM6v1vfIztXFxr3X7r380tG+rb6vuObLtaOs0vLOqrTzuebE
+o8qn0rXU7LPJtcTJ57vhsrvOyLaozqPP1dX91Nqz1tD4yc/J/aGjPC9wPg0KPHA+1tC5+rXE1+7Q
+wrXEw7PS18r919bSssq5tcOxvsC00tG+rcqut9b39rWttcTIq8fyzrTAtNW5zfvRqcnPvNPLqqGj
+0vLOqtTayKvH8sbky/u4u9Sjufq80ra80tG+rc/dyOvLpc3LtcTH6b/2z8KjrLrctuC5+rzStrzW
+uM3718XW0Ln6wLTWp7PFyKvH8r6tvMOho8PAwdbU59CpyrG68tT4vq3UpLLiy7WjrNbQufrVvL7d
+MjAwOcTqyKvH8tT2s6TW0DYwJbXEt9227qGjtavEv8ewvfi/2rXEvLG+58/Cu6zU8su1w/ejrNbQ
+ufrIy9Kyzt63qLPJzqrX7rrztcTP+7fRsdy358zBoaM8L3A+DQo8cD7T0NSkvMbLtdbQufq1xLP2
+v9rOrsv1u7m9q7PW0Pi8uLj21MK33aGjtvi21NPayMvD8bHSvLS9q7Hh1rW1xM22u/q77rav0tG+
+rbPJzqrG1bHpz9bP86Ostau82cjnyKvH8tDox/OzubXXscDAo7XEu7CjrNXi0rvH0La8vavG8LK7
+wcvMq7TztcTX99PDoaPRp8+w0rvPwrqrufq1xL6t0em9q8rH09Cw79b6tcSjur3xxOq6q9SqttTD
+wNSqtcS748LK0tG+rbHh1rXBy738yP231tau0rujrLWr1eKyosO709DX6Na5uqu5+rP2v9rU2jEx
+1MLNrLHIz8K7rDE4LjMltcTKwsq1oaOyu9DStcTKx6Os1eLSu8fQv8nE3La8srvX49LU1+jWudbQ
+ufrV/riuyMPIy8PxsdKx4da1tcTOtMC00NC2r6Gj0vLOqtbQufrMq7n909rSwMC1s/a/2sHLoaM8
+L3A+DQo8cD6yxtX+tMy8pLXE1/fTw8/UtcPT+rzT1tjSqsHLo7u2+MCptPPE2tDotcTFrMGmvauw
+79b61tC5+tfUye26zcrAveeho774tPO24Mr9t9bO9tSkvMbLtdbQufq74dPQuPy24LXEssbV/rTM
+vKS3vbC4oaO2+NbQufq1xMD7wsq6zcuwytXSsr/JxNy74b340ruyvb21tc2hozwvcD48YnIgY2xl
+YXI9ImFsbCI+PHNwYW4gY2xhc3M9InNnIj48YnI+LS0gPGJyPllvdSBtYXkgZm9vbCBhbGwgb2Yg
+dGhlIHBlb3BsZSBzb21lIG9mIHRoZSB0aW1lOzxicj55b3UgY2FuIGV2ZW4gZm9vbCBzb21lIG9m
+IHRoZSBwZW9wbGUgYWxsIG9mIHRoZSB0aW1lOyA8YnI+DQpidXQgeW91IGNhbiYjMzk7dCBmb29s
+IGFsbCBvZiB0aGUgcGVvcGxlIGFsbCBvZiB0aGUgdGltZS48YnI+o62jrUFicmFoYW0gTGluY29s
+bjxicj48L3NwYW4+PC9ibG9ja3F1b3RlPjwvZGl2Pjxicj4NCg==
+
+--=_nVqf9oUAO21yhRoW3LsexUNPnOPziJmx--
+
+.

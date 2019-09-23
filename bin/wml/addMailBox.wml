@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml><card id="card1" title="<#title>" newcontext="true">
+<p>
+
+邮箱全名:<input name="box" emptyok="false" tabindex="0" maxlength="100"/><br/>
+<fieldset title="sss">
+POP3服务器:<input name="pop" emptyok="false" tabindex="1" maxlength="100"/><br/>
+SMTP服务器:<input name="smtp" emptyok="false" talbeindex="2"
+</filedset>
+用户名:<input name="muid" emptyok="false" tabindex="3" maxlength="250"/><br/>
+密码:<input name="mpwd" emptyok="false" tableindex="4" maxlength="50" type="password"/><br/>
+SMTP服务器需要认证:<input name="smtpAuth" type="checkbox"/><br/>
+SMTP与邮箱登陆相同:<input name="smtpAuth" type="checkbox"/><br/>
+SMTP用户名:<input name="smtpUID" maxlength="50"/><br/>
+SMTP密码:<input name="smtpPWD" maxlength="50"/><br/>
+POP3要求安全认证:<input name="POPSSL" type="checkbox"/><br/>
+POP3端口:<input name="POPPort" value="110" format="*N" maxlenght="5" size="5"/><br/>
+SMTP要求安全认证<input name="POPSSL" type="checkbox"/><br/>
+SMTP端口:<input name="SMTPPort" value="25" format="*N" maxlenght="5" size="5"/><br/>
+
+<anchor>保存
+  <go accept-charset="utf-8" href="<%=Pages.send.HREF%>" method="post">
+	<postfield name="rcpnts" value="$(rcpnts)"/>
+	<postfield name="sbjct" value="$(sbjct)"/>
+	<postfield name="bdy" value="$(bdy)"/>
+  </go>
+</anchor>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>

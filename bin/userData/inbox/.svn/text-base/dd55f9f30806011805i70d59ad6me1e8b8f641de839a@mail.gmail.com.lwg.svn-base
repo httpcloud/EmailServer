@@ -1,0 +1,131 @@
+Received: from py-out-1314.google.com (unknown [64.233.166.172])
+	by mx29 (Coremail) with SMTP id ENGowLCbQBHRUENI5W8lBg==.33930S2;
+	Mon, 02 Jun 2008 09:45:54 +0800 (CST)
+Received: by py-out-1314.google.com with SMTP id p69so5386008pyb.6
+        for <helpus@163.com>; Sun, 01 Jun 2008 18:45:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlegroups.com; s=beta;
+        h=domainkey-signature:received:received:x-sender:x-apparently-to:received:received:received-spf:authentication-results:received:dkim-signature:domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:references:reply-to:sender:precedence:x-google-loop:mailing-list:list-id:list-post:list-help:list-unsubscribe;
+        bh=QLmJpV4j5/APE/czfyo86zP8kUKblky2gfWRSzdztng=;
+        b=ts+ooEeW0O5xKSgoki90DHzSbUBPs+ZmqR+r1dVJT3p2AFsq8cavulGdQEsB2GTQb0c9lFVQJrumQJ++RJxXQzg094WE6csxtJwS1wtm8IDl11u4AjM+deGWPVM3dwP1+wFhbUJNuuM0Z756rwAMSBQozqp5WfefqJ7+M1Gh1n0=
+DomainKey-Signature: a=rsa-sha1; c=nofws;
+        d=googlegroups.com; s=beta;
+        h=x-sender:x-apparently-to:received-spf:authentication-results:dkim-signature:domainkey-signature:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:references:reply-to:sender:precedence:x-google-loop:mailing-list:list-id:list-post:list-help:list-unsubscribe;
+        b=K+dvBbgAs9IdFSuykGkeH7+74nGiziKhi5q0s/ACr/Ab8nqidQhj+pS4qExfBAoM9JjbGxjqLXmy+nIfEsRg4SkHgPEPbbt0QeheuxsqcSmuisZB+D7J9DDJK+T3lHeqzJX/bG3hyqYya2kyXIpsgW0YSSH9hsKTKH49rtV2NLo=
+Received: by 10.141.27.16 with SMTP id e16mr528123rvj.6.1212368724732;
+        Sun, 01 Jun 2008 18:05:24 -0700 (PDT)
+Received: by 10.106.79.1 with SMTP id c1gr5061prb.0;
+	Sun, 01 Jun 2008 18:05:15 -0700 (PDT)
+X-Sender: cpunion@gmail.com
+X-Apparently-To: dev4server@googlegroups.com
+Received: by 10.141.34.12 with SMTP id m12mr2357498rvj.0.1212368715615; Sun, 01 Jun 2008 18:05:15 -0700 (PDT)
+Received: from fg-out-1718.google.com (fg-out-1718.google.com [72.14.220.153]) by mx.google.com with ESMTP id 7si3222859yxg.1.2008.06.01.18.05.14; Sun, 01 Jun 2008 18:05:15 -0700 (PDT)
+Received-SPF: pass (google.com: domain of cpunion@gmail.com designates 72.14.220.153 as permitted sender) client-ip=72.14.220.153;
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of cpunion@gmail.com designates 72.14.220.153 as permitted sender) smtp.mail=cpunion@gmail.com; dkim=pass (test mode) header.i=@gmail.com
+Received: by fg-out-1718.google.com with SMTP id 16so751083fgg.22 for <dev4server@googlegroups.com>; Sun, 01 Jun 2008 18:05:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma; h=domainkey-signature:received:received:message-id:date:from:to:subject:in-reply-to:mime-version:content-type:references; bh=ym4OFbM288evWLaTrNGzl6ihcEoQx/SLiwym6UELr7A=; b=uxP8smyUT5EWkQlgD08S5Pen3gAT4t9g3SR3hofDIf6tFia0TQn6kLcUMfLP/n9G15CyAr5MOIU3/ipuoha1XwxuGco/A3nrxNg/a4wmW4bHuhrCya0MnRFhFVpNMl5WiqbLiEY96bspwpC31kaq663q/frwzjbYOOLkBL5R3DQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma; h=message-id:date:from:to:subject:in-reply-to:mime-version:content-type:references; b=qJi7xVBzkmd9zUIoDGI6pJatwRjRMlmceYWQkCePJyVl1zD0AoNyWelDbRjBh+naDH+++321RLosL6LD8i7GlbDTaFSWITUBWi0imgcUMM+4g/sD8bWbrzoT0e4eQlLSQ+yADzb5V++o1mcgV5sG//N5AuHd0AgBT15Uojm/NUY=
+Received: by 10.86.28.2 with SMTP id b2mr3072043fgb.10.1212368713643; Sun, 01 Jun 2008 18:05:13 -0700 (PDT)
+Received: by 10.86.81.7 with HTTP; Sun, 1 Jun 2008 18:05:13 -0700 (PDT)
+Message-ID: <dd55f9f30806011805i70d59ad6me1e8b8f641de839a@mail.gmail.com>
+Date: Mon, 2 Jun 2008 09:05:13 +0800
+From: "lijie" <cpunion@gmail.com>
+To: dev4server@googlegroups.com
+Subject: Re:_????libevent??timer??
+In-Reply-To: <dd55f9f30806011805i70d59ad6me1e8b8f641de839a@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="FepMOss7us=_JkLMIihfRrpOSeXv9RBt6j"
+References: <52c01a0e-bcd9-46c9-8324-4303705f62e0@j1g2000prb.googlegroups.com>
+Reply-To: dev4server@googlegroups.com
+Sender: dev4server@googlegroups.com
+Precedence: bulk
+X-Google-Loop: groups
+Mailing-List: list dev4server@googlegroups.com;
+	contact dev4server-owner@googlegroups.com
+List-Id: <dev4server.googlegroups.com>
+List-Post: <mailto:dev4server@googlegroups.com>
+List-Help: <mailto:dev4server-help@googlegroups.com>
+List-Unsubscribe: <http://googlegroups.com/group/dev4server/subscribe>,
+	<mailto:dev4server-unsubscribe@googlegroups.com>
+X-Coremail-Antispam: 1Uf129KBjvdXoWrtF1kAFWDGFy3KF47KF4kWFg_yoWkJFb_ta
+	y7GFykAw1UAF15Xr9rJ3W3G3Wjqw4Ut3WUXwnrXrZ7tF9xWryUCw42ya1Dury0gFn7Gr1q
+	krn8KFyUKr15WjkaLaAFLSUrUUUU7bIjqfuFe4nvWSU5nxnvy29KBjDU0xBIdaVrnRJUUU
+	fFb7Iv0xC_Jr1lb4IE77IF4wAFxVCF77xC6IxKo4kEV4yl1I0EscIYIxCEI4klw4CSwwAa
+	w2AFwI0_Jw0_GFyln4vEF7Iv6F18KVAqrcv_GVWUtr1rJF1lnx0Ec2IEnICE548m6r1DJr
+	WUZwAa7VCIwxCIbxAFccxY0VAqrcv_JFW8Jry7Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+	7VCjz48v1sIEY20_GrylYx0Ec7CjxVAajcxG14v26r1j6r4UM4xvF2IEb7IF0Fy264kE64
+	k0F24lFcxC0VAYjxAxZF0Ex2IqxwAC6c804VA2FcCkMx02cVCv0xWlc7CjxVAaw2AFwI0_
+	Jw0_GFylc7CjxVAKzI0EY4vE52x082I5MxkFs20EbsIEYx1lc7Ca8VAvwVCFzxkY4VCF77
+	xAMxkIecxEwVCI4VWkMxkI7II2jI8vz4v_tr0_Kr1l42xK82IY64kExVAvwVAq07x20xyl
+	42xK82IY6x8ErcxFaVAv8VW8ZwCF72vEw2IIxxk0rwCFI7km07C267AKxVWUtVW8ZwCFI7
+	vE84CIb48I67vvx24lx4CE17CEb7AF67AKxVWUXVWUAbIYCTnIWIevJa73UjIFyTuYvj4R
+	ua0BDUUUU
+
+This is a multi-part message in MIME format
+
+--FepMOss7us=_JkLMIihfRrpOSeXv9RBt6j
+Content-Type: text/plain; charset="GB18030"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+
+v7S/tMrHsrvKx3RpbWV2YWy1xHR2X3VzZWPDu7G7s/XKvLuvtcTUrdLyo6zI57n7y/zKx7j2y+a7
++rXE1f3K/da1o6zEx77Nzt63qNSkwc/L/LvhtuCzpMqxvOS199PDwcuhow0KDQoyMDA4LzYvMSBQ
+ZW5nIDxqYXNzLnpoYW9AZ21haWwuY29tPjoNCg0KPg0KPiDA/dfTyOfPwqO6DQo+DQo+ICNpbmNs
+dWRlIDxldmVudC5oPg0KPiAjaW5jbHVkZSA8c3RkaW8uaD4NCj4gI2luY2x1ZGUgPHVuaXN0ZC5o
+Pg0KPiAjaW5jbHVkZSA8c3lzL3RpbWUuaD4NCj4NCj4gdm9pZCBtYW5hZ2VyKGludCBmZCwgc2hv
+cnQgZXZlbnQsIHZvaWQgKmFyZykNCj4gew0KPiAgRklMRSAqZnA7DQo+DQo+ICBmcCA9IGZvcGVu
+KCJ0aW1lci5sb2ciLCAidysiKTsNCj4gIGZwcmludGYoZnAsICJXZSBnb3QgYSB0aW1lci5cbiIp
+Ow0KPiAgZmNsb3NlKGZwKTsNCj4gfQ0KPg0KPiBpbnQgbWFpbigpDQo+IHsNCj4gIHN0cnVjdCBl
+dmVudF9iYXNlICpldmI7DQo+ICBzdHJ1Y3QgZXZlbnQgaGI7DQo+ICBzdHJ1Y3QgdGltZXZhbCB0
+dl9oYjsNCj4NCj4gIHR2X2hiLnR2X3NlYyA9IDU7DQo+ICBldmIgPSBldmVudF9pbml0KCk7DQo+
+ICBldnRpbWVyX3NldCgmaGIsIG1hbmFnZXIsIE5VTEwpOw0KPiAgZXZlbnRfYmFzZV9zZXQoZXZi
+LCAmaGIpOw0KPiAgZXZ0aW1lcl9hZGQoJmhiLCAmdHZfaGIpOw0KPiAgZXZlbnRfYmFzZV9kaXNw
+YXRjaChldmIpOw0KPg0KPiAgcmV0dXJuIDA7DQo+IH0NCj4NCj4g1NpsaW51eM/C1MvQ0LXEyrG6
+8qOst6LP1m1hbmFnZXIoKcO709Cxu7X308Oho7340ruyvWdkYtakyrWjrNTabWFuYWdlcsnPt8XS
+u7j2YnJlYWtwb2ludNauuvNjLCDDu9PQDQo+IGJyZWFroaO1q8bmuda1xMrHo6zI57n7Z2Ri0ruy
+vdK7sr1zdGVwvfhldmVudF9iYXNlX2Rpc3BhdGNoKCnV4rj2uq/K/aOsbWFuYWdlcr7Nu+Gxu7X3
+08OjrNPQyMvWqrXA1K3S8g0KPiDDtKO/DQo+DQo+DQo+ID4NCj4NCg0KLS1+LS1+LS0tLS0tLS0t
+fi0tfi0tLS1+LS0tLS0tLS0tLS0tfi0tLS0tLS1+LS1+LS0tLX4NCiC439DUxNzN+MLnseCzzA0K
+IGh0dHA6Ly9ncm91cHMuZ29vZ2xlLmNvbS9ncm91cC9kZXY0c2VydmVyDQotfi0tLS0tLS0tLS1+
+LS0tLX4tLS0tfi0tLS1+LS0tLS0tfi0tLS1+LS0tLS0tfi0tfi0tLQ0K
+
+--FepMOss7us=_JkLMIihfRrpOSeXv9RBt6j
+Content-Type: text/html; charset="GB18030"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+
+v7S/tMrHsrvKx3RpbWV2YWy1xHR2X3VzZWPDu7G7s/XKvLuvtcTUrdLyo6zI57n7y/zKx7j2y+a7
++rXE1f3K/da1o6zEx77Nzt63qNSkwc/L/LvhtuCzpMqxvOS199PDwcuhozxicj48YnI+PGRpdiBj
+bGFzcz0iZ21haWxfcXVvdGUiPjIwMDgvNi8xIFBlbmcgJmx0OzxhIGhyZWY9Im1haWx0bzpqYXNz
+LnpoYW9AZ21haWwuY29tIj5qYXNzLnpoYW9AZ21haWwuY29tPC9hPiZndDs6PGJyPjxibG9ja3F1
+b3RlIGNsYXNzPSJnbWFpbF9xdW90ZSIgc3R5bGU9ImJvcmRlci1sZWZ0OiAxcHggc29saWQgcmdi
+KDIwNCwgMjA0LCAyMDQpOyBtYXJnaW46IDBwdCAwcHQgMHB0IDAuOGV4OyBwYWRkaW5nLWxlZnQ6
+IDFleDsiPg0KPGJyPg0KwP3X08jnz8Kjujxicj4NCjxicj4NCiNpbmNsdWRlICZsdDtldmVudC5o
+Jmd0Ozxicj4NCiNpbmNsdWRlICZsdDtzdGRpby5oJmd0Ozxicj4NCiNpbmNsdWRlICZsdDt1bmlz
+dGQuaCZndDs8YnI+DQojaW5jbHVkZSAmbHQ7c3lzL3RpbWUuaCZndDs8YnI+DQo8YnI+DQp2b2lk
+IG1hbmFnZXIoaW50IGZkLCBzaG9ydCBldmVudCwgdm9pZCAqYXJnKTxicj4NCns8YnI+DQogJm5i
+c3A7RklMRSAqZnA7PGJyPg0KPGJyPg0KICZuYnNwO2ZwID0gZm9wZW4oJnF1b3Q7dGltZXIubG9n
+JnF1b3Q7LCAmcXVvdDt3KyZxdW90Oyk7PGJyPg0KICZuYnNwO2ZwcmludGYoZnAsICZxdW90O1dl
+IGdvdCBhIHRpbWVyLlxuJnF1b3Q7KTs8YnI+DQogJm5ic3A7ZmNsb3NlKGZwKTs8YnI+DQp9PGJy
+Pg0KPGJyPg0KaW50IG1haW4oKTxicj4NCns8YnI+DQogJm5ic3A7c3RydWN0IGV2ZW50X2Jhc2Ug
+KmV2Yjs8YnI+DQogJm5ic3A7c3RydWN0IGV2ZW50IGhiOzxicj4NCiAmbmJzcDtzdHJ1Y3QgdGlt
+ZXZhbCB0dl9oYjs8YnI+DQo8YnI+DQogJm5ic3A7dHZfaGIudHZfc2VjID0gNTs8YnI+DQogJm5i
+c3A7ZXZiID0gZXZlbnRfaW5pdCgpOzxicj4NCiAmbmJzcDtldnRpbWVyX3NldCgmYW1wO2hiLCBt
+YW5hZ2VyLCBOVUxMKTs8YnI+DQogJm5ic3A7ZXZlbnRfYmFzZV9zZXQoZXZiLCAmYW1wO2hiKTs8
+YnI+DQogJm5ic3A7ZXZ0aW1lcl9hZGQoJmFtcDtoYiwgJmFtcDt0dl9oYik7PGJyPg0KICZuYnNw
+O2V2ZW50X2Jhc2VfZGlzcGF0Y2goZXZiKTs8YnI+DQo8YnI+DQogJm5ic3A7cmV0dXJuIDA7PGJy
+Pg0KfTxicj4NCjxicj4NCtTabGludXjPwtTL0NC1xMqxuvKjrLeiz9ZtYW5hZ2VyKCnDu9PQsbu1
+99PDoaO9+NK7sr1nZGLWpMq1o6zU2m1hbmFnZXLJz7fF0ru49mJyZWFrcG9pbnTWrrrzYywgw7vT
+0Dxicj4NCmJyZWFroaO1q8bmuda1xMrHo6zI57n7Z2Ri0ruyvdK7sr1zdGVwvfhldmVudF9iYXNl
+X2Rpc3BhdGNoKCnV4rj2uq/K/aOsbWFuYWdlcr7Nu+Gxu7X308OjrNPQyMvWqrXA1K3S8jxicj4N
+CsO0o788YnI+DQo8YnI+DQo8YnI+DQo8YnI+DQo8L2Jsb2NrcXVvdGU+PC9kaXY+PGJyPjxicj4N
+Ci0tfi0tfi0tLS0tLS0tLX4tLX4tLS0tfi0tLS0tLS0tLS0tLX4tLS0tLS0tfi0tfi0tLS1+PGJy
+Pg0KJm5ic3A7uN/Q1MTczfjC57Hgs8wNCiA8YnI+ICZuYnNwO2h0dHA6Ly9ncm91cHMuZ29vZ2xl
+LmNvbS9ncm91cC9kZXY0c2VydmVyIDxicj4gLX4tLS0tLS0tLS0tfi0tLS1+LS0tLX4tLS0tfi0t
+LS0tLX4tLS0tfi0tLS0tLX4tLX4tLS08YnI+DQo8YnI+DQo=
+
+--FepMOss7us=_JkLMIihfRrpOSeXv9RBt6j--
+
+.

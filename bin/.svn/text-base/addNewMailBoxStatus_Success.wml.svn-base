@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="success" title="保存成功" newcontext="true">
+<p>
+保存成功！<br/>
+<a href="<%=Pages.login.HREF%>?ms=<#ms>">转到收件箱</a>
+<!-- #include file="return.wml" -->
+</p>
+</card>
+</wml>
+

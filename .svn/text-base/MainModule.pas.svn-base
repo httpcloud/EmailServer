@@ -1,0 +1,261 @@
+unit MainModule;
+
+interface
+
+uses
+  SysUtils, Classes, HTTPApp, WebModu, HTTPProd, ReqMulti, WebSess, WebDisp,
+  WebAdapt, WebComp,IniFiles,windows,idPOP3,HashMap,Config,SiteComp;
+
+type
+  TMain = class(TWebAppPageModule)
+    PageProducer: TPageProducer;
+    WebAppComponents: TWebAppComponents;
+    ApplicationAdapter: TApplicationAdapter;
+    EndUserSessionAdapter: TEndUserSessionAdapter;
+    PageDispatcher: TPageDispatcher;
+    AdapterDispatcher: TAdapterDispatcher;
+    SessionsService: TSessionsService;
+    AdapterAction: TAdapterAction;
+    procedure PageProducerHTMLTag(Sender: TObject; Tag: TTag;
+      const TagString: string; TagParams: TStrings; var ReplaceText: string);
+    procedure WebAppPageModuleBeforeDispatchPage(Sender: TObject;
+      const PageName: string; var Handled: Boolean);
+    procedure SessionsServiceEndSession(ASender: TObject;
+      ASession: TAbstractWebSession; AReason: TEndSessionReason);
+    procedure SessionsServiceStartSession(ASender: TObject;
+      ASession: TAbstractWebSession);
+    procedure AdapterDispatcherGetAdapterRequestParams(Sender: TObject;
+      Handler: IInterface; var Identifer: string; Params: TStrings);
+    procedure AdapterDispatcherActionRequestNotHandled(Sender, Action: TObject;
+      Params: TStrings; var Handled: Boolean);
+    procedure AdapterDispatcherBeforeDispatchAction(Sender, Action: TObject;
+      Params: TStrings; var Handled: Boolean);
+    procedure WebAppPageModuleActivate(Sender: TObject);
+    procedure ApplicationAdapterGetActionParams(Sender, Action: TObject;
+      Params: TStrings);
+    procedure EndUserSessionAdapterBeforeExecuteAction(Sender, Action: TObject;
+      Params: TStrings; var Handled: Boolean);
+    procedure ApplicationAdapterBeforeExecuteAction(Sender, Action: TObject;
+      Params: TStrings; var Handled: Boolean);
+    procedure EndUserSessionAdapterGetActionParams(Sender, Action: TObject;
+      Params: TStrings);
+    procedure WebAppComponentsBeforeDispatch(Sender: TObject;
+      Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
+    procedure WebDispatcher1BeforeDispatch(Sender: TObject;
+      Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
+    procedure WebDispatcher1Create(Sender: TObject);
+    procedure WebAppComponentsException(Sender: TObject; E: Exception;
+      var Handled: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+  function Main: TMain;
+
+implementation
+
+{$R *.dfm}  {*.wml}
+
+uses WebReq, WebCntxt, WebFact, Variants,loginModule;
+
+function Main: TMain;
+begin
+  Result := TMain(WebContext.FindModuleClass(TMain));
+end;
+
+
+
+procedure TMain.AdapterDispatcherActionRequestNotHandled(Sender,
+  Action: TObject; Params: TStrings; var Handled: Boolean);
+var
+  id : string;
+begin
+  id := Params.Text;
+end;
+
+procedure TMain.AdapterDispatcherBeforeDispatchAction(Sender,
+  Action: TObject; Params: TStrings; var Handled: Boolean);
+var
+  id:string;
+begin
+  id :=  params.Text;
+end;
+
+procedure TMain.AdapterDispatcherGetAdapterRequestParams(Sender: TObject;
+  Handler: IInterface; var Identifer: string; Params: TStrings);
+var
+  id : string;
+begin
+  id := Params.Text;
+end;
+
+procedure TMain.ApplicationAdapterBeforeExecuteAction(Sender,
+  Action: TObject; Params: TStrings; var Handled: Boolean);
+var
+  id : string;
+begin
+  id := Params.Text;
+end;
+
+procedure TMain.ApplicationAdapterGetActionParams(Sender, Action: TObject;
+  Params: TStrings);
+var
+  id : string;
+begin
+  id := Params.Text;
+end;
+
+procedure TMain.EndUserSessionAdapterBeforeExecuteAction(Sender,
+  Action: TObject; Params: TStrings; var Handled: Boolean);
+var
+  id : string;
+begin
+  id := Params.Text;
+end;
+
+procedure TMain.EndUserSessionAdapterGetActionParams(Sender,
+  Action: TObject; Params: TStrings);
+var
+  id : string;
+begin
+  id := Params.Text;
+end;
+
+procedure TMain.PageProducerHTMLTag(Sender: TObject; Tag: TTag;
+  const TagString: string; TagParams: TStrings; var ReplaceText: string);
+begin
+//  if TagString='onlyForTest' then
+//    ReplaceText := GetCurrentPath
+//  else
+  if TagString=TConfig.SYS_MSG then
+  begin
+    ReplaceText := Session.Values[TConfig.SYS_MSG];
+    Session.Values[TConfig.SYS_MSG] := '';
+  end
+  else
+  if tagString='info' then
+  begin
+    if TagParams.Values['card']=Request.QueryFields.Values['card'] then
+        ReplaceText:=GetInfo(Request);
+  end
+  else
+    ReplaceText:=GetInfo(Request);
+end;
+
+procedure TMain.SessionsServiceEndSession(ASender: TObject;
+  ASession: TAbstractWebSession; AReason: TEndSessionReason);
+var
+  currentPage,content:string;
+  serialObj:string;
+  obj:TIdPOP3;
+  hash:THashMap;
+  UName,PWD:string;
+  User:TUser;
+begin
+  UName := WebContext.Session.Values[TConfig.cUserName];
+  PWD := WebContext.Session.Values[TConfig.cPassword];
+  if UName<>'' then
+  begin
+    hash := GetPOP3List;
+    if hash.Values.First.GetObject<>nil then
+    begin
+      obj := hash.Values.First.Next as TIdPOP3;
+      if (obj.Username = UName) and (obj.Password = PWD) then
+      begin
+        obj.Disconnect;
+        obj.FreeOnRelease;
+        hash.Values.Remove(obj);
+      end
+      else
+        while hash.Values.First.HasNext do
+        begin
+          obj := hash.Values.First.Next as TIdPOP3;
+          if (obj.Username = UName) and (obj.Password = PWD) then
+          begin
+            obj.Disconnect;
+            obj.FreeOnRelease;
+            hash.Values.Remove(obj);
+            break;
+          end;
+        end;
+    end;
+  end;
+end;
+
+procedure TMain.SessionsServiceStartSession(ASender: TObject;
+  ASession: TAbstractWebSession);
+var
+  id:string;
+begin
+  id := ASession.SessionID;
+end;
+
+procedure TMain.WebAppComponentsBeforeDispatch(Sender: TObject;
+  Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
+var
+  id:string;
+begin
+  id := Session.SessionID;
+end;
+
+procedure TMain.WebAppComponentsException(Sender: TObject; E: Exception;
+  var Handled: Boolean);
+begin
+  Response.ContentType := 'text/vnd.wap.wml';
+  Handled := true;
+  //RedirectToPageName('login',nil,Response,[dpPublished]);
+  Response.SendRedirect(Request.InternalScriptName+'/login');
+end;
+
+procedure TMain.WebAppPageModuleActivate(Sender: TObject);
+var
+  id:string;
+begin
+
+  id:=Session.Values['WebBrokerSessionID'];
+  id := Request.QueryFields.Values['ms'];
+  if id<>'' then
+  begin  
+    Request.CookieFields.Add('WebBrokerSessionID='+Request.QueryFields.Values['ms']);
+    Request.CookieFields.Values['WebBrokerSessionID']:=id;
+    if (Request.Cookie = 'WebBrokerSessionID=') or (Request.Cookie = '') then
+    begin
+      Request.CookieFields.Text := 'WebBrokerSessionID='+Request.QueryFields.Values['ms']+#13#10;  //MS:MailSession
+    end;
+  end;
+  id := Request.Query;
+end;
+
+procedure TMain.WebAppPageModuleBeforeDispatchPage(Sender: TObject;
+  const PageName: string; var Handled: Boolean);
+begin
+  Response.ContentType := 'text/vnd.wap.wml';
+//  if Session.Values[TConfig.SYS_MSG]<>'' then
+//  this.PageProducer.HTMLDoc.LoadFromFile();
+end;
+
+procedure TMain.WebDispatcher1BeforeDispatch(Sender: TObject;
+  Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
+var
+  id:string;
+begin
+  id := Request.Cookie;
+end;
+
+procedure TMain.WebDispatcher1Create(Sender: TObject);
+var
+  id:string;
+begin
+  id := Request.Cookie;
+end;
+
+initialization
+  if WebRequestHandler <> nil then
+    WebRequestHandler.AddWebModuleFactory(TWebAppPageModuleFactory.Create(TMain, TWebPageInfo.Create([wpPublished {, wpLoginRequired}], '.wml'), caCache)
+
+);
+
+end.
+

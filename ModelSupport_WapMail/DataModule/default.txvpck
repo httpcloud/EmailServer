@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="78ybkwmy9xrz0d4tt_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="delphi:e_class:src:WapMail:DataModule.TWebDataModuleShare">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,281,355" />
+      <reference referencedUin="delphi:e_field:src:WapMail:DataModule.TWebDataModuleShare.ADOConnection1" />
+      <reference referencedUin="delphi:e_field:src:WapMail:DataModule.TWebDataModuleShare.ADOQuery1" />
+      <reference referencedUin="delphi:e_field:src:WapMail:DataModule.TWebDataModuleShare.ADOCommand1" />
+      <reference referencedUin="delphi:e_field:src:WapMail:DataModule.TWebDataModuleShare.ScriptObject" />
+      <reference referencedUin="delphi:e_field:src:WapMail:DataModule.TWebDataModuleShare.VirtualTable1" />
+      <reference referencedUin="delphi:e_field:src:WapMail:DataModule.TWebDataModuleShare.XMLSchemaCache261" />
+      <reference referencedUin="delphi:e_field:src:WapMail:DataModule.TWebDataModuleShare.JvgXMLSerializer1" />
+      <reference referencedUin="delphi:e_field:src:WapMail:DataModule.TWebDataModuleShare.DISQLite3Database1" />
+      <reference referencedUin="delphi:e_method:src:WapMail:DataModule.TWebDataModuleShare.WebDataModuleDestroy(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:DataModule.TWebDataModuleShare.WebDataModuleCreate(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:DataModule.TWebDataModuleShare.registerUser(System.string,System.string)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:DataModule.TWebDataModuleShare.login(System.string,System.string,ref@config.TUser)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:DataModule.TWebDataModuleShare.login(System.Integer,System.string,ref@config.TUser)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:DataModule.TWebDataModuleShare.addMailBox(System.Integer,config.TMailConfig)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:DataModule.TWebDataModuleShare.LoginMailServer(config.TUser,config.TMailConfig,System.Boolean)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:DataModule.TWebDataModuleShare.ReadGuestMailServerConfig(System.string,ref@config.TMailConfig)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:DataModule.TWebDataModuleShare.UpdateGuestMailServerConfig(System.string,ref@config.TMailConfig)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:DataModule.TWebDataModuleShare.InsertGuestMailServerConfig(System.string,config.TMailConfig)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:DataModule.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="delphi:e_method:src:WapMail:DataModule.@unitclass.WebDataModuleShare()" />
+    </reference>
+  </view>
+</nodeSet>

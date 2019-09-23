@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" ?>
+<configuration>
+  <appSettings>
+    <add key="domainName" value="Domain"/>
+  </appSettings>
+  <connectionStrings>
+    <add name="sqlConnStr" connectionString="Data Source=oracleerp;Initial Catalog=TimeSys;Persist Security Info=True;User ID=sa;MultipleActiveResultSets=False;Packet Size=4096;Application Name=&quot;Microsoft SQL Server Management Studio&quot;" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+  <connectionStrings configProtectionProvider="RsaProtectedConfigurationProvider">
+    <EncryptedData Type="http://www.w3.org/2001/04/xmlenc#Element" xmlns="http://www.w3.org/2001/04/xmlenc#">
+      <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
+      <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <EncryptedKey xmlns="http://www.w3.org/2001/04/xmlenc#">
+          <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5" />
+          <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+            <KeyName>Rsa Key</KeyName>
+          </KeyInfo>
+          <CipherData>
+            <CipherValue>cWGmnGew5r0acQ2att4wW63nO9rdYOoTWKW57z2PoMy8FiGo5Lg3BxOPWDQTjRvqwKQmR40ikg78UPXegBHsxL6aTU4EME6q9/1mDePKNxJtbH3NQ5AIn2QjfnRy9SQIZtAs4q/Ks+Y4mqIPCg/2u7ubTHhFlrBApPJeS7H2hsg=</CipherValue>
+          </CipherData>
+        </EncryptedKey>
+      </KeyInfo>
+      <CipherData>
+        <CipherValue>FD/dSdI35arwoD68Jw1IJpVDx01nYmVZZ5pBiTVzhdU=</CipherValue>
+      </CipherData>
+    </EncryptedData>
+  </connectionStrings>
+  <system.web>
+    <!-- 
+            Set compilation debug="true" to insert debugging 
+            symbols into the compiled page. Because this 
+            affects performance, set this value to true only 
+            during development.
+    -->
+    <compilation debug="true">
+      <assemblies>
+        <add assembly="System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/>
+        <add assembly="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+      </assemblies>
+    </compilation>
+    <!--
+            The <authentication> section enables configuration 
+            of the security authentication mode used by 
+            ASP.NET to identify an incoming user. 
+    -->
+    <authentication mode="Windows"/>
+        <!--
+            The <customErrors> section enables configuration 
+            of what to do if/when an unhandled error occurs 
+            during the execution of a request. Specifically, 
+            it enables developers to configure html error pages 
+            to be displayed in place of a error stack trace.
+
+        <customErrors mode="RemoteOnly" defaultRedirect="GenericErrorPage.htm">
+            <error statusCode="403" redirect="NoAccess.htm" />
+            <error statusCode="404" redirect="FileNotFound.htm" />
+        </customErrors>
+        -->
+    <customErrors mode="RemoteOnly" defaultRedirect="SysError.htm"/>
+    <sessionState timeout="15"/>
+  </system.web>
+</configuration>

@@ -1,0 +1,112 @@
+Received: from mail-gx0-f56.google.com (unknown [209.85.217.56])
+	by mx30 (Coremail) with SMTP id 3dGowKDbnANZsNFI0wUACQ--.62828S2;
+	Thu, 18 Sep 2008 09:35:23 +0800 (CST)
+Received: by gxk16 with SMTP id 16so33258394gxk.3
+        for <helpus@163.com>; Wed, 17 Sep 2008 18:35:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlegroups.com; s=beta;
+        h=domainkey-signature:received:received:x-sender:x-apparently-to
+         :mime-version:content-type:content-transfer-encoding:received:date
+         :in-reply-to:x-ip:references:user-agent:x-http-useragent:message-id
+         :subject:from:to:reply-to:sender:precedence:x-google-loop
+         :mailing-list:list-id:list-post:list-help:list-unsubscribe
+         :x-beenthere-env:x-beenthere;
+        bh=DC0sgh8kTIFgKTa7fQct/P4DREVHT2G0gqElRwRFGUc=;
+        b=hR9g8BsqJFcsWEn68fT6RMB/VbqTIAtN1fvv7UzLqDxmFVqI6aT3CF6HnkOF7hqQdD
+         jsAdz4BNASdG0XW5z0ezwPFBMaPPTdnNlZd/2xhpmr7rCZID18dYl2pTTTzjO9iP6ifu
+         pOQ4Jeo/n4SAHKVf9muWhzGRVwM5trhaRaepI=
+DomainKey-Signature: a=rsa-sha1; c=nofws;
+        d=googlegroups.com; s=beta;
+        h=x-sender:x-apparently-to:mime-version:content-type
+         :content-transfer-encoding:date:in-reply-to:x-ip:references
+         :user-agent:x-http-useragent:message-id:subject:from:to:reply-to
+         :sender:precedence:x-google-loop:mailing-list:list-id:list-post
+         :list-help:list-unsubscribe:x-beenthere-env:x-beenthere;
+        b=pLQrHKBNAW+3QQMQYEa6yFeCbH/Bedrg7OvD9C68Db7m2j/PjFGzEyxDm6QWJaMSoX
+         LFEvCeAlwz0J3RZCUrgfWwdpx09UoPq89Tdg2+K+9arNUj8GctOWi6x6aSAUNnYh1Akw
+         T0NsoWE1n4JP6A+YY98SnCYNaJnKm5LctY/nk=
+Received: by 10.114.27.19 with SMTP id a19mr88420waa.8.1221701718089;
+        Wed, 17 Sep 2008 18:35:18 -0700 (PDT)
+Received: by 10.106.144.6 with SMTP id r6gr5461prd.0;
+	Wed, 17 Sep 2008 18:35:10 -0700 (PDT)
+X-Sender: sunhuino1@gmail.com
+X-Apparently-To: dev4server@googlegroups.com
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="GB2312"
+Content-Transfer-Encoding: base64
+Received: by 10.150.49.2 with SMTP id w2mr5791ybw.21.1221701710209; Wed, 17  Sep 2008 18:35:10 -0700 (PDT)
+Date: Thu, 18 Sep 2008 09:35:10 +0800
+In-Reply-To: <3c33e129-feb1-4d53-b919-c167637c4df5@a3g2000prm.googlegroups.com>
+X-IP: 61.172.241.100
+References:
+ <bba843a4-10b6-41f5-b082-b00f9b1632d5@v39g2000pro.googlegroups.com>
+ <48c66851-6c15-43cd-a245-8432f9d9adbf@w24g2000prd.googlegroups.com>
+ <461683ab0809010631h7654ec87wec5534bfebe2593f@mail.gmail.com>
+ <461683ab0809010643o13a7fdd1kec6229beb67bb61b@mail.gmail.com>
+ <dd1f02da-cfb2-4506-9850-b0e6e29e5615@x16g2000prn.googlegroups.com>
+ <21e4c6c0-53cb-4320-acbf-f6bea3e19a77@w39g2000prb.googlegroups.com>
+ <9ee09001-9c60-4f79-9669-d0031f8bb190@i24g2000prf.googlegroups.com>
+ <71c762aa-45c9-4d02-8385-e136ea5a1197@l33g2000pri.googlegroups.com>
+ <bbdeed0c-73ad-4951-9f87-a250f2120e1d@s20g2000prd.googlegroups.com>
+ <caf2c96a-b657-4ff1-9cd8-4f7bedde2503@l33g2000pri.googlegroups.com>
+ <c65a3813-4003-4508-a12c-53762fe4f4eb@b2g2000prf.googlegroups.com>
+ <2376035d-0252-4cf4-9ba8-b6c35f91f77c@v16g2000prc.googlegroups.com>
+User-Agent: G2/1.0
+X-HTTP-UserAgent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET  CLR 2.0.50727; MS-RTC LM 8),gzip(gfe),gzip(gfe)
+Message-ID: <3c33e129-feb1-4d53-b919-c167637c4df5@a3g2000prm.googlegroups.com>
+Subject: Re: 请教一下 所谓的 单区4w 人 是多台服务器 还是1台服务器
+From: "sunway" <sunhuino1@gmail.com>
+To: 高性能网络编程邮件列表 <dev4server@googlegroups.com>
+Reply-To: dev4server@googlegroups.com
+Sender: dev4server@googlegroups.com
+Precedence: bulk
+X-Google-Loop: groups
+Mailing-List: list dev4server@googlegroups.com;
+	contact dev4server+owner@googlegroups.com
+List-Id: <dev4server.googlegroups.com>
+List-Post: <mailto:dev4server@googlegroups.com>
+List-Help: <mailto:dev4server+help@googlegroups.com>
+List-Unsubscribe: <http://googlegroups.com/group/dev4server/subscribe>,
+	<mailto:dev4server+unsubscribe@googlegroups.com>
+X-BeenThere-Env: dev4server@googlegroups.com
+X-BeenThere: dev4server@googlegroups.com
+X-Coremail-Antispam: 1Uf129KBjvJXoW7Ww1rAFWxZw1xXr4kZF4UCFg_yoW8Gry3pr
+	4fC3W7Kr1kJa18trs0qrZ8XFyjgr17Gw4fXa4kZw1Fkw4qyFZ8Xr4vqw40gFWUAry7C3y5
+	XryUWa13uw1jyrUanT9S1TB71UUUU1Dv73VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UU
+	Ueu7k0a2IF6r1UM7kC6x804xWl1I0E4x80FVCIwcAKzIAtM7C26IkvcIIF6IxKo4kEV4yl
+	n4kS14v26r1q6r43M2kK64x0aVW7GwIE548m6rI_Jw1UWr17M2vj6xkI62vS6c8GOVWUtr
+	1rJFylnx0EI4vFI7vF1xkvb2IE548m6r1fGr15AwAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
+	Yx0E74AGY7Cv6cx26r45McIj6xIIjxv20xvE14v26Fy26r45twAv7VCY1x0262k0Y48FwI
+	0_Jr0_Gr1lYx0Ex4A2jsIE14v26F4UJVW0owACY4xI67k04243AVAKzVAKj4xxM4xvF2IE
+	b7IF0Fy26I8I3I1lFVAqjxCE84xlawCjxxvEa2IrMxkF7I0En4kS14v26r1q6r43MxkF7I
+	0Ew4C26cxK6c8Ij28IcwCY1Ik267vv6cIUMxkFs20EY4vE44CYbxCE4x80FwCY02Avz4vE
+	IxC_KwCY0x0Ix7I2Y4AK64vIr41l42xK82IY64kExVAvwVAq07x20xyl42xK82IY6x8Erc
+	xFaVAv8VW8ZwCF72vE77IF4wCFI7km07C267AKxVWUtVW8ZwCFI7vE84CIb48I67vvx24l
+	x4CE17CEb7AF67AKxVWUXVWUAwCE64xvF2IEb7IF0Fy7YxBIdaVFxhVjvjDU0xZFpf9x07
+	UtEf5UUUUU=
+
+zazS4qOsxLPIy821u7u4xcTuyse438rWo6y6x7rHoaMNCg0KT24gOdTCMTfI1Swgz8LO5zEwyrEy
+MrfWLCBmbHl3YXYgPHBwbXNuMi4uLkBnbWFpbC5jb20+IHdyb3RlOg0KPiBPbiA51MIxNMjVLCDJ
+z87nN8qxMzG31iwgeE1hbiA8TUVTU0FHRS4uLkAxNjMuY29tPiB3cm90ZToNCj4NCj4NCj4NCj4N
+Cj4NCj4gPiDE49aqtcC7pcGq0Me/1bXEt/7O8cb3v8nS1M2syrHOqrbgydnIy8zhualJbnRlcm5l
+dLf+zvE/DQo+DQo+ID4gxOPVvs7IwcssysfNrMqxNTYwMM3yyMshDQo+DQo+ID4gxOOyu9aqtcAs
+sqKyu7T6se2yu7Tm1NouDQo+DQo+ID4gxOPWqrXA1eK49s+1zbPKx9TayrLDtMqxuvLJ6LzGzbbI
+69TL06q1xMO0Pw0KPg0KPiA+INaqtcDL+7XEyei8xrmry77Kx8TEvNLDtD8NCj4NCj4gPiDE47K7
+yse7ubvu1NoxMDMwxOqwyT8NCj4NCj4gPiBPbiA51MIxM8jVLCDJz87nMTHKsTQ0t9YsIGZseXdh
+diA8cHBtc24yLi4uQGdtYWlsLmNvbT4gd3JvdGU6DQo+DQo+ID4gPiDL5rHj0rvMqFBDIHNvY2tl
+dNans9a1xLXHwry+zb/J0tSzrLn9sNnN8qOs1eLKx9PQu/mxvlNvY2tldLOjyra1xMjLtrzWqrXA
+tcShow0KPg0KPiA+ID4gLi4uLi4gxOO/qreiuf1zb2NrZXQgs8zQ8sLwo7+78tXfy7UgIMTj0rvH
+0Na7ysfU2llZILb40tGho8vkyLvP1tTau/rG99DUxNzHv76io6wxMDB3ID8gIMTjwLTX1DIwMzDE
+6qO/DQo+DQo+ID4gPiBPbiA51MIxM8jVLCDJz87nNsqxNDK31iwgeE1hbiA8TUVTU0FHRS4uLkAx
+NjMuY29tPiB3cm90ZToNCj4NCj4gPiA+ID4gy+ax49K7zKhQQyBzb2NrZXTWp7PWtcS1x8K8vs2/
+ydLUs6y5/bDZzfKjrNXiysfT0Lv5sb5Tb2NrZXSzo8q2tcTIy7a81qq1wLXEoaMNCj4NCj4gPiA+
+ID4gudi8/MrHxOPKtc/WwcvKssO00fm1xLrz0PjC37ytssXKx7nYvPyhoy0g0v6y2LG70v3Tw87E
+19YgLQ0KPg0KPiA+ID4gLSDP1Mq+0v3Tw7XEzsTX1iAtDQo+DQo+IMTjxNTX07G7x7m08rn9wcuw
+yaO/ILulwarQx7/Vvs3Su8yot/7O8cb3wvCjvw0KPiBnb29nbGUgu7m/ydLUzqrIq8fy0rvG8Lf+
+zvHE2KGjDQo+DQo+IL+0wcu688PmtcS2q873IL7NuPy809aqtcDE48rHuPbKssO0y67GvcHLoaMt
+INL+stixu9L908POxNfWIC0NCj4NCj4gLSDP1Mq+0v3Tw7XEzsTX1iAtDQotLX4tLX4tLS0tLS0t
+LS1+LS1+LS0tLX4tLS0tLS0tLS0tLS1+LS0tLS0tLX4tLX4tLS0tfg0KILjf0NTE3M34wuex4LPM
+DQogaHR0cDovL2dyb3Vwcy5nb29nbGUuY29tL2dyb3VwL2RldjRzZXJ2ZXINCi1+LS0tLS0tLS0t
+LX4tLS0tfi0tLS1+LS0tLX4tLS0tLS1+LS0tLX4tLS0tLS1+LS1+LS0tDQoNCg==
+.

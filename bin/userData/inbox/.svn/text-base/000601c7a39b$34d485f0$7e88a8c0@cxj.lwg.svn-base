@@ -1,0 +1,98 @@
+Received: from py-out-1314.google.com (unknown [64.233.166.175])
+	by mx27 (Coremail) with SMTP id wKjR6bDLT9ZD7l5GnS+4Dg==.46006S7;
+	Thu, 31 May 2007 23:49:21 +0800 (CST)
+Received: by py-out-1314.google.com with SMTP id u10so740636pyb
+        for <helpus@163.com>; Thu, 31 May 2007 08:49:18 -0700 (PDT)
+Received: by 10.35.8.13 with SMTP id l13mr1455293pyi.1180626552403;
+        Thu, 31 May 2007 08:49:12 -0700 (PDT)
+Received: by 10.44.88.4 with SMTP id l4gr3697hsb;
+	Thu, 31 May 2007 08:49:05 -0700 (PDT)
+X-Sender: cxj2000@gmail.com
+X-Apparently-To: dev4server@googlegroups.com
+Received: by 10.35.81.2 with SMTP id i2mr13500008pyl.1180626545134; Thu, 31 May 2007 08:49:05 -0700 (PDT)
+Received: from nz-out-0506.google.com (nz-out-0506.google.com [64.233.162.231]) by mx.google.com with ESMTP id a28si2915488pye.2007.05.31.08.49.05; Thu, 31 May 2007 08:49:05 -0700 (PDT)
+Received-SPF: pass (google.com: domain of cxj2000@gmail.com designates 64.233.162.231 as permitted sender)
+DomainKey-Status: good (test mode)
+Received: by nz-out-0506.google.com with SMTP id f1so182456nzc for <dev4server@googlegroups.com>; Thu, 31 May 2007 08:49:05 -0700 (PDT)
+DKIM-Signature: a=rsa-sha1; c=relaxed/relaxed; d=gmail.com; s=beta; h=domainkey-signature:received:received:message-id:from:to:references:subject:date:mime-version:content-type:content-transfer-encoding:x-priority:x-msmail-priority:x-mailer:x-mimeole; b=V5lyndyEaG6KVELmmr0QsOWIHgBQk7M0Yi7BDCYJhQRv8vxKsrpOeyXApLhEBtVrqPDJPhRUrXOiebOZaKdqu1eHTbwZZfPxqCLJiYmC7ZVkvQahmTTCxtxYlNxNOxwIungi+WVT0Q/Ae6F+a8XhZhlKTNWQTqMCTFTtxfO0yS4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=beta; h=received:message-id:from:to:references:subject:date:mime-version:content-type:content-transfer-encoding:x-priority:x-msmail-priority:x-mailer:x-mimeole; b=jmGXhCDB9Hb+89clP/px74D/t516be5Sl/BSDH3uue6oReXMeTIOXKMHqc8u3wYZz473ef3NRxWRzf8gzLp3QNOm47eAM/t60CfyUM78Gsu4aeWIE6P62/yt6cGx+2LRh0WWduiPt5ljTr40i88OyC5fQjUiZypCJFqoMk/vqfo=
+Received: by 10.114.193.1 with SMTP id q1mr756779waf.1180626543546; Thu, 31 May 2007 08:49:03 -0700 (PDT)
+Received: from cxj ( [61.183.126.46]) by mx.google.com with ESMTP id j6sm837957wah.2007.05.31.08.48.59; Thu, 31 May 2007 08:49:01 -0700 (PDT)
+Message-ID: <000601c7a39b$34d485f0$7e88a8c0@cxj>
+From: 曹小健 <cxj2000@gmail.com>
+To: dev4server@googlegroups.com
+References: <1179808864.211915.281240@z28g2000prd.googlegroups.com>
+ <dd55f9f30705212212t5e77dc83ib788c518265db6c0@mail.gmail.com>
+ <461683ab0705212235y3de1beb9lef54034ce8ec41fa@mail.gmail.com>
+ <7cab66f10705212304k1499ab5cn7c172663242c2646@mail.gmail.com>
+ <dd55f9f30705212316j620a89dg3625531f75150f27@mail.gmail.com>
+ <7cab66f10705212329y7db944c3i94491fa53d56cb3a@mail.gmail.com>
+ <461683ab0705212333t37f3c89ficaf699f87d6f0f8e@mail.gmail.com>
+ <7cab66f10705212348n2873b0c7o8135b4ebea1ef6b0@mail.gmail.com>
+ <20070522151015.GA5116@fwolf>
+ <7cab66f10705310629o495c2d70q622ea738561d386d@mail.gmail.com>
+ <daffae8f0705310738o63ad0da3v4e4adab172194a40@mail.gmail.com>
+Subject: Re: 在服务器开发中有没有必要建立自己的异常处理类
+Date: Thu, 31 May 2007 23:48:51 +0800
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="GB2312"
+Content-Transfer-Encoding: base64
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.3028
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3028
+Reply-To: dev4server@googlegroups.com
+Sender: dev4server@googlegroups.com
+Precedence: bulk
+X-Google-Loop: groups
+Mailing-List: list dev4server@googlegroups.com;
+	contact dev4server-owner@googlegroups.com
+List-Id: <dev4server.googlegroups.com>
+List-Post: <mailto:dev4server@googlegroups.com>
+List-Help: <mailto:dev4server-help@googlegroups.com>
+List-Unsubscribe: <http://googlegroups.com/group/dev4server/subscribe>,
+	<mailto:dev4server-unsubscribe@googlegroups.com>
+X-Coremail-Antispam: 1U3Yxn0WfASr-VFAUDIcSsGvfJTRUUUjTvF72vE77IF4wAaw2
+	AFwI0_JF0_Jw1l1I0E4x80FVCIwcAKzIAtMxAIw28IcVAKzI0EY4vE52x082I5MxAIw28I
+	cVCjz48v1sIEY20_GFylYx0E74AGY7Cv6cx26r45McIj6xkF7I0En7xvr7AKxVWUJVW8Jw
+	ACY4xI67k04243AVAKzVAKj4xxM2vYz4IE04k24VAvwVAKI4IrMVCEFcxC0VAYjxAxZF1l
+	x4CE17CEb7AF67AKxVWUJVWUXwACY4xI67k04243AVC20s07MxkFs20EbsIEYx1lc2IjII
+	80xcxEwVW3JVWfJwAFxVCaYxvI4VCIwcAKzIAtMxkF7I0Ew4C26cxK6c8Ij28IcwCY02Av
+	z4vEIxC_XrWl7I0Y6sxI4wAYFVCjjxCrMxkF7I0En4kS14v26r126r1DMc02F40EFcxC0V
+	AKzVAqx4xG6I80ewCY1Ik26cxK6xAEc7vF6xCjj44lb7Iv0xC_JF7anT9S1TB71UUUUjJa
+	7-sFnT9fnUUI43ZEXa7IUbPEf5UUUUUFnT9fnV15pF1ruw1xuw4UAw4xtr4Dury3AoXrpr
+	4xtFb_AFZ8JF17WrWSgr1UXr95Jw47C3yDJr1UKas0yrn7JrWkur43ZFZ5Krs8tF4DZry7
+	ZF47JF18tr1DCrs8tryqg
+In-Reply-To: <000601c7a39b$34d485f0$7e88a8c0@cxj>
+
+Ni50cnkgY2F0Y2jRubj5srvTsM/s0KfCyg0KztLKx9C0amF2YbXEo6xtYW9zaGnU2mphdmHA78Pm
+utzTsM/s0KfCyqOsy/nS1KOs1NpqYXZhtcR0cnnA78PmtPrC676hv8nE3MnZoaMNCg0KaHR0cDov
+L3d3dy5hbGxhYm91dHByb2dyYW0uY29tL2JiL3ZpZXd0b3BpYy5waHA/dD0yMDY5JnBvc3RkYXlz
+PTAmcG9zdG9yZGVyPWFzYyZzdGFydD0wDQoNCjMutffTw7bR1bvDu9PQu/LV38rHtPK1vW50ZGxs
+wO/IpcHLo6zEx8Lpt7PV5rXEwLTBy6Osv6rKvLfWxKO/6bzTdHJ5DQo+IGNhdGNoo6zWwcnZ0qrW
+qrXAysfEx7j2xKO/6bHEtcSwyaOsY2F0Y2i687zHwrzI1da+o6yzzNDyvs3Ny7P2y+PBy6Os1NrU
+y9DQ0tG+rcO709DS4tLlwcuho8i7uvPX0M+4t9bO9tXiuPbEo7/ptcTC37yto6y24LzTyNXWvqGj
+1eLR+bXEYnVnxNHW2M/Wo6zSu9bYz9a+zdKqw/yjrLy0yrnKx7X3ytTXtMyso6y199PDttHVu9Ky
+ysfDu9PQtcSjrL/etry/3rK7s/bAtA0KDQqyu9aqtcBkb3RuZXTA78Pmc29ja2V0LndyaXRlxdez
+9tLss6O7ucrHybajrLe01f3V4rj20uyzo9TaamF2YcDvw+bKx7K7xNzNy7P2s8zQ8rXEo6zSu7ao
+0qq0psDto6y6x7rHoaMNCg0KDQotLS0tLSBPcmlnaW5hbCBNZXNzYWdlIC0tLS0tIA0KRnJvbTog
+ImxpdSB3cCIgPGxpdS5saW51eEBnbWFpbC5jb20+DQpUbzogPGRldjRzZXJ2ZXJAZ29vZ2xlZ3Jv
+dXBzLmNvbT4NClNlbnQ6IFRodXJzZGF5LCBNYXkgMzEsIDIwMDcgMTA6MzggUE0NClN1YmplY3Q6
+IFJlOiDU2rf+zvHG97+qt6LW0NPQw7vT0LHY0qq9qMGi19S8urXE0uyzo7SmwO3A4A0KDQoNCj4g
+ttTT2s34wufTzs+3t/7O8cb3o7oNCj4gMS6yu7jDs/bP1rXEwt+8rbP2z9bBy6OsvMfI1da+DQo+
+IDIus8zQ8rHAwKO1xMrCx+mz9s/WwcujrLj5vt1wZGLOxLz+us21scqxY3B1vMS05sb30MXPoqOs
+yuSz9rP2tffTw7bR1bujrL/J0tS2qM67tb3Ex9DQtPrC66Os1eK49rrc1OfT0Lj2zqLI7bXEyMvQ
+tMHLuPbA4LD8uqy9+GRsbLvy1d9leGW+zdDQwcsNCj4gMy6199PDttHVu8O709C78tXfyse08rW9
+bnRkbGzA78ilwcujrMTHwum3s9XmtcTAtMHLo6y/qsq8t9bEo7/pvNN0cnkNCj4gY2F0Y2ijrNbB
+ydnSqtaqtcDKx8THuPbEo7/pscS1xLDJo6xjYXRjaLrzvMfCvMjV1r6jrLPM0PK+zc3Ls/bL48HL
+o6zU2tTL0NDS0b6tw7vT0NLi0uXBy6GjyLu689fQz7i31s721eK49sSjv+m1xMLfvK2jrLbgvNPI
+1da+oaPV4tH5tcRidWfE0dbYz9ajrNK71tjP1r7N0qrD/KOsvLTKucrHtffK1Ne0zKyjrLX308O2
+0dW70rLKx8O709C1xKOsv962vL/esruz9sC0DQo+IDQuyv2+3b/istnX98Sjv+mjrNfuzeKy43Ry
+eSBjYXRjaKOs1rvSqrP2wcu07aOstbHKsdKq1rTQ0LXEc3Fs0+++5LzHyNXWvg0KPiA1Lsbky/vH
+6b/2o6zKtdTaw7vT0NKqdHJ5IGNhdGNotcTA7dPJDQo+IDYudHJ5IGNhdGNo0bm4+bK707DP7NCn
+wsoNCj4gNy7Du7HY0qq448qyw7S4tNTTtcTS7LOj0ruy47Ljxde1xMrCx+mjrM7SvvW1w9XiuPbK
+wsfpu+HIw8jLs9nU57vht+i19A0KPiANCj4gPiANCj4NCi0tfi0tfi0tLS0tLS0tLX4tLX4tLS0t
+fi0tLS0tLS0tLS0tLX4tLS0tLS0tfi0tfi0tLS1+DQoguN/Q1MTczfjC57Hgs8wNCiBodHRwOi8v
+Z3JvdXBzLmdvb2dsZS5jb20vZ3JvdXAvZGV2NHNlcnZlcg0KLX4tLS0tLS0tLS0tfi0tLS1+LS0t
+LX4tLS0tfi0tLS0tLX4tLS0tfi0tLS0tLX4tLX4tLS0NCg0K
+.

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="list" title="<#title>" newcontext="false">
+<#mailList>
+<!-- #include file="return.wml" -->
+</card>
+</wml>

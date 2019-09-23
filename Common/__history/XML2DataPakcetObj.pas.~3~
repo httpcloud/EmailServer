@@ -1,0 +1,14 @@
+unit XML2DataPakcetObj;
+
+interface
+
+uses ObjAuto;
+
+implementation
+
+function XML2DataPacketObject(XML:String):TObject;
+begin
+  Result := nil;
+end;
+
+end.

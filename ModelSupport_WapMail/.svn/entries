@@ -1,0 +1,153 @@
+9
+
+dir
+2
+svn://192.168.0.100/WAPMail/trunk/ModelSupport_MoFunWapMail
+svn://192.168.0.100/WAPMail
+
+
+
+2009-02-16T17:02:16.684700Z
+2
+lwgboy
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+34cebb9b-13f7-f04d-ae18-db28b624088a
+
+DataModule
+dir
+
+outBox
+dir
+
+actionModule
+dir
+
+Main
+dir
+
+send
+dir
+
+write
+dir
+
+IdSASLCollection
+dir
+
+IdAuthenticationSSPI
+dir
+
+default.txaPackage
+file
+
+
+
+
+2009-02-16T17:13:32.541700Z
+946def8c92ce491a4023fc219dafa8c4
+2009-02-16T17:02:16.684700Z
+2
+lwgboy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+65
+
+sendMail
+dir
+
+MoFunWapMail
+dir
+
+detail
+dir
+
+addNewMailBoxForGuestModule
+dir
+
+config
+dir
+
+login
+dir
+
+detailModule
+dir
+
+default_diagram.tvsconfig
+file
+
+
+
+
+2009-02-16T17:13:32.544700Z
+b1ad270a074a7a5c220a75700032c0f5
+2009-02-16T17:02:16.684700Z
+2
+lwgboy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+72
+
+IdSASLNTLM
+dir
+
+WebSnapScriptObject
+dir
+
+readTxt
+dir
+
+loginModule
+dir
+

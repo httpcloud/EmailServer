@@ -1,0 +1,180 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{4fa9cb57-abd8-49af-956c-3bf64ad9f038}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="MoFunWapMail.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="XXTEA_TEST\XXTEA_DLL.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Test\MoFunWapMailTests.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="XXTEA_TEST\XXTEA_DLL_TEST\XXTEA_DLL_TEST.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Snapse.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="M:\Delphi\VCL\Delphi Fundamentals\fndInt325\fndInt325\Examples\POP3 Client\pPOP3Client.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="M:\Delphi\VCL\dcpdemos\Demos\FileHash\FileHash.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="M:\Delphi\加解密\CodeTEA\CodeTEA\TestTEA.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="M:\Delphi\加解密\dcpcrypt2\DCPdelphi6.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="L:\WapMail\乱码处理\FilterChar2.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="SSL\Project1.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="G:\Data\query_for_delphi2009\WapQuery.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="ScriptObject\ScriptObjectForWebSnap.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="MoFunWapMail">
+			<MSBuild Projects="MoFunWapMail.dproj"/>
+		</Target>
+		<Target Name="MoFunWapMail:Clean">
+			<MSBuild Targets="Clean" Projects="MoFunWapMail.dproj"/>
+		</Target>
+		<Target Name="MoFunWapMail:Make">
+			<MSBuild Targets="Make" Projects="MoFunWapMail.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL">
+			<MSBuild Projects="XXTEA_TEST\XXTEA_DLL.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL:Clean">
+			<MSBuild Targets="Clean" Projects="XXTEA_TEST\XXTEA_DLL.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL:Make">
+			<MSBuild Targets="Make" Projects="XXTEA_TEST\XXTEA_DLL.dproj"/>
+		</Target>
+		<Target Name="MoFunWapMailTests">
+			<MSBuild Projects="Test\MoFunWapMailTests.dproj"/>
+		</Target>
+		<Target Name="MoFunWapMailTests:Clean">
+			<MSBuild Targets="Clean" Projects="Test\MoFunWapMailTests.dproj"/>
+		</Target>
+		<Target Name="MoFunWapMailTests:Make">
+			<MSBuild Targets="Make" Projects="Test\MoFunWapMailTests.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL_TEST">
+			<MSBuild Projects="XXTEA_TEST\XXTEA_DLL_TEST\XXTEA_DLL_TEST.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL_TEST:Clean">
+			<MSBuild Targets="Clean" Projects="XXTEA_TEST\XXTEA_DLL_TEST\XXTEA_DLL_TEST.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL_TEST:Make">
+			<MSBuild Targets="Make" Projects="XXTEA_TEST\XXTEA_DLL_TEST\XXTEA_DLL_TEST.dproj"/>
+		</Target>
+		<Target Name="Snapse">
+			<MSBuild Projects="Snapse.dproj"/>
+		</Target>
+		<Target Name="Snapse:Clean">
+			<MSBuild Targets="Clean" Projects="Snapse.dproj"/>
+		</Target>
+		<Target Name="Snapse:Make">
+			<MSBuild Targets="Make" Projects="Snapse.dproj"/>
+		</Target>
+		<Target Name="pPOP3Client">
+			<MSBuild Projects="M:\Delphi\VCL\Delphi Fundamentals\fndInt325\fndInt325\Examples\POP3 Client\pPOP3Client.dproj"/>
+		</Target>
+		<Target Name="pPOP3Client:Clean">
+			<MSBuild Targets="Clean" Projects="M:\Delphi\VCL\Delphi Fundamentals\fndInt325\fndInt325\Examples\POP3 Client\pPOP3Client.dproj"/>
+		</Target>
+		<Target Name="pPOP3Client:Make">
+			<MSBuild Targets="Make" Projects="M:\Delphi\VCL\Delphi Fundamentals\fndInt325\fndInt325\Examples\POP3 Client\pPOP3Client.dproj"/>
+		</Target>
+		<Target Name="FileHash">
+			<MSBuild Projects="M:\Delphi\VCL\dcpdemos\Demos\FileHash\FileHash.dproj"/>
+		</Target>
+		<Target Name="FileHash:Clean">
+			<MSBuild Targets="Clean" Projects="M:\Delphi\VCL\dcpdemos\Demos\FileHash\FileHash.dproj"/>
+		</Target>
+		<Target Name="FileHash:Make">
+			<MSBuild Targets="Make" Projects="M:\Delphi\VCL\dcpdemos\Demos\FileHash\FileHash.dproj"/>
+		</Target>
+		<Target Name="TestTEA">
+			<MSBuild Projects="M:\Delphi\加解密\CodeTEA\CodeTEA\TestTEA.dproj"/>
+		</Target>
+		<Target Name="TestTEA:Clean">
+			<MSBuild Targets="Clean" Projects="M:\Delphi\加解密\CodeTEA\CodeTEA\TestTEA.dproj"/>
+		</Target>
+		<Target Name="TestTEA:Make">
+			<MSBuild Targets="Make" Projects="M:\Delphi\加解密\CodeTEA\CodeTEA\TestTEA.dproj"/>
+		</Target>
+		<Target Name="DCPdelphi6">
+			<MSBuild Projects="M:\Delphi\加解密\dcpcrypt2\DCPdelphi6.dproj"/>
+		</Target>
+		<Target Name="DCPdelphi6:Clean">
+			<MSBuild Targets="Clean" Projects="M:\Delphi\加解密\dcpcrypt2\DCPdelphi6.dproj"/>
+		</Target>
+		<Target Name="DCPdelphi6:Make">
+			<MSBuild Targets="Make" Projects="M:\Delphi\加解密\dcpcrypt2\DCPdelphi6.dproj"/>
+		</Target>
+		<Target Name="FilterChar2">
+			<MSBuild Projects="L:\WapMail\乱码处理\FilterChar2.dproj"/>
+		</Target>
+		<Target Name="FilterChar2:Clean">
+			<MSBuild Targets="Clean" Projects="L:\WapMail\乱码处理\FilterChar2.dproj"/>
+		</Target>
+		<Target Name="FilterChar2:Make">
+			<MSBuild Targets="Make" Projects="L:\WapMail\乱码处理\FilterChar2.dproj"/>
+		</Target>
+		<Target Name="Project1">
+			<MSBuild Projects="SSL\Project1.dproj"/>
+		</Target>
+		<Target Name="Project1:Clean">
+			<MSBuild Targets="Clean" Projects="SSL\Project1.dproj"/>
+		</Target>
+		<Target Name="Project1:Make">
+			<MSBuild Targets="Make" Projects="SSL\Project1.dproj"/>
+		</Target>
+		<Target Name="WapQuery">
+			<MSBuild Projects="G:\Data\query_for_delphi2009\WapQuery.dproj"/>
+		</Target>
+		<Target Name="WapQuery:Clean">
+			<MSBuild Targets="Clean" Projects="G:\Data\query_for_delphi2009\WapQuery.dproj"/>
+		</Target>
+		<Target Name="WapQuery:Make">
+			<MSBuild Targets="Make" Projects="G:\Data\query_for_delphi2009\WapQuery.dproj"/>
+		</Target>
+		<Target Name="ScriptObjectForWebSnap">
+			<MSBuild Projects="ScriptObject\ScriptObjectForWebSnap.dproj"/>
+		</Target>
+		<Target Name="ScriptObjectForWebSnap:Clean">
+			<MSBuild Targets="Clean" Projects="ScriptObject\ScriptObjectForWebSnap.dproj"/>
+		</Target>
+		<Target Name="ScriptObjectForWebSnap:Make">
+			<MSBuild Targets="Make" Projects="ScriptObject\ScriptObjectForWebSnap.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="MoFunWapMail;XXTEA_DLL;MoFunWapMailTests;XXTEA_DLL_TEST;Snapse;pPOP3Client;FileHash;TestTEA;DCPdelphi6;FilterChar2;Project1;WapQuery;ScriptObjectForWebSnap"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="MoFunWapMail:Clean;XXTEA_DLL:Clean;MoFunWapMailTests:Clean;XXTEA_DLL_TEST:Clean;Snapse:Clean;pPOP3Client:Clean;FileHash:Clean;TestTEA:Clean;DCPdelphi6:Clean;FilterChar2:Clean;Project1:Clean;WapQuery:Clean;ScriptObjectForWebSnap:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="MoFunWapMail:Make;XXTEA_DLL:Make;MoFunWapMailTests:Make;XXTEA_DLL_TEST:Make;Snapse:Make;pPOP3Client:Make;FileHash:Make;TestTEA:Make;DCPdelphi6:Make;FilterChar2:Make;Project1:Make;WapQuery:Make;ScriptObjectForWebSnap:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

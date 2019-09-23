@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <node uin="hn8yfqccn5gjpy33t_n">
+    <property name="$metaclass" value="Note" />
+    <property name="$name" value="Note_CreatePredigest" />
+    <property name="$note_text" value="通过EMail 和 对应密码创建一个&#xD;&#xA;最简单的MailBoxConfigRecord&#xD;&#xA;&#xD;&#xA;" />
+    <property name="@url" value="element://model:project::SQLite3_Demo/delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_CitiesDB.TMailBoxConfigRec.CreatePredigest(System.string,System.string)" />
+    <property name="@url" value="element://model:project::SQLite3_Demo/delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.CreatePredigest(System.string,System.string)" />
+  </node>
+</nodeSet>

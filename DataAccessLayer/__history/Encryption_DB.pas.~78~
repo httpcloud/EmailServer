@@ -1,0 +1,1130 @@
+unit Encryption_DB;
+
+interface
+
+uses
+  DISQLite3Cache, DISQLite3Database, SysUtils, StrUtils, IdStrings, IdGlobal,
+  RTTI, TypInfo, ObjAuto, windows,
+  Generics.Collections, Dialogs, Domain.UserMailInBox, Classes;
+
+type
+  { Record to store information about a city. }
+  TCityRec = record
+    City: WideString;
+    Country: WideString;
+    Population: Integer;
+  end;
+
+  PCityRec = ^TCityRec;
+
+  TMailBoxConfigRec = class
+    MailDomain: WideString;
+    SMTPServer: WideString;
+    POP3Server: WideString;
+    // SMTPPort: Integer;
+    // POP3Port: Integer;
+    SMTPSSL: boolean;
+    POP3SSL: boolean;
+    // SMTPSSLPort: Integer;
+    // POP3SSLPort: Integer;
+    POP3UserName: WideString;
+    POP3Password: WideString;
+    SMTPUserName: WideString;
+    SMTPPassword: WideString;
+    UpdateMail: WideString;
+    SaveToOutMailBox:integer;  //是否将发送邮件保存到发件箱：1保存，0不包存
+    PhoneNum : AnsiString;     //手机号
+    UpdaeTime: TDateTime;
+  public
+    procedure InitializeProcess;
+    /// <url>element://model:project::SQLite3_Demo/design:node:::hn8yfqccn5gjpy33t_n</url>
+    /// <property1>dddd</property1>
+    constructor CreatePredigest(const EMail: String; const Password: String);
+  strict private
+    FPOP3Port: Integer;
+    function GetPOP3Port: Integer;
+    procedure SetPOP3Port(val: Integer);
+  public
+    property POP3Port: Integer read GetPOP3Port write SetPOP3Port default 0;
+  strict private
+    FSMTPPort: Integer;
+    function GetSMTPPort: Integer;
+    procedure SetSMTPPort(val: Integer);
+  public
+    property SMTPPort: Integer read GetSMTPPort write SetSMTPPort default 0;
+  strict private
+    FPOP3SSLPort: Integer;
+    function GetPOP3SSLPort: Integer;
+    procedure SetPOP3SSLPort(val: Integer);
+  public
+    property POP3SSLPort : Integer read GetPOP3SSLPort write SetPOP3SSLPort default 0;
+  strict private
+    FSMTPSSLPort: Integer;
+    function GetSMTPSSLPort: Integer;
+    procedure SetSMTPSSLPort(val: Integer);
+  public
+    property SMTPSSLPort : Integer read GetSMTPSSLPort write SetSMTPSSLPort default 0;
+
+  end;
+
+  PMailBoxConfigRec = ^TMailBoxConfigRec;
+
+  TKeyValue = class
+    Key: string;
+    Value: TValue;
+  public
+    constructor Create(theKey: String; theValue: TValue);
+
+  end;
+
+
+  // ------------------------------------------------------------------------------
+  // TCitiesCache class
+  // ------------------------------------------------------------------------------
+
+  { Cache for TCityRec (above), used by TCitiesDatabase (below). }
+  TCitiesCache = class(TDIAbstractSQLite3Cache)
+    procedure DoInitializeItem(const AItem: Pointer); override;
+    procedure DoFinalizeItem(const AItem: Pointer); override;
+  end;
+
+  // ------------------------------------------------------------------------------
+  // TCitiesDatabase
+  // ------------------------------------------------------------------------------
+
+  { Simple extension to TDISQLite3Database which automates buffered access to
+    the Cities table. }
+  TCitiesDatabase = class(TDISQLite3Database)
+  private
+    FCitiesCache: TCitiesCache;
+  protected
+    procedure DoAfterConnect; override;
+    procedure DoAfterCreateDatabase; override;
+    procedure DoBeforeDisconnect; override;
+  public
+    function AddCity(const ACity, ACountry: WideString; const APopulation: Integer): Int64;
+
+    procedure AddRandomCities(ACount: Integer);
+    function AddRandomCity: Int64;
+    procedure DeleteFromCities(const ARowID: Int64);
+    function GetCity(const ARowID: Int64): PCityRec;
+
+    property CitiesCache: TCitiesCache read FCitiesCache;
+  end;
+
+
+  // ------------------------------------------------------------------------------
+  // TCitiesCache class
+  // ------------------------------------------------------------------------------
+
+  { Cache for TCityRec (above), used by TCitiesDatabase (below). }
+  TMailBoxConfigCache = class(TDIAbstractSQLite3Cache)
+    procedure DoInitializeItem(const AItem: Pointer); override;
+    procedure DoFinalizeItem(const AItem: Pointer); override;
+  end;
+
+
+  // ------------------------------------------------------------------------------
+  // TCitiesDatabase
+  // ------------------------------------------------------------------------------
+
+  { Simple extension to TDISQLite3Database which automates buffered access to
+    the Cities table. }
+  TMailBoxConfigDatabase = class(TDISQLite3Database)
+  constructor Create(AOwner: TComponent); override;
+  private
+  var
+    FMailBoxConfigCache: TMailBoxConfigCache;
+  protected
+    procedure DoAfterConnect; override;
+    procedure DoAfterCreateDatabase; override;
+    procedure DoBeforeDisconnect; override;
+  public
+    function AddMailBoxConfig(MBCR: TMailBoxConfigRec): Int64;
+
+    procedure AddRandomMailBoxConfigs(ACount: Integer);
+    function AddRandomMailBoxConfig: Int64;
+    procedure DeleteFromMailBoxConfig(const ARowID: Int64);
+
+    //获得邮箱公共配置，根据邮箱后缀域名
+    function GetMailBoxPublicConfig(EMailAddress: WideString;operatorSign:String='='): TMailBoxConfigRec;
+
+    //获得邮箱私有配置，根据邮箱名
+    function GetMailBoxPrivateConfig(EMailAddress: WideString): TMailBoxConfigRec;
+
+    function Update(MBCR: TMailBoxConfigRec): Int64;
+    function Delete(MBCR: TMailBoxConfigRec; KeyFieldName: string): Int64;
+      overload;
+    function Delete(sql: string; params: TObjectList<TKeyValue>): Int64;
+      overload;
+
+    function Add(sql: String; params: TList < TPair < String, TValue >> )
+      : Int64; overload;
+    function Add_for_test(sql: String; params: TObjectList<TKeyValue>): Int64;
+      overload;
+    function Add_for_test2(sql: String; params: TObjectList<TKeyValue>): Int64;
+      overload;
+    function Add(sql: String; params: TObjectList<TKeyValue>): Int64; overload;
+
+    function Read(sql: String; params: TObjectList<TKeyValue>): TDISQLite3Statement;  overload;
+    function Read_<T: class>(sql: String; params: TObjectList<TKeyValue>)
+      : TObjectList<T>; overload;
+
+
+
+    function Add(sql: String; params: TDictionary<String, TValue>): Int64;
+      overload;
+    property MailBoxConfigCache: TMailBoxConfigCache read FMailBoxConfigCache;
+  end;
+
+function GetIndex(stmt: TDISQLite3Statement; FieldName: string): Integer;
+
+implementation
+
+uses
+  DISQLite3Api, Cities,config;
+
+// ------------------------------------------------------------------------------
+// TCitiesCache class
+// ------------------------------------------------------------------------------
+
+procedure TCitiesCache.DoInitializeItem(const AItem: Pointer);
+begin
+  Initialize(PCityRec(AItem)^);
+end;
+
+// ------------------------------------------------------------------------------
+
+procedure TCitiesCache.DoFinalizeItem(const AItem: Pointer);
+begin
+  Finalize(PCityRec(AItem)^);
+end;
+
+// ------------------------------------------------------------------------------
+// TCitiesDatabase class
+// ------------------------------------------------------------------------------
+
+function TCitiesDatabase.AddCity(const ACity, ACountry: WideString;
+  const APopulation: Integer): Int64;
+var
+  stmt: TDISQLite3Statement;
+begin
+
+  stmt := Prepare16(
+    'INSERT INTO Cities (City, Country, Population) VALUES (?,?,?);');
+  try
+    stmt.bind_Str16(1, ACity);
+    stmt.bind_Str16(2, ACountry);
+    stmt.bind_Int(3, APopulation);
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+  end;
+end;
+
+// ------------------------------------------------------------------------------
+
+procedure TCitiesDatabase.AddRandomCities(ACount: Integer);
+begin
+  if ACount > 0 then
+  begin
+    StartTransaction;
+    try
+      repeat
+        AddRandomCity;
+        Dec(ACount);
+      until ACount = 0;
+    finally
+      Commit;
+    end;
+  end;
+end;
+
+// ------------------------------------------------------------------------------
+
+function TCitiesDatabase.AddRandomCity: Int64;
+begin
+  with xCities[Random( High(xCities) - Low(xCities))] do
+    Result := AddCity(City, Country, Population);
+end;
+
+// ------------------------------------------------------------------------------
+
+procedure TCitiesDatabase.DeleteFromCities(const ARowID: Int64);
+var
+  stmt: TDISQLite3Statement;
+begin
+  stmt := Prepare16('DELETE FROM Cities WHERE Idx = ?;');
+  try
+    stmt.bind_Int64(1, ARowID);
+    stmt.Step;
+    FCitiesCache.InvalidateItem(ARowID);
+  finally
+    stmt.Free;
+  end;
+end;
+
+// ------------------------------------------------------------------------------
+
+{ This method is called after a connecting to / opening the database. }
+procedure TCitiesDatabase.DoAfterConnect;
+begin
+  FCitiesCache := TCitiesCache.Create(SizeOf(TCityRec));
+  FCitiesCache.MaxCount := 384;
+  inherited;
+end;
+
+// ------------------------------------------------------------------------------
+
+{ This method is called after a new database file has been created. It can be
+  used to create new tables, indexes, triggers, views etc. which are required
+  by the application. }
+procedure TCitiesDatabase.DoAfterCreateDatabase;
+begin
+  Execute16('CREATE TABLE IF NOT EXISTS Cities (' + #13#10 +
+      '  Idx INTEGER PRIMARY KEY,' + #13#10 + '  City TEXT,' + #13#10 +
+      '  Country TEXT,' + #13#10 + '  Population INTEGER);');
+  inherited;
+end;
+
+// ------------------------------------------------------------------------------
+
+{ This method is called before diconnecting from / closing the database. }
+procedure TCitiesDatabase.DoBeforeDisconnect;
+begin
+  FCitiesCache.Free;
+  inherited;
+end;
+
+// ------------------------------------------------------------------------------
+
+function TCitiesDatabase.GetCity(const ARowID: Int64): PCityRec;
+var
+  stmt: TDISQLite3Statement;
+begin
+  Result := FCitiesCache.GetItem(ARowID);
+  if not Assigned(Result) then
+  begin
+    stmt := Prepare16(
+      'SELECT City, Country, Population FROM Cities WHERE Idx = ?;');
+    try
+      stmt.bind_Int(1, ARowID);
+      if stmt.Step = SQLITE_ROW then
+      begin
+        Result := FCitiesCache.AddItem(ARowID);
+        Result^.City := stmt.Column_Str16(0);
+        Result^.Country := stmt.Column_Str16(1);
+        Result^.Population := stmt.Column_Int(2);
+      end;
+    finally
+      stmt.Free;
+    end;
+  end;
+end;
+
+{ TMailBoxConfigCache }
+
+procedure TMailBoxConfigCache.DoFinalizeItem(const AItem: Pointer);
+begin
+  Initialize(PMailBoxConfigRec(AItem)^);
+end;
+
+procedure TMailBoxConfigCache.DoInitializeItem(const AItem: Pointer);
+begin
+  Finalize(PMailBoxConfigRec(AItem)^);
+end;
+
+{ TMailBoxConfigDatabase }
+
+function TMailBoxConfigDatabase.Add(sql: String;
+  params: TList < TPair < String, TValue >> ): Int64;
+var
+  stmt: TDISQLite3Statement;
+  pair: TPair<String, TValue>;
+  rctx: TRTTIContext;
+  i: Integer;
+begin
+  Result := 0;
+  try
+    stmt := Prepare16(sql);
+    for i := 0 to params.Count do
+    begin
+      pair := params[i];
+      rctx.GetType(stmt).GetMethod('bind_' + pair.Key).Invoke
+        (stmt, [i, pair.Value]);
+    end;
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+  end;
+end;
+
+function TMailBoxConfigDatabase.Add(sql: String; params: TDictionary<String,
+  TValue>): Int64;
+var
+  stmt: TDISQLite3Statement;
+  pair: TPair<String, TValue>;
+  rctx: TRTTIContext;
+  i: Integer;
+begin
+  Result := 0;
+  try
+    stmt := Prepare16(sql);
+    for pair in params do
+    begin
+      rctx.GetType(stmt).GetMethod('bind_' + pair.Key).Invoke
+        (stmt, [i, pair.Value]);
+    end;
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+  end;
+end;
+
+function TMailBoxConfigDatabase.Add_for_test
+  (sql: String; params: TObjectList<TKeyValue>): Int64;
+var
+  stmt: TDISQLite3Statement;
+  pair: TKeyValue;
+  rctx: TRTTIContext;
+  i: Integer;
+  methodName: string;
+  Value: WideString;
+  PTI: PTypeInfo;
+  PTD: PTypeData;
+  PPL: PPropList;
+  PI: PPropInfo;
+
+  mia: TMethodInfoArray;
+  mi: PMethodInfoHeader;
+
+  PMIH: PMethodInfoHeader;
+begin
+  Result := 0;
+  try
+    stmt := Prepare16(sql);
+    Value := '中国';
+    // stmt.Bind_Str16_By_Name();
+    PTI := stmt.ClassInfo;
+    PTD := GetTypeData(PTI);
+    GetPropList(PTI, PPL);
+    // for PI in PPL do
+    // if(PI.Name='bind_Str16')then
+    // PI.GetProc;
+
+    // 反射 调用方式1 测试
+    {
+      PMIH :=ObjAuto.GetMethodInfo(stmt,'Bind_Str16');
+      ObjAuto.ObjectInvoke(stmt,PMIH,[1,2],[1,value]) ;
+      stmt.Step;
+      }
+
+    // 反射 调用方式2 测试
+    // methodName := 'Bind_Str';
+    // rctx.GetType(stmt.ClassInfo).GetMethod(methodName).Invoke(stmt, [1, sqlite3_encode_utf8(value)]);
+    // stmt.Step;
+
+    rctx.GetType(stmt.ClassInfo).GetMethod('Bind_Str16_By_Name').Invoke
+      (stmt, ['Subject', Value]);
+    // for i:=0 to Params.Count-1 do
+    // begin
+    // pair := params[i];
+    // value:='33';
+    // methodName := 'bind_'+iif(pair.Key='str','Str16',pair.Key);
+    // if(pair.Key='str')then
+    // rctx.GetType(stmt.ClassInfo).GetMethod(methodName).Invoke(stmt, [i+1, value])
+    // else
+    // begin
+    //
+    // rctx.GetType(stmt.ClassInfo).GetMethod(methodName).Invoke(stmt, [i+1, pair.Value]);
+    // end;
+    // end;
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+  end;
+end;
+
+function WideStringToString(const ws: WideString; codePage: Word): AnsiString;
+var
+  l: Integer;
+begin
+  if ws = '' then
+    Result := ''
+  else
+  begin
+    l := WideCharToMultiByte(codePage,
+      WC_COMPOSITECHECK or WC_DISCARDNS or WC_SEPCHARS or WC_DEFAULTCHAR,
+      @ws[1], -1, nil, 0, nil, nil);
+    SetLength(Result, l - 1);
+    if l > 1 then
+      WideCharToMultiByte(codePage,
+        WC_COMPOSITECHECK or WC_DISCARDNS or WC_SEPCHARS or WC_DEFAULTCHAR,
+        @ws[1], -1, @Result[1], l - 1, nil, nil);
+  end;
+end;
+
+function TMailBoxConfigDatabase.Add_for_test2
+  (sql: String; params: TObjectList<TKeyValue>): Int64;
+var
+  stmt: TDISQLite3Statement;
+  pair: TKeyValue;
+  rctx: TRTTIContext;
+  i: Integer;
+  methodName: string;
+  Value: WideString;
+  PMIH: PMethodInfoHeader;
+begin
+  Result := 0;
+  try
+    stmt := Prepare16(sql);
+    for i := 0 to params.Count - 1 do
+    begin
+      pair := params[i];
+      methodName := 'Bind_' + pair.Key;
+      if (pair.Key = 'str') then
+      begin
+        // methodName := methodName+'16';
+
+        rctx.GetType(stmt.ClassInfo).GetMethod(methodName).Invoke
+          (stmt, [i + 1, sqlite3_encode_utf8(pair.Value.AsString)]);
+        // rctx.GetType(stmt.ClassInfo).GetMethod(methodName).Invoke(stmt, [i+1,WideStringToString(pair.Value.AsString,6500)]);
+      end
+      else
+      begin
+        rctx.GetType(stmt.ClassInfo).GetMethod(methodName).Invoke
+          (stmt, [i + 1, pair.Value]);
+      end;
+    end;
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+  end;
+end;
+
+constructor TMailBoxConfigDatabase.Create(AOwner: TComponent);
+begin
+  inherited;
+     DatabaseName :=  TXMLConfig.DataBaseFullPath;
+     //以下两句用语初次给数据库设置密码
+     //self.Open;
+     //rekey(TXMLConfig.GetPWD);
+     password := TXMLConfig.GetPWD;
+end;
+
+function TMailBoxConfigDatabase.Add(sql: String; params: TObjectList<TKeyValue>)
+  : Int64;
+var
+  stmt: TDISQLite3Statement;
+  pair: TKeyValue;
+  rctx: TRTTIContext;
+  i: Integer;
+  methodName: string;
+  Value: WideString;
+  PMIH: PMethodInfoHeader;
+begin
+  Result := 0;
+  try
+    stmt := Prepare16(sql);
+    for i := 0 to params.Count - 1 do
+    begin
+      pair := params[i];
+      methodName := 'Bind_' + pair.Key;
+      if (pair.Key = 'str') then
+      begin
+        methodName := methodName + '16';
+        PMIH := ObjAuto.GetMethodInfo(stmt, methodName);
+        ObjAuto.ObjectInvoke(stmt, PMIH, [1, 2], [i + 1, pair.Value.AsString]);
+      end
+      else
+      begin
+        rctx.GetType(stmt.ClassInfo).GetMethod(methodName).Invoke
+          (stmt, [i + 1, pair.Value]);
+      end;
+    end;
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+  end;
+end;
+
+function TMailBoxConfigDatabase.AddMailBoxConfig(MBCR: TMailBoxConfigRec)
+  : Int64;
+var
+  stmt: TDISQLite3Statement;
+  sb:TStringBuilder;
+begin
+  Result := 0;
+  //sql := 'INSERT INTO MailBoxConfig(MailDomain,SMTPServer,POP3Server,SMTPPort,POP3Port,SMTPSSL,POP3SSL,SMTPSSLPort,POP3SSLPort,POP3UserName,POP3Password,SMTPUserName,SMTPPassword,UpdateMail,SaveToOutMailBox,UpdateTime) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,current_timestamp);');
+  sb := TStringBuilder.Create;
+  sb.Append('INSERT INTO MailBoxConfig(MailDomain,SMTPServer,POP3Server,SMTPPort,POP3Port,SMTPSSL,POP3SSL,SMTPSSLPort,POP3SSLPort,POP3UserName,POP3Password,SMTPUserName,SMTPPassword,UpdateMail,SaveToOutMailBox,UpdateTime) ');
+  sb.Append('VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,current_timestamp);');
+  stmt := Prepare16(sb.ToString());
+  sb.Free;
+  try
+    MBCR.InitializeProcess;
+    stmt.bind_Str16(1, MBCR.MailDomain);
+    stmt.bind_Str16(2, MBCR.SMTPServer);
+    stmt.bind_Str16(3, MBCR.POP3Server);
+    stmt.bind_Int(4, MBCR.SMTPPort);
+    stmt.bind_Int(5, MBCR.POP3Port);
+    stmt.bind_Int(6, iif(MBCR.SMTPSSL, 1, 0));
+    stmt.bind_Int(7, iif(MBCR.POP3SSL, 1, 0));
+    stmt.bind_Int(8, MBCR.SMTPSSLPort);
+    stmt.bind_Int(9, MBCR.POP3SSLPort);
+    stmt.bind_Str16(10, MBCR.POP3UserName);
+    stmt.bind_Str16(11, MBCR.POP3Password);
+    stmt.bind_Str16(12, MBCR.SMTPUserName);
+    stmt.bind_Str16(13, MBCR.SMTPPassword);
+    stmt.bind_Str16(14, MBCR.UpdateMail);
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+  end;
+end;
+
+function TMailBoxConfigDatabase.AddRandomMailBoxConfig: Int64;
+begin
+  Result := 0;
+end;
+
+procedure TMailBoxConfigDatabase.AddRandomMailBoxConfigs(ACount: Integer);
+begin
+
+end;
+
+function TMailBoxConfigDatabase.Delete(MBCR: TMailBoxConfigRec;KeyFieldName: string): Int64;
+var
+  stmt: TDISQLite3Statement;
+  fmt: TFormatSettings;
+begin
+  stmt := Prepare16('delete MailBoxConfig where ' + KeyFieldName + '=?;');
+  try
+    stmt.bind_Str16(1, stmt.Column_Str16(GetIndex(stmt, KeyFieldName)));
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+  end;
+  Result := 0;
+end;
+
+function TMailBoxConfigDatabase.Delete(sql: string;params: TObjectList<TKeyValue>): Int64;
+var
+  stmt: TDISQLite3Statement;
+  pair: TKeyValue;
+  rctx: TRTTIContext;
+  i: Integer;
+  methodName: string;
+  Value: WideString;
+  PMIH: PMethodInfoHeader;
+begin
+  Result := 0;
+  try
+    stmt := Prepare16(sql);
+    for i := 0 to params.Count - 1 do
+    begin
+      pair := params[i];
+      methodName := 'Bind_' + pair.Key;
+      if (pair.Key = 'str') then
+      begin
+        methodName := methodName + '16';
+        PMIH := ObjAuto.GetMethodInfo(stmt, methodName);
+        ObjAuto.ObjectInvoke(stmt, PMIH, [1, 2], [i + 1, pair.Value.AsString]);
+      end
+      else
+      begin
+        rctx.GetType(stmt.ClassInfo).GetMethod(methodName).Invoke
+          (stmt, [i + 1, pair.Value]);
+      end;
+    end;
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+    params.Free;
+  end;
+end;
+
+procedure TMailBoxConfigDatabase.DeleteFromMailBoxConfig(const ARowID: Int64);
+begin
+
+end;
+
+procedure TMailBoxConfigDatabase.DoAfterConnect;
+begin
+  inherited;
+
+end;
+
+procedure TMailBoxConfigDatabase.DoAfterCreateDatabase;
+begin
+  inherited;
+
+end;
+
+procedure TMailBoxConfigDatabase.DoBeforeDisconnect;
+begin
+  inherited;
+
+end;
+
+function TMailBoxConfigDatabase.GetMailBoxPrivateConfig(EMailAddress: WideString): TMailBoxConfigRec;
+var
+  stmt: TDISQLite3Statement;
+  MBCR: TMailBoxConfigRec;
+begin
+  begin
+    try
+      stmt := Prepare16('SELECT * FROM MailBoxConfig WHERE updateMail=? order by updatetime desc;');
+      stmt.bind_Str16(1, EMailAddress);
+
+      if stmt.Step = SQLITE_ROW then
+      begin
+        Result := TMailBoxConfigRec.Create;
+        Result.MailDomain := stmt.Column_Str16(GetIndex(stmt, 'MailDomain'));
+        Result.SMTPServer := stmt.Column_Str16(GetIndex(stmt, 'SMTPServer'));
+        Result.POP3Server := stmt.Column_Str16(GetIndex(stmt, 'POP3Server'));
+        Result.SMTPPort := stmt.Column_Int(GetIndex(stmt, 'SMTPPort'));
+        Result.POP3Port := stmt.Column_Int(GetIndex(stmt, 'POP3Port'));
+        Result.SMTPSSL := iif(stmt.Column_Int(GetIndex(stmt, 'SMTPSSL')) = 1,true, false);
+        Result.POP3SSL := iif(stmt.Column_Int(GetIndex(stmt, 'POP3SSL')) = 1,true, false);
+        Result.SMTPSSLPort := stmt.Column_Int(GetIndex(stmt, 'SMTPSSLPort'));
+        Result.POP3SSLPort := stmt.Column_Int(GetIndex(stmt, 'POP3SSLPort'));
+        Result.POP3UserName := stmt.Column_Str16(GetIndex(stmt, 'POP3UserName'));
+        Result.POP3Password := stmt.Column_Str16(GetIndex(stmt, 'POP3Password'));
+        Result.SMTPUserName := stmt.Column_Str16(GetIndex(stmt, 'SMTPUserName'));
+        Result.SMTPPassword := stmt.Column_Str16(GetIndex(stmt, 'SMTPPassword'));
+        Result.UpdateMail := stmt.Column_Str16(GetIndex(stmt, 'UpdateMail'));
+        Result.SaveToOutMailBox := stmt.Column_Int(GetIndex(stmt, 'SaveToOutMailBox'));
+        Result.PhoneNum :=  stmt.Column_Str16(GetIndex(stmt, 'PhoneNum'));
+        Result.UpdaeTime := StrToDateTimeDef(stmt.Column_Str16(GetIndex(stmt, 'UpdateTime')), now);
+        Result.InitializeProcess
+      end;
+    finally
+      stmt.Free;
+    end;
+    if(Result<>nil) then
+      Result.InitializeProcess;
+  end;
+end;
+
+
+function TMailBoxConfigDatabase.GetMailBoxPublicConfig(EMailAddress: WideString;operatorSign:String='=') : TMailBoxConfigRec;
+var
+  stmt: TDISQLite3Statement;
+  UserName, Domain: String;
+  MBCR: TMailBoxConfigRec;
+begin
+  // Result := FMailBoxConfigCache.GetItem(ARowID);
+  SplitString(Trim(EMailAddress), '@', UserName, Domain);
+  if (Domain = '') then
+  begin
+    Result := MBCR;
+    Exit;
+  end;
+
+  // if not Assigned(Result) then
+  begin
+    try
+      if(operatorSign='like')then
+      begin
+        //Domain := '%'+RightStr(EMailAddress,Length(EMailAddress)-pos('@',EMailAddress)+1);
+        stmt := Prepare16('SELECT * FROM MailBoxConfig WHERE MailDomain like ''%'+Domain+'%'' order by updatetime desc;');
+      end
+      else
+      begin
+        stmt := Prepare16('SELECT * FROM MailBoxConfig WHERE MailDomain ' + operatorSign + ' ? order by updatetime desc;');
+        stmt.bind_Str16(1, Domain);
+      end;
+
+
+      if stmt.Step = SQLITE_ROW then
+      begin
+        // Result := FMailBoxConfigCache.AddItem(ARowID);
+        Result := TMailBoxConfigRec.Create;
+        Result.MailDomain := stmt.Column_Str16(GetIndex(stmt, 'MailDomain'));
+        Result.SMTPServer := stmt.Column_Str16(GetIndex(stmt, 'SMTPServer'));
+        Result.POP3Server := stmt.Column_Str16(GetIndex(stmt, 'POP3Server'));
+        Result.SMTPPort := stmt.Column_Int(GetIndex(stmt, 'SMTPPort'));
+        Result.POP3Port := stmt.Column_Int(GetIndex(stmt, 'POP3Port'));
+        Result.SMTPSSL := iif(stmt.Column_Int(GetIndex(stmt, 'SMTPSSL')) = 1,true, false);
+        Result.POP3SSL := iif(stmt.Column_Int(GetIndex(stmt, 'POP3SSL')) = 1,true, false);
+        Result.SMTPSSLPort := stmt.Column_Int(GetIndex(stmt, 'SMTPSSLPort'));
+        Result.POP3SSLPort := stmt.Column_Int(GetIndex(stmt, 'POP3SSLPort'));
+        Result.POP3UserName := stmt.Column_Str16(GetIndex(stmt, 'POP3UserName'));
+        Result.POP3Password := stmt.Column_Str16(GetIndex(stmt, 'POP3Password'));
+        Result.SMTPUserName := stmt.Column_Str16(GetIndex(stmt, 'SMTPUserName'));
+        Result.SMTPPassword := stmt.Column_Str16(GetIndex(stmt, 'SMTPPassword'));
+        Result.UpdateMail := stmt.Column_Str16(GetIndex(stmt, 'UpdateMail'));
+        Result.SaveToOutMailBox := stmt.Column_Int(GetIndex(stmt, 'SaveToOutMailBox'));
+        Result.PhoneNum :=  stmt.Column_Str16(GetIndex(stmt, 'PhoneNum'));
+        Result.UpdaeTime := StrToDateTimeDef(stmt.Column_Str16(GetIndex(stmt, 'UpdateTime')), now);
+        // Result := @MBCR;
+        Result.InitializeProcess
+      end;
+    finally
+      stmt.Free;
+    end;
+    if(Result<>nil) then
+      Result.InitializeProcess;
+  end;
+end;
+
+function TMailBoxConfigDatabase.Read(sql: String; params: TObjectList<TKeyValue>): TDISQLite3Statement;
+var
+  stmt: TDISQLite3Statement;
+  pair: TKeyValue;
+  rctx: TRTTIContext;
+  i: Integer;
+  methodName: string;
+  Value: WideString;
+  PMIH: PMethodInfoHeader;
+  RFA: TArray<RTTI.TRttiField>;
+  RF: TRttiField;
+  FieldIndex: Integer;
+  obj:TObject;
+  userInBox:TUserMailInBoxRec;
+  temp:string;
+begin
+  Result := nil;
+  try
+    stmt := Prepare16(sql);
+    for i := 0 to params.Count - 1 do
+    begin
+      pair := params[i];
+      methodName := 'Bind_' + pair.Key;
+      if (pair.Key = 'str') then
+      begin
+        methodName := methodName + '16';
+        PMIH := ObjAuto.GetMethodInfo(stmt, methodName);
+        ObjAuto.ObjectInvoke(stmt, PMIH, [1, 2], [i + 1, pair.Value.AsString]);
+      end
+      else
+      begin
+        rctx.GetType(stmt.ClassInfo).GetMethod(methodName).Invoke(stmt, [i + 1, pair.Value]);
+      end;
+    end;
+    Result := stmt;
+  finally
+    //stmt.Free;
+  end;
+end;
+
+
+function TMailBoxConfigDatabase.Read_<T>(sql: String; params: TObjectList<TKeyValue>): TObjectList<T>;
+var
+  stmt: TDISQLite3Statement;
+  pair: TKeyValue;
+  rctx: TRTTIContext;
+  i: Integer;
+  methodName: string;
+  Value: WideString;
+  PMIH: PMethodInfoHeader;
+  RFA: TArray<RTTI.TRttiField>;
+  RF: TRttiField;
+  FieldIndex: Integer;
+  objList: TObjectList<T>;
+  obj:TObject;
+  userInBox:TUserMailInBoxRec;
+  temp:string;
+  tempObj:T;
+begin
+  Result := nil;
+  try
+    stmt := Prepare16(sql);
+    for i := 0 to params.Count - 1 do
+    begin
+      pair := params[i];
+      methodName := 'Bind_' + pair.Key;
+      if (pair.Key = 'str') then
+      begin
+        methodName := methodName + '16';
+        PMIH := ObjAuto.GetMethodInfo(stmt, methodName);
+        ObjAuto.ObjectInvoke(stmt, PMIH, [1, 2], [i + 1, pair.Value.AsString]);
+      end
+      else
+      begin
+        rctx.GetType(stmt.ClassInfo).GetMethod(methodName).Invoke(stmt, [i + 1, pair.Value]);
+      end;
+    end;
+
+
+    objList := TObjectList<T>.Create;
+    ShowMessage(T.ClassName);
+
+    userInBox :=TUserMailInBoxRec(TClassFinder.Create(T));
+    //userInBox :=  TUserMailInBoxRec(classes.FindClass(T.ClassName).Create) ;
+    ShowMessage(T(TClassFinder.Create(T)).ClassName);
+
+    RFA := rctx.GetType(T.ClassInfo).GetFields;
+    userInBox := TUserMailInBoxRec(rctx.GetType(T.ClassInfo).NewInstance);
+    if (stmt.Step = SQLITE_ROW) then
+    begin
+      ShowMessage(rctx.GetType(T.ClassInfo).NewInstance.ClassName);
+      objList.Add(rctx.GetType(T.ClassInfo).NewInstance);
+      obj:=objList[0];
+      for RF in RFA do
+      begin
+       ShowMessage('a');
+        FieldIndex := GetIndex(stmt, RF.Name);
+        if (FieldIndex > 0) then
+        begin
+          //ShowMessage(RF.Name + ':' + RF.FieldType.ToString + ':' + IntToStr(FieldIndex));
+          if (RF.FieldType.ToString = 'WideString') or (RF.FieldType.ToString = 'string') then
+          begin
+           temp := stmt.Column_Str16(FieldIndex);
+           ShowMessage(temp);
+           //RF.SetValue(TUserMailInBoxRec(obj), temp);
+           RF.SetValue(userInBox, temp);
+           //ShowMessage(TUserMailInBoxRec(obj).MailID);
+           //ShowMessage(RF.Name + '' + RF.FieldType.ToString + ':' + IntToStr
+           //    (FieldIndex)+':'+IntToStr(stmt.Column_Type(FieldIndex))+':'+temp);
+          end
+          else if (RF.FieldType.TypeKind = tkInteger) then
+          begin
+           ShowMessage(IntToStr(3));
+            RF.SetValue(obj, stmt.Column_Int(FieldIndex));
+            ShowMessage(IntToStr(4));
+          end;
+        end;
+      end;
+    end;
+    ShowMessage(IntToStr(5));
+    Result := objList;
+  finally
+    stmt.Free;
+  end;
+end;
+
+{
+  function TMailBoxConfigDatabase.Read
+  (sql: String; params: TObjectList<TKeyValue>): Int64;
+  begin
+
+  var
+  stmt: TDISQLite3Statement;
+  pair: TKeyValue;
+  rctx: TRTTIContext;
+  i: Integer;
+  methodName: string;
+  Value: WideString;
+  PMIH: PMethodInfoHeader;
+  begin
+  Result := 0;
+  try
+  stmt := Prepare16(sql);
+  for i := 0 to params.Count - 1 do
+  begin
+  pair := params[i];
+  methodName := 'Bind_' + pair.Key;
+  if (pair.Key = 'str') then
+  begin
+  methodName := methodName + '16';
+  PMIH := ObjAuto.GetMethodInfo(stmt, methodName);
+  ObjAuto.ObjectInvoke
+  (stmt, PMIH, [1, 2], [i + 1, pair.Value.AsString]);
+  end
+  else
+  begin
+  rctx.GetType(stmt.ClassInfo).GetMethod(methodName).Invoke
+  (stmt, [i + 1, pair.Value]);
+  end;
+  end;
+  stmt.Step;
+  Result := LastInsertRowID;
+  finally
+  stmt.Free;
+  end;
+  end;
+}
+
+function TMailBoxConfigDatabase.Update(MBCR: TMailBoxConfigRec): Int64;
+var
+  stmt: TDISQLite3Statement;
+  UserName, MailDomain: String;
+  sql: TStringBuilder;
+begin
+  MBCR.InitializeProcess;
+  // Result := FMailBoxConfigCache.GetItem(ARowID);
+  // if not Assigned(Result) then
+  begin
+    sql := TStringBuilder.Create;
+    sql.Append('Update MailBoxConfig Set ');
+    sql.Append('MailDomain =?,');
+    sql.Append('SMTPServer =?,');
+    sql.Append('POP3Server =?,');
+    sql.Append('SMTPPort =?,');
+    sql.Append('POP3Port =?,');
+    sql.Append('SMTPSSL =?,');
+    sql.Append('POP3SSL =?,');
+    sql.Append('SMTPSSLPort =?,');
+    sql.Append('POP3SSLPort =?,');
+    sql.Append('POP3UserName =?,');
+    sql.Append('POP3Password =?,');
+    sql.Append('SMTPUserName =?,');
+    sql.Append('SMTPPassword =?,');
+    // sql.Append('UpdateMail =?');
+    sql.Append('SaveToOutMailBox =?,');
+    sql.Append('PhoneNum =?,');
+    sql.Append('UpdateTime = current_timestamp');
+    sql.Append(' where UpdateMail=?');
+
+    stmt := Prepare16(sql.ToString());
+    try
+      // if stmt.Step = SQLITE_DONE then
+      begin
+        // Result := FMailBoxConfigCache.AddItem(ARowID);
+        stmt.bind_Str16(1, MBCR.MailDomain);
+        stmt.bind_Str16(2, MBCR.SMTPServer);
+        stmt.bind_Str16(3, MBCR.POP3Server);
+        stmt.bind_Int(4, MBCR.SMTPPort);
+        stmt.bind_Int(5, MBCR.POP3Port);
+        stmt.bind_Int(6, iif(MBCR.SMTPSSL, 1, 0));
+        stmt.bind_Int(7, iif(MBCR.POP3SSL, 1, 0));
+        stmt.bind_Int(8, MBCR.SMTPSSLPort);
+        stmt.bind_Int(9, MBCR.POP3SSLPort);
+        stmt.bind_Str16(10, MBCR.POP3UserName);
+        stmt.bind_Str16(11, MBCR.POP3Password);
+        stmt.bind_Str16(12, MBCR.SMTPUserName);
+        stmt.bind_Str16(13, MBCR.SMTPPassword);
+        stmt.bind_Int(14, MBCR.SaveToOutMailBox);
+        stmt.bind_Str16(15, MBCR.PhoneNum);
+        stmt.bind_Str16(16, MBCR.UpdateMail);
+        // stmt.bind_Str16(MBCR.UpdaeTime);
+        stmt.Step;
+        Result := LastInsertRowID;
+      end;
+    finally
+      stmt.Free;
+    end;
+  end;
+end;
+
+function GetIndex(stmt: TDISQLite3Statement; FieldName: string): Integer;
+var
+  i: Integer;
+begin
+  Result := -1;
+  for i := 0 to stmt.Column_Count - 1 do
+  begin
+    if stmt.Column_Name16(i) = FieldName then
+    begin
+      Result := i;
+      Break;
+    end;
+  end;
+
+end;
+
+procedure TMailBoxConfigRec.InitializeProcess;
+var
+  UserName, EMailDomain: string;
+begin
+  if(self=nil)then exit;
+  SplitString(Trim(self.UpdateMail), '@', UserName, EMailDomain);
+  if (EMailDomain = '') then
+    Exit;
+
+  if (SMTPUserName = '') then
+    SMTPUserName := UserName;
+  if (POP3UserName = '') then
+    POP3UserName := UserName;
+  if (SMTPPassword = '') then
+    SMTPPassword := POP3Password;
+
+  if (MailDomain = '') then
+    MailDomain := EMailDomain;
+  if (POP3Server = '') then
+    POP3Server := 'POP3.' + EMailDomain;
+  if (SMTPServer = '') then
+    SMTPServer := 'SMTP.' + EMailDomain;
+
+  if (POP3Port = 0) then
+    POP3Port := 110;
+  if (SMTPPort = 0) then
+    SMTPPort := 25;
+
+  if (POP3SSL) then
+    if (POP3SSLPort = 0) then
+      POP3SSLPort := 110;
+
+  if (SMTPSSL) then
+    if (SMTPSSLPort = 0) then
+      SMTPSSLPort := 995;
+
+  if (SaveToOutMailBox<>0) and (SaveToOutMailBox<>1) then
+    SaveToOutMailBox := 0;
+end;
+
+constructor TMailBoxConfigRec.CreatePredigest(const EMail: String;
+  const Password: String);
+begin
+  self.UpdateMail := EMail;
+  self.POP3Password := Password;
+  self.InitializeProcess;
+end;
+
+function TMailBoxConfigRec.GetPOP3Port: Integer;
+begin
+  Result := FPOP3Port;
+end;
+
+procedure TMailBoxConfigRec.SetPOP3Port(val: Integer);
+begin
+  if (val < 0) or (val >= 65536) then
+    val := 0;
+  FPOP3Port := val;
+end;
+
+function TMailBoxConfigRec.GetSMTPPort: Integer;
+begin
+  Result := FSMTPPort;
+end;
+
+procedure TMailBoxConfigRec.SetSMTPPort(val: Integer);
+begin
+  if (val < 0) or (val >= 65536) then
+    val := 0;
+  FSMTPPort := val;
+end;
+
+function TMailBoxConfigRec.GetPOP3SSLPort: Integer;
+begin
+  Result := FPOP3SSLPort;
+end;
+
+procedure TMailBoxConfigRec.SetPOP3SSLPort(val: Integer);
+begin
+  if (val < 0) or (val >= 65536) then
+    val := 0;
+  FPOP3SSLPort := val;
+end;
+
+function TMailBoxConfigRec.GetSMTPSSLPort: Integer;
+begin
+  Result := FSMTPSSLPort;
+end;
+
+procedure TMailBoxConfigRec.SetSMTPSSLPort(val: Integer);
+begin
+  if (val < 0) or (val >= 65536) then
+    val := 0;
+  FSMTPSSLPort := val;
+end;
+
+constructor TKeyValue.Create(theKey: string; theValue: TValue);
+begin
+  inherited Create;
+  Key := theKey;
+  Value := theValue;
+end;
+
+end.

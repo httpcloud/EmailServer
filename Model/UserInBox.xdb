@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+  <xs:element name="DATAPACKET" type="DATAPACKETType"/>
+  <xs:complexType name="DATAPACKETType"><xs:annotation>
+      <xs:appinfo xdb:docElement="DATAPACKET"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="METADATA" type="METADATAType"/>
+      <xs:element name="ROWDATA" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="Version" type="xs:decimal"/>
+  </xs:complexType>
+  <xs:complexType name="METADATAType">
+    <xs:sequence>
+      <xs:element name="FIELDS" type="FIELDSType"/>
+      <xs:element name="PARAMS" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FIELDSType">
+    <xs:sequence>
+      <xs:element name="FIELD" type="FIELDType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FIELDType">
+    <xs:attribute name="attrname" type="xs:string"/>
+    <xs:attribute name="fieldtype" type="xs:string"/>
+    <xs:attribute name="WIDTH" type="xs:integer"/>
+  </xs:complexType>
+</xs:schema>

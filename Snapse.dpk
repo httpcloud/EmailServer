@@ -1,0 +1,67 @@
+package Snapse;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl;
+
+contains
+  asn1util in '..\ThirdComponent\Delphi\synapse\asn1util.pas',
+  blcksock in '..\ThirdComponent\Delphi\synapse\blcksock.pas',
+  clamsend in '..\ThirdComponent\Delphi\synapse\clamsend.pas',
+  dnssend in '..\ThirdComponent\Delphi\synapse\dnssend.pas',
+  ftpsend in '..\ThirdComponent\Delphi\synapse\ftpsend.pas',
+  ftptsend in '..\ThirdComponent\Delphi\synapse\ftptsend.pas',
+  httpsend in '..\ThirdComponent\Delphi\synapse\httpsend.pas',
+  imapsend in '..\ThirdComponent\Delphi\synapse\imapsend.pas',
+  ldapsend in '..\ThirdComponent\Delphi\synapse\ldapsend.pas',
+  mimeinln in '..\ThirdComponent\Delphi\synapse\mimeinln.pas',
+  mimemess in '..\ThirdComponent\Delphi\synapse\mimemess.pas',
+  mimepart in '..\ThirdComponent\Delphi\synapse\mimepart.pas',
+  nntpsend in '..\ThirdComponent\Delphi\synapse\nntpsend.pas',
+  pingsend in '..\ThirdComponent\Delphi\synapse\pingsend.pas',
+  pop3send in '..\ThirdComponent\Delphi\synapse\pop3send.pas',
+  slogsend in '..\ThirdComponent\Delphi\synapse\slogsend.pas',
+  smtpsend in '..\ThirdComponent\Delphi\synapse\smtpsend.pas',
+  snmpsend in '..\ThirdComponent\Delphi\synapse\snmpsend.pas',
+  sntpsend in '..\ThirdComponent\Delphi\synapse\sntpsend.pas',
+  ssl_cryptlib in '..\ThirdComponent\Delphi\synapse\ssl_cryptlib.pas',
+  ssl_openssl in '..\ThirdComponent\Delphi\synapse\ssl_openssl.pas',
+  ssl_openssl_lib in '..\ThirdComponent\Delphi\synapse\ssl_openssl_lib.pas',
+  synachar in '..\ThirdComponent\Delphi\synapse\synachar.pas',
+  synacode in '..\ThirdComponent\Delphi\synapse\synacode.pas',
+  synacrypt in '..\ThirdComponent\Delphi\synapse\synacrypt.pas',
+  synadbg in '..\ThirdComponent\Delphi\synapse\synadbg.pas',
+  synafpc in '..\ThirdComponent\Delphi\synapse\synafpc.pas',
+  synaicnv in '..\ThirdComponent\Delphi\synapse\synaicnv.pas',
+  synaip in '..\ThirdComponent\Delphi\synapse\synaip.pas',
+  synamisc in '..\ThirdComponent\Delphi\synapse\synamisc.pas',
+  synaser in '..\ThirdComponent\Delphi\synapse\synaser.pas',
+  synautil in '..\ThirdComponent\Delphi\synapse\synautil.pas',
+  synsock in '..\ThirdComponent\Delphi\synapse\synsock.pas',
+  tlntsend in '..\ThirdComponent\Delphi\synapse\tlntsend.pas',
+  cryptlib in '..\ThirdComponent\Delphi\synapse\cryptlib.pas';
+
+end.

@@ -1,0 +1,121 @@
+library MoFunWapMail;
+
+uses
+  ActiveX,
+  ComObj,
+  WebBroker,
+  ISAPIApp,
+  ISAPIThreadPool,
+  MainModule in 'MainModule.pas' {Main: TWebAppPageModule} {*.wml},
+  loginModule in 'loginModule.pas' {login: TWebPageModule} {*.wml},
+  inBoxModule in 'inBoxModule.pas' {inBox: TWebPageModule} {*.wml},
+  outBoxModule in 'outBoxModule.pas' {outBox: TWebPageModule} {*.wml},
+  sendModule in 'sendModule.pas' {send: TWebPageModule} {*.wml},
+  writeModule in 'writeModule.pas' {write: TWebPageModule} {*.wml},
+  detailModule in 'detailModule.pas' {detail: TWebPageModule} {*.wml},
+  readTxtModule in 'readTxtModule.pas' {readTxt: TWebPageModule} {*.wml},
+  EMailCode in 'EMailCode.pas',
+  gb_big5 in 'gb_big5.pas',
+  serialization in 'serialization.pas',
+  HashMap in 'dcl\HashMap.pas',
+  config in 'config.pas' {$R *.res},
+  big5 in 'big5.pas',
+  AbstractContainer in 'dcl\AbstractContainer.pas',
+  DCLUtil in 'dcl\DCLUtil.pas',
+  DCL_intf in 'dcl\DCL_intf.pas',
+  ArrayList in 'dcl\ArrayList.pas',
+  ArraySet in 'dcl\ArraySet.pas',
+  Algorithms in 'dcl\Algorithms.pas',
+  UEncode in 'UEncode.pas',
+  EZCrypt in 'EZCrypt.pas',
+  RegisterModule in 'RegisterModule.pas' {reg: TWebPageModule},
+  actionModule in 'actionModule.pas' {action: TWebPageModule},
+  DataModule in 'DataModule.pas' {WebDataModuleShare: TWebDataModule},
+  addNewMailBoxForGuestModule in 'addNewMailBoxForGuestModule.pas' {NewGuest: TWebPageModule} {*.wml},
+  IdAuthenticationSSPI in 'NTLM2009\IdAuthenticationSSPI.pas',
+  IdSASLNTLM in 'NTLM2009\IdSASLNTLM.pas',
+  IdSSPI in 'NTLM2009\IdSSPI.pas',
+  HTTPApp in 'win32_for_Delphi2009\my_internet\HTTPApp.pas' {HTTPApp in'win32\my_internet\HTTPApp.pas',
+  SessColn in 'win32\my_websnap\SessColn.pas',
+  SiteComp in 'win32\my_websnap\SiteComp.pas',
+  WebDisp in 'win32\my_websnap\WebDisp.pas',
+  WebSess in 'win32\my_websnap\WebSess.pas',
+  WebSnapObjs in 'win32\websnap\WebSnapObjs.pas',
+  WebScript in 'win32\websnap\WebScript.pas',
+  WebScriptAS in 'win32\websnap\WebScriptAS.pas',
+  WebAuto in 'win32\websnap\WebAuto.pas',
+  AutoAdap in 'win32\websnap\AutoAdap.pas',
+  AdaptReq in 'win32\websnap\AdaptReq.pas',
+  WebAdapt in 'win32\websnap\WebAdapt.pas',
+  WebModu in 'win32\websnap\WebModu.pas',
+  WebFact in 'win32\websnap\WebFact.pas',
+  },
+  MSHTML in 'win32\internet\MSHTML.pas',
+  synacode in 'S:\Delphi\VCL\synapse38\source\lib\synacode.pas',
+  Portal_UserService in 'Portal_UserService.pas',
+  Common in 'Common\Common.pas',
+  Portlet_Blogs_BlogsEntryService in 'Portlet_Blogs_BlogsEntryService.pas',
+  addNewMailBoxModule in 'addNewMailBoxModule.pas' {Add: TWebPageModule},
+  WebSnapScriptObject in 'ScriptObject\WebSnapScriptObject.pas';
+
+{$R *.res}
+
+exports
+  GetExtensionVersion,
+  HttpExtensionProc,
+  TerminateExtension;
+
+begin
+  CoInitFlags := COINIT_MULTITHREADED;
+  Application.Initialize;
+  Application.Run;
+end.
+
+
+//program MoFunWapMail;
+//
+//{$APPTYPE GUI}
+//
+//uses
+//  Forms,
+//  SockApp,
+//  mainFrm in 'mainFrm.pas' {MainForm},
+//  MainModule in 'MainModule.pas' {Main: TWebAppPageModule} {*.wml},
+//  loginModule in 'loginModule.pas' {login: TWebPageModule} {*.wml},
+//  inBoxModule in 'inBoxModule.pas' {inBox: TWebPageModule} {*.wml},
+//  outBoxModule in 'outBoxModule.pas' {outBox: TWebPageModule} {*.wml},
+//  sendModule in 'sendModule.pas' {send: TWebPageModule} {*.wml},
+//  writeModule in 'writeModule.pas' {write: TWebPageModule} {*.wml},
+//  detailModule in 'detailModule.pas' {detail: TWebPageModule} {*.wml},
+//  readTxtModule in 'readTxtModule.pas' {readTxt: TWebPageModule} {*.wml},
+//  EMailCode in 'EMailCode.pas',
+//  gb_big5 in 'gb_big5.pas',
+//  serialization in 'serialization.pas',
+//  HashMap in 'dcl\HashMap.pas',
+//  config in 'config.pas' {$R *.res},
+//  big5 in 'big5.pas',
+//  AbstractContainer in 'dcl\AbstractContainer.pas',
+//  DCLUtil in 'dcl\DCLUtil.pas',
+//  DCL_intf in 'dcl\DCL_intf.pas',
+//  ArrayList in 'dcl\ArrayList.pas',
+//  ArraySet in 'dcl\ArraySet.pas',
+//  Algorithms in 'dcl\Algorithms.pas',
+//  UEncode in 'UEncode.pas',
+//  EZCrypt in 'EZCrypt.pas',
+//  RegisterModule in 'RegisterModule.pas' {reg: TWebPageModule},
+//  actionModule in 'actionModule.pas' {action: TWebPageModule},
+//  DataModule in 'DataModule.pas' {WebDataModuleShare: TWebDataModule},
+//  addNewMailBoxModule in 'addNewMailBoxModule.pas' {Add: TWebPageModule} {*.wml},
+//  IdAuthentication in 'NTLM\IdAuthentication.pas',
+//  IdAuthenticationSSPI in 'NTLM\IdAuthenticationSSPI.pas',
+//  IdSASLCollection in 'NTLM\IdSASLCollection.pas',
+//  IdSASLNTLM in 'NTLM\IdSASLNTLM.pas';
+//
+//{$R *.res}
+//
+//begin
+//  Application.Initialize;
+//  Application.CreateForm(TMainForm, MainForm);
+//  Application.Run;
+//end.
+

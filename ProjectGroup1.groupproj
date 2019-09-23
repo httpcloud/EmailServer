@@ -1,0 +1,252 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{4fa9cb57-abd8-49af-956c-3bf64ad9f038}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="MobileMail.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="XXTEA_TEST\XXTEA_DLL.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Test\WapMailTests.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="XXTEA_TEST\XXTEA_DLL_TEST\XXTEA_DLL_TEST.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Snapse.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\ThirdComponent\Delphi\dcpcrypt2-2009\DCPdelphi2009.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="ScriptObject\ScriptObjectForWebSnap.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\ThirdComponent\Delphi\TPerlRegEx\PerlRegExD2009.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\ThirdComponent\Delphi\xmlserializer\OmniXML\dpk\OmniXML_d2005.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="WebSnapTest\Project1.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="SQLite3_Demo\SQLite3_Demo.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\ThirdComponent\Delphi\DISQLite3.1.3.12\Demos\DISQLite3_Buffered_Grid\DISQLite3_Buffered_Grid.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="UTF8\UTF8_Test.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="EncryptTemplateDemo\EncryptTemplateDemo.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="IIS_Set\IIS\PrIIS.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="IIS_Set\IISSet_Good.Mail..CC\SysSetHelper.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\WapQuery\Weather_WebService_For_Delphi2010\WebService.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\ThirdComponent\Delphi\DISQLite.3_2.0.2\Source\DISQLite3_D2009.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\ThirdComponent\Delphi\DSL3_2010\DISQLite3_D2010.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="MobileMail">
+			<MSBuild Projects="MobileMail.dproj"/>
+		</Target>
+		<Target Name="MobileMail:Clean">
+			<MSBuild Targets="Clean" Projects="MobileMail.dproj"/>
+		</Target>
+		<Target Name="MobileMail:Make">
+			<MSBuild Targets="Make" Projects="MobileMail.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL">
+			<MSBuild Projects="XXTEA_TEST\XXTEA_DLL.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL:Clean">
+			<MSBuild Targets="Clean" Projects="XXTEA_TEST\XXTEA_DLL.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL:Make">
+			<MSBuild Targets="Make" Projects="XXTEA_TEST\XXTEA_DLL.dproj"/>
+		</Target>
+		<Target Name="WapMailTests">
+			<MSBuild Projects="Test\WapMailTests.dproj"/>
+		</Target>
+		<Target Name="WapMailTests:Clean">
+			<MSBuild Targets="Clean" Projects="Test\WapMailTests.dproj"/>
+		</Target>
+		<Target Name="WapMailTests:Make">
+			<MSBuild Targets="Make" Projects="Test\WapMailTests.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL_TEST">
+			<MSBuild Projects="XXTEA_TEST\XXTEA_DLL_TEST\XXTEA_DLL_TEST.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL_TEST:Clean">
+			<MSBuild Targets="Clean" Projects="XXTEA_TEST\XXTEA_DLL_TEST\XXTEA_DLL_TEST.dproj"/>
+		</Target>
+		<Target Name="XXTEA_DLL_TEST:Make">
+			<MSBuild Targets="Make" Projects="XXTEA_TEST\XXTEA_DLL_TEST\XXTEA_DLL_TEST.dproj"/>
+		</Target>
+		<Target Name="Snapse">
+			<MSBuild Projects="Snapse.dproj"/>
+		</Target>
+		<Target Name="Snapse:Clean">
+			<MSBuild Targets="Clean" Projects="Snapse.dproj"/>
+		</Target>
+		<Target Name="Snapse:Make">
+			<MSBuild Targets="Make" Projects="Snapse.dproj"/>
+		</Target>
+		<Target Name="DCPdelphi2009">
+			<MSBuild Projects="..\ThirdComponent\Delphi\dcpcrypt2-2009\DCPdelphi2009.dproj"/>
+		</Target>
+		<Target Name="DCPdelphi2009:Clean">
+			<MSBuild Targets="Clean" Projects="..\ThirdComponent\Delphi\dcpcrypt2-2009\DCPdelphi2009.dproj"/>
+		</Target>
+		<Target Name="DCPdelphi2009:Make">
+			<MSBuild Targets="Make" Projects="..\ThirdComponent\Delphi\dcpcrypt2-2009\DCPdelphi2009.dproj"/>
+		</Target>
+		<Target Name="ScriptObjectForWebSnap">
+			<MSBuild Projects="ScriptObject\ScriptObjectForWebSnap.dproj"/>
+		</Target>
+		<Target Name="ScriptObjectForWebSnap:Clean">
+			<MSBuild Targets="Clean" Projects="ScriptObject\ScriptObjectForWebSnap.dproj"/>
+		</Target>
+		<Target Name="ScriptObjectForWebSnap:Make">
+			<MSBuild Targets="Make" Projects="ScriptObject\ScriptObjectForWebSnap.dproj"/>
+		</Target>
+		<Target Name="PerlRegExD2009">
+			<MSBuild Projects="..\ThirdComponent\Delphi\TPerlRegEx\PerlRegExD2009.dproj"/>
+		</Target>
+		<Target Name="PerlRegExD2009:Clean">
+			<MSBuild Targets="Clean" Projects="..\ThirdComponent\Delphi\TPerlRegEx\PerlRegExD2009.dproj"/>
+		</Target>
+		<Target Name="PerlRegExD2009:Make">
+			<MSBuild Targets="Make" Projects="..\ThirdComponent\Delphi\TPerlRegEx\PerlRegExD2009.dproj"/>
+		</Target>
+		<Target Name="OmniXML_d2005">
+			<MSBuild Projects="..\ThirdComponent\Delphi\xmlserializer\OmniXML\dpk\OmniXML_d2005.dproj"/>
+		</Target>
+		<Target Name="OmniXML_d2005:Clean">
+			<MSBuild Targets="Clean" Projects="..\ThirdComponent\Delphi\xmlserializer\OmniXML\dpk\OmniXML_d2005.dproj"/>
+		</Target>
+		<Target Name="OmniXML_d2005:Make">
+			<MSBuild Targets="Make" Projects="..\ThirdComponent\Delphi\xmlserializer\OmniXML\dpk\OmniXML_d2005.dproj"/>
+		</Target>
+		<Target Name="Project1">
+			<MSBuild Projects="WebSnapTest\Project1.dproj"/>
+		</Target>
+		<Target Name="Project1:Clean">
+			<MSBuild Targets="Clean" Projects="WebSnapTest\Project1.dproj"/>
+		</Target>
+		<Target Name="Project1:Make">
+			<MSBuild Targets="Make" Projects="WebSnapTest\Project1.dproj"/>
+		</Target>
+		<Target Name="SQLite3_Demo">
+			<MSBuild Projects="SQLite3_Demo\SQLite3_Demo.dproj"/>
+		</Target>
+		<Target Name="SQLite3_Demo:Clean">
+			<MSBuild Targets="Clean" Projects="SQLite3_Demo\SQLite3_Demo.dproj"/>
+		</Target>
+		<Target Name="SQLite3_Demo:Make">
+			<MSBuild Targets="Make" Projects="SQLite3_Demo\SQLite3_Demo.dproj"/>
+		</Target>
+		<Target Name="DISQLite3_Buffered_Grid">
+			<MSBuild Projects="..\ThirdComponent\Delphi\DISQLite3.1.3.12\Demos\DISQLite3_Buffered_Grid\DISQLite3_Buffered_Grid.dproj"/>
+		</Target>
+		<Target Name="DISQLite3_Buffered_Grid:Clean">
+			<MSBuild Targets="Clean" Projects="..\ThirdComponent\Delphi\DISQLite3.1.3.12\Demos\DISQLite3_Buffered_Grid\DISQLite3_Buffered_Grid.dproj"/>
+		</Target>
+		<Target Name="DISQLite3_Buffered_Grid:Make">
+			<MSBuild Targets="Make" Projects="..\ThirdComponent\Delphi\DISQLite3.1.3.12\Demos\DISQLite3_Buffered_Grid\DISQLite3_Buffered_Grid.dproj"/>
+		</Target>
+		<Target Name="UTF8_Test">
+			<MSBuild Projects="UTF8\UTF8_Test.dproj"/>
+		</Target>
+		<Target Name="UTF8_Test:Clean">
+			<MSBuild Targets="Clean" Projects="UTF8\UTF8_Test.dproj"/>
+		</Target>
+		<Target Name="UTF8_Test:Make">
+			<MSBuild Targets="Make" Projects="UTF8\UTF8_Test.dproj"/>
+		</Target>
+		<Target Name="EncryptTemplateDemo">
+			<MSBuild Projects="EncryptTemplateDemo\EncryptTemplateDemo.dproj"/>
+		</Target>
+		<Target Name="EncryptTemplateDemo:Clean">
+			<MSBuild Targets="Clean" Projects="EncryptTemplateDemo\EncryptTemplateDemo.dproj"/>
+		</Target>
+		<Target Name="EncryptTemplateDemo:Make">
+			<MSBuild Targets="Make" Projects="EncryptTemplateDemo\EncryptTemplateDemo.dproj"/>
+		</Target>
+		<Target Name="PrIIS">
+			<MSBuild Projects="IIS_Set\IIS\PrIIS.dproj"/>
+		</Target>
+		<Target Name="PrIIS:Clean">
+			<MSBuild Targets="Clean" Projects="IIS_Set\IIS\PrIIS.dproj"/>
+		</Target>
+		<Target Name="PrIIS:Make">
+			<MSBuild Targets="Make" Projects="IIS_Set\IIS\PrIIS.dproj"/>
+		</Target>
+		<Target Name="SysSetHelper">
+			<MSBuild Projects="IIS_Set\IISSet_Good.Mail..CC\SysSetHelper.dproj"/>
+		</Target>
+		<Target Name="SysSetHelper:Clean">
+			<MSBuild Targets="Clean" Projects="IIS_Set\IISSet_Good.Mail..CC\SysSetHelper.dproj"/>
+		</Target>
+		<Target Name="SysSetHelper:Make">
+			<MSBuild Targets="Make" Projects="IIS_Set\IISSet_Good.Mail..CC\SysSetHelper.dproj"/>
+		</Target>
+		<Target Name="WebService">
+			<MSBuild Projects="..\WapQuery\Weather_WebService_For_Delphi2010\WebService.dproj"/>
+		</Target>
+		<Target Name="WebService:Clean">
+			<MSBuild Targets="Clean" Projects="..\WapQuery\Weather_WebService_For_Delphi2010\WebService.dproj"/>
+		</Target>
+		<Target Name="WebService:Make">
+			<MSBuild Targets="Make" Projects="..\WapQuery\Weather_WebService_For_Delphi2010\WebService.dproj"/>
+		</Target>
+		<Target Name="DISQLite3_D2009">
+			<MSBuild Projects="..\ThirdComponent\Delphi\DISQLite.3_2.0.2\Source\DISQLite3_D2009.dproj"/>
+		</Target>
+		<Target Name="DISQLite3_D2009:Clean">
+			<MSBuild Targets="Clean" Projects="..\ThirdComponent\Delphi\DISQLite.3_2.0.2\Source\DISQLite3_D2009.dproj"/>
+		</Target>
+		<Target Name="DISQLite3_D2009:Make">
+			<MSBuild Targets="Make" Projects="..\ThirdComponent\Delphi\DISQLite.3_2.0.2\Source\DISQLite3_D2009.dproj"/>
+		</Target>
+		<Target Name="DISQLite3_D2010">
+			<MSBuild Projects="..\ThirdComponent\Delphi\DSL3_2010\DISQLite3_D2010.dproj"/>
+		</Target>
+		<Target Name="DISQLite3_D2010:Clean">
+			<MSBuild Targets="Clean" Projects="..\ThirdComponent\Delphi\DSL3_2010\DISQLite3_D2010.dproj"/>
+		</Target>
+		<Target Name="DISQLite3_D2010:Make">
+			<MSBuild Targets="Make" Projects="..\ThirdComponent\Delphi\DSL3_2010\DISQLite3_D2010.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="MobileMail;XXTEA_DLL;WapMailTests;XXTEA_DLL_TEST;Snapse;DCPdelphi2009;ScriptObjectForWebSnap;PerlRegExD2009;OmniXML_d2005;Project1;SQLite3_Demo;DISQLite3_Buffered_Grid;UTF8_Test;EncryptTemplateDemo;PrIIS;SysSetHelper;WebService;DISQLite3_D2009;DISQLite3_D2010"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="MobileMail:Clean;XXTEA_DLL:Clean;WapMailTests:Clean;XXTEA_DLL_TEST:Clean;Snapse:Clean;DCPdelphi2009:Clean;ScriptObjectForWebSnap:Clean;PerlRegExD2009:Clean;OmniXML_d2005:Clean;Project1:Clean;SQLite3_Demo:Clean;DISQLite3_Buffered_Grid:Clean;UTF8_Test:Clean;EncryptTemplateDemo:Clean;PrIIS:Clean;SysSetHelper:Clean;WebService:Clean;DISQLite3_D2009:Clean;DISQLite3_D2010:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="MobileMail:Make;XXTEA_DLL:Make;WapMailTests:Make;XXTEA_DLL_TEST:Make;Snapse:Make;DCPdelphi2009:Make;ScriptObjectForWebSnap:Make;PerlRegExD2009:Make;OmniXML_d2005:Make;Project1:Make;SQLite3_Demo:Make;DISQLite3_Buffered_Grid:Make;UTF8_Test:Make;EncryptTemplateDemo:Make;PrIIS:Make;SysSetHelper:Make;WebService:Make;DISQLite3_D2009:Make;DISQLite3_D2010:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

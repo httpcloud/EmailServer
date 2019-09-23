@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="8jw03gl7a7l_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DIFileCache.TDIFileBlock">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,111,113" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DIFileCache.TDIFileBlock.Len" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DIFileCache.TDIFileBlock.Data" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DIFileCache.TDIFileCache">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="140,1,209,253" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DIFileCache.TDIFileCache.FBlockSize" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DIFileCache.TDIFileCache.FCache" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DIFileCache.TDIFileCache.FFileName" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DIFileCache.TDIFileCache.FFileStream" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DIFileCache.TDIFileCache.FUpdateCount" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DIFileCache.TDIFileCache.Create(System.AnsiString,System.Integer)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DIFileCache.TDIFileCache.AddBlocksToCache(System.Integer,System.Integer)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DIFileCache.TDIFileCache.BeginUpdate()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DIFileCache.TDIFileCache.EndUpdate()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DIFileCache.TDIFileCache.GetBlock(System.Integer)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DIFileCache.TDIFileCache.Invalidate()" />
+      <reference referencedUin="delphi:e_property:src:SQLite3_Demo:DIFileCache.TDIFileCache.BlockSize" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DIFileCache.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DIFileCache.@unitclass.BlockToHex(DIFileCache.TDIFileBlock*)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DIFileCache.@unitclass.BlockToText(DIFileCache.TDIFileBlock*)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DIFileCache.PDIFileBlock">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="368,1,171,36" />
+    </reference>
+  </view>
+</nodeSet>

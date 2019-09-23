@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="card1" title="Wap.MoFun.CC" newcontext="true">
+<do type="accept" label="答复" name="reply">
+  <go accept-charset="utf-8" href="<%=Pages.write.HREF%>" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</do>
+<do type="accept" label="全部答复" name="allReply">
+  <go accept-charset="utf-8" href="<%=Pages.write.HREF%>" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</do>
+<do type="accept" label="转发" name="allReply">
+  <go accept-charset="utf-8" href="<%=Pages.write.HREF%>" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</do>
+<do type="accept" label="转发" name="btLogin">
+  <go accept-charset="utf-8" href="<%=Pages.write.HREF%>" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</do>
+发件人:<#sender><br/>
+日期:<#time><br/>
+收件人:<#recipients><br/>
+主题:<#subject><br/>
+<#attatchment>
+<#body><br/>
+</card></wml>
+

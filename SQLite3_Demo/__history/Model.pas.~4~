@@ -1,0 +1,14 @@
+unit Model;
+
+interface
+
+uses disqlite3_encryption_db;
+
+type
+  UserInBox = class(TMailBoxConfigDatabase)
+
+  end;
+
+implementation
+
+end.

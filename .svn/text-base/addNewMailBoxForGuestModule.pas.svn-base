@@ -1,0 +1,306 @@
+unit addNewMailBoxForGuestModule;
+
+interface
+
+uses
+  SysUtils, Classes, HTTPApp, WebModu, HTTPProd,idGlobal,StrUtils;
+
+type
+  TNewGuest = class(TWebPageModule)
+    PageProducer: TPageProducer;
+    procedure WebPageModuleBeforeDispatchPage(Sender: TObject;
+      const PageName: string; var Handled: Boolean);
+    procedure PageProducerHTMLTag(Sender: TObject; Tag: TTag;
+      const TagString: string; TagParams: TStrings; var ReplaceText: string);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+  function NewGuest: TNewGuest;
+
+implementation
+
+{$R *.dfm}  {*.wml}
+
+uses WebReq, WebCntxt, WebFact, Variants, Config,DataModule,WebDisp,ActionModule,serialization,sendModule,
+  loginModule;
+
+function NewGuest: TNewGuest;
+begin
+  Result := TNewGuest(WebContext.FindModuleClass(TNewGuest));
+end;
+
+procedure TNewGuest.PageProducerHTMLTag(Sender: TObject; Tag: TTag;
+  const TagString: string; TagParams: TStrings; var ReplaceText: string);
+begin
+  if TagString='ms' then ReplaceText := Session.SessionID+loginModule.AppendUserInfo(Request.QueryFields.Values['box']);
+
+end;
+
+procedure TNewGuest.WebPageModuleBeforeDispatchPage(Sender: TObject;
+  const PageName: string; var Handled: Boolean);
+var
+  mcfg:TMailConfig;
+  user:TUser;
+  userId:integer;
+  emailAddress,pop3Server,smtpServer,userName,msg,PSvr,SSvr,domain,TestResult:string;
+  up,uname,pwd,loginType:AnsiString;
+  pop3SSL,smtpSSL,pop3Port,smtpPort,isDefault:integer;
+begin
+  Response.ContentType := 'text/vnd.wap.wml';
+  loginType := '';
+  //if (Request.ContentFields.Count<10) and (Request.QueryFields.Count<10) then
+  //  exit;
+  {
+  if(Session.Values[TConfig.currentUserSession]='') then
+  begin
+    DispatchPageName('main',Response,[]);
+    handled := true;
+    exit;
+  end;
+  }
+
+  if (Request.ContentFields.Count=0) then
+  begin
+    if ((Request.QueryFields.Count=2) or (Request.QueryFields.Count=3) or (Request.QueryFields.Count=4) or (Request.QueryFields.Count=5)) and (Request.QueryFields.Values['up']<>'') then
+    begin
+      up :=  Request.QueryFields.Values['up'];
+      if(Config.decryptUserInfo(up,uname,pwd))then
+      begin
+       if(pwd='NULL')then  //说明可能由手机书签链接过来
+       begin
+         emailAddress := uname;
+         mcfg := TMailConfig.create(owner);
+         if DataModule.WebDataModuleShare.ReadGuestMailServerConfig(emailAddress,mcfg) then
+           Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep22','',emailAddress)+'&box='+emailAddress+'&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&SA='+iif(mcfg.smtpAuthencation,'1','0')+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(mcfg.smtpPort)+'&PS='+iif(mcfg.pop3SSL,'1','0')+'&SS='+iif(mcfg.smtpSSL,'1','0')+'&lt=0')  //列出所有配置,lt=0 ，表示由手机书签登录,lt 为loginType所写，表示登录方式。
+         else
+           Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3','',uname)+'&box='+uname+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(mcfg.smtpPort));
+         mcfg.Free;
+         Handled := true;
+         exit;
+       end
+       else
+       if (pwd<>'') and IsEMail(uname) then  //说明不仅存了用户信箱，而且还存了对应的密码 ，那么暂且还按非注册用户流程处理，以后有时间再改(根据用户是否同意保存密码）来确定是否完全自动登录。
+       begin
+         emailAddress := uname;
+         mcfg := TMailConfig.create(owner);
+         if DataModule.WebDataModuleShare.ReadGuestMailServerConfig(emailAddress,mcfg) then
+           Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep22','',emailAddress)+'&box='+emailAddress+'&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&SA='+iif(mcfg.smtpAuthencation,'1','0')+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(mcfg.smtpPort)+'&PS='+iif(mcfg.pop3SSL,'1','0')+'&SS='+iif(mcfg.smtpSSL,'1','0')+'&lt=0')  //列出所有配置,lt=0 ，表示由手机书签登录,lt 为loginType所写，表示登录方式。
+         else
+           Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3','',uname)+'&box='+uname+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(mcfg.smtpPort));
+         mcfg.Free;
+         Handled := true;
+         exit;
+       end;
+      end;
+    end
+    else
+    begin
+      //Response.SendRedirect(getCommonAction('addNewMailBoxForGuestStep1'));
+      Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep1'),false);
+    end;
+  end
+  else
+  if (Request.ContentFields.Count=1) then  //开始取第一步传过来的邮箱全名
+  begin
+    emailAddress := Request.ContentFields.Values['box'];
+    if isEmail(emailAddress) then
+    begin
+      emailAddress := lowercase(emailAddress);
+      mcfg := TMailConfig.create(owner);
+      if DataModule.WebDataModuleShare.ReadGuestMailServerConfig(emailAddress,mcfg) then
+      begin
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep22','',emailAddress)+'&box='+emailAddress+'&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&SA='+iif(mcfg.smtpAuthencation,'1','0')+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(mcfg.smtpPort)+'&PS='+iif(mcfg.pop3SSL,'1','0')+'&SS='+iif(mcfg.smtpSSL,'1','0'));  //第二步之2，列出所有配置
+      end
+      else
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep21','',emailAddress)+'&box='+emailAddress+'&s=2');  //第二步之1，请输入是否是SSL加密通道方式连接。
+    end
+    else
+    begin  //非法EMail地址继续转向开始让用户重新输入邮箱
+      Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep1','-9'))
+    end;
+  end
+  else
+  if (Request.ContentFields.Count=3) or ((Request.ContentFields.Count=5) and (Request.ContentFields.Values['s']='1')) then  //取传过来的SSL情况
+  begin
+    emailAddress := Request.ContentFields.Values['box'];
+    if isEmail(emailAddress) then
+    begin
+      emailAddress := lowercase(emailAddress);
+      pop3SSL := StrToIntDef(Request.ContentFields.Values['PS'],0);
+      smtpSSL := StrToIntDef(Request.ContentFields.Values['SS'],0);
+      userName := LeftStr(emailAddress,pos('@',emailAddress)-1);
+      domain := RightStr(emailAddress,length(emailAddress)-pos('@',emailAddress));
+      PSvr := 'pop3.'+domain;
+      SSvr := 'smtp.'+domain;
+      if (pop3SSL=1) and (smtpSSL=1) then
+      begin
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3All','',emailAddress)+'&box='+emailAddress+'&s=2&PSvr='+PSvr+'&SSvr='+SSvr);
+      end
+      else
+      if (pop3SSL=1) then
+      begin
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3PS','',emailAddress)+'&box='+emailAddress+'&s=2&PSvr='+PSvr+'&SSvr='+SSvr);
+      end
+      else
+      if (smtpSSL=1) then
+      begin
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3SS','',emailAddress)+'&box='+emailAddress+'&s=2&PSvr='+PSvr+'&SSvr='+SSvr);
+      end
+      else
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3','',emailAddress)+'&box='+emailAddress+'&s=2&PSvr='+PSvr+'&SSvr='+SSvr);
+    end
+    else //非法EMail地址继续转向开始让用户重新输入邮箱
+    begin
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep1'));
+    end
+  end
+  else
+  if (Request.ContentFields.Count=6) and (Request.ContentFields.Values['s']='1') then//s=1 代表 step=1，亦即第一步
+  begin
+    emailAddress := Request.ContentFields.Values['box'];
+    if isEmail(emailAddress) then
+    begin
+      emailAddress := lowercase(emailAddress);
+      pop3SSL := StrToIntDef(Request.ContentFields.Values['PS'],0);
+      smtpSSL := StrToIntDef(Request.ContentFields.Values['SS'],0);
+      isDefault := StrToIntDef(Request.ContentFields.Values['D'],1);
+
+      userName := LeftStr(emailAddress,pos('@',emailAddress)-1);
+
+      pop3Server := replaceText(emailAddress,userName+'@','pop3.');
+      smtpServer := replaceText(emailAddress,userName+'@','smtp.');
+
+      pop3Port := iif(pop3SSL=1,995,110);
+      smtpPort := iif(smtpSSL=1,25,25) ;
+
+      //SafeRedirect(Response,getCommonAction('addNewMailBoxStep2','')+'&box='+emailAddress+'&PS='+IntToStr(pop3SSL)+'&SS='+IntToStr(smtpSSL)+'&MUID='+userName+'&PSvr='+pop3Server+'&SSvr='+smtpServer+'&PP='+IntToStr(pop3Port)+'&SP='+IntToStr(smtpPort));
+      Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep2','',emailAddress)+'&box='+emailAddress+'&PS='+IntToStr(pop3SSL)+'&SS='+IntToStr(smtpSSL)+'&MUID='+userName+'&PSvr='+pop3Server+'&SSvr='+smtpServer+'&PP='+IntToStr(pop3Port)+'&SP='+IntToStr(smtpPort)+'&D='+IntToStr(isDefault));
+    end
+    else
+      Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep1','-8'));
+    handled := true;
+    exit;
+  end
+  else
+  if Session.Values[TConfig.currentUserSession]<>'' then
+  begin
+    user := TUser.Create(self);
+    serialization.StrToComponent(Session.Values[TConfig.currentUserSession],user);
+    userId := user.userId;
+    user.Free;
+  end;
+
+  if (Request.ContentFields.Count=9) then //全部参数提供完毕
+  begin
+    loginType := Request.QueryFields.Values['lt'];
+    if loginType<>'' then
+      loginType := '&lt='+loginType;
+    mcfg := TMailConfig.create(self);
+    mcfg.mailAddress := lowercase(Request.ContentFields.Values['box']);
+    mcfg.pop3Server := Request.ContentFields.Values['PSvr'];
+    mcfg.smtpServer := Request.ContentFields.Values['SSvr'];
+    //mcfg.mailUserName := Request.ContentFields.Values['MUID'];
+    mcfg.mailUserName := LeftStr(mcfg.mailAddress,pos('@',mcfg.mailAddress)-1);
+    mcfg.mailPassword := Request.ContentFields.Values['MPWD'];
+    mcfg.smtpAuthencation := iif(Request.ContentFields.Values['SA']='1',true,false);
+    mcfg.pop3Port := StrToIntDef(Request.ContentFields.Values['PP'],110);
+    mcfg.pop3SSL := iif(Request.ContentFields.Values['PS']='1',true,false);
+    mcfg.smtpPort := StrToIntDef(Request.ContentFields.Values['SP'],25);
+    mcfg.smtpSSL := iif(Request.ContentFields.Values['SS']='1',true,false);
+    mcfg.isDefault := iif(Request.ContentFields.Values['D']='1',true,false);
+    if(mcfg.mailPassword='')then
+    begin
+      if(mcfg.pop3SSL) and (mcfg.smtpSSL) then
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3ALLR','-10')+'&box='+mcfg.mailAddress+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(mcfg.smtpPort)+loginType)
+      else
+      if(mcfg.pop3SSL) then
+        //Response.SendRedirect(getCommonAction('addNewMailBoxForGuestStep3PSR','-10')+'&box='+mcfg.mailAddress+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(mcfg.smtpPort))
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3PSR','-10')+'&box='+mcfg.mailAddress+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(25)+loginType)
+      else
+      if(mcfg.smtpSSL) then
+        //Response.SendRedirect(getCommonAction('addNewMailBoxForGuestStep3SSR','-10')+'&box='+mcfg.mailAddress+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(mcfg.smtpPort))
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3SSR','-10')+'&box='+mcfg.mailAddress+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&PP='+IntToStr(110)+'&SP='+IntToStr(mcfg.smtpPort)+loginType)
+      else
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3','-10')+'&box='+mcfg.mailAddress+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(mcfg.smtpPort)+loginType);
+      mcfg.Free;
+      Handled := true;
+      exit;
+    end;
+
+    if loginType='&lt=0' then
+    begin
+      user := TUser.Create(owner,1);
+      user.userId :=   Config.TUserLoginMode.guestUserMapVlaue;
+      user.userName := mcfg.mailUserName;
+      user.userName := mcfg.mailAddress;
+      user.userMail := mcfg.mailAddress;
+      user.password := mcfg.mailPassword;
+      user.loginMode := TUserLoginMode.guest;
+      TestResult := Tlogin.LoginPOP3MailServer(user,mcfg);
+      if TestResult='' then
+      begin
+        Session.Values[TConfig.currentUserSession] := serialization.ComponentToStr(user);
+        //Response.SendRedirect(getCommonAction('loginModule'));
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep42')+'&up='+config.encryptUserInfo(mcfg.mailAddress,mcfg.mailPassword));
+      end
+      else
+      begin
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep22','-12',mcfg.mailAddress)+'&box='+mcfg.mailAddress+'&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&SA='+iif(mcfg.smtpAuthencation,'1','0')+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(mcfg.smtpPort)+'&PS='+iif(mcfg.pop3SSL,'1','0')+'&SS='+iif(mcfg.smtpSSL,'1','0')+'&errorMsg='+TestResult)
+      end;
+    end
+    else
+    begin
+      if (not POP3Test(mcfg,msg)) or (not SMTPTest(mcfg,msg)) then
+      begin
+        if(mcfg.pop3SSL) and (mcfg.smtpSSL) then
+          Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3ALLR','-11')+'&box='+mcfg.mailAddress+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(mcfg.smtpPort)+'&errorMsg='+msg)
+        else
+        if(mcfg.pop3SSL) then
+          Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3PSR','-11')+'&box='+mcfg.mailAddress+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&PP='+IntToStr(mcfg.pop3Port)+'&SP='+IntToStr(25)+'&errorMsg='+msg)
+        else
+        if(mcfg.smtpSSL) then
+          Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3SSR','-11')+'&box='+mcfg.mailAddress+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&PP='+IntToStr(110)+'&SP='+IntToStr(mcfg.smtpPort)+'&errorMsg='+msg)
+        else
+          Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep3','-11')+'&box='+mcfg.mailAddress+'&s=2&PSvr='+mcfg.pop3Server+'&SSvr='+mcfg.smtpServer+'&errorMsg='+msg);
+        mcfg.Free;
+        Handled := true;
+        exit;
+        //Response.SendRedirect(getCommonAction('addNewMailBoxStep2','')+'&box='+mcfg.mailAddress+'&PS='+iif(mcfg.pop3SSL,'1','0')+'&SS='+iif(mcfg.smtpSSL,'1','0')+'&MUID='+mcfg.mailUserName+'&PSvr='+mcfg.pop3Server+'&SSvr='+smtpServer+'&PP='+IntToStr(pop3Port)+'&SP='+IntToStr(smtpPort)+'&D='+IntToStr(isDefault));
+      end
+      else
+      if WebDataModuleShare.InsertGuestMailServerConfig(mcfg.mailAddress,mcfg) then
+      begin
+        user := TUser.Create(owner,1);
+        user.userId := Config.TUserLoginMode.guestUserMapVlaue;
+        user.userName := mcfg.mailUserName;
+        user.userName := mcfg.mailAddress;
+        user.userMail := mcfg.mailAddress;
+        user.password := mcfg.mailPassword;
+        user.loginMode := TUserLoginMode.guest;
+        Session.Values[TConfig.currentUserSession] := serialization.ComponentToStr(user);
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxForGuestStep4')+'&up='+config.encryptUserInfo(mcfg.mailAddress,mcfg.mailPassword));
+        mcfg.Free;
+      end
+      else
+      begin
+        mcfg.Free;
+        Config.SafeRedirectTo(Response,getCommonAction('addNewMailBoxStatus_Failure'));
+      end;
+    end;
+  end;
+//  else
+//    Response.SendRedirect(getCommonAction('addNewMailBoxForGuestStep1',''));
+  Handled := true;
+end;
+
+initialization
+  if WebRequestHandler <> nil then
+    WebRequestHandler.AddWebModuleFactory(TWebPageModuleFactory.Create(TNewGuest, TWebPageInfo.Create([wpPublished {, wpLoginRequired}], '.wml'), crOnDemand, caCache)
+
+);
+
+end.
+

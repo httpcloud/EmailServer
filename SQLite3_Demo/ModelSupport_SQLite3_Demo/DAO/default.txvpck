@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="o0a7cithdxo61x7cq_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="design:view:::p6gq45xzlxolgbhnp_v">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,113,151" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DAO.UserInBox.UserInBox" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DAO.UserInBox.@unitclass" />
+    </reference>
+  </view>
+</nodeSet>

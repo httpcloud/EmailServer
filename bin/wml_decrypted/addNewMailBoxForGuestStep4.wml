@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="success" title="手机邮" newcontext="true">
+<p>
+<b><u>游客体验通道</u></b><br/>
+恭喜!您可以使用手机邮箱!<br/>
+为了方便您下次直接登陆邮箱而无需再次配置,你可以将当前页面加入您的手机书签,下次你只需打开该书签即可直接登陆。
+<br/>
+<a href="<%=Pages.login.HREF%>?ms=<#ms>&amp;up=<#up>">转到收件箱</a>
+<!-- #include file="return.wml" -->
+</p>
+</card>
+</wml>
+

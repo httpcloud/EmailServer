@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="demo" title ="<#title>" newcontext="true">
+<p>
+
+随时随地访问任意邮箱!<br/><br/>
+
+当前域名:<#domain><br/><br/>
+<#info card=demo>
+邮箱地址:<input name="UID" emptyok="true" maxlength="25" /><br/>
+邮箱密码:<input name="PWD" emptyok="true" type="password" maxlength="25" />
+<#SYSMSG>
+<anchor title="登陆">
+  <go accept-charset="utf-8" href="<%=Pages.login.HREF%>" method="post">
+	<postfield name="POP" value="100"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>登录
+</anchor><br/>
+<a href="http://wap..cc/mails/bin/MobileMail.dll/action?&amp;ac=addNewMailBoxForGuestStep1">更多邮箱登陆</a><br/>
+<br/>
+<#mailUpdate>
+<br/>任何事宜请发邮件至 i@.cc，我们会尽快做出响应 !<br/>
+祝您开心每一天 !<br/><br/>
+<a href="http://wap..cc">退出邮箱</a>
+<br/>
+</p>
+</card>
+</wml>

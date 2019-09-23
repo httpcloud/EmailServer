@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml><card id="crd" title="手机邮">
+<p>
+<b><u>待发送邮件</u></b><br/>
+收件人:<input name="rcpnts" emptyok="false" tabindex="0" maxlength="100" value="<#rcpnts>"/><br/>
+主题:<input name="sbjct" emptyok="false" tabindex="1" maxlength="100" value="<#sbjct>"/><br/>
+<#msg>
+内容:<input name="bdy" emptyok="false" tabindex="3" maxlength="500" value="<#bdy>"/><br/>
+<anchor>发送
+  <go accept-charset="utf-8" href="<%=Pages.send.HREF%>?ms=<#ms>" method="post">
+	<postfield name="R" value="$(rcpnts)"/>
+	<postfield name="S" value="$(sbjct)"/>
+	<postfield name="C" value="$(bdy)"/>
+	<postfield name="mt" value="2"/>
+	<postfield name="md" value="<#md>"/>
+  </go>
+</anchor>
+<anchor><#cancel>
+  <go accept-charset="utf-8" href="<%=Pages.outBox.HREF%>?ms=<#ms>" method="post">
+	<postfield name="md" value="<#md>"/>
+	<postfield name="op" value="2"/>
+  </go>
+</anchor>
+<do type="accept" label="撤消" name="btCancel">
+  <go accept-charset="utf-8" href="login" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</do>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>

@@ -1,0 +1,99 @@
+Delivered-To: i@mofun.cc
+Received: by 10.141.169.1 with SMTP id w1cs193273rvo;
+        Tue, 9 Dec 2008 06:57:54 -0800 (PST)
+Received: by 10.90.97.16 with SMTP id u16mr89941agb.52.1228834674239;
+        Tue, 09 Dec 2008 06:57:54 -0800 (PST)
+Return-Path: <grbounce-gakO0QUAAACO6x81tj6iH8QnMGIj7QdI=i=mofun.cc@googlegroups.com>
+Received: from yx-out-2526.google.com (yx-out-2526.google.com [74.125.44.32])
+        by mx.google.com with ESMTP id 34si186252yxl.8.2008.12.09.06.57.52;
+        Tue, 09 Dec 2008 06:57:53 -0800 (PST)
+Received-SPF: pass (google.com: domain of grbounce-gakO0QUAAACO6x81tj6iH8QnMGIj7QdI=i=mofun.cc@googlegroups.com designates 74.125.44.32 as permitted sender) client-ip=74.125.44.32;
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of grbounce-gakO0QUAAACO6x81tj6iH8QnMGIj7QdI=i=mofun.cc@googlegroups.com designates 74.125.44.32 as permitted sender) smtp.mail=grbounce-gakO0QUAAACO6x81tj6iH8QnMGIj7QdI=i=mofun.cc@googlegroups.com; dkim=pass (test mode) header.i=@googlegroups.com
+Received: by yx-out-2526.google.com with SMTP id 4so439636yxk.60
+        for <i@mofun.cc>; Tue, 09 Dec 2008 06:57:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlegroups.com; s=beta;
+        h=domainkey-signature:received:received:x-sender:x-apparently-to
+         :mime-version:received:date:in-reply-to:x-ip:references:user-agent
+         :x-http-useragent:message-id:subject:from:to:content-type
+         :content-transfer-encoding:reply-to:sender:precedence:x-google-loop
+         :mailing-list:list-id:list-post:list-help:list-unsubscribe
+         :x-beenthere-env:x-beenthere;
+        bh=OVbVmyhUeenc2IjkSBl+wKQcZ5brhJdOmPZQm9zsTMg=;
+        b=zbr0MjqY0W6qRcYqA3NNpNvlcF2DMe7kqqrcSCf7j5sG1cY50RUbZSuxBC2xcHoHN9
+         8f9lS8igPtkApkxvtqxJZI7E/muQEFTAW26FrTg9W3n+O9T8/F8fijMXx4+pnZUSKYEn
+         plvNYmH+DavrAAGvIwcu203LZApwh46iFf4TE=
+DomainKey-Signature: a=rsa-sha1; c=nofws;
+        d=googlegroups.com; s=beta;
+        h=x-sender:x-apparently-to:mime-version:date:in-reply-to:x-ip
+         :references:user-agent:x-http-useragent:message-id:subject:from:to
+         :content-type:content-transfer-encoding:reply-to:sender:precedence
+         :x-google-loop:mailing-list:list-id:list-post:list-help
+         :list-unsubscribe:x-beenthere-env:x-beenthere;
+        b=4vx+wJgPWDgM0gQMYqeyyGhaK4uhe39HeU6VU4gIAKJFq/ME+zeT8vgEmzo0i4iXXS
+         lhK8kn3vxhBpjB0BsiUPJfShwXgKvoHMfr0FRSUBZuvUKh8fYIcCLfR+afC24iC0/OJ9
+         eIiDwHzIB1xKLNM4k0qyWGExYI7LuOSyE6w5Y=
+Received: by 10.100.249.10 with SMTP id w10mr18475anh.29.1228834665931;
+        Tue, 09 Dec 2008 06:57:45 -0800 (PST)
+Received: by 10.177.41.40 with SMTP id t40gr19686yqj.0;
+	Tue, 09 Dec 2008 06:57:45 -0800 (PST)
+X-Sender: caorui@gmail.com
+X-Apparently-To: pongba@googlegroups.com
+MIME-Version: 1.0
+Received: by 10.100.197.3 with SMTP id u3mr20536anf.6.1228834664850; Tue, 09  Dec 2008 06:57:44 -0800 (PST)
+Date: Tue, 9 Dec 2008 22:57:44 +0800
+In-Reply-To:
+ <765ed661-65a9-40ee-b113-d4300aea32b4@k24g2000pri.googlegroups.com>
+X-IP: 123.120.6.128
+References:
+ <7604c936-1241-4f19-bb0e-526bc6430c3c@35g2000pry.googlegroups.com>  <f7bdf99e-9413-4d51-bc2d-19ce5dede801@r36g2000prf.googlegroups.com>
+User-Agent: G2/1.0
+X-HTTP-UserAgent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US)  AppleWebKit/528.6 (KHTML, like Gecko) Chrome/0.5.155.0 Safari/528.6,gzip(gfe),gzip(gfe)
+Message-ID: <765ed661-65a9-40ee-b113-d4300aea32b4@k24g2000pri.googlegroups.com>
+Subject: [TopLanguage] Re: 关于cache的设计
+From: "Rui" <caorui@gmail.com>
+To: "TopLanguage" <pongba@googlegroups.com>
+Content-Type: text/plain;
+	charset="GB2312"
+Content-Transfer-Encoding: base64
+Reply-To: pongba@googlegroups.com
+Sender: pongba@googlegroups.com
+Precedence: bulk
+X-Google-Loop: groups
+Mailing-List: list pongba@googlegroups.com;
+	contact pongba+owner@googlegroups.com
+List-Id: <pongba.googlegroups.com>
+List-Post: <mailto:pongba@googlegroups.com>
+List-Help: <mailto:pongba+help@googlegroups.com>
+List-Unsubscribe: <http://googlegroups.com/group/pongba/subscribe>,
+	<mailto:pongba+unsubscribe@googlegroups.com>
+X-BeenThere-Env: pongba@googlegroups.com
+X-BeenThere: pongba@googlegroups.com
+
+ztLU2dfQz7jP68/rLM7SvvW1w7nYvPzKx8Tj1NrHsMbasNFzcGlkZXK1xNDQzqq5/cLLtfQu1sHT
+2tPDVXNlci1BZ2VudLn9wsu7ucrHzai5/c2zvMa3vcq9uf3Cyyy2vNOmuMPKx9PQ0Ke1xCyyu9Kq
+1ru2otfFDQpMUlXLq8/ywbSx7c/rsOy3qMHLLg0KDQpPbiAxMtTCOcjVLCDPws7nMTDKsTQ5t9Ys
+IFJ1aSA8Y2FvLi4uQGdtYWlsLmNvbT4gd3JvdGU6DQo+IMTjsru74cO/tM63w87Ktry4/NDCY2Fj
+aGXB0LHtsMku1eK49tOmuMPV4tH5yei8xrXELL7Nyse31s6qzbO8xrrNwbSx7bj80MLBvbj2sr3W
+6C4NCj4gxOPUrcC0tcTL47eouf3T2sP0uNDByyzSsr7NysfLtcvmsePSu7TOt8POyra8u+G1vNbC
+xOO1xMG0se24/NDCP9Xisru3+7rP0ruw47XEuebCyS4NCj4g06a4w8rH1eLR+bXELMv509C1xLfD
+zsq2vNKqvq25/c2zvMbEo7/pLLjDzbO8xsSjv+nF0LbPs6y5/ePQ1rW687LFxNy4/NDCwbSx7SzV
+4tH5xNy5u7DR1u7I53NwaWRlctauwOC1xMW8t6LS8svYxcWz/dTazeIuDQo+IMbkyrW21NPac3Bp
+ZGVy1eLR+bnmwsnHv7XEt8ezo8jd0tfFxbP9LL7ZwP3LtSyyydPD0rvW1sa9uuK8x7fWt73KvS68
+2cjn1b7Jz9PQMTAwuPbSs8PmLNTyw7+49tKzw+bGvbrivMe31i7TydPa08nT2nNwaWRlcsrHDQo+
+IMir1b7Dv7j20rPD5ra8t8POyrW9wcss1PLDv7j20rPD5rXEt9bWtba8zOG43yy94bn7uPfSs8Pm
+tcTFxcP7trzDu9PQseQuDQo+DQo+IMa9uuK8x7fW1rvKx9K71ta3vbeoLMTjv8nS1Lj5vt3E49fU
+vLq1xMq1vMrH6b/2wLTJ6LzG0rvW1s2zvMbL47eoLg0KPg0KPiDO0r71tcO52Lz81NrT2sTj1eK4
+9kxSVbHtLLK7xNy5/dPaw/S40Cyyu8TcttTDv7TOwbS907fDzsq2vLjEseQuscjI58novMa7+sb3
+yMu1xM7ItqjQ0Nffy+O3qMqxLMTj0qq21LSruNDG98O/tM7QxbrFsru+rc2zvMa+zdaxvdPX99PD
+tcQNCj4gu7AsxOPV4rv6xvfIy7/PtqjDu7eo08PG8MC0LNLyzqq357S1st22r8v8vs3T0Ln9vKS3
+tNOmLg0KPg0KPiBPbiAxMtTCOcjVLCDPws7nOMqxMTG31iwgY2hhc2VkcmVhbSA8ZG9uZ2ZlaS4u
+LkBnbWFpbC5jb20+IHdyb3RlOg0KPg0KPg0KPg0KPiA+INTayei8xmNhY2hlz7XNs7XEyrG68qOs
+ssnTw0xSVcvjt6ijrLOjs6PKudPDy6vP8sG0se2ho7y0tbHSs8Pmw/zW0Mqxo6y9q7TLvdq147fF
+tb3BtLHtzrKyv6OsyOfT0NDC0rPD5r34yOujrNTyzOa7u7X0wbSx7c23sr+1xL3ateOjrNXiDQo+
+ID4g0fm/ydLUsaPWpE+jqDGjqbi01NO2yKGjttTT2tK70Km3w87KtcRzcGlkZXKjrNPJ09rL+8PH
+ysfIq834senA+qOsv8nE3L7Nxsa7tcHLbHJ1tcTM2NDUo6zTsM/swcvG5Mv708O7p7XEt8POyqGj
+z9bU2sjnus64xL34DQo+ID4gY2FjaGW1xLLfwtS78tXfyv2+3b3hubmjrMq5tcO8yMTcwvrX48jI
+tePSs8PmtcS3w87Ko6jG1c2o08O7p7XE0NDOqqOpo6zT1sTct/u6z3NwaWRlcrXE0OjH88TYo6y0
+87zS09DDu9PQusO1xM/rt6ihow0K
+.

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2008-12-09 22:42:52.593.pas,E:\Documents and Settings\Administrator\My Documents\RAD Studio\Projects\Unit3.pas=L:\Projects\WapMail_080102_For_Delphi2009\SSL\Unit1.pas</Transaction>
+    <Transaction>2008-12-09 22:42:52.593.dfm,E:\Documents and Settings\Administrator\My Documents\RAD Studio\Projects\Unit3.dfm=L:\Projects\WapMail_080102_For_Delphi2009\SSL\Unit1.dfm</Transaction>
+    <Transaction>2008-12-09 22:42:54.906.dproj,E:\Documents and Settings\Administrator\My Documents\RAD Studio\Projects\Project1.dproj=L:\Projects\WapMail_080102_For_Delphi2009\SSL\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

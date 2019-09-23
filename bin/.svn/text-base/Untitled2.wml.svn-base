@@ -1,0 +1,59 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.2//EN"
+ "http://www.wapforum.org/DTD/wml12.dtd">
+<wml><card id="crd1" title="">
+<p>
+邮箱全名:<input name="box" emptyok="false" tabindex="0" maxlength="100"/><br/>
+<a href="addMailBox_func.wmls#getSvr($box)">下一步</a>
+</p>
+</card>
+<card id="crd2" title="">
+<onevent type="oneventforward">
+<refresh/>
+</onevent>
+<p>
+邮箱全名:$box <a href="#crd1">更改</a><br/>
+$POP3 <br/>
+$SMTP  <br/>
+$UN   <br/>
+
+POP3服务器:<input name="PSvr" value="$(POP3)" tabindex="1" maxlength="100"/><br/>
+SMTP服务器:<input name="SSvr" value="$(SMTP)" emptyok="false" talbeindex="2" maxlength="100"/><br/>
+
+用户名:<input name="MUID" value="$UN" emptyok="false" tabindex="3" maxlength="100"/><br/>
+密码:<input name="MPWD" emptyok="false" tableindex="4" maxlength="25"/><br/>
+SMTP服务器需认证
+<select name="SA">
+	<optgroup title="Auth">
+		<option value="1">是</option>
+		<option value="0">否</option>
+	</optgroup>
+</select><br/>
+POP3端口:<input name="PP" value="110" size="5" matxlenghth="5"/><br/>
+POP3要求SSL加密:
+<select name="PS">
+	<option value="0">否</option>
+	<option value="1">是</option>
+</select><br/>
+SMTP端口:<input name="SP" value="25" size="5" maxlength="5"/><br/>
+SMTP要求SSL加密:
+<select name="SS">
+		<option value="0">否</option>
+		<option value="1">是</option>
+</select><br/>
+<do type="accept" label="保存" name="btLogin">
+  <go accept-charset="utf-8" href="<%=Pages.add.HREF%>?ms=<#ms>" method="post">
+	<postfield name="box" value="$(box)"/>
+	<postfield name="PSvr" value="$(PSvr)"/>
+	<postfield name="SSvr" value="$(PSvr)"/>
+	<postfield name="MUID" value="$(MUID)"/>
+	<postfield name="MPWD" value="$(MPWD)"/>
+	<postfield name="SA" value="$(SA)"/>
+	<postfield name="PP" value="$(PP)"/>
+	<postfield name="PS" value="$(PS)"/>
+	<postfield name="SP" value="$(SP)"/>
+	<postfield name="SS" value="$(SS)"/>
+  </go>
+</do>
+</p>
+</card></wml>

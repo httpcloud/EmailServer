@@ -1,0 +1,527 @@
+unit DISQLite3_Encryption_CitiesDB;
+
+interface
+
+uses
+  DISQLite3Cache, DISQLite3Database, SysUtils, StrUtils, IdStrings, IdGlobal;
+
+type
+  { Record to store information about a city. }
+  TCityRec = record
+    City: WideString;
+    Country: WideString;
+    Population: Integer;
+  end;
+
+  PCityRec = ^TCityRec;
+
+  TMailBoxConfigRec = record
+    MailDomain: WideString;
+    SMTPServer: WideString;
+    POP3Server: WideString;
+    SMTPPort: Integer;
+    POP3Port: Integer;
+    SMTPSSL: boolean;
+    POP3SSL: boolean;
+    SMTPSSLPort: Integer;
+    POP3SSLPort: Integer;
+    POP3UserName: WideString;
+    POP3Password: WideString;
+    SMTPUserName: WideString;
+    SMTPPassword: WideString;
+    UpdateMail: WideString;
+    UpdaeTime: TDateTime;
+  public
+    procedure InitializeProcess;
+    constructor CreatePredigest(const EMail: String; const Password: String);
+
+  end;
+
+  PMailBoxConfigRec = ^TMailBoxConfigRec;
+
+
+
+  // ------------------------------------------------------------------------------
+  // TCitiesCache class
+  // ------------------------------------------------------------------------------
+
+  { Cache for TCityRec (above), used by TCitiesDatabase (below). }
+  TCitiesCache = class(TDIAbstractSQLite3Cache)
+    procedure DoInitializeItem(const AItem: Pointer); override;
+    procedure DoFinalizeItem(const AItem: Pointer); override;
+  end;
+
+  // ------------------------------------------------------------------------------
+  // TCitiesDatabase
+  // ------------------------------------------------------------------------------
+
+  { Simple extension to TDISQLite3Database which automates buffered access to
+    the Cities table. }
+  TCitiesDatabase = class(TDISQLite3Database)
+  private
+    FCitiesCache: TCitiesCache;
+  protected
+    procedure DoAfterConnect; override;
+    procedure DoAfterCreateDatabase; override;
+    procedure DoBeforeDisconnect; override;
+  public
+    function AddCity(const ACity, ACountry: WideString;
+      const APopulation: Integer): Int64;
+
+    procedure AddRandomCities(ACount: Integer);
+    function AddRandomCity: Int64;
+    procedure DeleteFromCities(const ARowID: Int64);
+    function GetCity(const ARowID: Int64): PCityRec;
+
+    property CitiesCache: TCitiesCache read FCitiesCache;
+  end;
+
+
+  // ------------------------------------------------------------------------------
+  // TCitiesCache class
+  // ------------------------------------------------------------------------------
+
+  { Cache for TCityRec (above), used by TCitiesDatabase (below). }
+  TMailBoxConfigCache = class(TDIAbstractSQLite3Cache)
+    procedure DoInitializeItem(const AItem: Pointer); override;
+    procedure DoFinalizeItem(const AItem: Pointer); override;
+  end;
+
+  // ------------------------------------------------------------------------------
+  // TCitiesDatabase
+  // ------------------------------------------------------------------------------
+
+  { Simple extension to TDISQLite3Database which automates buffered access to
+    the Cities table. }
+  TMailBoxConfigDatabase = class(TDISQLite3Database)
+  private
+    FMailBoxConfigCache: TMailBoxConfigCache;
+  protected
+    procedure DoAfterConnect; override;
+    procedure DoAfterCreateDatabase; override;
+    procedure DoBeforeDisconnect; override;
+  public
+    function AddMailBoxConfig(MBCR: TMailBoxConfigRec): Int64;
+
+    procedure AddRandomMailBoxConfigs(ACount: Integer);
+    function AddRandomMailBoxConfig: Int64;
+    procedure DeleteFromMailBoxConfig(const ARowID: Int64);
+    function GetMailBoxConfig(EMailAddress: WideString): TMailBoxConfigRec;
+
+    function Update(MBCR: TMailBoxConfigRec): Int64;
+    function Delete(MBCR: TMailBoxConfigRec; KeyFieldName: string): Int64;
+
+    property MailBoxConfigCache: TMailBoxConfigCache read FMailBoxConfigCache;
+  end;
+
+function GetIndex(stmt: TDISQLite3Statement; FieldName: string): Integer;
+
+implementation
+
+uses
+  DISQLite3Api, Cities;
+
+// ------------------------------------------------------------------------------
+// TCitiesCache class
+// ------------------------------------------------------------------------------
+
+procedure TCitiesCache.DoInitializeItem(const AItem: Pointer);
+begin
+  Initialize(PCityRec(AItem)^);
+end;
+
+// ------------------------------------------------------------------------------
+
+procedure TCitiesCache.DoFinalizeItem(const AItem: Pointer);
+begin
+  Finalize(PCityRec(AItem)^);
+end;
+
+// ------------------------------------------------------------------------------
+// TCitiesDatabase class
+// ------------------------------------------------------------------------------
+
+function TCitiesDatabase.AddCity(const ACity, ACountry: WideString;
+  const APopulation: Integer): Int64;
+var
+  stmt: TDISQLite3Statement;
+begin
+  stmt := Prepare16(
+    'INSERT INTO Cities (City, Country, Population) VALUES (?,?,?);');
+  try
+    stmt.bind_Str16(1, ACity);
+    stmt.bind_Str16(2, ACountry);
+    stmt.bind_Int(3, APopulation);
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+  end;
+end;
+
+// ------------------------------------------------------------------------------
+
+procedure TCitiesDatabase.AddRandomCities(ACount: Integer);
+begin
+  if ACount > 0 then
+  begin
+    StartTransaction;
+    try
+      repeat
+        AddRandomCity;
+        Dec(ACount);
+      until ACount = 0;
+    finally
+      Commit;
+    end;
+  end;
+end;
+
+// ------------------------------------------------------------------------------
+
+function TCitiesDatabase.AddRandomCity: Int64;
+begin
+  with xCities[Random( High(xCities) - Low(xCities))] do
+    Result := AddCity(City, Country, Population);
+end;
+
+// ------------------------------------------------------------------------------
+
+procedure TCitiesDatabase.DeleteFromCities(const ARowID: Int64);
+var
+  stmt: TDISQLite3Statement;
+begin
+  stmt := Prepare16('DELETE FROM Cities WHERE Idx = ?;');
+  try
+    stmt.bind_Int64(1, ARowID);
+    stmt.Step;
+    FCitiesCache.InvalidateItem(ARowID);
+  finally
+    stmt.Free;
+  end;
+end;
+
+// ------------------------------------------------------------------------------
+
+{ This method is called after a connecting to / opening the database. }
+procedure TCitiesDatabase.DoAfterConnect;
+begin
+  FCitiesCache := TCitiesCache.Create(SizeOf(TCityRec));
+  FCitiesCache.MaxCount := 384;
+  inherited;
+end;
+
+// ------------------------------------------------------------------------------
+
+{ This method is called after a new database file has been created. It can be
+  used to create new tables, indexes, triggers, views etc. which are required
+  by the application. }
+procedure TCitiesDatabase.DoAfterCreateDatabase;
+begin
+  Execute16('CREATE TABLE IF NOT EXISTS Cities (' + #13#10 +
+      '  Idx INTEGER PRIMARY KEY,' + #13#10 + '  City TEXT,' + #13#10 +
+      '  Country TEXT,' + #13#10 + '  Population INTEGER);');
+  inherited;
+end;
+
+// ------------------------------------------------------------------------------
+
+{ This method is called before diconnecting from / closing the database. }
+procedure TCitiesDatabase.DoBeforeDisconnect;
+begin
+  FCitiesCache.Free;
+  inherited;
+end;
+
+// ------------------------------------------------------------------------------
+
+function TCitiesDatabase.GetCity(const ARowID: Int64): PCityRec;
+var
+  stmt: TDISQLite3Statement;
+begin
+  Result := FCitiesCache.GetItem(ARowID);
+  if not Assigned(Result) then
+  begin
+    stmt := Prepare16(
+      'SELECT City, Country, Population FROM Cities WHERE Idx = ?;');
+    try
+      stmt.bind_Int(1, ARowID);
+      if stmt.Step = SQLITE_ROW then
+      begin
+        Result := FCitiesCache.AddItem(ARowID);
+        Result^.City := stmt.Column_Str16(0);
+        Result^.Country := stmt.Column_Str16(1);
+        Result^.Population := stmt.Column_Int(2);
+      end;
+    finally
+      stmt.Free;
+    end;
+  end;
+end;
+
+{ TMailBoxConfigCache }
+
+procedure TMailBoxConfigCache.DoFinalizeItem(const AItem: Pointer);
+begin
+  Initialize(PMailBoxConfigRec(AItem)^);
+end;
+
+procedure TMailBoxConfigCache.DoInitializeItem(const AItem: Pointer);
+begin
+  Finalize(PMailBoxConfigRec(AItem)^);
+end;
+
+{ TMailBoxConfigDatabase }
+
+function TMailBoxConfigDatabase.AddMailBoxConfig(MBCR: TMailBoxConfigRec)
+  : Int64;
+var
+  stmt: TDISQLite3Statement;
+begin
+  Result := 0;
+  stmt := Prepare16(
+    'INSERT INTO MailBoxConfig(MailDomain,SMTPServer,POP3Server,SMTPPort,POP3Port,SMTPSSL,POP3SSL,SMTPSSLPort,POP3SSLPort,POP3UserName,POP3Password,SMTPUserName,SMTPPassword,UpdateMail,UpdateTime) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,current_timestamp);');
+  try
+    MBCR.InitializeProcess;
+    stmt.bind_Str16(1, MBCR.MailDomain);
+    stmt.bind_Str16(2, MBCR.SMTPServer);
+    stmt.bind_Str16(3, MBCR.POP3Server);
+    stmt.bind_Int(4, MBCR.SMTPPort);
+    stmt.bind_Int(5, MBCR.POP3Port);
+    stmt.bind_Int(6, iif(MBCR.SMTPSSL, 1, 0));
+    stmt.bind_Int(7, iif(MBCR.POP3SSL, 1, 0));
+    stmt.bind_Int(8, MBCR.SMTPSSLPort);
+    stmt.bind_Int(9, MBCR.POP3SSLPort);
+    stmt.bind_Str16(10, MBCR.POP3UserName);
+    stmt.bind_Str16(11, MBCR.POP3Password);
+    stmt.bind_Str16(12, MBCR.SMTPUserName);
+    stmt.bind_Str16(13, MBCR.SMTPPassword);
+    stmt.bind_Str16(14, MBCR.UpdateMail);
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+  end;
+end;
+
+function TMailBoxConfigDatabase.AddRandomMailBoxConfig: Int64;
+begin
+  Result := 0;
+end;
+
+procedure TMailBoxConfigDatabase.AddRandomMailBoxConfigs(ACount: Integer);
+begin
+
+end;
+
+function TMailBoxConfigDatabase.Delete(MBCR: TMailBoxConfigRec;
+  KeyFieldName: string): Int64;
+var
+  stmt: TDISQLite3Statement;
+  fmt: TFormatSettings;
+begin
+  stmt := Prepare16('delete MailBoxConfig where ' + KeyFieldName + '=?;');
+  try
+    stmt.bind_Str16(1, stmt.Column_Str16(GetIndex(stmt, KeyFieldName)));
+    stmt.Step;
+    Result := LastInsertRowID;
+  finally
+    stmt.Free;
+  end;
+  Result := 0;
+end;
+
+procedure TMailBoxConfigDatabase.DeleteFromMailBoxConfig(const ARowID: Int64);
+begin
+
+end;
+
+procedure TMailBoxConfigDatabase.DoAfterConnect;
+begin
+  inherited;
+
+end;
+
+procedure TMailBoxConfigDatabase.DoAfterCreateDatabase;
+begin
+  inherited;
+
+end;
+
+procedure TMailBoxConfigDatabase.DoBeforeDisconnect;
+begin
+  inherited;
+
+end;
+
+function TMailBoxConfigDatabase.GetMailBoxConfig(EMailAddress: WideString)
+  : TMailBoxConfigRec;
+var
+  stmt: TDISQLite3Statement;
+  UserName, Domain: String;
+  MBCR: TMailBoxConfigRec;
+begin
+  // Result := FMailBoxConfigCache.GetItem(ARowID);
+  SplitString(Trim(EMailAddress), '@', UserName, Domain);
+  if (Domain = '') then
+  begin
+    Result := MBCR;
+    Exit;
+  end;
+
+  // if not Assigned(Result) then
+  begin
+    stmt := Prepare16('SELECT * FROM MailBoxConfig WHERE MailDomain = ?;');
+    try
+      stmt.bind_Str16(1, Domain);
+      if stmt.Step = SQLITE_ROW then
+      begin
+        // Result := FMailBoxConfigCache.AddItem(ARowID);
+        Result.MailDomain := stmt.Column_Str16(GetIndex(stmt, 'MailDomain'));
+        Result.SMTPServer := stmt.Column_Str16(GetIndex(stmt, 'SMTPServer'));
+        Result.POP3Server := stmt.Column_Str16(GetIndex(stmt, 'POP3Server'));
+        Result.SMTPPort := stmt.Column_Int(GetIndex(stmt, 'SMTPPort'));
+        Result.POP3Port := stmt.Column_Int(GetIndex(stmt, 'POP3Port'));
+        Result.SMTPSSL := iif(stmt.Column_Int(GetIndex(stmt, 'SMTPSSL')) = 1,
+          true, false);
+        Result.POP3SSL := iif(stmt.Column_Int(GetIndex(stmt, 'POP3SSL')) = 1,
+          true, false);
+        Result.SMTPSSLPort := stmt.Column_Int(GetIndex(stmt, 'SMTPSSLPort'));
+        Result.POP3SSLPort := stmt.Column_Int(GetIndex(stmt, 'POP3SSLPort'));
+        Result.POP3UserName := stmt.Column_Str16
+          (GetIndex(stmt, 'POP3UserName'));
+        Result.POP3Password := stmt.Column_Str16
+          (GetIndex(stmt, 'POP3Password'));
+        Result.SMTPUserName := stmt.Column_Str16
+          (GetIndex(stmt, 'SMTPUserName'));
+        Result.SMTPPassword := stmt.Column_Str16
+          (GetIndex(stmt, 'SMTPPassword'));
+        Result.UpdateMail := stmt.Column_Str16(GetIndex(stmt, 'UpdateMail'));
+        Result.UpdaeTime := StrToDateTimeDef
+          (stmt.Column_Str16(GetIndex(stmt, 'UpdaeTime')), now);
+        // Result := @MBCR;
+        Result.InitializeProcess
+      end;
+    finally
+      stmt.Free;
+    end;
+    Result.InitializeProcess;
+  end;
+end;
+
+function TMailBoxConfigDatabase.Update(MBCR: TMailBoxConfigRec): Int64;
+var
+  stmt: TDISQLite3Statement;
+  UserName, MailDomain: String;
+  sql: TStringBuilder;
+begin
+  MBCR.InitializeProcess;
+  // Result := FMailBoxConfigCache.GetItem(ARowID);
+  // if not Assigned(Result) then
+  begin
+    sql := TStringBuilder.Create;
+    sql.Append('Update MailBoxConfig Set ');
+    sql.Append('MailDomain =?,');
+    sql.Append('SMTPServer =?,');
+    sql.Append('POP3Server =?,');
+    sql.Append('SMTPPort =?,');
+    sql.Append('POP3Port =?,');
+    sql.Append('SMTPSSL =?,');
+    sql.Append('POP3SSL =?,');
+    sql.Append('SMTPSSLPort =?,');
+    sql.Append('POP3SSLPort =?,');
+    sql.Append('POP3UserName =?,');
+    sql.Append('POP3Password =?,');
+    sql.Append('SMTPUserName =?,');
+    sql.Append('SMTPPassword =?,');
+    // sql.Append('UpdateMail =?');
+    sql.Append('UpdaeTime = current_timestamp');
+    sql.Append(' where UpdateMail=?');
+
+    stmt := Prepare16(sql.ToString());
+    try
+      if stmt.Step = SQLITE_ROW then
+      begin
+        // Result := FMailBoxConfigCache.AddItem(ARowID);
+        stmt.bind_Str16(1, MBCR.MailDomain);
+        stmt.bind_Str16(2, MBCR.SMTPServer);
+        stmt.bind_Str16(3, MBCR.POP3Server);
+        stmt.bind_Int(4, MBCR.SMTPPort);
+        stmt.bind_Int(5, MBCR.POP3Port);
+        stmt.bind_Int(6, iif(MBCR.SMTPSSL, 1, 0));
+        stmt.bind_Int(7, iif(MBCR.POP3SSL, 1, 0));
+        stmt.bind_Int(8, MBCR.SMTPSSLPort);
+        stmt.bind_Int(9, MBCR.POP3SSLPort);
+        stmt.bind_Str16(10, MBCR.POP3UserName);
+        stmt.bind_Str16(11, MBCR.POP3Password);
+        stmt.bind_Str16(12, MBCR.SMTPUserName);
+        stmt.bind_Str16(13, MBCR.SMTPPassword);
+        stmt.bind_Str16(14, MBCR.UpdateMail);
+        // stmt.bind_Str16(MBCR.UpdaeTime);
+      end;
+    finally
+      stmt.Free;
+    end;
+  end;
+end;
+
+function GetIndex(stmt: TDISQLite3Statement; FieldName: string): Integer;
+var
+  I: Integer;
+begin
+  Result := -1;
+  for I := 0 to stmt.Column_Count - 1 do
+  begin
+    if stmt.Column_Name16(I) = FieldName then
+    begin
+      Result := I;
+      Break;
+    end;
+  end;
+
+end;
+
+procedure TMailBoxConfigRec.InitializeProcess;
+var
+  UserName, EMailDomain: string;
+begin
+  SplitString(Trim(self.UpdateMail), '@', UserName, EMailDomain);
+  if (EMailDomain = '') then
+    Exit;
+
+  if (SMTPUserName = '') then
+    SMTPUserName := UserName;
+  if (POP3UserName = '') then
+    POP3UserName := UserName;
+  if (SMTPPassword = '') then
+    SMTPPassword := POP3Password;
+
+  if (EMailDomain = '') then
+    MailDomain := EMailDomain;
+  if (POP3Server = '') then
+    POP3Server := 'POP3.' + MailDomain;
+  if (SMTPServer = '') then
+    POP3Server := 'SMTP.' + MailDomain;
+
+  if (POP3Port = 0) then
+    POP3Port := 25;
+  if (SMTPPort = 0) then
+    SMTPPort := 110;
+
+  if (POP3SSL) then
+    if (POP3SSLPort = 0) then
+      POP3SSLPort := 110;
+
+  if (SMTPSSL) then
+    if (SMTPSSLPort = 0) then
+      SMTPSSLPort := 995;
+end;
+
+constructor TMailBoxConfigRec.CreatePredigest(const EMail: String; const Password: String);
+begin
+  self.UpdateMail := EMail;
+  self.POP3Password := Password;
+  self.InitializeProcess;
+end;
+
+end.

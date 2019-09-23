@@ -1,0 +1,15 @@
+unit Model;
+
+interface
+
+uses disqlite3_encryption_db,  RTTI,
+  Generics.Collections;
+
+type
+  UserInBox = class(TMailBoxConfigDatabase)
+     function Add(sql: String; Params: TDictionary<String, TValue>): Int64; overload;
+  end;
+
+implementation
+
+end.

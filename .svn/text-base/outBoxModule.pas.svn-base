@@ -1,0 +1,45 @@
+unit outBoxModule;
+
+interface
+
+uses
+  SysUtils, Classes, HTTPApp, WebModu, HTTPProd;
+
+type
+  ToutBox = class(TWebPageModule)
+    PageProducer: TPageProducer;
+    procedure WebPageModuleBeforeDispatchPage(Sender: TObject;
+      const PageName: string; var Handled: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+  function outBox: ToutBox;
+
+implementation
+
+{$R *.dfm}  {*.wml}
+
+uses WebReq, WebCntxt, WebFact, Variants;
+
+function outBox: ToutBox;
+begin
+  Result := ToutBox(WebContext.FindModuleClass(ToutBox));
+end;
+
+procedure ToutBox.WebPageModuleBeforeDispatchPage(Sender: TObject;
+  const PageName: string; var Handled: Boolean);
+begin
+  Response.ContentType := 'text/vnd.wap.wml';
+end;
+
+initialization
+  if WebRequestHandler <> nil then
+    WebRequestHandler.AddWebModuleFactory(TWebPageModuleFactory.Create(ToutBox, TWebPageInfo.Create([wpPublished {, wpLoginRequired}], '.wml'), crOnDemand, caCache)
+
+);
+
+end.
+

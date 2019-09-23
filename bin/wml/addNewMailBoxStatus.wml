@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="success" title="<#title>" newcontext="true">
+<p>
+保存成功！<br/>
+<a href="<%=Pages.login.HREF%>">转到收件箱</a>
+<!-- #include file="return.wml" -->
+</p>
+</card>
+<card id="failure" title="<#title>" newcontext="true">
+<p>
+保存失败！<br/>
+<do type="prev" label="返回" name="back">
+  <prev/>
+</do>
+<!-- #include file="return.wml" -->
+</p>
+</card>
+</wml>
+

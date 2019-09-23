@@ -1,0 +1,30 @@
+﻿<?xml version="1.0"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="card1" title="Wap..CC" newcontext="false">
+<#info>
+<a href="/WapMail.WapMail/inBoxModule?p=2">下</a>
+<a href="/WapMail.WapMail/inBoxModule?p=3">下</a>
+<a href="">高级登陆入口</a>
+<select name="POP" title="选择服务商" tabindex="1">
+  <option value="-1">测试邮箱</option>
+  <option value="0">网易邮箱</option>
+  <option value="1">新浪邮箱</option>
+  <option value="2">搜虎邮箱</option>
+</select><br/>
+用户名:<input name="UID" emptyok="false" tabindex="2" size="20"/><br/>
+密　码:<input name="PWD" emptyok="false" type="password" tabindex="3" size="20"/>
+<do type="accept" label="登陆" name="btLogin">
+  <go accept-charset="utf-8" href="<%=Pages.loginModule.HREF%>" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</do>
+<do type="accept" label="撤消" name="btCancel">
+  <go accept-charset="utf-8" href="login" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</do>
+</card></wml>

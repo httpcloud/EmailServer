@@ -1,0 +1,434 @@
+{ This example project demonstrates database encryption with DISQLite3. It
+  implements a tiny database with a hex viewer to monitor how database changes
+  are reflected in the database file with or without encryption.
+
+  To realize database display and the hex viewer, this project uses controls
+  from the following Open Source libraries:
+
+    * VirtualTrees - this powerful treeview component is used to display the
+      folder tree and the file grids. It is more flexible, uses less memory,
+      and is much faster than the standard TTreeView.
+
+        http://www.soft-gems.net
+
+  Visit the DISQLite3 Internet site for latest information and updates:
+
+    http://www.yunqa.de/delphi/
+
+  Copyright (c) 2006-2007 Ralf Junker, The Delphi Inspiration <delphi@yunqa.de>
+
+------------------------------------------------------------------------------ }
+
+unit SQLite3_Encrypt_Demo;
+
+{$I DI.inc}
+{$I DISQLite3.inc}
+
+interface
+
+uses
+  Classes, Controls, Forms, StdCtrls, ComCtrls, ExtCtrls,
+  VirtualTrees,
+  DIFileCache, DISQLite3Database, DISQLite3_Encryption_CitiesDB, SysUtils,StrUtils;
+
+type
+  TfrmMain = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Splitter1: TSplitter;
+    vtCities: TVirtualStringTree;
+    vtHex: TVirtualStringTree;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    pnlLeftButtons: TPanel;
+    btnNew: TButton;
+    btnEdit: TButton;
+    btnDelete: TButton;
+    pnlRightButtons: TPanel;
+    lblPassword: TLabel;
+    edtPassword: TEdit;
+    btnChangePassword: TButton;
+    btnRemovePassword: TButton;
+    btnAddRandom: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnChangePasswordClick(Sender: TObject);
+    procedure btnRemovePasswordClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
+    procedure vtCitiesGetText(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType; var CellText: WideString);
+    procedure vtHexGetText(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType; var CellText: WideString);
+    procedure btnEditClick(Sender: TObject);
+    procedure vtCitiesNewText(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex; NewText: WideString);
+    procedure btnNewClick(Sender: TObject);
+    procedure btnAddRandomClick(Sender: TObject);
+    procedure vtCitiesCompareNodes(Sender: TBaseVirtualTree; Node1,
+      Node2: PVirtualNode; Column: TColumnIndex; var Result: Integer);
+  private
+    FDb: TCitiesDatabase;
+    FHexCache: TDIFileCache;
+    procedure ChangePassword(const ANewPassword: AnsiString);
+    procedure RefreshHexView;
+    procedure ReloadDatabase;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMain: TfrmMain;
+
+const
+  APP_TITLE = 'DISQLite3' + {$IFDEF DISQLite3_Personal} ' Personal' + {$ENDIF} ': Database Encryption';
+
+implementation
+
+uses
+  Dialogs,
+  DISQLite3Api;
+
+{$R *.dfm}
+
+const
+  DEFAULT_PASSWORD = 'personal';
+  FILE_NAME = 'Encrypted.db3';
+  HEX_ROW_SIZE = 16;
+
+type
+  { The data type associated with each node of the Cities grid.
+    It stores a RowID to reference the node's record in the database. }
+  TNodeData = record
+    ID: Int64
+  end;
+  PNodeData = ^TNodeData;
+
+  //------------------------------------------------------------------------------
+  // TfrmMain Form
+  //------------------------------------------------------------------------------
+
+procedure TfrmMain.FormCreate(Sender: TObject);
+var
+  Password: String;
+begin
+  Caption := APP_TITLE;
+
+  vtCities.NodeDataSize := SizeOf(TNodeData);
+
+  edtPassword.Text := DEFAULT_PASSWORD;
+
+  FHexCache := TDIFileCache.Create(FILE_NAME, HEX_ROW_SIZE);
+
+  { Create a database component and open the database. }
+  FDb := TCitiesDatabase.Create(nil);
+  FDb.DatabaseName := FILE_NAME;
+  try
+    FDb.Open;
+  except
+    on EFOpenError do
+      begin
+        { If the database does not yet exist, create a new one. }
+        FDb.CreateDatabase;
+        // FDb.AddRandomCities(64);
+      end;
+  end;
+  Password := FDb.Password;
+
+  { Load records for display. }
+  repeat
+    try
+      { Database encryption in DISQLite3 is completely hidden from outside eyes
+        as well as from the database engine itself. Therefore, even the engine
+        can detect an encrypted database only by reading from it.
+
+        The next line reads from the database. If this results in an error,
+        prompt for a new password, set the new password and try the reading
+        again.
+
+        This loop continues until the database opens successfully or the user
+        terminates. }
+      ReloadDatabase;
+      RefreshHexView;
+      Break;
+    except
+      on e: ESQLite3 do
+        if e.ErrorCode = SQLITE_NOTADB then
+          if InputQuery(APP_TITLE, 'Database encrypted?' + #13#10#13#10 + 'Enter password or cancel to close:', String(Password)) then
+            begin
+              FDb.Password := Password;
+            end
+          else
+            begin
+              Application.Terminate;
+              Break;
+            end
+        else
+          Break;
+    end;
+  until False;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.FormDestroy(Sender: TObject);
+begin
+  FDb.Free;
+  FHexCache.Free;
+end;
+
+//------------------------------------------------------------------------------
+
+{ This function (re-)encrypts the database. It encrypts an unencrypted database
+  or re-encrypts an encrypted database if the password has changed. For larger
+  databases, this can take some time to complete since the entire database file
+  has to be read, decrypted, re-encrypted and written back to disk. }
+procedure TfrmMain.ChangePassword(const ANewPassword: AnsiString);
+begin
+  FDb.ReKey(ANewPassword);
+  FHexCache.Invalidate;
+  vtHex.Invalidate;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.RefreshHexView;
+var
+  s: TStream;
+begin
+  FHexCache.Invalidate;
+  s := TFileStream.Create(FDb.DatabaseName, fmOpenRead or fmShareDenyNone);
+  try
+    vtHex.RootNodeCount := (s.Size + HEX_ROW_SIZE - 1) div HEX_ROW_SIZE;
+  finally
+    s.Free;
+  end;
+  vtHex.Repaint;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.ReloadDatabase;
+var
+  Stmt: TDISQLite3Statement;
+  Node: PVirtualNode;
+  NodeData: PNodeData;
+begin
+  vtCities.BeginUpdate;
+  try
+    vtCities.Clear;
+    Stmt := FDb.Prepare16('SELECT Idx FROM Cities ORDER BY City;');
+    try
+    Stmt
+      while Stmt.Step = SQLITE_ROW do
+        begin
+          Node := vtCities.AddChild(nil);
+          NodeData := vtCities.GetNodeData(Node);
+          NodeData^.ID := Stmt.column_int64(0);
+        end;
+    finally
+      Stmt.Free;
+    end;
+  finally
+    vtCities.EndUpdate;
+  end;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.btnAddRandomClick(Sender: TObject);
+var
+  i: Integer;
+  NodeData: PNodeData;
+begin
+  vtCities.BeginUpdate;
+  try
+    i := 32;
+    repeat
+      NodeData := vtCities.GetNodeData(vtCities.AddChild(nil));
+      NodeData^.ID := FDb.AddRandomCity;
+      Dec(i);
+    until i = 0;
+    vtCities.Sort(nil, 0, sdAscending);
+  finally
+    vtCities.EndUpdate;
+  end;
+  RefreshHexView;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.btnNewClick(Sender: TObject);
+var
+  Node: PVirtualNode;
+  NodeData: PNodeData;
+  NewRowID: Int64;
+begin
+
+  NewRowID := FDb.AddCity('New City', 'New Country', -1);
+  Node := vtCities.AddChild(nil);
+  NodeData := vtCities.GetNodeData(Node);
+  NodeData^.ID := NewRowID;
+  vtCities.ScrollIntoView(Node, False);
+  vtCities.EditNode(Node, 0);
+  RefreshHexView;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.btnEditClick(Sender: TObject);
+var
+  Node: PVirtualNode;
+begin
+  Node := vtCities.FocusedNode;
+  if Assigned(Node) then
+    begin
+      vtCities.EditNode(Node, vtCities.FocusedColumn);
+    end
+  else
+    begin
+      ShowMessage('Please select a record first.');
+    end;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.btnDeleteClick(Sender: TObject);
+var
+  Node: PVirtualNode;
+  NodeData: PNodeData;
+begin
+  Node := vtCities.FocusedNode;
+  if Assigned(Node) then
+    begin
+      NodeData := vtCities.GetNodeData(Node);
+      FDb.DeleteFromCities(NodeData^.ID);
+      vtCities.DeleteNode(Node, False);
+      RefreshHexView;
+    end
+  else
+    begin
+      ShowMessage('Please select a record first.');
+    end;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.btnChangePasswordClick(Sender: TObject);
+var
+  Password: AnsiString;
+begin
+  Password := edtPassword.Text;
+  {$IFDEF DISQLite3_Personal}
+  if Password <> 'personal' then
+    ShowMessage(
+      'DISQLite3 Personal includes full database ' + #13#10 +
+      'encryption, limited to a single password ' + #13#10 +
+      'named "personal" (all lower case). Any other ' + #13#10 +
+      'password will automatically be converted' + #13#10 +
+      'converted to this default.' +
+      #13#10#13#10 +
+      'DISQLite3 Personal employs the same strong ' + #13#10 +
+      'AES encryption algorithm as the full version ' + #13#10 +
+      'and renders any database file completely ' + #13#10 +
+      'unrecognizable to any outside observer.' +
+      #13#10#13#10 +
+      'The full version of DISQLite3 does not ' + #13#10 +
+      'enforce any password limits: It accepts any ' + #13#10 +
+      'password of any length, containing any ' + #13#10 +
+      'possible ASCII or binary character.');
+  {$ENDIF DISQLite3_Personal}
+  ChangePassword(Password);
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.btnRemovePasswordClick(Sender: TObject);
+begin
+  ChangePassword('');
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.vtCitiesGetText(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType; var CellText: WideString);
+var
+  CityRec: PCityRec;
+  NodeData: PNodeData;
+begin
+  NodeData := vtCities.GetNodeData(Node);
+  CityRec := FDb.GetCity(NodeData^.ID);
+  if Assigned(CityRec) then
+    case Column of
+      0: CellText := CityRec^.City;
+      1: CellText := CityRec^.Country;
+      2: CellText := IntToStr(CityRec^.Population);
+    end;
+end;
+
+//------------------------------------------------------------------------------
+
+{ This is called after the user edited a node's cell. We use it to update
+  the database and refresh the hex-view to reflect the changes. }
+procedure TfrmMain.vtCitiesNewText(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex; NewText: WideString);
+var
+  NodeData: PNodeData;
+  Stmt: TDISQLite3Statement;
+  ColName: WideString;
+  Value: Variant;
+begin
+  case Column of
+    0: begin ColName := 'City'; Value := NewText; end;
+    1: begin ColName := 'Country'; Value := NewText; end;
+    2: begin ColName := 'Population'; Value := StrToInt(NewText); end;
+    else Exit;
+  end;
+
+  Stmt := FDb.Prepare16('UPDATE Cities SET ' + ColName + '= ? WHERE Idx = ?;');
+  try
+    Stmt.bind_Variant(1, Value);
+    NodeData := vtCities.GetNodeData(Node);
+    Stmt.bind_Int64(2, NodeData^.ID);
+    Stmt.Step;
+    FDb.CitiesCache.InvalidateItem(NodeData^.ID);
+  finally
+    Stmt.Free;
+  end;
+  RefreshHexView;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.vtCitiesCompareNodes(Sender: TBaseVirtualTree; Node1, Node2: PVirtualNode; Column: TColumnIndex; var Result: Integer);
+var
+  NodeData: PNodeData;
+  CityRec1, CityRec2: PCityRec;
+begin
+  case Column of
+    0:
+      begin
+        NodeData := vtCities.GetNodeData(Node1);
+        CityRec1 := FDb.GetCity(NodeData^.ID);
+
+        NodeData := vtCities.GetNodeData(Node2);
+        CityRec2 := FDb.GetCity(NodeData^.ID);
+
+        Result := {$IFDEF COMPILER_6_UP}WideCompareText{$ELSE}CompareText{$ENDIF}(CityRec1.City, CityRec2.City);
+      end;
+  end;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure TfrmMain.vtHexGetText(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType; var CellText: WideString);
+var
+  Block: PDIFileBlock;
+begin
+  Block := FHexCache.GetBlock(Node^.Index);
+  if Assigned(Block) then
+    case Column of
+      0: CellText := IntToHex(Node^.Index * HEX_ROW_SIZE, 8);
+      1: CellText := BlockToHex(Block);
+      2: CellText := BlockToText(Block);
+    end;
+end;
+
+//------------------------------------------------------------------------------
+
+end.
+

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml><card id="crd" title="魔方手机邮">
+<p>
+<b><u>游客体验通道</u></b><br/>
+<#commonActionTagName>
+请输入您的邮箱全名(如:user@mofun.cc):<br/>
+邮箱全名:<input name="box" emptyok="false" tabindex="0" value="<#box>" maxlength="100"/><br/>
+<anchor title="下一步">
+  <go accept-charset="utf-8" href="<%=Pages.NewGuest.HREF%>?ms=<#ms>&amp;s=1" method="post">
+	<postfield name="box" value="$(box)"/>
+  </go>下一步
+</anchor>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>
+

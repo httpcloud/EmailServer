@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="dj0v2lssxvr20u2cn_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="delphi:e_class:src:WapMail:loginModule.TEventHandlers">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,141,80" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.TEventHandlers.IdPOP3Disconnected(System.TObject)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:loginModule.Tlogin">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="170,1,231,205" />
+      <reference referencedUin="delphi:e_field:src:WapMail:loginModule.Tlogin.PageProducer" />
+      <reference referencedUin="delphi:e_field:src:WapMail:loginModule.Tlogin.IdPOP31" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.Tlogin.WebPageModuleBeforeDispatchPage(System.TObject,System.string,ref@System.Boolean)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.Tlogin.WebPageModuleCreate(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.Tlogin.WebPageModuleDeactivate(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.Tlogin.WebPageModuleDestroy(System.TObject)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.Tlogin.PageProducerHTMLTag(System.TObject,HTTPProd.TTag,System.string,Classes.TStrings,ref@System.string)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.Tlogin.LoginPOP3MailServer(config.TUser,config.TMailConfig,System.Boolean)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:loginModule.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.@unitclass.login()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.@unitclass.GetPOP3()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.@unitclass.GetPOP3List()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.@unitclass.GetUserPOP3(ref@IdPOP3.TIdPOP3)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.@unitclass.GetUser(ref@config.TUser)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.@unitclass.GetUser(System.string,ref@config.TUser)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.@unitclass.GetUserCurrentSelectMailConfig(ref@config.TMailConfig)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.@unitclass.AppendUserInfo(System.string,System.string)" />
+      <reference referencedUin="delphi:e_field:src:WapMail:loginModule.@unitclass.POP" />
+      <reference referencedUin="delphi:e_field:src:WapMail:loginModule.@unitclass.POP3List" />
+      <reference referencedUin="delphi:e_method:src:WapMail:loginModule.@unitclass.UpdateUser(config.TUser)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:loginModule.TNotifyEvent">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="81,109,84,38" />
+    </reference>
+  </view>
+</nodeSet>

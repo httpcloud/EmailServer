@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml><card id="crd" title="<#title>">
+<p>
+<b><u>系统设置</u></b><br/>
+<!--
+手机号:<input name="M" size="10" max-length="13" format="*N" value="<#MP>"/>
+<anchor><#SAC>
+<go accept-charset="utf-8" href="<%=Pages.set.HREF%>?ms=<#ms>" method="post">
+	<postfield name="MP" value="$M"/>
+</go>
+</anchor>
+-->
+<#msg>
+<br/>
+<br/>
+<anchor>设置保存已发邮件到发件箱<br/>
+  <go accept-charset="utf-8" href="<%=Pages.set.HREF%>?ms=<#ms>" method="post">
+	<postfield name="T" value="1"/>
+  </go>
+</anchor>
+<br/>
+<br/>
+<anchor>清空草稿箱
+  <go accept-charset="utf-8" href="<%=Pages.set.HREF%>?ms=<#ms>" method="post">
+	<postfield name="D" value="0"/>
+  </go>
+</anchor>
+<br/>
+<anchor>清空发件箱
+  <go accept-charset="utf-8" href="<%=Pages.set.HREF%>?ms=<#ms>" method="post">
+	<postfield name="D" value="1"/>
+  </go>
+</anchor>
+<br/>
+<b>小技巧:</b>你可将当前页面加入您的手机书签,下次你只需打开该书签即可直接登陆。
+<br/>
+<a href="<%=Pages.inBox.HREF%>?ms=<#ms>&amp;p=<#mailListPage>">返回邮件列表</a><br/>
+<a href="<%=Pages.login.HREF%>?ms=<#ms>">返回收件箱</a>
+<do type="accept" label="撤销" name="btCancel">
+  <go accept-charset="utf-8" href="login" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</do>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>

@@ -1,0 +1,63 @@
+Received: by 10.100.106.6 with HTTP; Tue, 28 Oct 2008 01:56:43 -0700 (PDT)
+Message-ID: <22a0b9480810280156x7b606bffn6b642750319525f5@mail.gmail.com>
+Date: Tue, 28 Oct 2008 16:56:43 +0800
+From: "i@mofun.cc" <i@mofun.cc>
+To: i@mofun.cc
+Subject: get asp server variables
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="sy1IIiXkAGFW=_xAIZJ9H2sQoGrJYheGvb"
+Delivered-To: i@mofun.cc
+In-Reply-To: <22a0b9480810280156x7b606bffn6b642750319525f5@mail.gmail.com>
+
+UmFyIRoHAM+QcwAADQAAAAAAAAD6fXQgkjAAcwIAAI0PAAAC3OY/P2yGXDkdMwsAIAAAAGFzcC5h
+c3AAAcAFAPB2sBAMHRDI0P0cFb3qV+DiaXK2+NvwGdEnwOAXiDK2zopfEU5WeFSt8LL/H36pTNc5
+HHUOpJGSEXB7noa8xY9/jNfxp7n7ce6DHoiaGuZo8weZ7nkkoiYyZ6591vZOrrVr/H71/n9e9evZ
+/N13atn11d/2pD2mPaA23Hu6suTv2fDL6/VZGUfQ9jTRfjPBM01P54KJjsiD5CYJmi0rjfq88+ST
+rcmGZ6Qr/q16Eqgwqm6AwJZGZpmQ9iJnG63ll4anWhW2YqCH6YZQ+lPbGgPkJgrNIeFb22QdmeCo
+1rnQrbIPOkp9qK7HXzQ2NtmCVofUhlvJDpZuXNFaozySz5+y3vgbaBr1TV3bq2TmHNcQXymVU52f
+H/HMKO0Bhv///iqONsGTKxG6ok8CFkWENXAGCrudsODICE9O6D6aI6+NWY76CZ5gXa8WP+qMkWvV
+9PGsur768vA17OmZzCQWqmqqZyjnoK24C9yYcjUSHlhnPCjEGm/zD3jG3pD0lNSMyFIU2MrME2PS
+orX2VhQNAwLcd8DowDb2/oi5XOBsNg0PYI41eh9wAXay4Iyty5qOVbDyvoqt4+G+Lk0QbhGzo8PC
+eRnnAMyJs8lw8EDl9fomuIL7eWXUKZfO7oRN1e96sW62+8yXsOccAX/kTzjMUeVclbrcGHNcQcuR
+/8q7U00L8QVawtedBeMbUjOmqnlo4XBo3szlsaJK2Y002h82U+ibo14HVcnyq2y7mrWDCmnQc28p
+b6o69JEp8+H0VNEGtz+Ys00B8zJUzbMKHGx1J1IEZWYGUliX0yYpTKzBC05maDqQURaHfE48tN6b
+d+bwrAZ4tt5r+oDnUXQgkjEAGwIAAJkEAAACGATdseGEXDkdMwwAIAAAAHRlc3QuYXNwAAHABgCw
+ypo7DcEQzNC9HBl+/Jd4O0xdVeRyllA+AhWxKqk4KjupVbAp8+TkjtsSlkg6+toeOn1PCD6HiZ4U
+JCUtJ0jkNc/jkWrrxx97FGrMzZmZN1vx3c3W3uZrb3V+e5mpa/B7XJx8XpcziiNBzMFzwR6n+AFb
+DvCX49ZdhTEU2mK95DOEZdkCuIfrYYwdVy7dXwMRzlRdCdED72gqmNAzlrjIOtSlVhsppr2QEy89
+ikSvSRzAAg8EDrjRDuI5Y0vNqatpTXmPnd8euLBUFRaWDRX9+YzFelIFT+3XCFY7mAXkUVGgK7si
++Aa/ANzeaEI+H836egCLKiaXtMGiXnaB19Pr9vz9/x6EjwFMTv4GU3Wft+21f9Qih2mBs0sO7qR0
+yXmhT0ZakwmYyNRLnZOISEQbgZcoy37sS+Hquepe+xM5zD6X/m466SNW5oDzxvfzwESnMizxg1Rm
+qG6iswwITL9x8WyJ6tHS7iZfM3MCC00jzsBG25oMtPjKORrZllBMrT7qEWx+JtVpXnVGsn3DT6tr
+d6i8sP6sPZRQ68+24d5hkh0F6ytVZ+K+TOW1YkCLO3/ZzvXuDWKIkOM+Nw+YVVjNjnlfEvMRIWj2
+F+QbGuDxtoTVkoIpYYqwtLN03Rk7R48whADAe3HJf3Mr03AzvwdgmIT6J2dNCqJ/wnJz+Dz9pT3L
+Qn+7RJI3ZK+G+5Rt/JsajPJRZSUzftGkUSa1+kDEPXsAQAcA
+
+--sy1IIiXkAGFW=_xAIZJ9H2sQoGrJYheGvb
+Content-Type: multipart/alternative;
+        boundary="fPkqcG5MbrlJJch311JgPPM8c=_A0vFxnL"
+
+--fPkqcG5MbrlJJch311JgPPM8c=_A0vFxnL
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+Content-Disposition=inline
+
+-- 
+http://lwgboy.space.mofun.cc
+
+--fPkqcG5MbrlJJch311JgPPM8c=_A0vFxnL
+Content-Type: text/html; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+Content-Disposition=inline
+
+<br clear="all"><br>-- <br><a href="http://lwgboy.space.mofun.cc">http://lwgboy.space.mofun.cc</a><br>
+
+--fPkqcG5MbrlJJch311JgPPM8c=_A0vFxnL--
+
+--sy1IIiXkAGFW=_xAIZJ9H2sQoGrJYheGvb--
+
+.

@@ -1,0 +1,20 @@
+program SQLite3_Demo;
+
+uses
+  Forms,
+  Unit3 in 'Unit3.pas' {Form3},
+  SQLite3_Encrypt_Demo in 'SQLite3_Encrypt_Demo.pas',
+  DIFileCache in 'DIFileCache.pas',
+  Cities in 'Cities.pas',
+  DISQLite3_Encryption_DB in 'DISQLite3_Encryption_DB.pas',
+  TableUserInBox in 'DAO\TableUserInBox.pas',
+  UserInBox in 'Domain\UserInBox.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm3, Form3);
+  Application.Run;
+end.

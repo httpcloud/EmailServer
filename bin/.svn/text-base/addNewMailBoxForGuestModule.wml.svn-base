@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml><card id="crd" title="魔方手机邮">
+<p>
+<b><u>游客体验通道</u></b><br/>
+邮箱全名:<b><#box></b><br/>
+<#commonActionTagName>
+邮箱密码:<input name="MPWD" emptyok="false" maxlength="25"/><br/>
+<i><b>提示:</b>以下设置若与您的邮件服务器配置相同则无须更改，直接选<b>下一步</b></i><br/>
+POP3服务器:<input name="PSvr" value="<#PSvr>" emptyok="false" maxlength="100"/><br/>
+SMTP服务器:<input name="SSvr" value="<#SSvr>" emptyok="false" maxlength="100"/><br/>
+您选择了POP3服务器要求SSL连接,其端口是:<input name="PP" value="995" size="5" format="*N" maxlength="5"/><br/>
+您选择了SMTP服务器要求SSL连接,其端口是:<input name="SP" value="25" size="5" format="*N" maxlength="5"/><br/>
+
+SMTP服务器需认证
+<select name="SA">
+	<optgroup title="Auth">
+		<option value="1">是</option>
+		<option value="0">否</option>
+	</optgroup>
+</select><br/>
+
+<anchor title="完成">完成
+  <go accept-charset="utf-8" href="<%=Pages.NewGuest.HREF%>?ms=<#ms>" method="post">
+	<postfield name="box" value="<#box>"/>
+	<postfield name="PSvr" value="$(PSvr)"/>
+	<postfield name="SSvr" value="$(SSvr)"/>
+	<postfield name="MPWD" value="$(MPWD)"/>
+	<postfield name="SA" value="$(SA)"/>
+	<postfield name="PP" value="$(PP)"/>
+	<postfield name="SP" value="$(SP)"/>
+	<postfield name="PS" value="1"/>
+	<postfield name="SS" value="1"/>
+  </go>
+</anchor>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>

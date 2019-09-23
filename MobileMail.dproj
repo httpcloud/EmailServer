@@ -1,0 +1,240 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{0d51a259-e60e-4a35-90d7-c2a6ed1421fc}</ProjectGuid>
+			<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<DCC_DependencyCheckOutputName>bin\WapMail.dll</DCC_DependencyCheckOutputName>
+			<MainSource>MobileMail.dpr</MainSource>
+			<ProjectVersion>12.3</ProjectVersion>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Base>True</Base>
+			<Platform>Win32</Platform>
+			<AppType>Library</AppType>
+			<FrameworkType>None</FrameworkType>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_UsePackage>rtl;dbexpress;DbxCommonDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;DataSnapServer;DbxClientDriver;DBXInterBaseDriver;DBXMySQLDriver;vcl;dbrtl;vcldb;dbxcds;vclx;DBXSybaseASEDriver;DBXSybaseASADriver;DBXOracleDriver;DBXMSSQLDriver;DBXInformixDriver;DBXDb2Driver;dsnap;vclactnband;xmlrtl;vcldbx;bdertl;dsnapcon;TeeUI;TeeDB;Tee;adortl;vclib;ibxpress;IndyCore;IndySystem;IndyProtocols;inet;intrawebdb_100_120;Intraweb_100_120;VclSmp;vclie;websnap;webdsnap;inetdbbde;inetdbxpress;soaprtl;vclribbon;Rave76VCL;DclSampleScriptObject;Jcl;JclVcl;JvCoreD12R;JvSystemD12R;JvStdCtrlsD12R;JvAppFrmD12R;JvBandsD12R;JvDBD12R;JvDlgsD12R;JvBDED12R;JvCmpD12R;JvCryptD12R;JvCtrlsD12R;JvCustomD12R;JvDockingD12R;JvDotNetCtrlsD12R;JvEDID12R;JvGlobusD12R;JvHMID12R;JvInterpreterD12R;JvJansD12R;JvManagedThreadsD12R;JvMMD12R;JvNetD12R;JvPageCompsD12R;JvPluginD12R;JvPrintPreviewD12R;JvRuntimeDesignD12R;JvTimeFrameworkD12R;JvWizardD12R;JvXPCtrlsD12R;XMLBuilder;DclDemoTemplate;TemplateRes;DclImgBtnProducer;DclDispHandlers;DclActionField;WebSnapScriptObject</DCC_UsePackage>
+			<DCC_DependencyCheckOutputName>MobileMail.dll</DCC_DependencyCheckOutputName>
+			<GenDll>true</GenDll>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<Version>7.0</Version>
+			<DCC_UnitSearchPath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;d:\Program Files\tmssoftware\TMSIWPROSE;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_ResourcePath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;d:\Program Files\tmssoftware\TMSIWPROSE;$(DCC_ResourcePath)</DCC_ResourcePath>
+			<DCC_ObjPath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;d:\Program Files\tmssoftware\TMSIWPROSE;$(DCC_ObjPath)</DCC_ObjPath>
+			<DCC_IncludePath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;d:\Program Files\tmssoftware\TMSIWPROSE;$(DCC_IncludePath)</DCC_IncludePath>
+			<DCC_Define>DEBUG;DEBUG;DEBUG;DEBUG;DEBUG;RELEASE;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_DependencyCheckOutputName>bin\MobileMail.dll</DCC_DependencyCheckOutputName>
+			<Version>7.0</Version>
+			<DCC_UnitSearchPath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_ResourcePath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;$(DCC_ResourcePath)</DCC_ResourcePath>
+			<DCC_ObjPath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;$(DCC_ObjPath)</DCC_ObjPath>
+			<DCC_IncludePath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;$(DCC_IncludePath)</DCC_IncludePath>
+			<DCC_Define>DEBUG;DEBUG;DEBUG;DEBUG;DEBUG;DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_ExeOutput>bin</DCC_ExeOutput>
+			<DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
+			<DCC_RangeChecking>True</DCC_RangeChecking>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="MobileMail.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<RcCompile Include="bin\Mail_Encrypted.rc">
+				<ContainerId>RC</ContainerId>
+				<ContainerId>RC</ContainerId>
+				<Form>Mail_Encrypted.res</Form>
+			</RcCompile>
+			<DCCReference Include="MainModule.pas">
+				<Form>Main</Form>
+				<DesignClass>TWebAppPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="loginModule.pas">
+				<Form>login</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="inBoxModule.pas">
+				<Form>inBox</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="outBoxModule.pas">
+				<Form>outBox</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="sendModule.pas">
+				<Form>send</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="writeModule.pas">
+				<Form>write</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="detailModule.pas">
+				<Form>detail</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="readTxtModule.pas">
+				<Form>readTxt</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="EMailCode.pas"/>
+			<DCCReference Include="gb_big5.pas"/>
+			<DCCReference Include="serialization.pas"/>
+			<DCCReference Include="dcl\HashMap.pas"/>
+			<DCCReference Include="config.pas">
+				<Form>$R *.res</Form>
+			</DCCReference>
+			<DCCReference Include="big5.pas"/>
+			<DCCReference Include="dcl\AbstractContainer.pas"/>
+			<DCCReference Include="dcl\DCLUtil.pas"/>
+			<DCCReference Include="dcl\DCL_intf.pas"/>
+			<DCCReference Include="dcl\ArrayList.pas"/>
+			<DCCReference Include="dcl\ArraySet.pas"/>
+			<DCCReference Include="dcl\Algorithms.pas"/>
+			<DCCReference Include="UEncode.pas"/>
+			<DCCReference Include="EZCrypt.pas"/>
+			<DCCReference Include="RegisterModule.pas">
+				<Form>reg</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="actionModule.pas">
+				<Form>action</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="DataModule.pas">
+				<Form>WebDataModuleShare</Form>
+				<DesignClass>TWebDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="addNewMailBoxForGuestModule.pas">
+				<Form>NewGuest</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="NTLM2009\IdAuthenticationSSPI.pas"/>
+			<DCCReference Include="NTLM2009\IdSASLNTLM.pas"/>
+			<DCCReference Include="NTLM2009\IdSSPI.pas"/>
+			<DCCReference Include="Portal_UserService.pas"/>
+			<DCCReference Include="Common\Common.pas"/>
+			<DCCReference Include="Portlet_Blogs_BlogsEntryService.pas"/>
+			<DCCReference Include="addNewMailBoxModule.pas">
+				<Form>Add</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ScriptObject\WebSnapScriptObject.pas"/>
+			<DCCReference Include="Common\Common.Debug.pas"/>
+			<DCCReference Include="Common\XML2DataPakcetObj.pas"/>
+			<DCCReference Include="Common\ClientDataSetEx.pas"/>
+			<DCCReference Include="win32\internet\MSHTML.pas"/>
+			<DCCReference Include="win32\my_websnap\SessColn.pas"/>
+			<DCCReference Include="win32\my_websnap\SiteComp.pas"/>
+			<DCCReference Include="win32\my_websnap\WebDisp.pas"/>
+			<DCCReference Include="win32\my_websnap\WebSess.pas"/>
+			<DCCReference Include="win32\my_internet\HTTPApp.pas"/>
+			<DCCReference Include="DataAccessLayer\Encryption_DB.pas"/>
+			<DCCReference Include="DataAccessLayer\Domain\Domain.UserMailInBox.pas"/>
+			<DCCReference Include="DataAccessLayer\DAO\DAO.UserMailInBox.pas"/>
+			<DCCReference Include="DataAccessLayer\Cities.pas"/>
+			<DCCReference Include="win32\my_internet\UTF8ContentParser.pas"/>
+			<DCCReference Include="setModule.pas">
+				<Form>sysSet</Form>
+				<DesignClass>TWebPageModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Common\cfg.pas"/>
+			<DCCReference Include="D:\Program Files (x86)\Embarcadero\RAD Studio\7.0\source\Win32\websnap\WebSnapObjs.pas"/>
+			<DCCReference Include="D:\Program Files (x86)\Embarcadero\RAD Studio\7.0\source\Win32\websnap\AutoAdap.pas"/>
+			<DCCReference Include="D:\Program Files (x86)\Embarcadero\RAD Studio\7.0\source\Win32\websnap\WebScript.pas"/>
+			<DCCReference Include="D:\Program Files (x86)\Embarcadero\RAD Studio\7.0\source\Win32\websnap\WebAuto.pas"/>
+			<DCCReference Include="D:\Program Files (x86)\Embarcadero\RAD Studio\7.0\source\Win32\websnap\AdaptReq.pas"/>
+			<DCCReference Include="D:\Program Files (x86)\Embarcadero\RAD Studio\7.0\source\Win32\websnap\WebModu.pas"/>
+			<DCCReference Include="D:\Program Files (x86)\Embarcadero\RAD Studio\7.0\source\Win32\websnap\WebAdapt.pas"/>
+			<DCCReference Include="D:\Program Files (x86)\Embarcadero\RAD Studio\7.0\source\Win32\internet\WebCntxt.pas"/>
+			<DCCReference Include="D:\Program Files (x86)\Embarcadero\RAD Studio\7.0\source\Win32\internet\WebReq.pas"/>
+			<DCCReference Include="D:\Program Files (x86)\Embarcadero\RAD Studio\7.0\source\Win32\websnap\WebFact.pas"/>
+			<None Include="ModelSupport_WapMail\default.txvpck"/>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Parameters>
+						<Parameters Name="HostApplication">C:\WINDOWS\system32\inetsrv\w3wp.exe</Parameters>
+						<Parameters Name="RunParams">-debug</Parameters>
+						<Parameters Name="DebugCWD">F:\Projects\WAPMail..CC_Delphi2010_20090830\bin</Parameters>
+						<Parameters Name="DebugSourceDirs">F:\Projects\WAPMail..CC_Delphi2010_20090830</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">2</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">1</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">2052</VersionInfo>
+						<VersionInfo Name="CodePage">936</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName">.CC</VersionInfoKeys>
+						<VersionInfoKeys Name="FileDescription">手机邮箱接入平台</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">1.2.0.1</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName">MobileMail.exe</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalCopyright">.CC</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalTrademarks">.CC</VersionInfoKeys>
+						<VersionInfoKeys Name="OriginalFilename">MobileMail.exe</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductName">手机邮箱接入平台</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">1.2.0.1</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments">HTTP://WWW..CC</VersionInfoKeys>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\6.0\Bpl\Jcl120.bpl">JEDI Code Library RTL package</Excluded_Packages>
+						<Excluded_Packages Name="C:\Windows\system32\dclSvComV7D12.bpl">File C:\Windows\system32\dclSvComV7D12.bpl not found</Excluded_Packages>
+						<Excluded_Packages Name="d:\Program Files\ElevateDB VCL\Version 2\RAD Studio (Delphi-Unicode) 2009\code\edb202s2009design.bpl">ElevateDB Design-Time Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k120.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclofficexp120.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+					<Source>
+						<Source Name="MainSource">MobileMail.dpr</Source>
+					</Source>
+				</Delphi.Personality>
+				<ModelSupport>False</ModelSupport>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

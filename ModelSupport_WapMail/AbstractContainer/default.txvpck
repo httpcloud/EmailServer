@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="29btan7bfuro287op_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="delphi:e_class:src:WapMail:AbstractContainer.TIntfCriticalSection">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,213,175" />
+      <reference referencedUin="delphi:e_field:src:WapMail:AbstractContainer.TIntfCriticalSection.FCriticalSection" />
+      <reference referencedUin="delphi:e_method:src:WapMail:AbstractContainer.TIntfCriticalSection.QueryInterface(System.TGUID,out@)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:AbstractContainer.TIntfCriticalSection._AddRef()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:AbstractContainer.TIntfCriticalSection._Release()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:AbstractContainer.TIntfCriticalSection.Create()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:AbstractContainer.TIntfCriticalSection.Destroy()" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:AbstractContainer.TAbstractContainer">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="242,1,153,81" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:AbstractContainer.@unitclass">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+  </view>
+</nodeSet>

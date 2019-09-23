@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="crd0" title="Wap..CC" newcontext="false">
+<do type="accept" label="答复" name="reply">
+  <go href="#crd1"/>
+</do>
+<do type="accept" label="全部答复" name="allReply">
+  <go href="#crd2"/>
+</do>
+<do type="option" label="转发" name="allReply">
+  <go href="#crd3"/>
+</do>
+<p>
+发件人:<input name="SND" value="<#sender>"/><br/>
+日期:<#time><br/>
+收件人:<input name="RCPT" value="<#recipients>"/><br/>
+主题:<input name="SBJCT" value="<#subject>"/><br/>
+<#attatchment>
+</p>
+<input name="BDY" value="<#body>"/><br/>
+</card>
+<card id="crd1" title="Wap..CC" newcontext="false">
+<p>
+收件人:<input name="R" value="$SND"/><br/>
+主题:<input name="S" value="Re:$SBJCT"/><br/>
+内容:<input name="C" value=""/><br/>
+</p>
+<do type="accept" label="发送" name="allReply">
+  <go accept-charset="utf-8" href="<%=Pages.send.HREF%>" method="post">
+	<postfield name="R" value="$R"/>
+	<postfield name="S" value="$S"/>
+	<postfield name="C" value="$C"/>
+  </go>
+</do>
+</card>
+<card id="crd2" title="Wap..CC" newcontext="false">
+<p>
+收件人:<input name="R" value="$SND;$RCPT"/><br/>
+主题:<input name="S" value="Re:$SBJCT"/><br/>
+内容:<input name="C" value=""/><br/>
+</p>
+<do type="accept" label="发送" name="allReply">
+  <go accept-charset="utf-8" href="<%=Pages.send.HREF%>" method="post">
+	<postfield name="R" value="$R"/>
+	<postfield name="S" value="$S"/>
+	<postfield name="C" value="$C"/>
+  </go>
+</do>
+</card>
+<card id="crd3" title="Wap..CC" newcontext="false">
+<p>
+收件人:<input name="R" value=""/><br/>
+主题:<input name="S" value="Fw:$SBJCT"/><br/>
+内容:<input name="C" value="$BDY"/><br/>
+</p>
+<do type="accept" label="转发" name="allReply">
+  <go accept-charset="utf-8" href="<%=Pages.send.HREF%>" method="post">
+	<postfield name="R" value="$R"/>
+	<postfield name="S" value="$S"/>
+	<postfield name="C" value="$C"/>
+  </go>
+</do>
+</card>
+</wml>
+

@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{0d2e774e-851d-497e-bd1b-1957eaa80b11}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="..\..\..\..\WapMail07121223\WapMail.dproj" />
+    <Projects Include="Perf.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="Perf">
+    <MSBuild Projects="Perf.dproj" Targets="" />
+  </Target>
+  <Target Name="Perf:Clean">
+    <MSBuild Projects="Perf.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="Perf:Make">
+    <MSBuild Projects="Perf.dproj" Targets="Make" />
+  </Target>
+  <Target Name="WapMail">
+    <MSBuild Projects="..\..\..\..\WapMail07121223\WapMail.dproj" Targets="" />
+  </Target>
+  <Target Name="WapMail:Clean">
+    <MSBuild Projects="..\..\..\..\WapMail07121223\WapMail.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="WapMail:Make">
+    <MSBuild Projects="..\..\..\..\WapMail07121223\WapMail.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="Perf;WapMail" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="Perf:Clean;WapMail:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="Perf:Make;WapMail:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="login" title="手机邮" newcontext="true">
+<p>
+<b><u>注册手机邮箱</u></b><br/>
+<#info>
+<#SYSMSG>
+邮箱全称:<br/>
+<input name="MUID" emptyok="false" maxlength="25"/><br/>
+密&nbsp;&nbsp;&nbsp;&nbsp;码:<br/><input name="MPWD" emptyok="false" format="10x"/><br/>
+重输密码:<br/><input name="MPWD2" emptyok="false" format="10x"/><br/>
+<do type="accept" label="注册" name="btReg">
+  <go href="<%=Pages.reg.HREF%>" method="post">
+	<postfield name="MUID" value="$(MUID)"/>
+	<postfield name="MPWD" value="$(MPWD)"/>
+	<postfield name="MPWD" value="$(MPWD2)"/>
+  </go>
+</do>
+<do type="prev" label="返回" name="back"><prev/></do>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>
+

@@ -1,0 +1,74 @@
+ 驱动器 F 中的卷是 Projects&Doc
+ 卷的序列号是 4A6D-332F
+
+ F:\Projects\WAPMail..CC_Delphi2010_20090830\bin 的目录
+
+2009/02/17  01:13               415 404.wml
+2009/02/17  01:13             1,518 addMailBox.wml
+2009/02/17  01:13               942 addMailBox_func.wmls
+2009/02/17  01:13             1,628 addNewMailBoxForGuestModule.wml
+2009/02/17  01:13               656 addNewMailBoxForGuestStep1.wml
+2009/02/17  01:13               657 addNewMailBoxForGuestStep1_bak.wml
+2009/02/17  01:13               983 addNewMailBoxForGuestStep2.wml
+2009/02/17  01:13               857 addNewMailBoxForGuestStep21.wml
+2009/02/17  01:13               851 addNewMailBoxForGuestStep21_bak.wml
+2009/02/17  01:13               930 addNewMailBoxForGuestStep22.wml
+2009/02/17  01:13             1,564 addNewMailBoxForGuestStep3.wml
+2009/02/17  01:13             1,632 addNewMailBoxForGuestStep3ALL.wml
+2009/02/17  01:13             1,804 addNewMailBoxForGuestStep3ALLR.wml
+2009/02/17  01:13             1,640 addNewMailBoxForGuestStep3PS.wml
+2009/02/17  01:13             1,830 addNewMailBoxForGuestStep3PSR.wml
+2009/02/17  01:13             1,643 addNewMailBoxForGuestStep3SS.wml
+2009/02/17  01:13             1,831 addNewMailBoxForGuestStep3SSR.wml
+2009/02/17  01:13               606 addNewMailBoxForGuestStep4.wml
+2009/02/17  01:13               428 addNewMailBoxForGuestStep42.wml
+2009/02/17  01:13             1,772 addNewMailBoxModule_.wml
+2009/02/17  01:13               551 addNewMailBoxStatus.wml
+2009/02/17  01:13               349 addNewMailBoxStatus_Failure.wml
+2009/02/17  01:13               355 addNewMailBoxStatus_Success.wml
+2009/02/17  01:13             1,058 addNewMailBoxStep1.wml
+2009/02/17  01:13             1,576 addNewMailBoxStep2.wml
+2009/09/10  22:07                46 alert.wml
+2009/02/17  01:13               136 alert_error.wml
+2009/09/08  23:22               605 default.wml
+2009/02/17  01:13             2,183 detail071226.wml
+2009/02/17  01:13             2,104 detail20071227.wml
+2009/09/13  14:03             3,200 detailModule.wml
+2009/02/17  01:13             1,408 detail_.wml
+2009/02/17  01:13             2,190 detail_all.wml
+2009/02/17  01:13             1,828 editMailBox.wml
+2009/02/17  01:13             1,693 forgetPWD.wml
+2009/02/17  01:13               803 help.wml
+2009/02/17  01:13             1,293 inBoxModule.wml
+2009/09/10  22:05                84 info.wml
+2009/09/15  23:30               901 loginModule.wml
+2009/02/17  01:13               273 login_Success.wml
+2009/09/10  21:46             1,208 MainModule.wml
+2009/02/17  01:13             2,571 MainModule20080207.wml
+2009/02/17  01:13             2,991 MainModule_bak.wml
+2009/09/08  23:40             2,914 MainModule_Good_All.wml
+2009/02/17  01:13             1,140 MainModule_Guest.wml
+2009/02/17  01:13               248 outBoxModule.wml
+2009/02/17  01:13               822 register.wml
+2009/02/17  01:13               880 registerModule.wml
+2009/02/17  01:13             1,163 register_success.wml
+2009/02/17  01:13               218 relogin.wml
+2009/02/17  01:13               226 relogin_.wml
+2009/09/15  19:09               131 return.wml
+2009/02/17  01:13               274 sendMail.wml
+2009/02/17  01:13               332 sendModule.wml
+2009/02/17  01:13               957 send_.wml
+2009/09/17  01:14             1,341 setModule.wml
+2009/09/18  02:19             1,502 setModule_CancelSaveMSG.wml
+2009/09/18  02:19             1,478 setModule_EnableSaveMSG.wml
+2009/02/17  01:13               586 stopRegUser.wml
+2009/09/15  22:31             1,373 sysSetModule.wml
+2009/09/15  19:16             1,541 test.wml
+2009/02/17  01:13             2,002 Untitled2.wml
+2009/02/17  01:13             1,974 Untitled2_.wml
+2009/09/15  01:22             1,070 writeModule.wml
+2009/09/15  03:27             1,341 writeModule_For_DraftBox.wml
+2009/09/15  02:46             1,028 writeModule_For_OutBox.wml
+2009/02/17  01:13             1,776 复件 addNewMailBoxForGuestStep3PSR.wml
+              67 个文件         79,910 字节
+               0 个目录  5,104,193,536 可用字节

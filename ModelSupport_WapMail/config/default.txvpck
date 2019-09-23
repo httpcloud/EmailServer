@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="7mdrzzid3k_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TConfig">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,213,455" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.cUserName" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.cPassword" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.cPOP3Server" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.cSMTPServer" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.cPOP3Port" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.cSMTPPort" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.cMailAddress" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.UserMailConfig" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.SendMailStateCode" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.SendMailStateInfo" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.userLogPath" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.userInBoxPath" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.userOutBoxPath" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.MailAppendContent" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.pageWordNum" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.StartWord" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.EndSignSet" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.currentUserSession" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.inBoxCount" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.mailBoxName" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.addMailBoxStatus" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.commonActionTagName" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.commonActionTagParagramName" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.SYS_State_Code" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.SYS_MSG" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TConfig.ERROR404" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TCurrentUserSession">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="242,1,134,219" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TCurrentUserSession._userName" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TCurrentUserSession._userId" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TCurrentUserSession._userMail" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TCurrentUserSession._password" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TCurrentUserSession.create(Classes.TComponent)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TCurrentUserSession.Destory()" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TCurrentUserSession.userName" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TCurrentUserSession.userId" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TCurrentUserSession.userMail" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TCurrentUserSession.password" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TMailConfig">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="242,257,166,429" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailConfig._pop3Server" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailConfig._smtpServer" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailConfig._pop3Port" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailConfig._smtpPort" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailConfig._smtpAuthencation" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailConfig._pop3SSL" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailConfig._smtpSSL" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailConfig._mailAddress" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailConfig._mailUserName" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailConfig._mailPassword" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailConfig._isDefault" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TMailConfig.create(Classes.TComponent)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TMailConfig.Destroy()" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailConfig.pop3Server" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailConfig.smtpServer" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailConfig.pop3Port" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailConfig.smtpPort" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailConfig.smtpAuthencation" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailConfig.pop3SSL" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailConfig.smtpSSL" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailConfig.mailAddress" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailConfig.mailUserName" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailConfig.mailPassword" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailConfig.isDefault" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TMailList">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="620,520,200,97" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TMailList._MailConfigList" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TMailList.MailConfigList" />
+      <reference referencedUin="delphi:l_ast:src:WapMail:config.TMailList._MailConfigList">
+        <property name="sourceAnchor" value="729,520" />
+        <property name="targetAnchor" value="729,445" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:WapMail:config.TMailList.MailConfigList">
+        <property name="sourceAnchor" value="721,520" />
+        <property name="targetAnchor" value="721,445" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TUserLoginMode">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="446,1,154,185" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUserLoginMode.userId" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUserLoginMode.userName" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUserLoginMode.emailAddress" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUserLoginMode.guest" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUserLoginMode.userIdMapValue" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUserLoginMode.userNameMapValue" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUserLoginMode.emailAddressMapValue" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUserLoginMode.guestUserMapVlaue" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TUser">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="638,1,207,369" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUser._userName" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUser._userId" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUser._userMail" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUser._password" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUser._currentSelectMail" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUser._userLoginMode" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUser._mailConfigArray" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TUser.getMailConfig(System.Integer)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TUser.setMailConfig(System.Integer,config.TMailConfig)" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TUser.mailConfigArrayLength" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TUser.Create(Classes.TComponent,System.Integer)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TUser.Destroy()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TUser.getLoginModeMapValue()" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TUser.mailConfigArray[System.Integer]" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TUser.userName" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TUser.userId" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TUser.userMail" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TUser.password" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TUser.currentSelectMail" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TUser.loginMode" />
+      <reference referencedUin="delphi:l_ast:src:WapMail:config.TUser._mailConfigArray">
+        <property name="sourceAnchor" value="741,370" />
+        <property name="targetAnchor" value="741,407" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:WapMail:config.TUser.mailConfigArray[System.Integer]">
+        <property name="sourceAnchor" value="638,322" />
+        <property name="targetAnchor" value="408,322" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TCharSet">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="446,205,75,155" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TCharSet.GB2312" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TCharSet.GBK" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TCharSet.GB18030" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TCharSet.BIG5" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TCharSet.UTF8" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TCharSet.other" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TEncoder">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="446,379,112,125" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TEncoder.base64" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TEncoder.QuotedPrintable" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TEncoder.bit8" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TEncoder.other" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TContentType">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="446,523,104,140" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TContentType.common" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TContentType.mailSubject" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TContentType.mailBody" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TContentType.mailRecipients" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TContentType.mailSender" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TLoginModeEnum">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="446,682,162,113" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TLoginModeEnum.ByUserNameAndPassword" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TLoginModeEnum.ById" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TLoginModeEnum.ByEmail" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TLoginModeEnum.ByGuest" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.GetCurrentPath()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.GetInfo(HTTPApp.TWebRequest,System.string)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.GetInfo(System.string)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.FilterHalfUnicode(ref@System.string)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.POP3Test(config.TMailConfig,ref@System.string)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.SMTPTest(config.TMailConfig,ref@System.string)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.encryptUserInfo(System.AnsiString,System.AnsiString)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.decryptUserInfo(System.AnsiString,ref@System.AnsiString,ref@System.AnsiString)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.FilterSpecialCharacter(System.string)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.FilterSightlessCharacter(System.string)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.FormatSystemMessage(System.string,System.string,System.Integer)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.SafeRedirectTo(HTTPApp.TWebResponse,System.string,System.Boolean)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.logToFile(System.string,System.string)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.GetMIMEType(System.string)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.RedirectTo()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.@unitclass.decodeURL(System.string)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TMailConfigArray">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="638,407,230,38" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TXMLConfigDebugDataSource">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="540,840,187,110" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TXMLConfigDebugDataSource.DataSourceName" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TXMLConfigDebugDataSource.DataSourceType" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TXMLConfigDebugDataSource.DataSourceValue" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TXMLConfig">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="60,820,318,264" />
+      <property name="location_set_by_user" value="True" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TXMLConfig.DebugDataSouce" />
+      <reference referencedUin="delphi:l_ast:src:WapMail:config.TXMLConfig.DebugDataSouce">
+        <property name="sourceAnchor" value="378,895" />
+        <property name="targetAnchor" value="540,895" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TXMLConfig.Create()">
+        <property name="bounds" value="97,-57,0,0" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TXMLConfig.LoadXMLConfigFile()">
+        <property name="bounds" value="137,-57,0,0" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TXMLConfig.GetDebugDataSource()">
+        <property name="bounds" value="115,-43,0,0" />
+      </reference>
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TXMLConfig.XMLConfigFileName">
+        <property name="bounds" value="115,-148,0,0" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TXMLConfig.GetXMLConfigFileName()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TXMLConfig.SetXMLConfigFileName(System.string)" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TXMLConfig.FXMLConfigFileName" />
+      <reference referencedUin="delphi:e_field:src:WapMail:config.TXMLConfig.FXMLConfig" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TXMLConfig.GetXMLConfigDoc()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TXMLConfig.IsDebug()" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TXMLConfig.XMLConfigDoc" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TXMLConfig.LoadXMLFile(System.string)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:WapMail:config.TContext">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="500,980,149,112" />
+      <reference referencedUin="delphi:e_property:src:WapMail:config.TContext.UserList">
+        <property name="bounds" value="35,-39,0,0" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TContext.GetUserList()" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TContext.SetUserList(config.THashMap)" />
+      <reference referencedUin="delphi:e_method:src:WapMail:config.TContext.SetUserList(HashMap.THashMap)" />
+    </reference>
+  </view>
+</nodeSet>

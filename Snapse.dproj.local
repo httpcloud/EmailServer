@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2008-10-21 02:33:37.250.dproj,C:\Documents and Settings\Administrator\My Documents\RAD Studio\Projects\Package1.dproj=C:\Documents and Settings\Administrator\My Documents\RAD Studio\Projects\Snapse38.dproj</Transaction>
+    <Transaction>2008-10-21 02:33:55.015.dproj,C:\Documents and Settings\Administrator\My Documents\RAD Studio\Projects\Snapse38.dproj=R:\Projects\WapMail_080102_For_Delphi2009\Snapse.dproj</Transaction>
+    <Transaction>2008-10-21 02:34:08.140.pas,S:\Delphi\VCL\synapse38\source\lib\ssdotnet.pas=</Transaction>
+    <Transaction>2008-10-21 02:34:08.156.pas,S:\Delphi\VCL\synapse38\source\lib\sslinux.pas=</Transaction>
+    <Transaction>2008-10-21 02:34:24.890.pas,S:\Delphi\VCL\synapse38\source\lib\ssfpc.pas=</Transaction>
+    <Transaction>2008-10-21 02:34:37.578.pas,S:\Delphi\VCL\synapse38\source\lib\ssl_cryptlib.pas=</Transaction>
+    <Transaction>2008-10-21 02:34:44.671.pas,S:\Delphi\VCL\synapse38\source\lib\ssl_openssl.pas=</Transaction>
+    <Transaction>2008-10-21 02:34:53.906.pas,S:\Delphi\VCL\synapse38\source\lib\ssl_sbb.pas=</Transaction>
+    <Transaction>2008-10-21 02:34:59.750.pas,S:\Delphi\VCL\synapse38\source\lib\ssl_streamsec.pas=</Transaction>
+    <Transaction>2008-10-21 02:35:11.500.pas,S:\Delphi\VCL\synapse38\source\lib\sswin32.pas=</Transaction>
+    <Transaction>2009/07/31 17:28:43.101.pas,F:\Projects\ThirdComponent\Delphi\synapse\ssdotnet.pas=</Transaction>
+    <Transaction>2009/07/31 17:29:27.298.pas,F:\Projects\ThirdComponent\Delphi\synapse\ssfpc.pas=</Transaction>
+    <Transaction>2009/07/31 17:49:38.239.pas,F:\Projects\ThirdComponent\Delphi\synapse\ssl_sbb.pas=</Transaction>
+    <Transaction>2009/07/31 18:36:34.130.pas,F:\Projects\ThirdComponent\Delphi\synapse\ssl_streamsec.pas=</Transaction>
+    <Transaction>2009/07/31 18:36:50.577.pas,F:\Projects\ThirdComponent\Delphi\synapse\sslinux.pas=</Transaction>
+    <Transaction>2009/07/31 18:39:43.677.pas,F:\Projects\ThirdComponent\Delphi\synapse\sswin32.pas=</Transaction>
+  </Transactions>
+</BorlandProject>

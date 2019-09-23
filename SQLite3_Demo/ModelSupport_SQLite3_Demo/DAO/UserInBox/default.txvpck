@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="p6gq45xzlxolgbhnp_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DAO.UserInBox.UserInBox">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="10,10,301,102" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DAO.UserInBox.UserInBox.Add(Domain.UserInBox.TUserMailInBoxRec)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DAO.UserInBox.@unitclass">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+  </view>
+</nodeSet>

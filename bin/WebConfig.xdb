@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+  <xs:element name="configuration" type="configurationType"/>
+  <xs:complexType name="configurationType"><xs:annotation>
+      <xs:appinfo xdb:docElement="configuration"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="appSettings" type="appSettingsType"/>
+      <xs:element name="connectionStrings" type="connectionStringsType"/>
+      <xs:element name="system.web" type="system.webType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="appSettingsType">
+    <xs:sequence>
+      <xs:element name="add" type="addType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addType">
+    <xs:attribute name="key" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string"/>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="connectionString" type="xs:string"/>
+    <xs:attribute name="providerName" type="xs:string"/>
+    <xs:attribute name="assembly" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="connectionStringsType">
+    <xs:sequence>
+      <xs:element name="add" type="addType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="system.webType">
+    <xs:sequence>
+      <xs:element name="compilation" type="compilationType"/>
+      <xs:element name="authentication" type="authenticationType"/>
+      <xs:element name="customErrors" type="customErrorsType"/>
+      <xs:element name="sessionState" type="sessionStateType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="compilationType">
+    <xs:sequence>
+      <xs:element name="assemblies" type="assembliesType"/>
+    </xs:sequence>
+    <xs:attribute name="debug" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="assembliesType">
+    <xs:sequence>
+      <xs:element name="add" type="addType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="authenticationType">
+    <xs:attribute name="mode" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="customErrorsType">
+    <xs:attribute name="mode" type="xs:string"/>
+    <xs:attribute name="defaultRedirect" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="sessionStateType">
+    <xs:attribute name="timeout" type="xs:integer"/>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="djxnajyp3bg_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="design:view:::v13d96eh1l2lazbig_v">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:Domain.UserInBox.TUserMailInBoxRec" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:Domain.UserInBox.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:SQLite3_Demo:Domain.UserInBox.MailStatus" />
+    </reference>
+  </view>
+</nodeSet>

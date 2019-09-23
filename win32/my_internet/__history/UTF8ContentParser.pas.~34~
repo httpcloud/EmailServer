@@ -1,0 +1,459 @@
+//from 李伟博客： http://gordonliwei.spaces.live.com/blog/cns!CCE1F10BD8108687!3603.entry
+
+{
+July 14，2009
+VCL For Web 2009繁體中文問題解決方法：
+
+在追了IntraWeb團隊和Delphi團隊將近半年之後終於追出了解決方案，由於了IntraWeb團隊和Delphi團隊都忙於下一版Delphi的開發工作，因此為了讓他們能夠解決這個問題實在是因為徹底發揮了『追，纏，黏』的功夫。不多說了，如果有朋友在VCL For Web下有繁體中文的問題的話，那麼請使用下列的方法即可解決:
+        1. 從http://www.atozed.com/intraweb/Download/Files/index.EN.aspx下載並且安裝IntraWeb build 10.0.15版
+        2. 把文後下附的UTF8ContentParser.pas放到您的專案目錄中
+        3. 在您的專案中加入UTF8ContentParser.pas
+        4. 在您的應用程式中的uses句子中加入參考UTF8ContentParser
+        5. 重新編譯和執行
+
+現在VCL For Web在繁體中文作業系統中的問題就會自動解決了。
+我已經和IntraWeb團隊和Delphi團隊確認在下一版的Delphi中UTF8ContentParser會加入到VCL框架中，因此下一版Delphi1出來時就不再需要上述的步驟了。
+Have Fun!
+
+--李伟
+}
+
+{
+  引用本单元的说明：
+  在用户通过 wap 发送邮件时，提交过来的 邮件主题(subject)，内容(body) 若含有中文,则 SendMail.pas 中的接收端：
+    Recipients := (Request.ContentFields.Values['R']);
+    subject := (Request.ContentFields.Values['S']);
+    body := (Request.ContentFields.Values['C']);
+
+  获得是通过 HTTPApp.pas 中默认的 TContentParser 解析的，但它并没有真正处理客户端发来的 HTTPEnode(中文UTF8编码) 格式的内容，因而这里接收到的解析出来的内容总是乱码(实则是UTF8格式中文，但可能总是最后少或多了半个汉字的情况，因为默认的 TContentParser 在做解析时是从转换为 String 后再进行转的，
+  并没有转换为Bytes再转换为目标类型字符串，所以对于有些特殊字符在转来转去的过程中会丢失掉，尤其是奇数个数的中文字时,如当客户断输入标题为"测试下" 三个字提交时，接收到的标题就会是丢失了末尾字符的 UTF8 格式乱码。
+
+  本来想自己来通过修改HTTPAPP中的解析部分来解决问题，但非常麻烦，也无时间和精力深入研究，便在网上搜索，找到了李伟德这片文章，他本来是解决 IntraWeb的问题，可仔细试验后，也解决了 WebSnap 的问题。
+  并且进一步发现 Delphi 的 HTTPApp.pas 设计是非常高明的，可以针对不同的类型设计相应的 ContentParser ，在需要的时候在相应的单元引用（Uses)一下即可，如我们在SendMail.pas中发现存在这种问题，于是Uses UTF8ContentParser 即可。
+
+  原理：
+  每个自定义的 ContentParser, 都必须实现基类TContentParser 的 三个方法:
+  destructor Destroy; override;
+  function GetContentFields: TStrings; override;
+  class function CanParse(AWebRequest: TWebRequest): Boolean; override;
+  尤其是后面的 GetContentFields 方法和 CanParse 方法，通过 CanParse 判定是否符合该类型，若符合就通过 GetContentFields 调用 ExtractHeaderFields 来进行解析并返回解析后的内容。
+
+  最后的   RegisterContentParser(TUTF8ContentParser); 一句也非常重要，它将本 ContentParser 注册到 HTTPApp.pas 中的 ContentParsers List容器中，方便 HTTPApp 统一进行管理，HTTPApp 通过其
+  function TWebRequest.GetContentParser: TAbstractContentParser; 函数循环所有的 ContentParser ，查询并找到最合适的 ContentParser ,然后调用其进行解析。
+
+  -- lwgboy ,2009-9-8 22:15
+}
+
+{
+
+  若要继续对汉字的各种编码进行研究可参考下面的代码进行试验以理解：
+  //代码片断1：
+  procedure   TForm1.Button1Click(Sender:   TObject);
+  begin
+      ShowMessage(HTTPDecode('%BD%CC%B3%CC+%CA%E9'));
+      ShowMessage(HTTPEncode('教程   书'));
+  end;
+
+  //代码片断2：
+  uses   HTTPApp;
+  procedure   TForm1.Button1Click(Sender:   TObject);
+  var
+  s:string;
+  begin
+  s:=httpdecode('%E5%A4%A7%E5%AD%A6');
+  s:=UTF8DECODE(s);
+  ShowMessage(s);
+  end;
+  //结果显示为"大学"
+
+
+
+  //代码片断3：
+  //汉字与多字节编码的转换：
+
+
+Delphi 2009 默认的编码是多字节编码(MBCS), Delphi 这样表示它: TEncoding.Default.
+
+下面是多字节编码与汉字之间转换的例子:
+
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+{汉字到多字节编码}
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  stream: TStringStream;
+  b: Byte;
+  s: string;
+begin
+  stream := TStringStream.Create('我们', TEncoding.Default);
+  s := '';
+  for b in stream.Bytes do s := Format('%s%x ', [s,b]);
+
+  ShowMessage(s); {CE D2 C3 C7}
+  stream.Free;
+end;
+
+{多字节编码到汉字}
+procedure TForm1.Button2Click(Sender: TObject);
+var
+  stream: TStringStream;
+begin
+  stream := TStringStream.Create;
+  stream.Size := 4;
+  stream.Bytes[0] := $CE;
+  stream.Bytes[1] := $D2;
+  stream.Bytes[2] := $C3;
+  stream.Bytes[3] := $C7;
+
+  ShowMessage(stream.DataString); {我们}
+  stream.Free;
+end;
+
+{把多字节编码的字符串转换到汉字}
+procedure TForm1.Button3Click(Sender: TObject);
+var
+  str: AnsiString;
+  stream: TStringStream;
+  i: Integer;
+begin
+  str := 'CED2C3C7';
+  stream := TStringStream.Create;
+  stream.Size := Length(str) div 2;
+
+  for i := 1 to Length(str) do
+    if Odd(i) then
+      stream.Bytes[i div 2] := StrToIntDef(Concat(#36,str[i],str[i+1]), 0);
+
+  ShowMessage(stream.DataString); {我们}
+  stream.Free;
+end;
+
+end.
+
+
+}
+
+
+
+// TUTF8ContentParser is a WebRequest content parser that parses UTF-8 requests.
+
+// TUTF8ContentParser class automatically replace the default content parser when this unit (UTF8ContentParser)
+
+// is used in a web application.  You should only use UTF8ContentParser in web applications that generate UTF-8
+
+// responses.
+
+//
+
+// To generated UTF-8 encoded responses, set Response.ContentType as follows before setting Response.Content.
+
+//    Response.ContentType := 'text/html; charset=UTF-8';
+
+//
+
+// Note that, if your application uses the ReqMulti unit to parse multipart content, ReqMulti must appear in the application
+
+// uses list after UTF8ContentParser.
+
+
+
+unit UTF8ContentParser;
+
+
+interface
+
+
+uses SysUtils, Classes, Masks, Contnrs, HTTPApp,
+
+  ReqFiles, HTTPParse;
+
+
+type
+
+
+{ TUTF8ContentParser }
+
+
+  TUTF8ContentParser = class(TContentParser)
+
+  private
+
+    FContentFields: TStrings;
+
+  public
+
+    destructor Destroy; override;
+
+    function GetContentFields: TStrings; override;
+
+    class function CanParse(AWebRequest: TWebRequest): Boolean; override;
+
+  end;
+
+
+implementation
+
+
+uses WebConst, WebComp, BrkrConst, Windows;
+
+
+
+{ TUTF8ContentParser }
+
+
+class function TUTF8ContentParser.CanParse(AWebRequest: TWebRequest): Boolean;
+
+begin
+
+  Result := True;
+
+end;
+
+
+destructor TUTF8ContentParser.Destroy;
+
+begin
+
+  FContentFields.Free;
+
+  inherited Destroy;
+
+end;
+
+
+procedure ExtractHeaderFields(Separators, WhiteSpace: TSysCharSet; Content: PAnsiChar;
+
+  Strings: TStrings; Decode: Boolean; Encoding: TEncoding; StripQuotes: Boolean = False); forward;
+
+
+function TUTF8ContentParser.GetContentFields: TStrings;
+
+begin
+
+  if FContentFields = nil then
+
+  begin
+
+    FContentFields := TStringList.Create;
+
+    if WebRequest.ContentLength > 0 then
+
+    begin
+
+      ExtractHeaderFields(['&'], [], PAnsiChar(WebRequest.RawContent), FContentFields, True, TEncoding.UTF8);
+
+    end;
+
+  end;
+
+  Result := FContentFields;
+
+end;
+
+
+// Version of HTTP.ExtractHeaderFields that supports encoding parameter
+
+procedure ExtractHeaderFields(Separators, WhiteSpace: TSysCharSet; Content: PAnsiChar;
+
+  Strings: TStrings; Decode: Boolean; Encoding: TEncoding; StripQuotes: Boolean = False);
+
+var
+
+  Head, Tail: PAnsiChar;
+
+  EOS, InQuote, LeadQuote: Boolean;
+
+  QuoteChar: AnsiChar;
+
+  ExtractedField: AnsiString;
+
+  WhiteSpaceWithCRLF: TSysCharSet;
+
+  SeparatorsWithCRLF: TSysCharSet;
+
+
+  procedure AddString(const S: AnsiString);
+
+  var
+
+    LBytes: TBytes;
+
+    LString: string;
+
+  begin
+
+    LBytes := BytesOf(S);
+
+    LString := Encoding.GetString(LBytes);
+
+    Strings.Add(LString);
+
+  end;
+
+
+  function DoStripQuotes(const S: AnsiString): AnsiString;
+
+  var
+
+    I: Integer;
+
+    InStripQuote: Boolean;
+
+    StripQuoteChar: AnsiChar;
+
+  begin
+
+    Result := S;
+
+    InStripQuote := False;
+
+    StripQuoteChar := #0;
+
+    if StripQuotes then
+
+      for I := Length(Result) downto 1 do
+
+        if CharInSet(Result[I], ['''', '"']) then
+
+          if InStripQuote and (StripQuoteChar = Result[I]) then
+
+          begin
+
+          Delete(Result, I, 1);
+
+            InStripQuote := False;
+
+          end
+
+          else if not InStripQuote then
+
+          begin
+
+            StripQuoteChar := Result[I];
+
+            InStripQuote := True;
+
+            Delete(Result, I, 1);
+
+          end
+
+  end;
+
+
+begin
+
+  if (Content = nil) or (Content^ = #0) then Exit;
+
+  WhiteSpaceWithCRLF := WhiteSpace + [#13, #10];
+
+  SeparatorsWithCRLF := Separators + [#0, #13, #10, '"'];
+
+  Tail := Content;
+
+  QuoteChar := #0;
+
+  repeat
+
+    while CharInSet(Tail^, WhiteSpaceWithCRLF) do Inc(Tail);
+
+    Head := Tail;
+
+    InQuote := False;
+
+    LeadQuote := False;
+
+    while True do
+
+    begin
+
+     while (InQuote and not CharInSet(Tail^, [#0, '"'])) or
+
+        not CharInSet(Tail^, SeparatorsWithCRLF) do Inc(Tail);
+
+      if Tail^ = '"' then
+
+      begin
+
+        if (QuoteChar <> #0) and (QuoteChar = Tail^) then
+
+          QuoteChar := #0
+
+        else
+
+        begin
+
+          LeadQuote := Head = Tail;
+
+          QuoteChar := Tail^;
+
+          if LeadQuote then Inc(Head);
+
+        end;
+
+        InQuote := QuoteChar <> #0;
+
+        if InQuote then
+
+          Inc(Tail)
+
+        else Break;
+
+      end else Break;
+
+    end;
+
+    if not LeadQuote and (Tail^ <> #0) and (Tail^ = '"') then
+
+      Inc(Tail);
+
+    EOS := Tail^ = #0;
+
+    if Head^ <> #0 then
+
+    begin
+
+      SetString(ExtractedField, Head, Tail-Head);
+
+      if Decode then
+
+        AddString(HTTPDecode(AnsiString(DoStripQuotes(ExtractedField))))
+
+      else AddString(DoStripQuotes(ExtractedField));
+
+    end;
+
+    Inc(Tail);
+
+  until EOS;
+
+end;
+
+
+initialization
+
+  RegisterContentParser(TUTF8ContentParser);
+
+end.

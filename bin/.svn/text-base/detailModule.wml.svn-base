@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="crd0" title="魔方手机邮" newcontext="false">
+<a href="#crd1">答复</a>
+<a href="#crd2">全部答复</a>
+<a href="#crd3">转发</a>
+<onevent type="onenterforward"><refresh>
+<setvar name="SND" value="<#sender>" />
+<setvar name="RCPT" value="<#recipients>" />
+<setvar name="SBJCT" value="<#subject>" />
+</refresh></onevent>
+<p>
+发件人:$(SND) <br/>
+日期:<#time> <br/>
+收件人:$(RCPT) <br/>
+主题:$(SBJCT) <br/>
+<#attachment>
+<#body><br/>
+<a href="<%=Pages.detail.HREF%>?ms=<#ms>&amp;id=<#id>&amp;cp=1&amp;lp=<#mailListPage>"><#firstPageText></a>
+<a href="<%=Pages.detail.HREF%>?ms=<#ms>&amp;id=<#id>&amp;cp=<#prevPage>&amp;lp=<#mailListPage>"><#prevPageText></a>
+<a href="<%=Pages.detail.HREF%>?ms=<#ms>&amp;id=<#id>&amp;cp=<#nextPage>&amp;lp=<#mailListPage>"><#nextPageText></a>
+<a href="<%=Pages.detail.HREF%>?ms=<#ms>&amp;id=<#id>&amp;cp=<#lastPage>&amp;lp=<#mailListPage>"><#lastPageText></a><br/>
+<a href="<%=Pages.inBox.HREF%>?ms=<#ms>&amp;p=<#mailListPage>">返回邮件列表</a><br/>
+<a href="<%=Pages.login.HREF%>?ms=<#ms>">返回收件箱</a>
+<!-- #include file="return.wml" -->
+</p>
+</card>
+<card id="crd1" title="魔方手机邮" newcontext="false">
+<p>
+收件人:<input name="R" value="$SND" /><br/>
+主题:<input name="S" value="Re:$SBJCT" /><br/>
+内容:<input name="C" value=""/><br/>
+<anchor>发送
+  <go accept-charset="utf-8" href="<%=Pages.send.HREF%>?ms=<#ms>" method="post">
+	<postfield name="R" value="$R" />
+	<postfield name="S" value="$S" />
+	<postfield name="C" value="$C" />
+  </go>
+</anchor>
+<!-- #include file="return.wml" -->
+</p>
+</card>
+<card id="crd2" title="魔方手机邮" newcontext="false">
+<p>
+收件人:<input name="R" value="$SND;$RCPT" /><br/>
+主题:<input name="S" value="Re:$SBJCT" /><br/>
+内容:<input name="C" value=""/><br/>
+<anchor>发送
+  <go accept-charset="utf-8" href="<%=Pages.send.HREF%>?ms=<#ms>" method="post">
+	<postfield name="R" value="$R" />
+	<postfield name="S" value="$S" />
+	<postfield name="C" value="$C" />
+  </go>
+</anchor>
+<a href="<%=Pages.inBox.HREF%>?ms=<#ms>&amp;p=<#mailListPage>">返回邮件列表</a><br/>
+<a href="<%=Pages.login.HREF%>?ms=<#ms>">返回收件箱</a>
+<!-- #include file="return.wml" -->
+</p>
+</card>
+<card id="crd3" title="魔方手机邮箱" newcontext="false">
+<p>
+收件人:<input name="R" value=""/><br/>
+主题:<input name="S" value="Fw:$SBJCT" /><br/>
+内容:<input name="C" value="$BDY" /><br/>
+<anchor>转发
+  <go accept-charset="utf-8" href="<%=Pages.send.HREF%>?ms=<#ms>" method="post">
+	<postfield name="R" value="$R" />
+	<postfield name="S" value="$S" />
+	<postfield name="C" value="$C" />
+  </go>
+</anchor>
+<a href="<%=Pages.inBox.HREF%>?ms=<#ms>&amp;p=<#mailListPage>">返回邮件列表</a><br/>
+<a href="<%=Pages.login.HREF%>?ms=<#ms>">返回收件箱</a>
+<!-- #include file="return.wml" -->
+</p>
+</card>
+</wml>
+

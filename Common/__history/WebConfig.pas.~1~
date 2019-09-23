@@ -1,0 +1,201 @@
+
+{************************************************************************}
+{                                                                        }
+{                            XML Data Binding                            }
+{                                                                        }
+{         Generated on: 2009/8/23 15:39:39                               }
+{       Generated from: F:\Projects\WAPMail..CC\bin\WebConfig.xml   }
+{   Settings stored in: F:\Projects\WAPMail..CC\bin\WebConfig.xdb   }
+{                                                                        }
+{************************************************************************}
+
+unit WebConfig;
+
+interface
+
+uses xmldom, XMLDoc, XMLIntf;
+
+type
+
+{ Forward Decls }
+
+  IXMLConfigurationType = interface;
+  IXMLSystemwebServerType = interface;
+  IXMLDirectoryBrowseType = interface;
+  IXMLHandlersType = interface;
+
+{ IXMLConfigurationType }
+
+  IXMLConfigurationType = interface(IXMLNode)
+    ['{5E4706A0-16C4-4935-B443-D656BABB7DBC}']
+    { Property Accessors }
+    function Get_SystemwebServer: IXMLSystemwebServerType;
+    { Methods & Properties }
+    property SystemwebServer: IXMLSystemwebServerType read Get_SystemwebServer;
+  end;
+
+{ IXMLSystemwebServerType }
+
+  IXMLSystemwebServerType = interface(IXMLNode)
+    ['{C33AEE90-210F-421A-84ED-C070502DF511}']
+    { Property Accessors }
+    function Get_DirectoryBrowse: IXMLDirectoryBrowseType;
+    function Get_Handlers: IXMLHandlersType;
+    { Methods & Properties }
+    property DirectoryBrowse: IXMLDirectoryBrowseType read Get_DirectoryBrowse;
+    property Handlers: IXMLHandlersType read Get_Handlers;
+  end;
+
+{ IXMLDirectoryBrowseType }
+
+  IXMLDirectoryBrowseType = interface(IXMLNode)
+    ['{B3B97E5E-DF2B-4570-A69B-56FF088DA397}']
+    { Property Accessors }
+    function Get_Enabled: WideString;
+    procedure Set_Enabled(Value: WideString);
+    { Methods & Properties }
+    property Enabled: WideString read Get_Enabled write Set_Enabled;
+  end;
+
+{ IXMLHandlersType }
+
+  IXMLHandlersType = interface(IXMLNode)
+    ['{F3139A9B-5A14-45B5-89A4-AA4047812213}']
+    { Property Accessors }
+    function Get_AccessPolicy: WideString;
+    procedure Set_AccessPolicy(Value: WideString);
+    { Methods & Properties }
+    property AccessPolicy: WideString read Get_AccessPolicy write Set_AccessPolicy;
+  end;
+
+{ Forward Decls }
+
+  TXMLConfigurationType = class;
+  TXMLSystemwebServerType = class;
+  TXMLDirectoryBrowseType = class;
+  TXMLHandlersType = class;
+
+{ TXMLConfigurationType }
+
+  TXMLConfigurationType = class(TXMLNode, IXMLConfigurationType)
+  protected
+    { IXMLConfigurationType }
+    function Get_SystemwebServer: IXMLSystemwebServerType;
+  public
+    procedure AfterConstruction; override;
+  end;
+
+{ TXMLSystemwebServerType }
+
+  TXMLSystemwebServerType = class(TXMLNode, IXMLSystemwebServerType)
+  protected
+    { IXMLSystemwebServerType }
+    function Get_DirectoryBrowse: IXMLDirectoryBrowseType;
+    function Get_Handlers: IXMLHandlersType;
+  public
+    procedure AfterConstruction; override;
+  end;
+
+{ TXMLDirectoryBrowseType }
+
+  TXMLDirectoryBrowseType = class(TXMLNode, IXMLDirectoryBrowseType)
+  protected
+    { IXMLDirectoryBrowseType }
+    function Get_Enabled: WideString;
+    procedure Set_Enabled(Value: WideString);
+  end;
+
+{ TXMLHandlersType }
+
+  TXMLHandlersType = class(TXMLNode, IXMLHandlersType)
+  protected
+    { IXMLHandlersType }
+    function Get_AccessPolicy: WideString;
+    procedure Set_AccessPolicy(Value: WideString);
+  end;
+
+{ Global Functions }
+
+function Getconfiguration(Doc: IXMLDocument): IXMLConfigurationType;
+function Loadconfiguration(const FileName: WideString): IXMLConfigurationType;
+function Newconfiguration: IXMLConfigurationType;
+
+const
+  TargetNamespace = '';
+
+implementation
+
+{ Global Functions }
+
+function Getconfiguration(Doc: IXMLDocument): IXMLConfigurationType;
+begin
+  Result := Doc.GetDocBinding('configuration', TXMLConfigurationType, TargetNamespace) as IXMLConfigurationType;
+end;
+
+function Loadconfiguration(const FileName: WideString): IXMLConfigurationType;
+begin
+  Result := LoadXMLDocument(FileName).GetDocBinding('configuration', TXMLConfigurationType, TargetNamespace) as IXMLConfigurationType;
+end;
+
+function Newconfiguration: IXMLConfigurationType;
+begin
+  Result := NewXMLDocument.GetDocBinding('configuration', TXMLConfigurationType, TargetNamespace) as IXMLConfigurationType;
+end;
+
+{ TXMLConfigurationType }
+
+procedure TXMLConfigurationType.AfterConstruction;
+begin
+  RegisterChildNode('system.webServer', TXMLSystemwebServerType);
+  inherited;
+end;
+
+function TXMLConfigurationType.Get_SystemwebServer: IXMLSystemwebServerType;
+begin
+  Result := ChildNodes['system.webServer'] as IXMLSystemwebServerType;
+end;
+
+{ TXMLSystemwebServerType }
+
+procedure TXMLSystemwebServerType.AfterConstruction;
+begin
+  RegisterChildNode('directoryBrowse', TXMLDirectoryBrowseType);
+  RegisterChildNode('handlers', TXMLHandlersType);
+  inherited;
+end;
+
+function TXMLSystemwebServerType.Get_DirectoryBrowse: IXMLDirectoryBrowseType;
+begin
+  Result := ChildNodes['directoryBrowse'] as IXMLDirectoryBrowseType;
+end;
+
+function TXMLSystemwebServerType.Get_Handlers: IXMLHandlersType;
+begin
+  Result := ChildNodes['handlers'] as IXMLHandlersType;
+end;
+
+{ TXMLDirectoryBrowseType }
+
+function TXMLDirectoryBrowseType.Get_Enabled: WideString;
+begin
+  Result := AttributeNodes['enabled'].Text;
+end;
+
+procedure TXMLDirectoryBrowseType.Set_Enabled(Value: WideString);
+begin
+  SetAttribute('enabled', Value);
+end;
+
+{ TXMLHandlersType }
+
+function TXMLHandlersType.Get_AccessPolicy: WideString;
+begin
+  Result := AttributeNodes['accessPolicy'].Text;
+end;
+
+procedure TXMLHandlersType.Set_AccessPolicy(Value: WideString);
+begin
+  SetAttribute('accessPolicy', Value);
+end;
+
+end.

@@ -1,0 +1,53 @@
+unit writeModule;
+
+interface
+
+uses
+  SysUtils, Classes, HTTPApp, WebModu, HTTPProd;
+
+type
+  Twrite = class(TWebPageModule)
+    PageProducer: TPageProducer;
+    procedure WebPageModuleBeforeDispatchPage(Sender: TObject;
+      const PageName: string; var Handled: Boolean);
+    procedure PageProducerHTMLTag(Sender: TObject; Tag: TTag;
+      const TagString: string; TagParams: TStrings; var ReplaceText: string);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+  function write: Twrite;
+
+implementation
+
+{$R *.dfm}  {*.wml}
+
+uses WebReq, WebCntxt, WebFact, Variants, loginModule;
+
+function write: Twrite;
+begin
+  Result := Twrite(WebContext.FindModuleClass(Twrite));
+end;
+
+procedure Twrite.PageProducerHTMLTag(Sender: TObject; Tag: TTag;
+  const TagString: string; TagParams: TStrings; var ReplaceText: string);
+begin
+  if TagString = 'ms' then ReplaceText := session.SessionID+loginModule.AppendUserInfo;
+end;
+
+procedure Twrite.WebPageModuleBeforeDispatchPage(Sender: TObject;
+  const PageName: string; var Handled: Boolean);
+begin
+   Response.ContentType := 'text/vnd.wap.wml';
+end;
+
+initialization
+  if WebRequestHandler <> nil then
+    WebRequestHandler.AddWebModuleFactory(TWebPageModuleFactory.Create(Twrite, TWebPageInfo.Create([wpPublished {, wpLoginRequired}], '.wml'), crOnDemand, caCache)
+
+);
+
+end.
+

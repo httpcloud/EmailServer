@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<TgConfig Version="3" SubLevelDisabled="False">
+  <Option Name="namespaceFolder.AbstractContainer" Type="System.String" Value="dcl" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.MoFunWapMail" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.DCL_intf" Type="System.String" Value="dcl" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.serialization" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.Main" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.outBox" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.config" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.big5" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.inBox" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.login" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.sendMail" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.detail" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.ArrayList" Type="System.String" Value="dcl" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.Algorithms" Type="System.String" Value="dcl" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.gb_big5" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.DCLUtil" Type="System.String" Value="dcl" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.HashMap" Type="System.String" Value="dcl" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.mainFrm" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.EMailCode" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.ArraySet" Type="System.String" Value="dcl" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.detail.Namespace1" Type="System.String" Value="Namespace1" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.readTxt" Type="System.String" Value="" Category="General" IsBrowsable="False" />
+</TgConfig>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="demo" title ="<#title>" newcontext="false">
+<select name="POP" title="选择服务商" tabindex="1">
+  <option value="-1">测试邮箱</option>
+  <option value="0">网易邮箱</option>
+  <option value="1">新浪邮箱</option>
+  <option value="2">搜虎邮箱</option>
+</select><br/>
+<p>
+<#SYSMSG>
+信箱名:<input name="UID" emptyok="false" maxlength="25" /><br/>
+密　码:<input name="PWD" emptyok="false" type="password" maxlength="25" />
+<anchor type="accept" label="登陆" name="btLogin">
+  <go accept-charset="utf-8" href="<%=Pages.login.HREF%>" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</anchor><br/>
+<a href="<%=Pages.reg.HREF%>">免费注册更精彩！</a><br/>
+<a href="<%=Pages.reg.HREF%>">更多其它邮箱登陆通道</a>
+<do type="prev" label="返回" name="back"><prev/></do>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>
+

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+  <appSettings>  	
+  	<!-- 设置您的手机邮箱网站标题  -->
+  	<add key="Title" value="手机邮箱接入平台"/>
+  	
+  	<!-- 设置您的域名，如果你的邮箱为abc@.cc,则要设置为.cc，而不是WWW..CC  -->
+  	<add key="Domain" value="163.com"/>
+  	
+  	<!-- 设置您的邮箱 POP3 服务器地址  -->
+  	<add key="POP3Server" value="pop3.163.com"/>
+  	
+  	<!-- 设置您的邮箱 SMTP 服务器地址  -->
+  	<add key="SMTPServer" value="smtp.163.com"/>
+  	
+  	<!-- 设置您的 POP3 是否是SSL认证  -->
+  	<add key="POP3SSL" value="false"/>
+ 	
+  	<!-- 设置您的邮箱 POP3 端口  -->
+  	<add key="POP3Port" value="110"/>
+
+  	<!-- 设置您的 SMTP 是否是SSL认证  -->
+  	<add key="SMTPSSL" value="false"/>
+  	
+  	<!-- 设置您的邮箱 SMTP 端口  -->
+  	<add key="SMTPPort" value="25"/>
+  </appSettings>
+  <system>
+    
+  </system>
+</configuration>

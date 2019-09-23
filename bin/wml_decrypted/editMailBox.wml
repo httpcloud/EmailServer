@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.2//EN" "http://www.wapforum.org/DTD/wml12.dtd">
+<wml><card id="crd" title="手机邮" newcontext="true">
+<p>
+邮箱全名:<input name="box" emptyok="false" tabindex="0" maxlength="100" value="<#MailBox>"/><br/>
+<fieldset title="Server">
+POP3服务器:<input name="PSvr" emptyok="false" tabindex="1" maxlength="100" value="<#POP3Server>"/><br/>
+SMTP服务器:<input name="SSvr" emptyok="false" talbeindex="2" maxlength="100" value="<#SMTPServer>"/><br/>
+</filedset>
+用户名:<input name="MUID" emptyok="false" tabindex="3" maxlength="100" value="<#MailUserId>"/><br/>
+密码:<input name="MPWD" emptyok="false" tableindex="4" maxlength="25" value="<#MailPassword>"/><br/>
+SMTP服务器需认证
+<select name="SA">
+	<optgroup title="Auth">
+		<#IsSMTPAuthention>
+	</optgroup>
+</select><br/>
+POP3端口:<input name="PP" value="110" size="5" format="*N" matxlenghth="5" value="<#POP3Port>"/><br/>
+POP3要求SSL加密:
+<select name="PS">
+	<#IsPOP3SSL>
+</select><br/>
+SMTP端口:<input name="SP" value="25" size="5" format="*N" maxlength="5" value="<#SMTPPort>"/><br/>
+SMTP要求SSL加密:
+<select name="SS">
+	<#IsSMTPSSL>
+</select><br/>
+<anchor>保存
+  <go accept-charset="utf-8" href="<%=Pages.send.HREF%>" method="post">
+	<postfield name="box" value="$(box)"/>
+	<postfield name="PSvr" value="$(PSvr)"/>
+	<postfield name="SSvr" value="$(PSvr)"/>
+	<postfield name="MUID" value="$(MUID)"/>
+	<postfield name="MPWD" value="$(MPWD)"/>
+	<postfield name="SA" value="$(SA)"/>
+	<postfield name="PP" value="$(PP)"/>
+	<postfield name="PS" value="$(PS)"/>
+	<postfield name="SP" value="$(SP)"/>
+	<postfield name="SS" value="$(SS)"/>
+  </go>
+</anchor>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>
+

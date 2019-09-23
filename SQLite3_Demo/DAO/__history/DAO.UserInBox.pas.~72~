@@ -1,0 +1,116 @@
+unit DAO.UserInBox;
+
+interface
+
+uses disqlite3_encryption_db,  RTTI,
+  Generics.Collections,Domain.UserInBox,DISQLite3Database,DISQLite3Api;
+
+type
+  UserInBox = class(TMailBoxConfigDatabase)
+     function Add(InBox:Domain.UserInBox.TUserMailInBoxRec): Int64; overload;
+     function Readx(UserEmail: String): TObjectList<TUserMailInBoxRec>; overload;
+     function Read(UserEmail: String): TObjectList<TUserMailInBoxRec>; overload;
+  end;
+
+implementation
+
+{ UserInBox }
+
+function UserInBox.Add(InBox:Domain.UserInBox.TUserMailInBoxRec): Int64;
+var
+  sql:string;
+  //params:TDictionary<String,TValue>;
+  params:TObjectList<TKeyValue>;
+  kv:TKeyValue;
+begin
+   sql := 'insert into UserInBox(UserEMail,MailID,RecvTime,FromAddr,Recipient ,CC,BCC ,Subject ,AttchFileName ,Body,OrginalContent,Status) values(?,?,current_timestamp,?,?,?,?,?,?,?,?,?);';
+   //sql := 'insert into UserInBox(Subject ,AttchFileName ) values(?,?);';
+   {
+   params:=TDictionary<String,TValue>.Create;
+   params.Add('str',InBox.UserEMail);
+   params.Add('str',InBox.MailID);
+   //params.Add('str',InBox.RecvTime);
+   params.Add('str',InBox.FromAddr);
+   params.Add('str',InBox.Recipient);
+   params.Add('str',InBox.CC);
+   params.Add('str',InBox.BCC);
+   params.Add('str',InBox.Subject);
+   params.Add('str',InBox.AttchFileName);
+   params.Add('str',InBox.Body);
+   params.Add('str',InBox.OrginalContent);
+   params.Add('int',InBox.Status);
+   }
+
+   params:=TObjectList<TKeyValue>.Create;
+   params.Add(TKeyValue.Create('str',InBox.UserEMail));
+   params.Add(TKeyValue.Create('str',InBox.MailID));
+   //params.AddRange('str',InBox.RecvTime);
+   params.Add(TKeyValue.Create('str',InBox.FromAddr));
+   params.Add(TKeyValue.Create('str',InBox.Recipient));
+   params.Add(TKeyValue.Create('str',InBox.CC));
+   params.Add(TKeyValue.Create('str',InBox.BCC));
+   params.Add(TKeyValue.Create('str',InBox.Subject));
+   params.Add(TKeyValue.Create('str',InBox.AttchFileName));
+   params.Add(TKeyValue.Create('str',InBox.Body));
+   params.Add(TKeyValue.Create('str',InBox.OrginalContent));
+   params.Add(TKeyValue.Create('int',InBox.Status));
+
+   inherited Add(sql,params);
+   params.Free;
+end;
+
+function UserInBox.Read(UserEmail: String): TObjectList<TUserMailInBoxRec>;
+var
+  sql:string;
+  objList:TObjectList<TKeyValue>;
+  kv:TKeyValue;
+  stmt:TDISQLite3Statement;
+  mailBoxList:TObjectList<TUserMailInBoxRec>;
+  i:integer;
+begin
+  sql := 'select * from UserInBox where UserEMail=?;';
+  objList:=TObjectList<TKeyValue>.Create;
+  kv := TKeyValue.Create('str',UserEMail);
+  objList.Add(kv);
+  stmt := inherited Read(sql,objList);
+  if(stmt<>nil)then
+  begin
+    mailBoxList := TObjectList<TUserMailInBoxRec>.Create();
+    i:=0;
+    while(stmt.Step=SQLITE_ROW)do
+    begin
+      mailBoxList.Add(TUserMailInBoxRec.Create);
+      mailBoxList.Items[0].MailDomain := stmt.Column_Str16(GetIndex(stmt, 'MailDomain'));
+      mailBoxList.Items[0].SMTPServer := stmt.Column_Str16(GetIndex(stmt, 'SMTPServer'));
+      mailBoxList.Items[0].POP3Server := stmt.Column_Str16(GetIndex(stmt, 'POP3Server'));
+      mailBoxList.Items[0].SMTPPort := stmt.Column_Int(GetIndex(stmt, 'SMTPPort'));
+      mailBoxList.Items[0].POP3Port := stmt.Column_Int(GetIndex(stmt, 'POP3Port'));
+      mailBoxList.Items[0].SMTPSSL := iif(stmt.Column_Int(GetIndex(stmt, 'SMTPSSL')) = 1,true, false);
+      mailBoxList.Items[0].POP3SSL := iif(stmt.Column_Int(GetIndex(stmt, 'POP3SSL')) = 1,true, false);
+      mailBoxList.Items[0].SMTPSSLPort := stmt.Column_Int(GetIndex(stmt, 'SMTPSSLPort'));
+      mailBoxList.Items[0].POP3SSLPort := stmt.Column_Int(GetIndex(stmt, 'POP3SSLPort'));
+      mailBoxList.Items[0].POP3UserName := stmt.Column_Str16(GetIndex(stmt, 'POP3UserName'));
+      mailBoxList.Items[0].POP3Password := stmt.Column_Str16(GetIndex(stmt, 'POP3Password'));
+      mailBoxList.Items[0].SMTPUserName := stmt.Column_Str16(GetIndex(stmt, 'SMTPUserName'));
+      mailBoxList.Items[0].SMTPPassword := stmt.Column_Str16(GetIndex(stmt, 'SMTPPassword'));
+      mailBoxList.Items[0].UpdateMail := stmt.Column_Str16(GetIndex(stmt, 'UpdateMail'));
+      mailBoxList.Items[0].UpdaeTime := StrToDateTimeDef(stmt.Column_Str16(GetIndex(stmt, 'UpdateTime')), now);
+      mailBoxList.Items[0].InitializeProcess
+    end;
+  end;
+  Result := mailBoxList;
+  stmt.Free;
+end;
+
+function UserInBox.Readx(UserEMail:string): TObjectList<TUserMailInBoxRec>;
+var
+  sql:string;
+  objList:TObjectList<TKeyValue>;
+begin
+  sql := 'select * from UserInBox where UserEMail=?;';
+  objList:=TObjectList<TKeyValue>.Create;
+  objList.Add(TKeyValue.Create('str',UserEMail));
+  Result := inherited Read_<TUserMailInBoxRec>(sql,objList);
+end;
+
+end.

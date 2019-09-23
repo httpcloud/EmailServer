@@ -1,0 +1,55 @@
+Received: from rv-out-0506.google.com (209.85.198.234) by
+ mailserver.domain.oceansoft (172.17.100.16) with Microsoft SMTP Server id
+ 8.1.240.5; Wed, 10 Dec 2008 06:58:11 +0800
+Received: by rv-out-0506.google.com with SMTP id f6so154710rvb.3        for
+ <lwg@oceansoft.com.cn>; Tue, 09 Dec 2008 14:58:58 -0800 (PST)
+Received: by 10.141.29.18 with SMTP id g18mr302669rvj.149.1228863537338;
+        Tue, 09 Dec 2008 14:58:57 -0800 (PST)
+Received: by 10.141.169.1 with HTTP; Tue, 9 Dec 2008 14:58:57 -0800 (PST)
+From: "i@mofun.cc" <i@mofun.cc>
+To: "helpus@163.com" <helpus@163.com>, "MoFun.CC i" <i@mofun.cc>, ÀîÎÄ¹ú
+ <lwg@oceansoft.com.cn>
+Date: Wed, 10 Dec 2008 06:58:57 +0800
+Subject: test
+Thread-Topic: test
+Thread-Index: AclaUZyQm/unvgmXQ6OhY74rpRKKtA==
+Message-ID: <22a0b9480812091458p7fa70783je7e78ae4cab9b4ad@mail.gmail.com>
+Accept-Language: zh-CN
+Content-Language: zh-CN
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Exchange-Organization-AuthSource: mailserver.domain.oceansoft
+X-MS-Has-Attach:
+X-MS-Exchange-Organization-SenderIdResult: None
+X-MS-Exchange-Organization-SCL: 5
+X-MS-Exchange-Organization-PCL: 2
+X-MS-Exchange-Organization-PRD: mofun.cc
+X-MS-TNEF-Correlator:
+received-spf: None (mailserver.domain.oceansoft: i@mofun.cc does not
+ designate permitted sender hosts)
+Content-Type: multipart/alternative; boundary="CFaseyaQZSHXFMAyMEvQ=_wvJpEOi5n7n0"
+MIME-Version: 1.0
+In-Reply-To: <22a0b9480812091458p7fa70783je7e78ae4cab9b4ad@mail.gmail.com>
+
+This is a multi-part message in MIME format
+
+--CFaseyaQZSHXFMAyMEvQ=_wvJpEOi5n7n0
+Content-Type: text/plain; charset="GB2312"
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+
+dGVzdA0KDQotLQ0KaHR0cDovL2x3Z2JveS5zcGFjZS5tb2Z1bi5jYw0K
+
+--CFaseyaQZSHXFMAyMEvQ=_wvJpEOi5n7n0
+Content-Type: text/html; charset="GB2312"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dgb23=
+12">test<br clear=3D"all"><br>-- <br><a href=3D"http://lwgboy.space.mo=
+fun.cc">http://lwgboy.space.mofun.cc</a><br>
+
+--CFaseyaQZSHXFMAyMEvQ=_wvJpEOi5n7n0--
+
+.

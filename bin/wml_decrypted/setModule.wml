@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml><card id="crd" title="手机邮">
+<p>
+<b><u>系统设置</u></b><br/>
+
+手机号(用于免费接收短信通知):
+<input name="Mobile" emptyok="false" tabindex="0" maxlength="100" value="<#Mobile>"/><br/>
+(目前只支持移动号码，请在稍后的加为好友中回复同意才可使用改项功能)<br/>
+
+<#msg>
+<br/>
+<anchor>设置保存已发邮件到发件箱<br/>
+  <go accept-charset="utf-8" href="<%=Pages.set.HREF%>?ms=<#ms>" method="post">
+	<postfield name="R" value="$(Mobile)"/>
+	<postfield name="S" value="$(sbjct)"/>
+	<postfield name="C" value="$(bdy)"/>
+  </go>
+</anchor>
+<!--
+<anchor>取消保存已发邮件到发件箱
+  <go accept-charset="utf-8" href="<%=Pages.set.HREF%>?ms=<#ms>" method="post">
+	<postfield name="R" value="$(rcpnts)"/>
+	<postfield name="S" value="$(sbjct)"/>
+	<postfield name="C" value="$(bdy)"/>
+  </go>
+</anchor>
+-->
+<do type="accept" label="撤销" name="btCancel">
+  <go accept-charset="utf-8" href="login" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>
+</do>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>

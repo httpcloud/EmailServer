@@ -1,0 +1,1 @@
+<br/>Ä§·½±¨Ê±:<%=Modules.WebDataModuleShare.ScriptObject.GetCurrentTime('hh:nn')%>

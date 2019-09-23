@@ -1,0 +1,9 @@
+unit Comon.Debug;
+
+interface
+
+uses window;
+
+implementation
+
+end.

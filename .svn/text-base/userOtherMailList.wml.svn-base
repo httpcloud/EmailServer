@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.2//EN"
+ "http://www.wapforum.org/DTD/wml12.dtd">
+<wml>
+  <card>
+	 <a href="getMail?ph=pop3host&sh=smtpHost&pp=pop3Port&sp=smtpPort&pu=pop3userName&su=smtpUserName&pw=pop3Password&sw=smtpPassword&psp=POP3SSLPort&ssp=SMTPSSLPort&ips=isPOP3SSL&iss=isSMTPSSL&m=abc@mofun.cc">abc@mofun.cc</a>
+	 <a href="getMail?ph=pop3host&sh=smtpHost&pp=pop3Port&sp=smtpPort&pu=pop3userName&su=smtpUserName&pw=pop3Password&sw=smtpPassword&psp=POP3SSLPort&ssp=SMTPSSLPort&ips=isPOP3SSL&iss=isSMTPSSL&m=xxx@mofun.cc">xxx@mofun.cc</a>
+  </card>
+</wml>

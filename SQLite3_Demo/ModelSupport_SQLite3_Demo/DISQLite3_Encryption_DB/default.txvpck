@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="typg70o5pwd02zhnn_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="design:node:::hn8yfqccn5gjpy33t_n">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="30,30,202,49" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCityRec">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="251,12,130,128" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCityRec.City" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCityRec.Country" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCityRec.Population" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="62,98,180,508" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.MailDomain" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.SMTPServer" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.POP3Server" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.SMTPSSL" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.POP3SSL" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.POP3UserName" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.POP3Password" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.SMTPUserName" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.SMTPPassword" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.UpdateMail" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.UpdaeTime" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.InitializeProcess()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.CreatePredigest(System.string,System.string)" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.FPOP3Port" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.GetPOP3Port()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.SetPOP3Port(System.Integer)" />
+      <reference referencedUin="delphi:e_property:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.POP3Port" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.FSMTPPort" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.GetSMTPPort()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.SetSMTPPort(System.Integer)" />
+      <reference referencedUin="delphi:e_property:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.SMTPPort" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.FPOP3SSLPort" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.GetPOP3SSLPort()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.SetPOP3SSLPort(System.Integer)" />
+      <reference referencedUin="delphi:e_property:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.POP3SSLPort" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.FSMTPSSLPort" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.GetSMTPSSLPort()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.SetSMTPSSLPort(System.Integer)" />
+      <reference referencedUin="delphi:e_property:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigRec.SMTPSSLPort" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesCache">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="400,1,252,117" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesCache.DoInitializeItem(System.Pointer)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesCache.DoFinalizeItem(System.Pointer)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="400,427,241,241" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.FCitiesCache" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.DoAfterConnect()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.DoAfterCreateDatabase()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.DoBeforeDisconnect()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.AddCity(System.WideString,System.WideString,System.Integer)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.AddRandomCities(System.Integer)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.AddRandomCity()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.DeleteFromCities(System.Int64)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.GetCity(System.Int64)" />
+      <reference referencedUin="delphi:e_property:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.CitiesCache" />
+      <reference referencedUin="delphi:l_ast:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.FCitiesCache">
+        <property name="sourceAnchor" value="520,427" />
+        <property name="targetAnchor" value="520,118" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:SQLite3_Demo:DISQLite3_Encryption_DB.TCitiesDatabase.CitiesCache">
+        <property name="sourceAnchor" value="512,427" />
+        <property name="targetAnchor" value="512,118" />
+        <property name="bendpoints" value="" />
+      </reference>
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigCache">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="141,625,252,117" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigCache.DoInitializeItem(System.Pointer)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigCache.DoFinalizeItem(System.Pointer)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="690,1,265,301" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.FMailBoxConfigCache" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.DoAfterConnect()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.DoAfterCreateDatabase()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.DoBeforeDisconnect()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.AddMailBoxConfig(DISQLite3_Encryption_DB.TMailBoxConfigRec)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.AddRandomMailBoxConfigs(System.Integer)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.AddRandomMailBoxConfig()" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.DeleteFromMailBoxConfig(System.Int64)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.GetMailBoxConfig(System.WideString)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.Update(DISQLite3_Encryption_DB.TMailBoxConfigRec)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.Delete(DISQLite3_Encryption_DB.TMailBoxConfigRec,System.string)" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.Add(System.string,Generics.Collections.TDictionary`2)" />
+      <reference referencedUin="delphi:e_property:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.MailBoxConfigCache" />
+      <reference referencedUin="delphi:l_ast:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.FMailBoxConfigCache">
+        <property name="sourceAnchor" value="690,277" />
+        <property name="targetAnchor" value="327,625" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:l_ast:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.MailBoxConfigCache">
+        <property name="sourceAnchor" value="690,270" />
+        <property name="targetAnchor" value="326,625" />
+        <property name="bendpoints" value="" />
+      </reference>
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TMailBoxConfigDatabase.Add(System.string,Generics.Collections.TList`1)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.@unitclass">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.@unitclass.GetIndex(DISQLite3Database.TDISQLite3Statement,System.string)" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.PCityRec">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="0,608,131,36" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.PMailBoxConfigRec">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="690,321,252,36" />
+    </reference>
+    <reference referencedUin="delphi:e_class:src:SQLite3_Demo:DISQLite3_Encryption_DB.TKeyValue">
+      <property name="$shortcutReference" value="true" />
+      <property name="bounds" value="261,159,97,116" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TKeyValue.Key" />
+      <reference referencedUin="delphi:e_field:src:SQLite3_Demo:DISQLite3_Encryption_DB.TKeyValue.Value" />
+      <reference referencedUin="delphi:e_method:src:SQLite3_Demo:DISQLite3_Encryption_DB.TKeyValue.Create(System.string,RTTI.TValue)" />
+    </reference>
+  </view>
+</nodeSet>

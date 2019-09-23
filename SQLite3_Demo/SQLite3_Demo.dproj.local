@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2009/09/02 00:04:46.237.pas,C:\Users\\Documents\RAD Studio\Projects\Unit3.pas=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\Unit3.pas</Transaction>
+    <Transaction>2009/09/02 00:04:46.237.dfm,C:\Users\\Documents\RAD Studio\Projects\Unit3.dfm=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\Unit3.dfm</Transaction>
+    <Transaction>2009/09/02 00:04:55.787.dproj,C:\Users\\Documents\RAD Studio\Projects\Project1.dproj=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\SQLite3_Demo.dproj</Transaction>
+    <Transaction>2009/09/02 00:05:42.584.pas,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\Unit4.pas=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\SQLite3_Encrypt_Demo.pas</Transaction>
+    <Transaction>2009/09/03 15:27:39.353.pas,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\DISQLite3_Encryption_CitiesDB.pas=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\DISQLite3_Encryption_DB.pas</Transaction>
+    <Transaction>2009/09/03 15:29:55.095.txvpck,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\modelsupport_sqlite3_demo\disqlite3_encryption_citiesdb\default.txvpck=</Transaction>
+    <Transaction>2009/09/03 15:29:55.112.txaPackage,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\ModelSupport_SQLite3_Demo\DISQLite3_Encryption_CitiesDB\default.txaPackage=</Transaction>
+    <Transaction>2009/09/05 20:24:36.606.pas,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\DISQLite3_Encryption_DB1.pas=</Transaction>
+    <Transaction>2009/09/05 20:35:20.325.txapackage,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\modelsupport_sqlite3_demo\namespace1\default.txapackage=</Transaction>
+    <Transaction>2009/09/05 20:35:20.349.txvpck,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\modelsupport_sqlite3_demo\namespace1\default.txvpck=</Transaction>
+    <Transaction>2009/09/05 20:45:56.079.pas,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\Model.pas=f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\Domain.pas</Transaction>
+    <Transaction>2009/09/05 20:45:56.147.txapackage,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\modelsupport_sqlite3_demo\model\default.txapackage=</Transaction>
+    <Transaction>2009/09/05 20:45:56.169.txvpck,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\modelsupport_sqlite3_demo\model\default.txvpck=</Transaction>
+    <Transaction>2009/09/05 20:46:06.225.txapackage,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\modelsupport_sqlite3_demo\namespace1\default.txapackage=</Transaction>
+    <Transaction>2009/09/05 20:46:06.290.txvpck,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\modelsupport_sqlite3_demo\namespace1\default.txvpck=</Transaction>
+    <Transaction>2009/09/05 20:47:57.237.pas,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\Domain.pas=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\DAO\UserInBox.pas</Transaction>
+    <Transaction>2009/09/05 20:48:34.301.pas,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\DAO\UserInBox.pas=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\DAO\TableUserInBox.pas</Transaction>
+    <Transaction>2009/09/05 20:51:43.405.pas,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\Unit4.pas=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\Domain\UserInBox.pas</Transaction>
+    <Transaction>2009/09/05 20:52:15.726.txvpck,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\modelsupport_sqlite3_demo\dao\default.txvpck=</Transaction>
+    <Transaction>2009/09/05 20:52:15.751.txaPackage,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\ModelSupport_SQLite3_Demo\DAO\default.txaPackage=</Transaction>
+    <Transaction>2009/09/05 20:54:00.478.pas,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\Domain\UserInBox.pas=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\Domain\Domain.UserInBox.pas</Transaction>
+    <Transaction>2009/09/05 20:54:22.426.txvpck,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\modelsupport_sqlite3_demo\userinbox\default.txvpck=</Transaction>
+    <Transaction>2009/09/05 20:54:22.487.txaPackage,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\ModelSupport_SQLite3_Demo\UserInBox\default.txaPackage=</Transaction>
+    <Transaction>2009/09/05 20:55:58.668.pas,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\DAO\TableUserInBox.pas=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\DAO\DAO.UserInBox.pas</Transaction>
+    <Transaction>2009/09/05 20:56:47.061.txvpck,f:\projects\wapmail..cc_delphi2010_20090830\sqlite3_demo\modelsupport_sqlite3_demo\tableuserinbox\default.txvpck=</Transaction>
+    <Transaction>2009/09/05 20:56:47.078.txaPackage,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\ModelSupport_SQLite3_Demo\TableUserInBox\default.txaPackage=</Transaction>
+    <Transaction>2009/09/07 21:15:20.597.pas,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\Domain\Domain.UserInBox.pas=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\Domain\Domain.UserMailInBox.pas</Transaction>
+    <Transaction>2009/09/07 21:15:43.217.pas,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\DAO\DAO.UserInBox.pas=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\DAO\DAO.UserMailInBox.pas</Transaction>
+    <Transaction>2009/09/07 23:02:43.583.pas,F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\DISQLite3_Encryption_DB.pas=F:\Projects\WAPMail..CC_Delphi2010_20090830\SQLite3_Demo\Encryption_DB.pas</Transaction>
+  </Transactions>
+</BorlandProject>

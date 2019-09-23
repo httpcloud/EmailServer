@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="login" title="手机邮" newcontext="true">
+<p>
+<#info card=Login>
+<!-- #include file="alert.wml" -->
+<a href="#MLogin">用邮箱作用户名登录</a><br/>
+魔号:<input name="MID" emptyok="false" format="N" maxlength="10"/><br/>
+密码:<input name="MPW" emptyok="false" maxlength="15"/><br/>
+<anchor title="登陆">登陆
+  <go accept-charset="utf-8" href="<%=Pages.login.HREF%>" method="post">
+	<postfield name="MID" value="$(MID)"/>
+	<postfield name="MPW" value="$(MPW)"/>
+  </go>
+</anchor><br/>
+<a href="#demo">游客体验通道</a><br/>
+<!--<a href="<%=Pages.reg.HREF%>">免费注册魔号</a>--><a href="<%=Pages.action.HREF%>?ac=stopRegUser">免费注册魔号</a><br/>
+<a href="<%=Pages.action.HREF%>?ac=forgetPWD">忘记魔号/密码</a><br/>
+<a href="<%=Pages.action.HREF%>?ac=help">新手帮助</a>
+<!-- #include file="return.wml" -->
+</p>
+</card>
+<card id="MLogin" title="手机邮" newcontext="true">
+<p>
+<#info card=MLogin>
+<a href="#login">用魔号快速登录</a><br/>
+在注册时所填的邮箱:<input name="MUID" emptyok="false" maxlength="25"/><br/>
+在注册时所设的密码:<input name="MPWD" emptyok="false" maxlength="25"/><br/>
+<anchor>登录
+  <go accept-charset="utf-8" href="<%=Pages.login.HREF%>" method="post">
+	<postfield name="MUID" value="$(MUID)"/>
+	<postfield name="MPWD" value="$(MPWD)"/>
+  </go>
+</anchor><br/>
+<a href="#demo">游客体验通道</a><br/>
+<!--<a href="<%=Pages.reg.HREF%>">免费注册魔号</a>--><a href="<%=Pages.action.HREF%>?ac=stopRegUser">免费注册魔号</a><br/>
+<a href="<%=Pages.action.HREF%>?ac=help">新手帮助</a><br/>
+<a href="<%=Pages.action.HREF%>?ac=forgetPWD">忘记魔号/密码</a><br/>
+<!-- #include file="return.wml" -->
+</p>
+</card>
+<card id="demo" title ="手机邮" newcontext="true">
+<select name="POP" title="选择服务商" tabindex="1">
+  <option value="0">网易邮箱</option>
+  <option value="2">搜虎邮箱</option>
+  <option value="1">新浪邮箱</option>
+  <option value="-1">邮箱</option>
+</select><br/>
+<p>
+<#SYSMSG>
+邮箱地址:<input name="UID" emptyok="false" maxlength="25" /><br/>
+邮箱密码:<input name="PWD" emptyok="false" type="password" maxlength="25" />
+<anchor title="登陆">
+  <go accept-charset="utf-8" href="<%=Pages.login.HREF%>" method="post">
+	<postfield name="POP" value="$(POP)"/>
+	<postfield name="UID" value="$(UID)"/>
+	<postfield name="PWD" value="$(PWD)"/>
+  </go>登录
+</anchor><br/>
+<a href="<%=Pages.NewGuest.HREF%>">更多邮箱登陆</a><br/>
+<!--<a href="<%=Pages.reg.HREF%>">免费注册更精彩！</a>--><a href="<%=Pages.action.HREF%>?ac=stopRegUser">免费注册更精彩！</a><br/>
+<do type="prev" label="返回" name="back"><prev/></do>
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>

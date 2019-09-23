@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml><card id="404" title="随身邮">
+<p align="center">
+对不起，没找到你期望的内容<#ERR404>，<a href="http://wap..cc">点这里返回首页</a>
+-随身邮-<br/>
+©.CC 2002-2008
+<!-- #include file="return.wml" -->
+</p>
+</card></wml>

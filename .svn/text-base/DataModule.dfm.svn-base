@@ -1,0 +1,29 @@
+object WebDataModuleShare: TWebDataModuleShare
+  OldCreateOrder = False
+  OnDestroy = WebDataModuleDestroy
+  Height = 322
+  Width = 370
+  object ADOConnection1: TADOConnection
+    Connected = True
+    ConnectionString = 'Provider=MSDASQL.1;Persist Security Info=False;Data Source=test'
+    LoginPrompt = False
+    Left = 136
+    Top = 24
+  end
+  object ADOQuery1: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 232
+    Top = 96
+  end
+  object ADOCommand1: TADOCommand
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 136
+    Top = 96
+  end
+  object ScriptObject: TScriptObject
+    Left = 232
+    Top = 160
+  end
+end

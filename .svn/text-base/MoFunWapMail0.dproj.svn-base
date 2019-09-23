@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{0d51a259-e60e-4a35-90d7-c2a6ed1421fc}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>bin\MoFunWapMail0.exe</DCC_DependencyCheckOutputName>
+    <MainSource>MoFunWapMail0.dpr</MainSource>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_UnitSearchPath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;d:\Program Files\tmssoftware\TMSIWPROSE</DCC_UnitSearchPath>
+    <DCC_ResourcePath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;d:\Program Files\tmssoftware\TMSIWPROSE</DCC_ResourcePath>
+    <DCC_ObjPath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;d:\Program Files\tmssoftware\TMSIWPROSE</DCC_ObjPath>
+    <DCC_IncludePath>$(BDS)\Lib\Indy10;$(BDS)\Lib\Indy9;d:\Program Files\tmssoftware\TMSIWPROSE</DCC_IncludePath>
+    <DCC_Define>DEBUG;DEBUG;DEBUG;DEBUG;DEBUG;RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_UnitSearchPath>$(BDS)\Lib\Indy9;D:\Program Files\CodeGear\RAD Studio\5.0\lib\Indy10;d:\Program Files\tmssoftware\TMSIWPROSE</DCC_UnitSearchPath>
+    <DCC_ResourcePath>$(BDS)\Lib\Indy9;D:\Program Files\CodeGear\RAD Studio\5.0\lib\Indy10;d:\Program Files\tmssoftware\TMSIWPROSE</DCC_ResourcePath>
+    <DCC_ObjPath>$(BDS)\Lib\Indy9;D:\Program Files\CodeGear\RAD Studio\5.0\lib\Indy10;d:\Program Files\tmssoftware\TMSIWPROSE</DCC_ObjPath>
+    <DCC_IncludePath>$(BDS)\Lib\Indy9;D:\Program Files\CodeGear\RAD Studio\5.0\lib\Indy10;d:\Program Files\tmssoftware\TMSIWPROSE</DCC_IncludePath>
+    <DCC_Define>DEBUG;DEBUG;DEBUG;DEBUG;DEBUG;DEBUG</DCC_Define>
+    <DCC_ExeOutput>bin</DCC_ExeOutput>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">2052</VersionInfo><VersionInfo Name="CodePage">936</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\bcboffice2k100.bpl">CodeGear C++Builder Office 2000 Servers Package</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\bcbofficexp100.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
+      <Excluded_Packages Name="d:\Program Files\SqlDir\BDS_2006\DclSql100.bpl">SQLDirect Components</Excluded_Packages>
+    </Excluded_Packages><Source><Source Name="MainSource">MoFunWapMail0.dpr</Source></Source></Delphi.Personality><ModelSupport>True</ModelSupport></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="MoFunWapMail0.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="actionModule.pas">
+      <Form>action</Form>
+      <DesignClass>TWebPageModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="addNewMailBoxModule.pas">
+      <Form>Add</Form>
+      <DesignClass>TWebPageModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="big5.pas" />
+    <DCCReference Include="config.pas">
+      <Form>$R *.res</Form>
+    </DCCReference>
+    <DCCReference Include="DataModule.pas">
+      <Form>WebDataModuleShare</Form>
+      <DesignClass>TWebDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="dcl\AbstractContainer.pas" />
+    <DCCReference Include="dcl\Algorithms.pas" />
+    <DCCReference Include="dcl\ArrayList.pas" />
+    <DCCReference Include="dcl\ArraySet.pas" />
+    <DCCReference Include="dcl\DCLUtil.pas" />
+    <DCCReference Include="dcl\DCL_intf.pas" />
+    <DCCReference Include="dcl\HashMap.pas" />
+    <DCCReference Include="detailModule.pas">
+      <Form>detail</Form>
+      <DesignClass>TWebPageModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="EMailCode.pas" />
+    <DCCReference Include="EZCrypt.pas" />
+    <DCCReference Include="gb_big5.pas" />
+    <DCCReference Include="inBoxModule.pas">
+      <Form>inBox</Form>
+      <DesignClass>TWebPageModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="loginModule.pas">
+      <Form>login</Form>
+      <DesignClass>TWebPageModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="mainFrm.pas">
+      <Form>MainForm</Form>
+    </DCCReference>
+    <DCCReference Include="MainModule.pas">
+      <Form>Main</Form>
+      <DesignClass>TWebAppPageModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="outBoxModule.pas">
+      <Form>outBox</Form>
+      <DesignClass>TWebPageModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="readTxtModule.pas">
+      <Form>readTxt</Form>
+      <DesignClass>TWebPageModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="RegisterModule.pas">
+      <Form>reg</Form>
+      <DesignClass>TWebPageModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="sendModule.pas">
+      <Form>send</Form>
+      <DesignClass>TWebPageModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="serialization.pas" />
+    <DCCReference Include="UEncode.pas" />
+    <DCCReference Include="writeModule.pas">
+      <Form>write</Form>
+      <DesignClass>TWebPageModule</DesignClass>
+    </DCCReference>
+    <None Include="bin\Untitled2.wml" />
+    <None Include="info.ini" />
+    <None Include="ModelSupport_MoFunWapMail0\AbstractContainer\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\actionModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\addNewMailBoxModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\Algorithms\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\ArrayList\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\ArraySet\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\big5\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\config\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\DataModule\default.txaPackage" />
+    <None Include="ModelSupport_MoFunWapMail0\DataModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\DCLUtil\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\DCL_intf\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\default.txaPackage" />
+    <None Include="ModelSupport_MoFunWapMail0\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\detailModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\detail\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\EMailCode\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\EZCrypt\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\gb_big5\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\HashMap\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\inBoxModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\inBox\default.txaPackage" />
+    <None Include="ModelSupport_MoFunWapMail0\inBox\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\loginModule\default.txaPackage" />
+    <None Include="ModelSupport_MoFunWapMail0\loginModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\login\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\mainFrm\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\MainModule\default.txaPackage" />
+    <None Include="ModelSupport_MoFunWapMail0\MainModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\Main\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\MoFunWapMail0\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\MoFunWapMail\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\outBoxModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\outBox\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\readTxtModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\readTxt\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\RegisterModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\sendModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\send\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\serialization\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\UEncode\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\writeModule\default.txvpck" />
+    <None Include="ModelSupport_MoFunWapMail0\write\default.txvpck" />
+    <None Include="userOtherMailList.wml" />
+  </ItemGroup>
+</Project>
